@@ -29,12 +29,12 @@ Pod::Spec.new do |spec|
       ss.subspec 'TFY_UI' do |s|
        s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_UI/**/*.{h,m}"
        s.dependency "TFY_LayoutCategoryKit/TFY_Tools"
-       s.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation"
+       s.dependency "TFY_Categories/TFY_Foundation"
       end
 
       ss.subspec 'TFY_Foundation' do |s|
         s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation/**/*.{h,m}"
-        s.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_UI"
+        s.dependency "TFY_Categories/TFY_UI"
       end
   end
 
@@ -74,6 +74,6 @@ Pod::Spec.new do |spec|
 
   spec.requires_arc  = true
 
-  spec.dependency "Masonry"
+  # spec.dependency "Masonry"
 
 end
