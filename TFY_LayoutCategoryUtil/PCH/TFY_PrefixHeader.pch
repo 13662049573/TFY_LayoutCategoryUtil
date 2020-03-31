@@ -1,0 +1,28 @@
+//
+//  TFY_PrefixHeader.pch
+//  TFY_LayoutCategoryUtil
+//
+//  Created by tiandengyou on 2020/3/30.
+//  Copyright © 2020 田风有. All rights reserved.
+//
+
+#ifndef TFY_PrefixHeader_pch
+#define TFY_PrefixHeader_pch
+
+#import "TFY_LayoutCategoryHeader.h"
+#import "Masonry.h"
+
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
+#define PUBLICSCALE SCREEN_WIDTH / 375.0
+
+//是否是X
+#define MOBLINK_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? ([[UIScreen mainScreen] currentMode].size.height == 1792 ||[[UIScreen mainScreen] currentMode].size.height >=2436) : NO)
+
+//底部home高度
+#define MOBLINK_TabbarSafeBottomMargin (MOBLINK_iPhoneX ? 34.f : 0.f)
+
+#define MOBLINK_StatusBarSafeBottomMargin (MOBLINK_iPhoneX ? 44.f : 20.f)
+
+#endif /* TFY_PrefixHeader_pch */
