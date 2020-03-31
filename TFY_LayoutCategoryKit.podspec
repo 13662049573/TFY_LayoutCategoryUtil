@@ -23,6 +23,10 @@ Pod::Spec.new do |spec|
 
   spec.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_LayoutCategoryHeader.h"
    
+  spec.subspec 'TFY_Tools' do |ss|
+    ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/**/*.{h,m}"
+   end
+
   spec.subspec 'TFY_Categories' do |ss|
       ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_CategoriesHeader.h","TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_Define.h"
       
@@ -63,9 +67,7 @@ Pod::Spec.new do |spec|
       end
  end
 
- spec.subspec 'TFY_Tools' do |ss|
-  ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/**/*.{h,m}"
- end
+ 
 
 
   spec.frameworks    = "Foundation","UIKit"
