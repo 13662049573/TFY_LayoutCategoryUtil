@@ -23,26 +23,26 @@ Pod::Spec.new do |spec|
 
   spec.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_LayoutCategoryHeader.h"
    
-  spec.subspec 'TFY_Tools' do |ss|
-    ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/**/*.{h,m}"
+   spec.subspec 'TFY_Tools' do |ss|
+     ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/**/*.{h,m}"
    end
 
-  spec.subspec 'TFY_Categories' do |ss|
+   spec.subspec 'TFY_Categories' do |ss|
       ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_CategoriesHeader.h","TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_Define.h"
       
       ss.subspec 'TFY_UI' do |s|
        s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_UI/**/*.{h,m}"
-       s.dependency "TFY_LayoutCategoryKit/TFY_Tools"
-    
+       s.dependency "TFY_LayoutCategoryKit/TFY_Tools","TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation"
+       
       end
 
       ss.subspec 'TFY_Foundation' do |s|
         s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation/**/*.{h,m}"
-        
+        s.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_UI"
       end
-  end
+   end
 
- spec.subspec 'TFY_Chain' do |ss|
+  spec.subspec 'TFY_Chain' do |ss|
     ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainHeader.h"
 
       ss.subspec 'TFY_ChainBase' do |s|
@@ -51,21 +51,19 @@ Pod::Spec.new do |spec|
 
       ss.subspec 'TFY_CALayer' do |s|
         s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Chain/TFY_CALayer/**/*.{h,m}"
-        # s.dependency "TFY_Chain/TFY_ChainBase"
+        s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase"
       end
       ss.subspec 'TFY_UIView' do |s|
         s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Chain/TFY_UIView/**/*.{h,m}"
-        # s.dependency "TFY_Chain/TFY_ChainBase"
-        # s.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_UI"
-        # s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_CALayer"
-        # s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_UIGesture"
+        s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase","TFY_LayoutCategoryKit/TFY_Categories/TFY_UI","TFY_LayoutCategoryKit/TFY_Chain/TFY_CALayer","TFY_LayoutCategoryKit/TFY_Chain/TFY_UIGesture"
+        
       end
       ss.subspec 'TFY_UIGesture' do |s|
         s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Chain/TFY_UIGesture/**/*.{h,m}"
-        # s.dependency "TFY_Chain/TFY_ChainBase"
-        # s.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_UI"
+        s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase","TFY_LayoutCategoryKit/TFY_Categories/TFY_UI"
+        
       end
- end
+  end
 
  
 
