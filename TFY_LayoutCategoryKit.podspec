@@ -25,16 +25,17 @@ Pod::Spec.new do |spec|
    
   spec.subspec 'TFY_Categories' do |ss|
       ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_CategoriesHeader.h","TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_Define.h"
-
+      ss.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation"
+      ss.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_UI"
       ss.subspec 'TFY_UI' do |s|
        s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_UI/**/*.{h,m}"
-       s.dependency "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools"
-       s.dependency "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation"
+       s.dependency "TFY_LayoutCategoryKit/TFY_Tools"
+    
       end
 
       ss.subspec 'TFY_Foundation' do |s|
         s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation/**/*.{h,m}"
-        s.dependency "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_UI"
+        
       end
   end
 
