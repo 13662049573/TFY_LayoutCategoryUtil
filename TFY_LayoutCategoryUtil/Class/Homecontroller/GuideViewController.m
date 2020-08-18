@@ -100,7 +100,7 @@
 
         if (i < imagesCount - 1)
         {
-            skipBtn.frame = CGRectMake(SCREEN_WIDTH * (i + 1) - 90, 40 + MOBLINK_TabbarSafeBottomMargin, 65, 28);
+            skipBtn.frame = CGRectMake(SCREEN_WIDTH * (i + 1) - 90, 40 + TFY_LINK_TabbarSafeBottomMargin, 65, 28);
             
             [skipBtn setTitle:@"跳过" forState:UIControlStateNormal];
             [skipBtn setTitleColor:[UIColor colorWithRed:48/255.0 green:79/255.0 blue:255/255.0 alpha:1.0] forState:UIControlStateNormal];

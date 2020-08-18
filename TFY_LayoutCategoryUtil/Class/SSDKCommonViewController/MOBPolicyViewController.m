@@ -59,7 +59,7 @@
     .part_first()
     .font(Font(PingFangSemibold, 17))
     .textColor(UIColorHexString(@"000000"))
-    .text(@"MOBLink Demo隐私条款")
+    .text(@"TFY_Link Demo隐私条款")
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
         make.centerX.equalTo(self.contentView);
         make.top.mas_offset(20);
@@ -149,7 +149,7 @@
 
 - (void)loadData{
     
-    NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:@"    欢迎您使用MobTech提供的演示DEMO，MOBLink提供了一步实现移动端深度链接的功能，不仅极大地方便了您的终端用户的服务体验，更为您实时了解终端用户的数据进行了统计分析。为了对您的MOBLink功能进行来源追溯并帮助您更精细化运营，我们将依据MobTech的《隐私政策》来帮助你了解我们需要收集哪些数据。\n\n\n详情点击:" attributes:@{
+    NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:@"    欢迎您使用TFY_Tech提供的演示DEMO，TFY_Link提供了一步实现移动端深度链接的功能，不仅极大地方便了您的终端用户的服务体验，更为您实时了解终端用户的数据进行了统计分析。为了对您的TFY_Link功能进行来源追溯并帮助您更精细化运营，我们将依据TFY_Tech的《隐私政策》来帮助你了解我们需要收集哪些数据。\n\n\n详情点击:" attributes:@{
         NSFontAttributeName :Font(PingFangReguler, 13),
         NSForegroundColorAttributeName:UIColorHexString(@"000000")
     }];
