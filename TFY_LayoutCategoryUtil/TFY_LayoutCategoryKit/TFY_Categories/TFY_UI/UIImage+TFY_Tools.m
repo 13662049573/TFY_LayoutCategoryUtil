@@ -704,7 +704,9 @@ static NSTimeInterval _tfy_CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef
         void *temp = malloc(tempSize);
         for (int i = 0; i < iterations; i++) {
             vImageBoxConvolve_ARGB8888(input, output, temp, 0, 0, radius, radius, NULL, kvImageEdgeExtend);
-            TFY_SWAP(input, output);
+            void *temp = input->data;
+            input->data = output->data;
+            output->data = temp;
         }
         free(temp);
     }
@@ -727,7 +729,9 @@ static NSTimeInterval _tfy_CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef
             matrix[i] = (int16_t)roundf(matrixFloat[i] * divisor);
         }
         vImageMatrixMultiply_ARGB8888(input, output, matrix, divisor, NULL, NULL, kvImageNoFlags);
-        TFY_SWAP(input, output);
+        void *temp = input->data;
+        input->data = output->data;
+        output->data = temp;
     }
     
     UIImage *outputImage = nil;
