@@ -7,7 +7,6 @@
 //
 
 #import "UIWindow+TFY_Tools.h"
-#import "UIApplication+TFY_Tools.h"
 #import <objc/message.h>
 
 @implementation UIWindow (TFY_Tools)

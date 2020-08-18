@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TFY_ScenePackageTools.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIApplication (TFY_Tools)

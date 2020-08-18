@@ -9,8 +9,8 @@
 #ifndef TFY_LayoutCategoryHeader_h
 #define TFY_LayoutCategoryHeader_h
 
-#import "TFY_ScenePackageTools.h"
 #import "TFY_CategoriesHeader.h"
 #import "TFY_ChainHeader.h"
+#import "UIWindow+TFY_Tools.h"
 
 #endif /* TFY_LayoutCategoryHeader_h */

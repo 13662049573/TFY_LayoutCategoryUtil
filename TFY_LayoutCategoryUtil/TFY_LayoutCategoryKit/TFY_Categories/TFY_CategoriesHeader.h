@@ -10,7 +10,6 @@
 #define TFY_CategoriesHeader_h
 
 #import "UIAlertController+TFY_Tools.h"
-#import "UIApplication+TFY_Tools.h"
 #import "NSObject+TFY_Tools.h"
 #import "NSArray+TFY_Tools.h"
 #import "NSData+TFY_Tools.h"
@@ -30,7 +29,6 @@
 #import "UIScrollView+TFY_Tools.h"
 #import "UITableView+TFY_Tools.h"
 #import "UITextField+TFY_Tools.h"
-#import "UIWindow+TFY_Tools.h"
 #import "NSAttributedString+TFY_Tools.h"
 #import "NSFileManager+TFY_Tools.h"
 #import "NSTimer+TFY_Tools.h"

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UIApplication+TFY_Tools.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIWindow (TFY_Tools)

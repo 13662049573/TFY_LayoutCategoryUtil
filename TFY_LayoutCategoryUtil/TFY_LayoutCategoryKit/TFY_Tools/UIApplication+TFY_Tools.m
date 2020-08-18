@@ -7,8 +7,6 @@
 //
 
 #import "UIApplication+TFY_Tools.h"
-#import "TFY_ScenePackageTools.h"
-#import "UIView+TFY_Tools.h"
 
 #import <pthread.h>
 #import <objc/message.h>
