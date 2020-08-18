@@ -15,6 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @class MASConstraintMaker;
 typedef void(^TFY_MasonryLoad)(MASConstraintMaker *make);
+
 @interface TFY_BaseViewChainModel<ObjectType> (Masonry)
 
 TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ makeMasonry)(TFY_MasonryLoad constraints);
