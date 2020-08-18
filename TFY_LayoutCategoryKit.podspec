@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_LayoutCategoryKit"
 
-  spec.version      = "1.1.2"
+  spec.version      = "1.1.4"
 
   spec.summary      = "全新链式的界面初始化和界面跳转，布局基于Masonry"
 
@@ -25,7 +25,6 @@ Pod::Spec.new do |spec|
    
    spec.subspec 'TFY_Tools' do |ss|
      ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/**/*.{h,m}"
-
      ss.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation"
    end
 
@@ -42,7 +41,7 @@ Pod::Spec.new do |spec|
    end
 
   spec.subspec 'TFY_Chain' do |ss|
-    ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainHeader.h"
+      ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainHeader.h"
 
       ss.subspec 'TFY_ChainBase' do |s|
         s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase/**/*.{h,m}"
