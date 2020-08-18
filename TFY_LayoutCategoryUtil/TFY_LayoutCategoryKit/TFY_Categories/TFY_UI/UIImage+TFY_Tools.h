@@ -10,10 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#ifndef TFY_SWAP // swap two value
-      #define TFY_SWAP(_a_, _b_)  do { __typeof__(_a_) _tmp_ = (_a_); (_a_) = (_b_); (_b_) = _tmp_; } while (0)
-#endif
-
 CG_INLINE CGFloat TFY_RadiansToDegrees(CGFloat radians) {
     return radians * 180 / M_PI;
 }
