@@ -15,6 +15,8 @@
 		36867DBA24EBA26400A761BC /* UIScreen+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36867DB924EBA26400A761BC /* UIScreen+TFY_Tools.m */; };
 		36867DBF24EBA2F600A761BC /* UITextField+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36867DBB24EBA2F400A761BC /* UITextField+TFY_Tools.m */; };
 		36867DC024EBA2F600A761BC /* UIWindow+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36867DBC24EBA2F500A761BC /* UIWindow+TFY_Tools.m */; };
+		36867DC324EBDFFF00A761BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36867DC224EBDFFF00A761BC /* Foundation.framework */; };
+		36867DC524EBE00C00A761BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36867DC424EBE00C00A761BC /* UIKit.framework */; };
 		56558376243196E000020D3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56558375243196E000020D3C /* Assets.xcassets */; };
 		56558379243196E000020D3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56558377243196E000020D3C /* LaunchScreen.storyboard */; };
 		5655837C243196E000020D3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5655837B243196E000020D3C /* main.m */; };
@@ -142,6 +144,8 @@
 		36867DBC24EBA2F500A761BC /* UIWindow+TFY_Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+TFY_Tools.m"; sourceTree = "<group>"; };
 		36867DBD24EBA2F500A761BC /* UIWindow+TFY_Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+TFY_Tools.h"; sourceTree = "<group>"; };
 		36867DBE24EBA2F600A761BC /* UITextField+TFY_Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+TFY_Tools.h"; sourceTree = "<group>"; };
+		36867DC224EBDFFF00A761BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		36867DC424EBE00C00A761BC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		56558366243196E000020D3C /* TFY_LayoutCategoryUtil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TFY_LayoutCategoryUtil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56558375243196E000020D3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56558378243196E000020D3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -347,6 +351,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36867DC324EBDFFF00A761BC /* Foundation.framework in Frameworks */,
+				36867DC524EBE00C00A761BC /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +373,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36867DC124EBDFFE00A761BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				36867DC424EBE00C00A761BC /* UIKit.framework */,
+				36867DC224EBDFFF00A761BC /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5655835D243196E000020D3C = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +389,7 @@
 				56558384243196E100020D3C /* TFY_LayoutCategoryUtilTests */,
 				5655838F243196E100020D3C /* TFY_LayoutCategoryUtilUITests */,
 				56558367243196E000020D3C /* Products */,
+				36867DC124EBDFFE00A761BC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
