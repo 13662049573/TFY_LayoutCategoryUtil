@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_LayoutCategoryKit"
 
-  spec.version      = "1.1.0"
+  spec.version      = "1.1.2"
 
   spec.summary      = "全新链式的界面初始化和界面跳转，布局基于Masonry"
 
@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
    
    spec.subspec 'TFY_Tools' do |ss|
      ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/**/*.{h,m}"
-     
+
      ss.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation"
    end
 
