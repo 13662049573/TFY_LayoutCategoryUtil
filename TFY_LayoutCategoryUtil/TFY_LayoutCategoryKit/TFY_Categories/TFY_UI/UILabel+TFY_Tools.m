@@ -7,7 +7,6 @@
 //
 
 #import "UILabel+TFY_Tools.h"
-#import "NSString+TFY_Tools.h"
 
 @implementation UILabel (TFY_Tools)
 
@@ -16,6 +15,7 @@
 }
 
 - (CGSize)sizeWithLimitSize:(CGSize)size{
-    return [self.text sizeWithAttributes:@{NSFontAttributeName:self.font} limitSize:size];
+    CGRect strRect = [self.text boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:self.font} context:nil];
+    return strRect.size;
 }
 @end

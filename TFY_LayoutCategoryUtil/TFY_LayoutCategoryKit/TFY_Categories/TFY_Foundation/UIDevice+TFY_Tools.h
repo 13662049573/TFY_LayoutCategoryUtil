@@ -11,13 +11,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIDevice (TFY_Tools)
-
+/**版本号*/
 + (double)systemVersion;
 
 + (NSString *)localVersion;
 
 + (NSString *)localBuild;
-
+/**跳转下载地址*/
 + (NSString *)storeUrlWithAppId:(NSString *)appId;
 
 @property (nonatomic, readonly) BOOL isJailbroken;

@@ -31,7 +31,7 @@
     // 首页
     HomeCollectionViewController *homeCtr = [[HomeCollectionViewController alloc] init];
     
-    [self addChildViewController:homeCtr navTitle:@"MobLink" tabTitle:@"首页" imageName:@"sy"];
+    [self addChildViewController:homeCtr navTitle:@"首页" tabTitle:@"首页" imageName:@"sy"];
     
     // 个人中心
     PersonalTableViewController *personCtr = [[PersonalTableViewController alloc] init];

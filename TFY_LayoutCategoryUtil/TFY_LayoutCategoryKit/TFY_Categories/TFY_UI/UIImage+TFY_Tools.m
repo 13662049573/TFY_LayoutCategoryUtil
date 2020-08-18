@@ -9,7 +9,6 @@
 #import "UIImage+TFY_Tools.h"
 #import <ImageIO/ImageIO.h>
 #import <Accelerate/Accelerate.h>
-#import "TFY_Define.h"
 
 @implementation UIImage (TFY_Tools)
 
@@ -27,8 +26,6 @@ static NSTimeInterval _tfy_CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef
         }
         CFRelease(dic);
     }
-    
-    // http://nullsleep.tumblr.com/post/16524517190/animated-gif-minimum-frame-delay-browser-compatibility
     if (delay < 0.02) delay = 0.1;
     return delay;
 }

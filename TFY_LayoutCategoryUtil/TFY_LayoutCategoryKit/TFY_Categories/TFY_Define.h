@@ -12,7 +12,6 @@
 #import <UIKit/UIKit.h>
 
 static inline CGFloat TFY_RadiansToDegrees(CGFloat radians) {
-    
     return radians * 180 / M_PI;
 }
 
@@ -21,7 +20,7 @@ static inline CGFloat TFY_DegreesToRadians(CGFloat degrees) {
 }
 
 #ifndef TFY_SWAP // swap two value
-#define TFY_SWAP(_a_, _b_)  do { __typeof__(_a_) _tmp_ = (_a_); (_a_) = (_b_); (_b_) = _tmp_; } while (0)
+      #define TFY_SWAP(_a_, _b_)  do { __typeof__(_a_) _tmp_ = (_a_); (_a_) = (_b_); (_b_) = _tmp_; } while (0)
 #endif
 
 #define TFY_WIDTH [UIScreen screenWidth]
@@ -39,7 +38,7 @@ static inline CGFloat TFY_DegreesToRadians(CGFloat degrees) {
     CGFloat height = 0;\
     UINavigationBar *bar = [UIApplication currentTopViewController].navigationController.navigationBar;\
     if (!bar.isHidden) {\
-    height = bar.height + kStatusBarHeight;\
+         height = bar.height + kStatusBarHeight;\
     }\
     height;\
 })
@@ -55,22 +54,24 @@ static inline CGFloat TFY_DegreesToRadians(CGFloat degrees) {
 #define TFY_SafeArea(view)\
 ({\
 UIEdgeInsets safeInsets = UIEdgeInsetsMake(20, 0, 0, 0);\
-if(view){\
-static IMP imp = _objc_msgForward;\
-static dispatch_once_t onceToken;\
-dispatch_once(&onceToken, ^{\
-    Method method = class_getInstanceMethod([view class], sel_registerName("safeAreaInsets"));\
-    if (method) {\
-        imp = method_getImplementation(method);\
-    }\
-});\
-if (imp != _objc_msgForward) {\
-   safeInsets = ((UIEdgeInsets (*)(id, SEL))imp)(view,sel_registerName("safeAreaInsets"));\
-}\
-}\
-safeInsets;\
+      if(view){\
+          static IMP imp = _objc_msgForward;\
+          static dispatch_once_t onceToken;\
+          dispatch_once(&onceToken, ^{\
+                  Method method = class_getInstanceMethod([view class], sel_registerName("safeAreaInsets"));\
+                  if (method) {\
+                     imp = method_getImplementation(method);\
+                  }\
+          });\
+      if (imp != _objc_msgForward) {\
+          safeInsets = ((UIEdgeInsets (*)(id, SEL))imp)(view,sel_registerName("safeAreaInsets"));\
+     }\
+  }\
+ safeInsets;\
 })
+
 #define TFY_WEAK  __weak typeof(self)weakSelf = self;
+
 #define TFY_STRONG  __strong typeof(weakSelf)self = weakSelf;
 
 #endif /* TFY_Define_h */
