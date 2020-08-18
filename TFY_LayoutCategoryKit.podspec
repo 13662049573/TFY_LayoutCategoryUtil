@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_LayoutCategoryKit"
 
-  spec.version      = "1.0.6"
+  spec.version      = "1.0.8"
 
   spec.summary      = "全新链式的界面初始化和界面跳转，布局基于Masonry"
 
@@ -29,7 +29,7 @@ Pod::Spec.new do |spec|
    end
 
    spec.subspec 'TFY_Categories' do |ss|
-      ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_CategoriesHeader.h","TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_Define.h"
+      ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/*.h"
       
       ss.subspec 'TFY_UI' do |s|
        s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_UI/**/*.{h,m}"
@@ -52,18 +52,19 @@ Pod::Spec.new do |spec|
         s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase"
       end
 
-      ss.subspec 'TFY_UIView' do |s|
-        s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Chain/TFY_UIView/**/*.{h,m}"
-        s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase"
-        s.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_UI"
-        s.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation"
-        s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_CALayer"
-        s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_UIGesture"
-      end
       ss.subspec 'TFY_UIGesture' do |s|
         s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Chain/TFY_UIGesture/**/*.{h,m}"
         s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase"
         s.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_UI"
+      end
+
+      ss.subspec 'TFY_UIView' do |s|
+        s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Chain/TFY_UIView/**/*.{h,m}"
+        s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase"
+        s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_CALayer"
+        s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_UIGesture"
+        s.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_UI"
+        s.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation"
       end
   end
 
