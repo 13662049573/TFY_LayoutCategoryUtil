@@ -11,8 +11,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-
 #define TFY_WIDTH [UIScreen screenWidth]
 
 #define TFY_HEIGHT [UIScreen screenHeight]
