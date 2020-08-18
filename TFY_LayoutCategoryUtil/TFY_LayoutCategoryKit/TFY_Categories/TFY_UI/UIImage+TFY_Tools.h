@@ -10,6 +10,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#ifndef TFY_SWAP // swap two value
+      #define TFY_SWAP(_a_, _b_)  do { __typeof__(_a_) _tmp_ = (_a_); (_a_) = (_b_); (_b_) = _tmp_; } while (0)
+#endif
+
+static inline CGFloat TFY_RadiansToDegrees(CGFloat radians) {
+    return radians * 180 / M_PI;
+}
+
+static inline CGFloat TFY_DegreesToRadians(CGFloat degrees) {
+    return degrees * M_PI / 180;
+}
+
 @interface UIImage (TFY_Tools)
 + (nullable UIImage *)imageWithSmallGIFData:(NSData *)data scale:(CGFloat)scale;
 
