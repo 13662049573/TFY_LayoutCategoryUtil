@@ -7,6 +7,7 @@
 //
 
 #import "UIApplication+TFY_Tools.h"
+#import "UIView+TFY_Tools.h"
 #import <pthread.h>
 #import <objc/message.h>
 #import <sys/sysctl.h>
