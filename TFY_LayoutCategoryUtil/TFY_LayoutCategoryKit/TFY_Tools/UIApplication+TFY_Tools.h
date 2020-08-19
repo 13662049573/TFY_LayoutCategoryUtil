@@ -64,4 +64,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface UIView (Navigation_Chain)
+
+- (UINavigationController *_Nonnull)navigationController;
+
+@end
+
+
 NS_ASSUME_NONNULL_END

@@ -7,7 +7,6 @@
 //
 
 #import "UIApplication+TFY_Tools.h"
-#import "UIView+TFY_Tools.h"
 #import <pthread.h>
 #import <objc/message.h>
 #import <sys/sysctl.h>
@@ -123,5 +122,24 @@ return objc_getAssociatedObject(self, @selector(_setter_:)); \
 + (UIWindow *)keyWindow{
     return [TFY_ScenePackageTools defaultPackage].keyWindow;
 }
+
+@end
+
+@implementation UIView (Navigation_Chain)
+
+- (UINavigationController *_Nonnull)navigationController
+{
+    UIResponder *next = self.nextResponder;
+    do {
+        if ([next isKindOfClass:[UINavigationController class]]) {
+            return (UINavigationController *)next;
+            
+        }
+        next = next.nextResponder;
+    } while (next);
+    return nil;
+    
+}
+
 
 @end

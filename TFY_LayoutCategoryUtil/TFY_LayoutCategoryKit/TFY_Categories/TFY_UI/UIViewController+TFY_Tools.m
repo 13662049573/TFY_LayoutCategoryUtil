@@ -10,7 +10,7 @@
 
 @implementation UIViewController (TFY_Tools)
 
-- (UINavigationController *)tfy_navigationController{
+- (UINavigationController *)navigationController{
     UIResponder * responder = self.view.nextResponder;
     while (responder) {
         if ([responder isKindOfClass:[UINavigationController class]]) {

@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (TFY_Tools)
-- (UINavigationController *)tfy_navigationController;
+
+- (UINavigationController *)navigationController;
+
 @end
 
 NS_ASSUME_NONNULL_END
