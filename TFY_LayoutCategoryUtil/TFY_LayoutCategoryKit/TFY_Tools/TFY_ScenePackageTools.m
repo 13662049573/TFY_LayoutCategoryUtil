@@ -7,7 +7,6 @@
 //
 
 #import "TFY_ScenePackageTools.h"
-#import "NSObject+TFY_Tools.h"
 #import <objc/message.h>
 
 typedef enum : NSUInteger {
@@ -938,4 +937,66 @@ static inline void ScenePackageViewLifeEventSwizzledNoParametersMethodExp(Class 
         return self;
     };
 }
+@end
+
+static const void *RuntimeDeallocTasks = &RuntimeDeallocTasks;
+static const void *RuntimeDeallocClassTag = &RuntimeDeallocClassTag;
+
+static inline void tfy_swizzleDeallocIfNeed(Class swizzleClass){
+    @synchronized (swizzleClass) {
+        if (objc_getAssociatedObject(swizzleClass, RuntimeDeallocClassTag)) return;
+        objc_setAssociatedObject(swizzleClass, RuntimeDeallocClassTag, @1, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        SEL deallocSelector = sel_registerName("dealloc");
+        
+        __block void (* oldImp) (__unsafe_unretained id, SEL) = NULL;
+        
+        id newImpBlock = ^ (__unsafe_unretained id self){
+            
+            NSMutableArray *deallocTask = objc_getAssociatedObject(self, RuntimeDeallocTasks);
+            @synchronized (deallocTask) {
+                if (deallocTask.count > 0) {
+                    [deallocTask enumerateObjectsUsingBlock:^(tfy_deallocTask obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        if (obj) {
+                            obj(self);
+                        }
+                    }];
+                    [deallocTask removeAllObjects];
+                }
+            }
+            if (oldImp == NULL) {
+                struct objc_super supperInfo = {
+                    .receiver = self,
+                    .super_class = class_getSuperclass(swizzleClass)
+                };
+                ((void (*) (struct objc_super *, SEL))objc_msgSendSuper)(&supperInfo, deallocSelector);
+            }else{
+                oldImp(self,deallocSelector);
+            }
+        };
+        IMP newImp = imp_implementationWithBlock(newImpBlock);
+        if (!class_addMethod(swizzleClass, deallocSelector, newImp, "v@:")) {
+            Method deallocMethod = class_getInstanceMethod(swizzleClass, deallocSelector);
+            oldImp = (__typeof__ (oldImp))method_getImplementation(deallocMethod);
+            oldImp = (__typeof__ (oldImp))method_setImplementation(deallocMethod, newImp);
+        }
+    }
+}
+
+@implementation NSObject (ScenePackageObject)
+
+- (NSMutableArray<tfy_deallocTask> *)tfy_deallocTasks{
+    NSMutableArray *tasks = objc_getAssociatedObject(self, RuntimeDeallocTasks);
+    if (tasks) return tasks;
+    tasks = [NSMutableArray array];
+    tfy_swizzleDeallocIfNeed(object_getClass(self));
+    objc_setAssociatedObject(self, RuntimeDeallocTasks, tasks, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return tasks;
+}
+
+- (void)addDeallocTask:(void (^)(id _Nonnull))task{
+    @synchronized ([self tfy_deallocTasks]) {
+        [[self tfy_deallocTasks] addObject:task];
+    }
+}
+
 @end

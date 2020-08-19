@@ -116,4 +116,12 @@ typedef NS_ENUM(NSUInteger, ControllerShowType) {
 
 @end
 
+typedef void(^tfy_deallocTask)(id _Nonnull object);
+
+@interface NSObject (ScenePackageObject)
+
+- (void)addDeallocTask:(tfy_deallocTask)task;
+
+@end
+
 NS_ASSUME_NONNULL_END

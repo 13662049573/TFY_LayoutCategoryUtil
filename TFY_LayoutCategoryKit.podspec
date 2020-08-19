@@ -25,7 +25,6 @@ Pod::Spec.new do |spec|
    
    spec.subspec 'TFY_Tools' do |ss|
      ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/**/*.{h,m}"
-     ss.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation"
    end
 
    spec.subspec 'TFY_Categories' do |ss|
