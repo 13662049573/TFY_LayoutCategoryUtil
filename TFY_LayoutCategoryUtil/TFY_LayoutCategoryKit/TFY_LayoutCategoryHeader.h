@@ -8,9 +8,11 @@
 
 #ifndef TFY_LayoutCategoryHeader_h
 #define TFY_LayoutCategoryHeader_h
-
+/**类别*/
 #import "TFY_CategoriesHeader.h"
+/**连式编程*/
 #import "TFY_ChainHeader.h"
-#import "UIWindow+TFY_Tools.h"
+/**额外工具*/
+#import "TFY_ToolsHeader.h"
 
 #endif /* TFY_LayoutCategoryHeader_h */
