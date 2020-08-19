@@ -23,6 +23,7 @@ TFY_CATEGORY_CHAIN_LABLE_IMPLEMENTATION(baselineAdjustment, UIBaselineAdjustment
 TFY_CATEGORY_CHAIN_LABLE_IMPLEMENTATION(allowsDefaultTighteningForTruncation, BOOL);
 TFY_CATEGORY_CHAIN_LABLE_IMPLEMENTATION(preferredMaxLayoutWidth, CGFloat);
 TFY_CATEGORY_CHAIN_LABLE_IMPLEMENTATION(minimumScaleFactor, CGFloat);
+
 - (CGSize (^)(CGSize))sizeWithLimitSize{
     return ^ (CGSize size){
         return [(UILabel *)self.view sizeWithLimitSize:size];
@@ -34,6 +35,16 @@ TFY_CATEGORY_CHAIN_LABLE_IMPLEMENTATION(minimumScaleFactor, CGFloat);
         return [(UILabel *)self.view sizeWithoutLimitSize];
     };
 }
+
+- (TFY_LabelChainModel * _Nonnull (^)(UIEdgeInsets))contentInsets{
+    return ^(UIEdgeInsets contentInsets){
+        [self enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj) {
+            obj.contentInsets = contentInsets;
+        }];
+        return self;
+    };
+}
+
 @end
 
 TFY_CATEGORY_VIEW_IMPLEMENTATION(UILabel, TFY_LabelChainModel)

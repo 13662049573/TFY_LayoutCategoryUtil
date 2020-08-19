@@ -7,7 +7,7 @@
 //
 
 #import "NSFileManager+TFY_Tools.h"
-#import "NSString+TFY_Tools.h"
+#import "NSString+TFY_String.h"
 
 @implementation NSFileManager (TFY_Tools)
 - (NSURL *)documentsURL {
@@ -79,7 +79,7 @@
         NSString *la = path.lastPathComponent;
         if (![la hasPrefix:preName]) {
             NSString *dir = [path substringToIndex:path.length - la.length];
-            NSString *newPath = [dir stringByAppendingPathComponent:[preName stringByAppendingString:[la transformToPinyin]]];
+            NSString *newPath = [dir stringByAppendingPathComponent:[preName stringByAppendingString:[la tfy_transformToPinyin]]];
             [self moveItemAtPath:path toPath:newPath error:nil];
         }
         return;
@@ -92,7 +92,7 @@
             if (!isDir) {
                 NSString *la = a.lastPathComponent;
                 NSString *dir = [p substringToIndex:p.length - la.length];
-                NSString *newPath = [dir stringByAppendingPathComponent:[preName stringByAppendingString:[la transformToPinyin]]];
+                NSString *newPath = [dir stringByAppendingPathComponent:[preName stringByAppendingString:[la tfy_transformToPinyin]]];
                 NSError *error = nil;
                 [self moveItemAtPath:p toPath:newPath error:&error];
             }

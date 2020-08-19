@@ -24,6 +24,7 @@ TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ baselineAdjustment)(UIBaseli
 TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ allowsDefaultTighteningForTruncation)(BOOL) API_AVAILABLE(ios(9.0));
 TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ minimumScaleFactor)(CGFloat);
 TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ preferredMaxLayoutWidth)(CGFloat);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ contentInsets)(UIEdgeInsets);
 
 TFY_CATEGORY_CHAIN_PROPERTY CGSize (^ sizeWithLimitSize) (CGSize);
 

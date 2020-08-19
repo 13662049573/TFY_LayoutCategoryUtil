@@ -7,7 +7,7 @@
 //
 
 #import "UIDevice+TFY_Tools.h"
-#import "NSString+TFY_Tools.h"
+#import "NSString+TFY_String.h"
 
 #include <sys/socket.h>
 #include <sys/sysctl.h>
@@ -66,7 +66,7 @@
         fclose(bash);
         return YES;
     }
-    NSString *path = [NSString stringWithFormat:@"/private/%@", [NSString stringWithUUID]];
+    NSString *path = [NSString stringWithFormat:@"/private/%@", [NSString tfy_stringWithUUID]];
     if ([@"test" writeToFile : path atomically : YES encoding : NSUTF8StringEncoding error : NULL]) {
         [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
         return YES;

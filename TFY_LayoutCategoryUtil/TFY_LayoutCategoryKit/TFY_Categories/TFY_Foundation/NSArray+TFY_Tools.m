@@ -7,8 +7,8 @@
 //
 
 #import "NSArray+TFY_Tools.h"
-#import "NSData+TFY_Tools.h"
-#import "NSString+TFY_Tools.h"
+#import "NSData+TFY_Data.h"
+#import "NSString+TFY_String.h"
 
 @implementation NSArray (TFY_Tools)
 
@@ -46,7 +46,7 @@
 
 + (nullable NSArray *)arrayWithPlistString:(NSString *)plist{
     if (!plist) return nil;
-    return [self arrayWithPlistData:plist.utf8Data];
+    return [self arrayWithPlistData:plist.tfy_utf8Data];
 }
 
 - (nullable NSData *)plistData{
@@ -54,21 +54,21 @@
 }
 - (NSString *)plistString{
     NSData *xmlData = [NSPropertyListSerialization dataWithPropertyList:self format:NSPropertyListXMLFormat_v1_0 options:kNilOptions error:NULL];
-    if (xmlData) return xmlData.utf8String;
+    if (xmlData) return xmlData.tfy_utf8String;
     return nil;
 }
 
 
 - (NSString *)jsonString{
     if ([NSJSONSerialization isValidJSONObject:self]) {
-        return [NSJSONSerialization dataWithJSONObject:self options:0 error:NULL].utf8String;
+        return [NSJSONSerialization dataWithJSONObject:self options:0 error:NULL].tfy_utf8String;
     }
     return nil;
 }
 
 - (NSString *)jsonPrettyString{
     if ([NSJSONSerialization isValidJSONObject:self]) {
-        return [NSJSONSerialization dataWithJSONObject:self options:NSJSONWritingPrettyPrinted error:NULL].utf8String;
+        return [NSJSONSerialization dataWithJSONObject:self options:NSJSONWritingPrettyPrinted error:NULL].tfy_utf8String;
     }
     return nil;
 }
@@ -85,7 +85,7 @@
 
 + (NSMutableArray *)arrayWithPlistString:(NSString *)plist {
     if (!plist) return nil;
-    NSData* data = plist.utf8Data;
+    NSData* data = plist.tfy_utf8Data;
     return [self arrayWithPlistData:data];
 }
 

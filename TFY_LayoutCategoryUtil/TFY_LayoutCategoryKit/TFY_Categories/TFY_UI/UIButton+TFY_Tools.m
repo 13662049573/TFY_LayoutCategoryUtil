@@ -10,6 +10,21 @@
 #import <objc/message.h>
 #import <time.h>
 
+@interface UIButton ()
+/**
+ *  🐶nn    👇
+ */
+@property(nonatomic,strong)dispatch_source_t timer;
+/**
+ *  🐶记录外边的时间    👇
+ */
+@property(nonatomic,assign)NSInteger userTime;
+
+@end
+
+static NSInteger const TimeInterval = 60; // 默认时间
+static NSString * const ButtonTitleFormat = @"剩余%ld秒";
+static NSString * const RetainTitle = @"重试";
 static const void *ButtonRuntimeLimitTasks         = &ButtonRuntimeLimitTasks;
 static const void *ButtonRuntimeLimitTapBlock      = &ButtonRuntimeLimitTapBlock;
 static const void *ButtonRuntimeLimitTapTimes      = &ButtonRuntimeLimitTapTimes;
@@ -113,7 +128,6 @@ static inline void UI_swizzleButtonIfNeed(Class swizzleClass){
     }
 }
 
-
 - (UIButton * _Nonnull (^)(ButtonLimitTimesTapBlock _Nonnull))buttonTapTime{
     return ^(ButtonLimitTimesTapBlock block){
         if (block != nil) {
@@ -137,5 +151,89 @@ static inline void UI_swizzleButtonIfNeed(Class swizzleClass){
     objc_setAssociatedObject(self, ButtonRuntimeLimitTapLastTimes, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (void)setTime:(NSInteger)time{
+    objc_setAssociatedObject(self, @selector(time), @(time), OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (NSInteger)time {
+    return  [objc_getAssociatedObject(self, _cmd) integerValue];
+}
+
+- (void)setFormat:(NSString *)format {
+    objc_setAssociatedObject(self, @selector(format), format, OBJC_ASSOCIATION_COPY);
+}
+
+- (NSString *)format {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setUserTime:(NSInteger)userTime {
+    objc_setAssociatedObject(self, @selector(userTime), @(userTime), OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (NSInteger)userTime {
+    return  [objc_getAssociatedObject(self, _cmd) integerValue];
+}
+
+- (void)setTimer:(dispatch_source_t)timer {
+    objc_setAssociatedObject(self, @selector(timer), timer, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (dispatch_source_t)timer {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setCompleteBlock:(void (^)(void))CompleteBlock {
+    objc_setAssociatedObject(self, @selector(CompleteBlock), CompleteBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+-(void (^)(void))CompleteBlock {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)startTimer {
+    if (!self.time) {
+        self.time = TimeInterval;
+    }
+    if (!self.format) {
+        self.format = ButtonTitleFormat;
+    }
+    dispatch_queue_t globalQueue = dispatch_get_global_queue(0, 0);
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, globalQueue);
+    dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    dispatch_source_set_event_handler(self.timer, ^{
+        if (self.time <= 1) {
+            dispatch_source_cancel(self.timer);
+        }else
+        {
+            self.time --;
+            dispatch_async(mainQueue, ^{
+                self.enabled = NO;
+                [self setTitle:[NSString stringWithFormat:self.format,self.time] forState:UIControlStateNormal];
+            });
+        }
+    });
+    dispatch_source_set_cancel_handler(self.timer, ^{
+        dispatch_async(mainQueue, ^{
+            self.enabled = YES;
+            [self setTitle:RetainTitle forState:UIControlStateNormal];
+            if (self.CompleteBlock) {
+                self.CompleteBlock();
+            }
+            if (self.userTime) {
+                self.time = self.userTime;
+            }else
+            {
+                self.time = TimeInterval;
+            }
+        });
+    });
+    dispatch_resume(self.timer);
+}
+
+- (void)endTimer{
+    dispatch_source_cancel(self.timer);
+}
 
 @end

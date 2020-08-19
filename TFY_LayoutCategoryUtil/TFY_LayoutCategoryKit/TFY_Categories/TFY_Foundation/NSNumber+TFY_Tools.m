@@ -7,11 +7,11 @@
 //
 
 #import "NSNumber+TFY_Tools.h"
-#import "NSString+TFY_Tools.h"
+#import "NSString+TFY_String.h"
 
 @implementation NSNumber (TFY_Tools)
 + (NSNumber *)numberWithString:(NSString *)string{
-    NSString *str = [[string stringByTrim] lowercaseString];
+    NSString *str = [[string tfy_stringByTrim] lowercaseString];
     if (!str || !str.length) {
         return nil;
     }

@@ -7,8 +7,8 @@
 //
 
 #import "NSDictionary+TFY_Tools.h"
-#import "NSString+TFY_Tools.h"
-#import "NSData+TFY_Tools.h"
+#import "NSString+TFY_String.h"
+#import "NSData+TFY_Data.h"
 
 @implementation NSDictionary (TFY_Tools)
 
@@ -54,7 +54,7 @@
     if ([NSJSONSerialization isValidJSONObject:self]) {
         NSError *error;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self options:NSJSONWritingPrettyPrinted error:&error];
-        return jsonData.utf8String;
+        return jsonData.tfy_utf8String;
     }
     return nil;
 }
@@ -82,7 +82,7 @@
 
 - (NSString *)plistString {
     NSData *xmlData = [NSPropertyListSerialization dataWithPropertyList:self format:NSPropertyListXMLFormat_v1_0 options:kNilOptions error:NULL];
-    if (xmlData) return xmlData.utf8String;
+    if (xmlData) return xmlData.tfy_utf8String;
     return nil;
 }
 

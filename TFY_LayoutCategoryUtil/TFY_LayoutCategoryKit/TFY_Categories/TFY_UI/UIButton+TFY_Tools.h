@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UILabel+TFY_Tools.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, ButtonImageDirection) {
@@ -38,6 +39,27 @@ typedef void(^ButtonLimitTimesTapBlock)(NSUInteger time, BOOL *stop, UIButton *b
  * 清除限制
  */
 - (void)cancelRecordTime;
+
+/**
+ *  🐶计时时间    👇
+ */
+@property(nonatomic,assign,readwrite)NSInteger time;
+/**
+ *  🐶format   👇
+ */
+@property(nonatomic,copy)NSString *format;
+/**
+ * 开启计时器
+ */
+- (void)startTimer;
+/**
+ * 干掉计时器
+ */
+- (void)endTimer;
+/**
+ * 倒计时完成后的回调
+ */
+@property(nonatomic,copy)void(^CompleteBlock)(void);
 @end
 
 NS_ASSUME_NONNULL_END

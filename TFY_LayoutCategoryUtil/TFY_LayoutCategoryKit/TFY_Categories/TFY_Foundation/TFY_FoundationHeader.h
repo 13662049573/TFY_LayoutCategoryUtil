@@ -17,12 +17,13 @@
 #import "UIDevice+TFY_Tools.h"
 #import "NSObject+TFY_Tools.h"
 #import "NSArray+TFY_Tools.h"
-#import "NSData+TFY_Tools.h"
-#import "NSString+TFY_Tools.h"
+#import "NSString+TFY_String.h"
 #import "NSNumber+TFY_Tools.h"
 #import "NSDictionary+TFY_Tools.h"
 #import "NSAttributedString+TFY_Tools.h"
 #import "NSFileManager+TFY_Tools.h"
 #import "NSTimer+TFY_Tools.h"
+#import "NSData+TFY_Data.h"
+#import "NSDate+TFY_Date.h"
 
 #endif /* TFY_FoundationHeader_h */
