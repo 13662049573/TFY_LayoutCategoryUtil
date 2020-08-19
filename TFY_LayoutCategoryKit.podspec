@@ -21,7 +21,7 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => "https://github.com/13662049573/TFY_LayoutCategoryUtil.git", :tag => spec.version }
 
-  spec.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_LayoutCategoryHeader.h"
+  spec.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/*.h"
    
    spec.subspec 'TFY_Tools' do |ss|
      ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/**/*.{h,m}"
