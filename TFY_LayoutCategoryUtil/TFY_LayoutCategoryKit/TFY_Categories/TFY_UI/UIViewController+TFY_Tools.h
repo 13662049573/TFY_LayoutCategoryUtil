@@ -12,7 +12,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (TFY_Tools)
 
-- (UINavigationController *)navigationController;
++ (UIViewController *)currentViewController;
+
+@end
+
+@interface UINavigationController (TFY_PlayerRotation)
+
+@end
+
+@interface UITabBarController (TFY_PlayerRotation)
+
+@end
+
+@interface UIAlertController (TFY_PlayerRotation)
 
 @end
 

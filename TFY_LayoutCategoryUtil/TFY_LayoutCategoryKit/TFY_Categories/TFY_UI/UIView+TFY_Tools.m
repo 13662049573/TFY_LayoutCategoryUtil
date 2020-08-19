@@ -140,17 +140,6 @@
     }
     return nextResponder;
 }
-- (UINavigationController *)navigationController{
-    id nextResponder = self;
-    while (nextResponder) {
-        if ([nextResponder isKindOfClass:[UIViewController class]] && [nextResponder navigationController] != nil) {
-            nextResponder = [nextResponder navigationController];
-            break;
-        }
-        nextResponder = [nextResponder nextResponder];
-    }
-    return nextResponder;
-}
 
 - (CGFloat)visibleAlpha{
     if ([self isKindOfClass:[UIWindow class]]) {

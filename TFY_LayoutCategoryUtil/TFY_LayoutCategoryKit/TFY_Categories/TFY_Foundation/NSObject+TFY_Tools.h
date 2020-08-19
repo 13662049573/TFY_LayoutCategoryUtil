@@ -10,8 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^tfy_deallocTask)(id object);
-
 @interface NSObject (TFY_Tools)
 
 @property (nonatomic, copy, readonly) NSString * clasName;
@@ -24,13 +22,9 @@ typedef void(^tfy_deallocTask)(id object);
 
 - (void)setAssociateValue:(id)value forKey:(void *)key;
 
-- (void)setAssociateWeakValue:(nullable id)value forKey:(void *)key;
-
 - (id)getAssociateValueByKey:(void *)key;
 
 - (void)removeAllAssociatedValues;
-
-- (void)addDeallocTask:(tfy_deallocTask)task;
 
 - (nullable id)performSelectorWithArguments:(SEL)sel, ...;
 

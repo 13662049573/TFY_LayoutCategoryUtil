@@ -28,10 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIViewController *)viewController;
 
-//接收响应事件的NavigationController
-- (UINavigationController *)navigationController;
-
-
 - (CGFloat)visibleAlpha;
 
 - (UIImage *)snapshotImage;

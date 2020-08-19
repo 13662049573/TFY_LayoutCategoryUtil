@@ -22,9 +22,6 @@ va_start(args, _args);\
 [NSObject setInv:invoctation withSig:sig andArgs:args];\
 va_end(args);
 
-static const void *RuntimeDeallocTasks = &RuntimeDeallocTasks;
-static const void *RuntimeDeallocClassTag = &RuntimeDeallocClassTag;
-
 @implementation NSObject (TFY_Tools)
 
 - (NSString *)clasName{
@@ -336,55 +333,8 @@ struct dummy arg = va_arg(args, struct dummy); \
     return YES;
 }
 
-static inline void tfy_swizzleDeallocIfNeed(Class swizzleClass){
-    @synchronized (swizzleClass) {
-        if (objc_getAssociatedObject(swizzleClass, RuntimeDeallocClassTag)) return;
-        objc_setAssociatedObject(swizzleClass, RuntimeDeallocClassTag, @1, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        SEL deallocSelector = sel_registerName("dealloc");
-        
-        __block void (* oldImp) (__unsafe_unretained id, SEL) = NULL;
-        
-        id newImpBlock = ^ (__unsafe_unretained id self){
-            
-            NSMutableArray *deallocTask = objc_getAssociatedObject(self, RuntimeDeallocTasks);
-            @synchronized (deallocTask) {
-                if (deallocTask.count > 0) {
-                    [deallocTask enumerateObjectsUsingBlock:^(tfy_deallocTask obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                        if (obj) {
-                            obj(self);
-                        }
-                    }];
-                    [deallocTask removeAllObjects];
-                }
-            }
-            if (oldImp == NULL) {
-                struct objc_super supperInfo = {
-                    .receiver = self,
-                    .super_class = class_getSuperclass(swizzleClass)
-                };
-                ((void (*) (struct objc_super *, SEL))objc_msgSendSuper)(&supperInfo, deallocSelector);
-            }else{
-                oldImp(self,deallocSelector);
-            }
-        };
-        IMP newImp = imp_implementationWithBlock(newImpBlock);
-        if (!class_addMethod(swizzleClass, deallocSelector, newImp, "v@:")) {
-            Method deallocMethod = class_getInstanceMethod(swizzleClass, deallocSelector);
-            oldImp = (__typeof__ (oldImp))method_getImplementation(deallocMethod);
-            oldImp = (__typeof__ (oldImp))method_setImplementation(deallocMethod, newImp);
-        }
-    }
-}
-
 - (void)setAssociateValue:(id)value forKey:(void *)key{
     objc_setAssociatedObject(self, key, value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (void)setAssociateWeakValue:(nullable id)value forKey:(void *)key{
-    objc_setAssociatedObject(self, key, value, OBJC_ASSOCIATION_ASSIGN);
-    [value addDeallocTask:^(id  _Nonnull object) {
-        objc_setAssociatedObject(self, key, nil, OBJC_ASSOCIATION_ASSIGN);
-    }];
 }
 
 - (id)getAssociateValueByKey:(void *)key{
@@ -395,20 +345,4 @@ static inline void tfy_swizzleDeallocIfNeed(Class swizzleClass){
     objc_removeAssociatedObjects(self);
 }
 
-
-//dealloc
-- (NSMutableArray<tfy_deallocTask> *)tfy_deallocTasks{
-    NSMutableArray *tasks = objc_getAssociatedObject(self, RuntimeDeallocTasks);
-    if (tasks) return tasks;
-    tasks = [NSMutableArray array];
-    tfy_swizzleDeallocIfNeed(object_getClass(self));
-    objc_setAssociatedObject(self, RuntimeDeallocTasks, tasks, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return tasks;
-}
-
-- (void)addDeallocTask:(void (^)(id _Nonnull))task{
-    @synchronized ([self tfy_deallocTasks]) {
-        [[self tfy_deallocTasks] addObject:task];
-    }
-}
 @end
