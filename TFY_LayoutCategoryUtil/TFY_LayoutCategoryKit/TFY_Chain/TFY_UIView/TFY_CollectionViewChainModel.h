@@ -12,12 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_CollectionViewChainModel;
 @interface TFY_CollectionViewChainModel : TFY_BaseScrollViewChainModel<TFY_CollectionViewChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ collectionViewLayout)(UICollectionViewLayout *collectionViewLayout);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ delegate)(id<UICollectionViewDelegate> delegate);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ dataSource)(id<UICollectionViewDataSource> dataSource);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ allowsSelection)(BOOL allowsSelection);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ collectionViewLayout)(UICollectionViewLayout *);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ delegate)(id<UICollectionViewDelegate>);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ dataSource)(id<UICollectionViewDataSource>);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ allowsSelection)(BOOL);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ allowsMultipleSelection)(BOOL allowsMultipleSelection);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ allowsMultipleSelection)(BOOL);
 
 TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ registerCellClass)(Class cellClass, NSString *identifier);
 

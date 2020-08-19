@@ -12,19 +12,19 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_SliderViewChainModel;
 @interface TFY_SliderViewChainModel : TFY_BaseControlChainModel<TFY_SliderViewChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ value) (float value);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ minimumValue) (float minimumValue);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ maximumValue) (float maximumValue);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ minimumValueImage) (UIImage * minimumValueImage);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ maximumValueImage) (UIImage * maximumValueImage);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ continuous) (BOOL continuous);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ minimumTrackTintColor) (UIColor * minimumTrackTintColor);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ maximumTrackTintColor) ( UIColor *maximumTrackTintColor);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ thumbTintColor) (UIColor * thumbTintColor);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ setThumbImage) (UIImage *image,UIControlState status);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ setMinimumTrackImage) (UIImage *image,UIControlState status);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ setMaximumTrackImage) (UIImage *image,UIControlState status);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ setValueAnimated) (float value, BOOL animated);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ value) (float);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ minimumValue) (float);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ maximumValue) (float);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ minimumValueImage) (UIImage *);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ maximumValueImage) (UIImage *);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ continuous) (BOOL);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ minimumTrackTintColor) (UIColor *);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ maximumTrackTintColor) ( UIColor *);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ thumbTintColor) (UIColor *);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ setThumbImage) (UIImage *,UIControlState);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ setMinimumTrackImage) (UIImage *,UIControlState);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ setMaximumTrackImage) (UIImage *,UIControlState);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_SliderViewChainModel * (^ setValueAnimated) (float, BOOL);
 @end
 
 TFY_CATEGORY_EXINTERFACE(UISlider, TFY_SliderViewChainModel)

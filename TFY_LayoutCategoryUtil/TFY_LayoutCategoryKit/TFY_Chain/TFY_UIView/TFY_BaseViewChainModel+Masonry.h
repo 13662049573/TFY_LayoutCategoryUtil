@@ -18,11 +18,11 @@ typedef void(^TFY_MasonryLoad)(MASConstraintMaker *make);
 
 @interface TFY_BaseViewChainModel<ObjectType> (Masonry)
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ makeMasonry)(TFY_MasonryLoad constraints);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ makeMasonry)(TFY_MasonryLoad);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ updateMasonry)(TFY_MasonryLoad constraints);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ updateMasonry)(TFY_MasonryLoad);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ remakeMasonry)(TFY_MasonryLoad constraints);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ remakeMasonry)(TFY_MasonryLoad);
 @end
 
 NS_ASSUME_NONNULL_END

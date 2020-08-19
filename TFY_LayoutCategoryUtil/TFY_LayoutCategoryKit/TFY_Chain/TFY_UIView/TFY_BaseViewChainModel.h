@@ -36,164 +36,164 @@ typedef void(^TFY_AssignViewLoad)(__kindof UIView *view);
 
 @property (nonatomic, assign, readonly) Class viewClass;
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ bounds) (CGRect frame);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ bounds) (CGRect);
 #pragma mark - frame -
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ frame) (CGRect frame);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ frame) (CGRect);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ origin) (CGPoint origin);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ origin) (CGPoint);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ x) (CGFloat x);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ x) (CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ y) (CGFloat y);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ y) (CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ size) (CGSize size);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ size) (CGSize);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ width) (CGFloat width);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ width) (CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ height) (CGFloat height);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ height) (CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ center) (CGPoint center);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ center) (CGPoint);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ centerX) (CGFloat centerX);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ centerX) (CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ centerY) (CGFloat centerY);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ centerY) (CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ top) (CGFloat top);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ top) (CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ left) (CGFloat left);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ left) (CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ bottom) (CGFloat bottom);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ bottom) (CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ right) (CGFloat right);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ right) (CGFloat);
 
 
 TFY_CATEGORY_CHAIN_PROPERTY CGFloat (^ visibleAlpha) (void);
 
-TFY_CATEGORY_CHAIN_PROPERTY CGRect (^ convertRectTo) (CGRect rect, UIView * toView);
+TFY_CATEGORY_CHAIN_PROPERTY CGRect (^ convertRectTo) (CGRect, UIView *);
 
-TFY_CATEGORY_CHAIN_PROPERTY CGRect (^ convertRectFrom) (CGRect rect, UIView * toView);
+TFY_CATEGORY_CHAIN_PROPERTY CGRect (^ convertRectFrom) (CGRect, UIView *);
 
-TFY_CATEGORY_CHAIN_PROPERTY CGPoint (^ convertPointTo) (CGPoint point, UIView * toView);
+TFY_CATEGORY_CHAIN_PROPERTY CGPoint (^ convertPointTo) (CGPoint, UIView *);
 
-TFY_CATEGORY_CHAIN_PROPERTY CGPoint (^ convertPointFrom) (CGPoint point, UIView * toView);
+TFY_CATEGORY_CHAIN_PROPERTY CGPoint (^ convertPointFrom) (CGPoint, UIView *);
 
-TFY_CATEGORY_CHAIN_PROPERTY UIView *(^ viewWithTag) (NSInteger tag);
+TFY_CATEGORY_CHAIN_PROPERTY UIView *(^ viewWithTag) (NSInteger);
 
 #pragma mark - show -
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ backgroundColor) (UIColor *backgroundColor);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ backgroundColor) (UIColor *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ tintColor) (UIColor *tintColor);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ tintColor) (UIColor *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ alpha) (CGFloat alpha);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ alpha) (CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ hidden) (BOOL hidden);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ hidden) (BOOL);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ clipsToBounds) (BOOL clipsToBounds);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ clipsToBounds) (BOOL);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ opaque) (BOOL opaque);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ opaque) (BOOL);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ userInteractionEnabled) (BOOL userInteractionEnabled);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ userInteractionEnabled) (BOOL);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ multipleTouchEnabled) (BOOL multipleTouchEnabled);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ multipleTouchEnabled) (BOOL);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ endEditing) (BOOL endEditing);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ endEditing) (BOOL);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ contentMode) (UIViewContentMode contentMode);
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ transform) (CGAffineTransform transform);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ contentMode) (UIViewContentMode);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ transform) (CGAffineTransform);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ autoresizingMask) (UIViewAutoresizing autoresizingMask);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ autoresizingMask) (UIViewAutoresizing);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ autoresizesSubviews) (BOOL autoresizesSubviews);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ autoresizesSubviews) (BOOL);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ makeTag) (NSInteger tag);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ makeTag) (NSInteger);
 
 #pragma mark - control -
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ addToSuperView) (UIView *superView);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ addToSuperView) (UIView *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ addSubView) (UIView *subView);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ addSubView) (UIView *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ addGesture) (UIGestureRecognizer *gesture);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ addGesture) (UIGestureRecognizer *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ addGestureBlock) (void (^ gestureBlock) (id gesture));
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ addGestureBlock) (void (^ gestureBlock) (id));
 
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ removeGesture) (UIGestureRecognizer *gesture);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ removeGesture) (UIGestureRecognizer *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ addGestureWithTag) (UIGestureRecognizer *gesture, NSString *tag);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ addGestureWithTag) (UIGestureRecognizer *, NSString *);
 
-@property (nonatomic, strong, readonly) UIGestureRecognizer * (^ getGestureByTag) (NSString * tag);
+@property (nonatomic, strong, readonly) UIGestureRecognizer * (^ getGestureByTag) (NSString *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ removeGestureByTag) (NSString *tag);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ removeGestureByTag) (NSString *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ bringSubViewToFront) (UIView *view);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ bringSubViewToFront) (UIView *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ sendSubViewToBack) (UIView *view);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ sendSubViewToBack) (UIView *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ exchangeSubView) (UIView *front, UIView *backView);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ exchangeSubView) (UIView *, UIView *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ exchangeSubviewWithIndex) (NSInteger front, NSInteger back);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ exchangeSubviewWithIndex) (NSInteger, NSInteger);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ insertSubViewBelow) (UIView* below, UIView * above);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ insertSubViewBelow) (UIView*, UIView *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ insertSubViewAbove) (UIView* above, UIView * below);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ insertSubViewAbove) (UIView*, UIView *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ insertSubViewIndex) (UIView* above, NSInteger index);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ insertSubViewIndex) (UIView*, NSInteger);
 
 
 #pragma mark - layer -
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shouldRasterize)(BOOL shouldRasterize);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shouldRasterize)(BOOL);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ layerOpacity)(float layerOpacity);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ layerOpacity)(float);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ layerBackGroundColor)(UIColor * backgroundColor);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ layerBackGroundColor)(UIColor *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ layerOpaque)(BOOL opaque);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ layerOpaque)(BOOL);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ rasterizationScale)(CGFloat rasterizationScale);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ rasterizationScale)(CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ masksToBounds)(BOOL masksToBounds);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ masksToBounds)(BOOL);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ cornerRadius)(CGFloat cornerRadius);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ cornerRadius)(CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ border)(CGFloat borderWidth, UIColor *borderColor);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ border)(CGFloat, UIColor *);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ borderWidth)(CGFloat borderWidth);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ borderWidth)(CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ borderColor)(CGColorRef borderColor);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ borderColor)(CGColorRef);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ zPosition)(CGFloat zPosition);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ zPosition)(CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ anchorPoint)(CGPoint anchorPoint);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ anchorPoint)(CGPoint);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shadow)(CGSize shadowOffset, CGFloat shadowRadius, UIColor *shadowColor, CGFloat shadowOpacity);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shadow)(CGSize, CGFloat, UIColor *, CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shadowColor)(CGColorRef shadowColor);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shadowColor)(CGColorRef);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shadowOpacity)(CGFloat shadowOpacity);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shadowOpacity)(CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shadowOffset)(CGSize shadowOffset);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shadowOffset)(CGSize);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shadowRadius)(CGFloat shadowRadius);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shadowRadius)(CGFloat);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ layerTransform)(CATransform3D transform);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ layerTransform)(CATransform3D);
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shadowPath) (CGPathRef shadowPath);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ shadowPath) (CGPathRef);
 
 #pragma mark - method -
 
 
 
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ assignTo)(TFY_AssignViewLoad assignTo);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ assignTo)(TFY_AssignViewLoad);
 TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ sizeToFit) (void);
-TFY_CATEGORY_CHAIN_PROPERTY CGSize (^ sizeToFitSize) (CGSize size);
+TFY_CATEGORY_CHAIN_PROPERTY CGSize (^ sizeToFitSize) (CGSize);
 TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ removeFormSuperView) (void);
 TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ layoutIfNeeded) (void);
 TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ setNeedsLayout) (void);
 TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ setNeedsDisplay) (void);
-TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ setNeedsDisplayRect) (CGRect rect);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ setNeedsDisplayRect) (CGRect);
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,11 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_ImageViewChainModel;
 @interface TFY_ImageViewChainModel : TFY_BaseViewChainModel<TFY_ImageViewChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ImageViewChainModel *(^ image)(UIImage *image);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_ImageViewChainModel *(^ image)(UIImage *);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ImageViewChainModel *(^ highlightedImage)(UIImage *highlightedImage);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_ImageViewChainModel *(^ highlightedImage)(UIImage *);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ImageViewChainModel *(^ highlighted)(BOOL highlighted);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_ImageViewChainModel *(^ highlighted)(BOOL);
 
 TFY_CATEGORY_CHAIN_PROPERTY TFY_ImageViewChainModel *(^ animationImages)(NSArray <UIImage *> * animationImages);
 
@@ -26,9 +26,9 @@ TFY_CATEGORY_CHAIN_PROPERTY TFY_ImageViewChainModel *(^ startAnimating)(void);
 
 TFY_CATEGORY_CHAIN_PROPERTY TFY_ImageViewChainModel *(^ stopAnimating)(void);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ImageViewChainModel *(^ animationRepeatCount)(NSInteger animationRepeatCount);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_ImageViewChainModel *(^ animationRepeatCount)(NSInteger);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ImageViewChainModel *(^ animationDuration)(NSTimeInterval animationDuration);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_ImageViewChainModel *(^ animationDuration)(NSTimeInterval);
 
 @end
 

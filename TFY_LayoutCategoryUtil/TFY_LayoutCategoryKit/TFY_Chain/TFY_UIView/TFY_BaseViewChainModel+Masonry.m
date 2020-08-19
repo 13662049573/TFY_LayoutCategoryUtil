@@ -11,13 +11,13 @@
 #define   TFY_CATEGORY_CHAIN_MASONRY_IMPLEMENTATION(methodName, masonryMethod) \
 - (id (^)( void (^constraints)(MASConstraintMaker *)) )methodName    \
 {   \
-return ^id ( void (^constraints)(MASConstraintMaker *) ) {  \
-[self enumerateObjectsUsingBlock:^(UIView*  _Nonnull obj) {\
-if (obj.superview) { \
-[obj masonryMethod:constraints];\
-}\
-}];\
-return self;\
+     return ^id ( void (^constraints)(MASConstraintMaker *) ) {  \
+     [self enumerateObjectsUsingBlock:^(UIView*  _Nonnull obj) {\
+     if (obj.superview) { \
+     [obj masonryMethod:constraints];\
+    }\
+  }];\
+  return self;\
 };  \
 }
 #define     TFY_CATEGORY_CHAIN_MASONRY_IMPLEMENTATION_NULL(methodName, masonryMethod) \

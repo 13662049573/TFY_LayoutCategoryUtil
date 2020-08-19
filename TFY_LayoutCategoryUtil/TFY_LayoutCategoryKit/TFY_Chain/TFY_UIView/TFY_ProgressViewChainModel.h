@@ -12,13 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_ProgressViewChainModel;
 @interface TFY_ProgressViewChainModel : TFY_BaseViewChainModel<TFY_ProgressViewChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ progressViewStyle) (UIProgressViewStyle progressViewStyle);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ progress) (float progress);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ progressTintColor) (UIColor* progressTintColor);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ trackTintColor) (UIColor* trackTintColor);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ progressImage) (UIImage* progressImage);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ trackImage) (UIImage* trackImage);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ observedProgress) (NSProgress * observedProgress) API_AVAILABLE(ios(9.0));
+TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ progressViewStyle) (UIProgressViewStyle);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ progress) (float);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ progressTintColor) (UIColor*);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ trackTintColor) (UIColor*);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ progressImage) (UIImage*);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ trackImage) (UIImage*);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ observedProgress) (NSProgress *) API_AVAILABLE(ios(9.0));
 TFY_CATEGORY_CHAIN_PROPERTY TFY_ProgressViewChainModel * (^ setProgressAnimated) (float progress, BOOL animated);
 @end
 

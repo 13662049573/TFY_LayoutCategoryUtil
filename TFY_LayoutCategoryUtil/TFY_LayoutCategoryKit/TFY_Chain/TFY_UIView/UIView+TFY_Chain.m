@@ -14,7 +14,7 @@
     return ^(NSInteger tag) {      \
         ViewClass *view = [[ViewClass alloc] init];       \
         [self addSubview:view];                            \
-ModelClass *chainModel = [[ModelClass alloc] initWithTag:tag andView:view modelClass:[ViewClass class]]; \
+        ModelClass *chainModel = [[ModelClass alloc] initWithTag:tag andView:view modelClass:[ViewClass class]]; \
         return chainModel;      \
     };      \
 }
@@ -22,7 +22,7 @@ ModelClass *chainModel = [[ModelClass alloc] initWithTag:tag andView:view modelC
 - (ModelClass * _Nonnull (^)(void))method{\
 return ^ (){\
     LayerClass *layer = [LayerClass layer];\
-ModelClass *chainModel = [[ModelClass alloc] initWithLayer:layer modelClass:[LayerClass class]];\
+    ModelClass *chainModel = [[ModelClass alloc] initWithLayer:layer modelClass:[LayerClass class]];\
     [self.layer addSublayer:layer];\
     return chainModel;\
 };\

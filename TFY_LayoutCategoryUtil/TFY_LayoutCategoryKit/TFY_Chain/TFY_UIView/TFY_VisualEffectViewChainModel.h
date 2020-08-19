@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_VisualEffectViewChainModel;
 @interface TFY_VisualEffectViewChainModel : TFY_BaseViewChainModel<TFY_VisualEffectViewChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_VisualEffectViewChainModel * (^ effect) (UIVisualEffect * effect);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_VisualEffectViewChainModel * (^ effect) (UIVisualEffect *);
 @end
 
 TFY_CATEGORY_EXINTERFACE(UIVisualEffectView, TFY_VisualEffectViewChainModel)

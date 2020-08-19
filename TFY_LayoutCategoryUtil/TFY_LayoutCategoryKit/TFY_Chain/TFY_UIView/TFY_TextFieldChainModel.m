@@ -60,19 +60,10 @@ TFY_CATEGORY_CHAIN_TEXTFIELD_IMPLEMENTATION(secureTextEntry, BOOL);
 TFY_CATEGORY_CHAIN_TEXTFIELD_IMPLEMENTATION(textContentType, UITextContentType);
 
 
-- (TFY_TextFieldChainModel * _Nonnull (^)(UIFont * _Nonnull))placeholderFont{
-    return ^(UIFont *font){
-        [self enumerateObjectsUsingBlock:^(UITextField * _Nonnull obj) {
-            [obj setValue:font forKeyPath:@"_placeholderLabel.font"];
-        }];
-        return self;
-    };
-}
-
 - (TFY_TextFieldChainModel * _Nonnull (^)(UIColor * _Nonnull))placeholderColor{
     return ^(UIColor *color){
         [self enumerateObjectsUsingBlock:^(UITextField * _Nonnull obj) {
-            [obj setValue:color forKeyPath:@"_placeholderLabel.textColor"];
+            obj.attributedPlaceholder = [[NSAttributedString alloc] initWithString:obj.placeholder attributes:@{NSForegroundColorAttributeName: color ,NSFontAttributeName:obj.font}];
         }];
         return self;
     };

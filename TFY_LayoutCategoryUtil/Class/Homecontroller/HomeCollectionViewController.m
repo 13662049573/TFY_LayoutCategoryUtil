@@ -11,6 +11,7 @@
 @interface HomeCollectionViewController ()
 @property (nonatomic, strong) UIButton * confirmButton;
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UITextField *textfiled;
 @end
 
 @implementation HomeCollectionViewController
@@ -36,6 +37,17 @@
     }).assignTo(^(__kindof UIView * _Nonnull view) {
         self.titleLabel = view;
     });
+    
+    UITextFieldModelSet().placeholder(@"这是一个输入框").placeholderColor(UIColor.whiteColor).allowsEditingTextAttributes(YES).font([UIFont systemFontOfSize:30 weight:UIFontWeightBold]).textColor(UIColor.redColor).backgroundColor(UIColor.lightTextColor).cornerRadius(10).addToSuperView(self.view).assignTo(^(__kindof UIView * _Nonnull view) {
+        self.textfiled = view;
+    }).makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+        make.left.equalTo(self.titleLabel);
+        make.right.equalTo(self.titleLabel);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(20);
+        make.height.mas_equalTo(80);
+    });
+    
+    
 }
 
 - (void)btnClick:(UIButton *)btn {
