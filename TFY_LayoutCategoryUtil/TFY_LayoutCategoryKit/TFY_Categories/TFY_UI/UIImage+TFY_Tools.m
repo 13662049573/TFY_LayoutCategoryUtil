@@ -1962,7 +1962,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
     return totalSize;
 }
 
-+ (UIImage*)cutOutImageWithRect:(CGPoint)point image:(UIImage *)image{
++ (UIImage*)tfy_cutOutImageWithRect:(CGPoint)point image:(UIImage *)image{
     CGFloat imageWidth = CGImageGetWidth(image.CGImage);
     CGFloat imageHeight = CGImageGetHeight(image.CGImage);
     CGRect rect = CGRectMake(point.x*image.scale, point.y*image.scale, imageWidth-point.x*image.scale, imageHeight-point.y*image.scale);

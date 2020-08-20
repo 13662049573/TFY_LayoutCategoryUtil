@@ -340,7 +340,7 @@ CG_INLINE CGFloat TFY_DegreesToRadians(CGFloat degrees) {
 /**
  * 切割合适的图片
  */
-+ (UIImage*)cutOutImageWithRect:(CGPoint)point image:(UIImage *)image;
++ (UIImage*)tfy_cutOutImageWithRect:(CGPoint)point image:(UIImage *)image;
 @end
 
 static inline UIImage *UIImageNamed(NSString *imageName){
