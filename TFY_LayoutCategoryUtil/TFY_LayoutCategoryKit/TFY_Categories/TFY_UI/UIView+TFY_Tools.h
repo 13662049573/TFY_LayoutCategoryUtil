@@ -51,34 +51,34 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat left;
 @property (nonatomic) CGFloat right;
 
-- (void)removeAllSubViews;
+- (void)tfy_removeAllSubViews;
 
-- (UIViewController *)viewController;
+- (UIViewController *)tfy_viewController;
 
-- (CGFloat)visibleAlpha;
+- (CGFloat)tfy_visibleAlpha;
 
-- (UIImage *)snapshotImage;
+- (UIImage *)tfy_snapshotImage;
 
-- (UIImage *)snapshotImageAfterScreenUpdates:(BOOL)afterUpdates;
+- (UIImage *)tfy_snapshotImageAfterScreenUpdates:(BOOL)afterUpdates;
 
-- (NSData *)snapshotPDF;
+- (NSData *)tfy_snapshotPDF;
 
 #pragma mark - convert -
 
-- (CGPoint)convertPointTo:(CGPoint)point :(UIView *)view;
+- (CGPoint)tfy_convertPointTo:(CGPoint)point :(UIView *)view;
 
-- (CGPoint)convertPointFrom:(CGPoint)point :(UIView *)view;
+- (CGPoint)tfy_convertPointFrom:(CGPoint)point :(UIView *)view;
 
-- (CGRect)convertRectTo:(CGRect)rect :(UIView *)view;
+- (CGRect)tfy_convertRectTo:(CGRect)rect :(UIView *)view;
 
-- (CGRect)convertRectFrom:(CGRect)rect :(UIView *)view;
+- (CGRect)tfy_convertRectFrom:(CGRect)rect :(UIView *)view;
 
 #pragma mark - draw -
-- (CAShapeLayer *)setCornerRadiusAngle:(UIRectCorner)corner cornerSize:(CGSize)size;
+- (CAShapeLayer *)tfy_setCornerRadiusAngle:(UIRectCorner)corner cornerSize:(CGSize)size;
 
-- (CALayer *)setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius;
+- (CALayer *)tfy_setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius;
 
-- (CALayer *)setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor;
+- (CALayer *)tfy_setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor;
 
 /**
  *  获取当前tabBarController

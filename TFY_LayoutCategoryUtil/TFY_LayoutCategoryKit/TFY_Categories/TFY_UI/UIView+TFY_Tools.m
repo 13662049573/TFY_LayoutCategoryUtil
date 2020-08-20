@@ -194,13 +194,13 @@ NSString const *BlockKey = @"BlockKey";
     self.frame = frame;
 }
 
-- (void)removeAllSubViews{
+- (void)tfy_removeAllSubViews{
     while (self.subviews.count > 0) {
         [[self.subviews firstObject] removeFromSuperview];
     }
 }
 
-- (UIViewController *)viewController{
+- (UIViewController *)tfy_viewController{
     id nextResponder = [self nextResponder];
     UIView *view = self;
     while (![nextResponder isKindOfClass:[UIViewController class]]) {
@@ -210,7 +210,7 @@ NSString const *BlockKey = @"BlockKey";
     return nextResponder;
 }
 
-- (CGFloat)visibleAlpha{
+- (CGFloat)tfy_visibleAlpha{
     if ([self isKindOfClass:[UIWindow class]]) {
         if (self.hidden) return 0;
         return self.alpha;
@@ -229,7 +229,7 @@ NSString const *BlockKey = @"BlockKey";
     return alpha;
 }
 
-- (UIImage *)snapshotImage{
+- (UIImage *)tfy_snapshotImage{
     UIGraphicsBeginImageContextWithOptions(self.size, self.opaque > 0, 0);
     [self.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *snap = UIGraphicsGetImageFromCurrentImageContext();
@@ -237,9 +237,9 @@ NSString const *BlockKey = @"BlockKey";
     return snap;
 }
 
-- (UIImage *)snapshotImageAfterScreenUpdates:(BOOL)afterUpdates{
+- (UIImage *)tfy_snapshotImageAfterScreenUpdates:(BOOL)afterUpdates{
     if (![self respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
-        return [self snapshotImage];
+        return [self tfy_snapshotImage];
     }
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque > 0, 0);
     [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:afterUpdates];
@@ -249,7 +249,7 @@ NSString const *BlockKey = @"BlockKey";
 }
 
 
-- (NSData *)snapshotPDF{
+- (NSData *)tfy_snapshotPDF{
     CGRect bounds = self.bounds;
     NSMutableData *data = [NSMutableData data];
     CGDataConsumerRef consumer = CGDataConsumerCreateWithCFData((__bridge CFMutableDataRef)data);
@@ -267,7 +267,7 @@ NSString const *BlockKey = @"BlockKey";
 }
 
 #pragma mark - convert -
-- (CGPoint)convertPointTo:(CGPoint)point :(UIView *)view{
+- (CGPoint)tfy_convertPointTo:(CGPoint)point :(UIView *)view{
     UIView *myView = self;
     CGPoint endPoint;
     if (!view) {
@@ -286,7 +286,7 @@ NSString const *BlockKey = @"BlockKey";
     endPoint = [view convertPoint:point fromView:to];
     return endPoint;
 }
-- (CGPoint)convertPointFrom:(CGPoint)point :(UIView *)view{
+- (CGPoint)tfy_convertPointFrom:(CGPoint)point :(UIView *)view{
     CGPoint endPoint;
     UIView *myView = self;
     if (!view) {
@@ -305,7 +305,7 @@ NSString const *BlockKey = @"BlockKey";
     }
     return endPoint;
 }
-- (CGRect)convertRectTo:(CGRect)rect :(UIView *)view{
+- (CGRect)tfy_convertRectTo:(CGRect)rect :(UIView *)view{
     UIView *myView = self;
     CGRect toRect;
     if (!view) {
@@ -325,7 +325,7 @@ NSString const *BlockKey = @"BlockKey";
     toRect = [view convertRect:rect fromView:to];
     return toRect;
 }
-- (CGRect)convertRectFrom:(CGRect)rect :(UIView *)view{
+- (CGRect)tfy_convertRectFrom:(CGRect)rect :(UIView *)view{
     CGRect fromRect;
     UIView *myView = self;
     if (!view) {
@@ -346,14 +346,14 @@ NSString const *BlockKey = @"BlockKey";
 }
 
 #pragma mark - draw -
-- (CAShapeLayer *)setCornerRadiusAngle:(UIRectCorner)corner cornerSize:(CGSize)size{
+- (CAShapeLayer *)tfy_setCornerRadiusAngle:(UIRectCorner)corner cornerSize:(CGSize)size{
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corner cornerRadii:size];
     CAShapeLayer *layer = [CAShapeLayer layer];
     layer.path = bezierPath.CGPath;
     return layer;
 }
 
-- (CALayer *)setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius {
+- (CALayer *)tfy_setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius {
     self.layer.shadowColor = color.CGColor;
     self.layer.shadowOffset = offset;
     self.layer.shadowRadius = radius;
@@ -363,8 +363,8 @@ NSString const *BlockKey = @"BlockKey";
     return self.layer;
 }
 
-- (CALayer *)setLayerShadow:(UIColor *)color offset:(CGSize)offset radius:(CGFloat)radius cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor{
-    [self setLayerShadow:color offset:offset radius:radius];
+- (CALayer *)tfy_setLayerShadow:(UIColor *)color offset:(CGSize)offset radius:(CGFloat)radius cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor{
+    [self tfy_setLayerShadow:color offset:offset radius:radius];
     if (cornerRadius > 0) {
         self.layer.masksToBounds = NO;
         self.layer.cornerRadius = cornerRadius;

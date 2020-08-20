@@ -82,33 +82,33 @@ TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(autoresizesSubviews, BOOL)
 
 - (CGFloat (^)(void))visibleAlpha{
     return ^{
-        return [self.view visibleAlpha];
+        return [self.view tfy_visibleAlpha];
     };
 }
 
 
 - (CGRect (^)(CGRect, UIView * _Nonnull))convertRectTo{
     return  ^(CGRect rect, UIView *view){
-        return [self.view convertRectTo:rect :view];
+        return [self.view tfy_convertRectTo:rect :view];
     };
 }
 
 
 - (CGRect (^)(CGRect, UIView * _Nonnull))convertRectFrom{
     return  ^(CGRect rect, UIView *view){
-        return [self.view convertRectFrom:rect :view];
+        return [self.view tfy_convertRectFrom:rect :view];
     };
 }
 
 - (CGPoint (^)(CGPoint, UIView * _Nonnull))convertPointTo{
     return  ^(CGPoint point, UIView *view){
-        return [self.view convertPointTo:point :view];
+        return [self.view tfy_convertPointTo:point :view];
     };
 }
 
 - (CGPoint (^)(CGPoint, UIView * _Nonnull))convertPointFrom{
     return  ^(CGPoint point, UIView *view){
-        return [self.view convertPointFrom:point :view];
+        return [self.view tfy_convertPointFrom:point :view];
     };
 }
 /**
