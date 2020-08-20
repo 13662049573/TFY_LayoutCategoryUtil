@@ -337,7 +337,10 @@ CG_INLINE CGFloat TFY_DegreesToRadians(CGFloat degrees) {
  *  拼接快照 imagesArr 快照的数组
  */
 + (UIImage *)tfy_getImageFromImagesArray:(NSArray *)imagesArr;
-
+/**
+ * 切割合适的图片
+ */
++ (UIImage*)cutOutImageWithRect:(CGPoint)point image:(UIImage *)image;
 @end
 
 static inline UIImage *UIImageNamed(NSString *imageName){

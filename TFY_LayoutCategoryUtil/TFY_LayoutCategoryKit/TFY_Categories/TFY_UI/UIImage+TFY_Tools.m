@@ -1961,5 +1961,23 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
     }
     return totalSize;
 }
+
++ (UIImage*)cutOutImageWithRect:(CGPoint)point image:(UIImage *)image{
+    CGFloat imageWidth = CGImageGetWidth(image.CGImage);
+    CGFloat imageHeight = CGImageGetHeight(image.CGImage);
+    CGRect rect = CGRectMake(point.x*image.scale, point.y*image.scale, imageWidth-point.x*image.scale, imageHeight-point.y*image.scale);
+    
+    CGImageRef subImageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
+    CGRect smallBounds = CGRectMake(0, 0, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
+    UIGraphicsBeginImageContext(smallBounds.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextDrawImage(context, smallBounds, subImageRef);
+    UIImage* smallImage = [UIImage imageWithCGImage:subImageRef];
+    UIGraphicsEndImageContext();
+    CGImageRelease(subImageRef);
+    return smallImage;
+    
+}
+
 @end
 
