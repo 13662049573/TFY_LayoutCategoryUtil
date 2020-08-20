@@ -46,24 +46,24 @@
 }
 
 #define TFY_CATEGORY_EXINTERFACE(TFY_Class, ModelType)\
-static inline TFY_Class *TFY_Class##Set(void){\
+CG_INLINE TFY_Class *TFY_Class##Set(void){\
        return [TFY_Class new];\
 }\
-static inline ModelType *TFY_Class##ModelSet(void){\
+CG_INLINE ModelType *TFY_Class##ModelSet(void){\
        return ((id (*)(id, SEL))objc_msgSend)([TFY_Class new],sel_registerName("makeChain"));\
 }\
-static inline ModelType *TFY_Class##NameSet(NSString *className){\
+CG_INLINE ModelType *TFY_Class##NameSet(NSString *className){\
       Class clas = NSClassFromString(className);\
       if ([clas isKindOfClass:[TFY_Class class]]) {\
       return [clas new];\
       }\
     return nil;\
 }\
-static inline ModelType *TFY_Class##NameModelSet(NSString *className){\
+CG_INLINE ModelType *TFY_Class##NameModelSet(NSString *className){\
       return ((id (*)(id, SEL))objc_msgSend)( TFY_Class##NameSet(className),sel_registerName("makeChain"));\
 }\
 TFY_CATEGORY_EXINTERFACE_(TFY_Class, ModelType)\
-static inline ModelType * TFY_Class##ModelWithArray(NSArray <TFY_Class *>*objects)\
+CG_INLINE ModelType * TFY_Class##ModelWithArray(NSArray <TFY_Class *>*objects)\
 {\
     return ((id (*)(id, SEL,id,id))objc_msgSend)([ModelType alloc],sel_registerName("initWithModelObjects:modelClass:"),objects,[TFY_Class class]);\
 }
