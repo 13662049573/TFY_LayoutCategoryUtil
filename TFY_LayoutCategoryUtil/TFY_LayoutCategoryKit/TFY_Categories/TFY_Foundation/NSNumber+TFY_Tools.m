@@ -10,7 +10,7 @@
 #import "NSString+TFY_String.h"
 
 @implementation NSNumber (TFY_Tools)
-+ (NSNumber *)numberWithString:(NSString *)string{
++ (NSNumber *)tfy_numberWithString:(NSString *)string{
     NSString *str = [[string tfy_stringByTrim] lowercaseString];
     if (!str || !str.length) {
         return nil;

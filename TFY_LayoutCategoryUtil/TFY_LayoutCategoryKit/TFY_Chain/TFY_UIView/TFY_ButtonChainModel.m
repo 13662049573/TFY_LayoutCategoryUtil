@@ -106,7 +106,7 @@ TFY_CATEGORY_CHAIN_BUTTONLABEL_IMPLEMENTATION(baselineAdjustment, UIBaselineAdju
 - (TFY_ButtonChainModel * _Nonnull (^)(ButtonImageDirection, CGFloat))imageDirection{
     return ^ (ButtonImageDirection direction, CGFloat space){
         [self enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj) {
-            [obj imageDirection:direction space:space];
+            [obj tfy_imageDirection:direction space:space];
         }];
         return self;
     };

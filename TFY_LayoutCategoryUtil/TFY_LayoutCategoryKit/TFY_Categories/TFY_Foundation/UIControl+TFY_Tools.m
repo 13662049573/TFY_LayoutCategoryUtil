@@ -39,7 +39,7 @@ static const int block_dic_key;
 
 @implementation UIControl (TFY_Tools)
 
-- (void)addEventBlock:(controlTargeAction)block forEvents:(UIControlEvents)events{
+- (void)tfy_addEventBlock:(controlTargeAction)block forEvents:(UIControlEvents)events{
     if (!events) return;
     if (!block) return;
     ControlTarget *target = [[ControlTarget alloc] initWithBlock:block events:events];
@@ -48,7 +48,7 @@ static const int block_dic_key;
     [targets addObject:target];
 }
 
-- (void)removeAllEvents{
+- (void)tfy_removeAllEvents{
     [self.allTargets enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
         [self removeTarget:obj action:NULL forControlEvents:UIControlEventAllEvents];
     }];
@@ -57,7 +57,7 @@ static const int block_dic_key;
     [[self tfy_controlTargetsDic] removeAllObjects];
 }
 
-- (void)setTarget:(id)target eventAction:(SEL)action forControlEvents:(UIControlEvents)events{
+- (void)tfy_setTarget:(id)target eventAction:(SEL)action forControlEvents:(UIControlEvents)events{
     if (!target || !action || !events) return;
     NSSet *targets = [self allTargets];
     for (id nowTarget in targets) {
@@ -69,25 +69,25 @@ static const int block_dic_key;
     [self addTarget:target action:action forControlEvents:events];
 }
 
-- (void)setEventBlock:(controlTargeAction)block forEvents:(UIControlEvents)events{
-    [self removeAllEventBlocksForEvents:events];
-    [self addEventBlock:block forEvents:events];
+- (void)tfy_setEventBlock:(controlTargeAction)block forEvents:(UIControlEvents)events{
+    [self tfy_removeAllEventBlocksForEvents:events];
+    [self tfy_addEventBlock:block forEvents:events];
 }
 
-- (BOOL)containsEventBlockForKey:(NSString *)key{
+- (BOOL)tfy_containsEventBlockForKey:(NSString *)key{
     NSMutableDictionary *dic = [self tfy_controlTargetsDic];
-    return [dic containsObjectForKey:key];
+    return [dic tfy_containsObjectForKey:key];
 }
 
-- (void)addEventBlock:(controlTargeAction)block forEvents:(UIControlEvents)events ForKey:(NSString *)key{
+- (void)tfy_addEventBlock:(controlTargeAction)block forEvents:(UIControlEvents)events ForKey:(NSString *)key{
     if (!block || !events || !key) return;
-    [self removeEventBlockForKey:key event:events];
+    [self tfy_removeEventBlockForKey:key event:events];
     ControlTarget *target = [[ControlTarget alloc] initWithBlock:block events:events];
     [self addTarget:target action:@selector(sendControl:) forControlEvents:events];
     [[self tfy_controlTargetsDic] setObject:target forKey:key];
 }
 
-- (void)removeEventBlockForKey:(NSString *)key event:(UIControlEvents)events{
+- (void)tfy_removeEventBlockForKey:(NSString *)key event:(UIControlEvents)events{
     NSMutableDictionary *dic = [self tfy_controlTargetsDic];
     ControlTarget *target = [dic objectForKey:key];
     if (target) {
@@ -105,7 +105,7 @@ static const int block_dic_key;
 }
 
 
-- (void)removeAllEventBlocksForEvents:(UIControlEvents)controlEvents{
+- (void)tfy_removeAllEventBlocksForEvents:(UIControlEvents)controlEvents{
     if (!controlEvents) return;
     NSMutableArray *targets = [self tfy_controlTargetsArray];
     NSMutableArray *removes = [NSMutableArray array];

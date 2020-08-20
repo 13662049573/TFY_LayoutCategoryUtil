@@ -9,17 +9,20 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
 typedef void(^GestureTargetAction)(id gesture);
+
 @interface UIGestureRecognizer (TFY_Tools)
+
 - (instancetype)initWithActionBlock:(void (^)(id sender))block;
 
-- (void)addTargetBlock:(GestureTargetAction)block;
+- (void)tfy_addTargetBlock:(GestureTargetAction)block;
 
-- (void)addTargetBlock:(GestureTargetAction)block tag:(NSString *)tag;
+- (void)tfy_addTargetBlock:(GestureTargetAction)block tag:(NSString *)tag;
 
-- (void)removeTargetBlockByTag:(NSString *)tag;
+- (void)tfy_removeTargetBlockByTag:(NSString *)tag;
 
-- (void)removeAllTargetBlock;
+- (void)tfy_removeAllTargetBlock;
 @end
 
 NS_ASSUME_NONNULL_END

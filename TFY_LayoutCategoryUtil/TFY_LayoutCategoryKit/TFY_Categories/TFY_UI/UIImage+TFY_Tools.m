@@ -34,7 +34,8 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     if (delay < 0.02) delay = 0.1;
     return delay;
 }
-+ (UIImage *)imageWithSmallGIFData:(NSData *)data scale:(CGFloat)scale {
+
++ (UIImage *)tfy_imageWithSmallGIFData:(NSData *)data scale:(CGFloat)scale {
     CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFTypeRef)(data), NULL);
     if (!source) return nil;
     
@@ -129,11 +130,11 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     return image;
 }
 
-+ (UIImage *)imageWithColor:(UIColor *)color{
-    return [self imageWithColor:color size:CGSizeMake(1, 1)];
++ (UIImage *)tfy_imageWithColor:(UIColor *)color{
+    return [self tfy_imageWithColor:color size:CGSizeMake(1, 1)];
 }
 
-+ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size{
++ (UIImage *)tfy_imageWithColor:(UIColor *)color size:(CGSize)size{
     if (!color || size.width <= 0 || size.height <= 0) return nil;
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
@@ -145,7 +146,7 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     return image;
 }
 
-+ (UIImage *)imageSize:(CGSize)size withDrawContext:(void (^)(CGContextRef _Nonnull))drawContext{
++ (UIImage *)tfy_imageSize:(CGSize)size withDrawContext:(void (^)(CGContextRef _Nonnull))drawContext{
     if (size.width == 0 || size.height == 0) return nil;
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -158,7 +159,7 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     return image;
 }
 
-- (BOOL)hasAlphaChannel{
+- (BOOL)tfy_hasAlphaChannel{
     if (self.CGImage == NULL) return NO;
     CGImageAlphaInfo alpha = CGImageGetAlphaInfo(self.CGImage) & kCGBitmapAlphaInfoMask;
     return (alpha == kCGImageAlphaFirst ||
@@ -167,7 +168,7 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
             alpha == kCGImageAlphaPremultipliedLast);
 }
 
-- (void)drawInRect:(CGRect)rect withContentMode:(UIViewContentMode)contentModel clipsToBounds:(BOOL)clips{
+- (void)tfy_drawInRect:(CGRect)rect withContentMode:(UIViewContentMode)contentModel clipsToBounds:(BOOL)clips{
     CGRect drawRect = TFY_CGRectFitWithContentMode(rect, rect.size, contentModel);
     if (drawRect.size.width == 0 || drawRect.size.height == 0) return;
     if (clips) {
@@ -187,19 +188,19 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
 
 
 
-+ (UIImage *)animatedGifName:(NSString *)name{
-    return [self animatedGifName:name scale:1];
++ (UIImage *)tfy_animatedGifName:(NSString *)name{
+    return [self tfy_animatedGifName:name scale:1];
 }
 
 
-+ (UIImage *)animatedGifName:(NSString *)name scale:(CGFloat)scale{
++ (UIImage *)tfy_animatedGifName:(NSString *)name scale:(CGFloat)scale{
     if (scale > 1.0f) {
         NSString *retinaPath = [[NSBundle mainBundle] pathForResource:[name stringByAppendingString:@"@2x"] ofType:@"gif"];
         
         NSData *data = [NSData dataWithContentsOfFile:retinaPath];
         
         if (data) {
-            return [UIImage animatedGIFWithData:data];
+            return [UIImage tfy_animatedGIFWithData:data];
         }
         
         NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"gif"];
@@ -207,7 +208,7 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
         data = [NSData dataWithContentsOfFile:path];
         
         if (data) {
-            return [UIImage animatedGIFWithData:data];
+            return [UIImage tfy_animatedGIFWithData:data];
         }
         
         return [UIImage imageNamed:name];
@@ -218,14 +219,14 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
         NSData *data = [NSData dataWithContentsOfFile:path];
         
         if (data) {
-            return [UIImage animatedGIFWithData:data];
+            return [UIImage tfy_animatedGIFWithData:data];
         }
         
         return [UIImage imageNamed:name];
     }
 }
 
-+ (UIImage *)animatedGIFWithData:(NSData *)data {
++ (UIImage *)tfy_animatedGIFWithData:(NSData *)data {
     if (!data) {
         return nil;
     }
@@ -250,7 +251,7 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
                 continue;
             }
             
-            duration += [self frameDurationAtIndex:i source:source];
+            duration += [self tfy_frameDurationAtIndex:i source:source];
             
             [images addObject:[UIImage imageWithCGImage:image scale:1 orientation:UIImageOrientationUp]];
             
@@ -269,7 +270,7 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     return animatedImage;
 }
 
-+ (float)frameDurationAtIndex:(NSUInteger)index source:(CGImageSourceRef)source {
++ (float)tfy_frameDurationAtIndex:(NSUInteger)index source:(CGImageSourceRef)source {
     float frameDuration = 0.1f;
     CFDictionaryRef cfFrameProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil);
     NSDictionary *frameProperties = (__bridge NSDictionary *)cfFrameProperties;
@@ -294,7 +295,7 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     return frameDuration;
 }
 
-- (UIImage *)imageByFixOrientation{
+- (UIImage *)tfy_imageByFixOrientation{
     if (self.imageOrientation == UIImageOrientationUp) return self;
     CGAffineTransform transform = CGAffineTransformIdentity;
     switch (self.imageOrientation) {
@@ -361,7 +362,7 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
 }
 
 
-- (UIImage *)imageByResizeToSize:(CGSize)size{
+- (UIImage *)tfy_imageByResizeToSize:(CGSize)size{
     if (size.width <= 0 || size.height <= 0) return nil;
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
@@ -370,21 +371,21 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     return image;
 }
 
-- (UIImage *)imageByResizeToScale:(CGFloat)scale{
+- (UIImage *)tfy_imageByResizeToScale:(CGFloat)scale{
     if (scale <= 0) return nil;
-    return [self imageByResizeToSize:CGSizeMake(self.size.width * scale, self.size.height * scale)];
+    return [self tfy_imageByResizeToSize:CGSizeMake(self.size.width * scale, self.size.height * scale)];
 }
 
-- (UIImage *)imageByResizeToSize:(CGSize)size contentMode:(UIViewContentMode)contentMode{
+- (UIImage *)tfy_imageByResizeToSize:(CGSize)size contentMode:(UIViewContentMode)contentMode{
     if (size.width <= 0 || size.height <= 0) return nil;
     UIGraphicsBeginImageContextWithOptions(size, NO, self.scale);
-    [self drawInRect:CGRectMake(0, 0, size.width, size.height) withContentMode:contentMode clipsToBounds:NO];
+    [self tfy_drawInRect:CGRectMake(0, 0, size.width, size.height) withContentMode:contentMode clipsToBounds:NO];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
 }
 
-- (UIImage *)imageByCropToRect:(CGRect)rect{
+- (UIImage *)tfy_imageByCropToRect:(CGRect)rect{
     rect.origin.x *= self.scale;
     rect.origin.y *= self.scale;
     rect.size.width *= self.scale;
@@ -396,7 +397,7 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     return image;
 }
 
-- (UIImage *)imageByInsetEdge:(UIEdgeInsets)insets withColor:(UIColor *)color{
+- (UIImage *)tfy_imageByInsetEdge:(UIEdgeInsets)insets withColor:(UIColor *)color{
     CGSize size = self.size;
     size.width -= insets.left + insets.right;
     size.height -= insets.top + insets.bottom;
@@ -419,21 +420,21 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     return image;
 }
 
-- (UIImage *)imageByRoundCornerRadius:(CGFloat)radius {
-    return [self imageByRoundCornerRadius:radius borderWidth:0 borderColor:nil];
+- (UIImage *)tfy_imageByRoundCornerRadius:(CGFloat)radius {
+    return [self tfy_imageByRoundCornerRadius:radius borderWidth:0 borderColor:nil];
 }
 
-- (UIImage *)imageByRoundCornerRadius:(CGFloat)radius
+- (UIImage *)tfy_imageByRoundCornerRadius:(CGFloat)radius
                           borderWidth:(CGFloat)borderWidth
                           borderColor:(nullable UIColor *)borderColor {
-    return [self imageByRoundCornerRadius:radius
+    return [self tfy_imageByRoundCornerRadius:radius
                                   corners:UIRectCornerAllCorners
                               borderWidth:borderWidth
                               borderColor:borderColor
                            borderLineJoin:kCGLineJoinMiter];
 }
 
-- (UIImage *)imageByRoundCornerRadius:(CGFloat)radius
+- (UIImage *)tfy_imageByRoundCornerRadius:(CGFloat)radius
                               corners:(UIRectCorner)corners
                           borderWidth:(CGFloat)borderWidth
                           borderColor:(nullable UIColor *)borderColor
@@ -483,7 +484,7 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     return image;
 }
 
-- (UIImage *)imageByRotate:(CGFloat)radians fitSize:(BOOL)fitSize {
+- (UIImage *)tfy_imageByRotate:(CGFloat)radians fitSize:(BOOL)fitSize {
     size_t width = (size_t)CGImageGetWidth(self.CGImage);
     size_t height = (size_t)CGImageGetHeight(self.CGImage);
     CGRect newRect = CGRectApplyAffineTransform(CGRectMake(0., 0., width, height),
@@ -547,27 +548,27 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     return img;
 }
 
-- (UIImage *)imageByRotateLeft90 {
-    return [self imageByRotate:TFY_DegreesToRadians(90) fitSize:YES];
+- (UIImage *)tfy_imageByRotateLeft90 {
+    return [self tfy_imageByRotate:TFY_DegreesToRadians(90) fitSize:YES];
 }
 
-- (UIImage *)imageByRotateRight90 {
-    return [self imageByRotate:TFY_DegreesToRadians(-90) fitSize:YES];
+- (UIImage *)tfy_imageByRotateRight90 {
+    return [self tfy_imageByRotate:TFY_DegreesToRadians(-90) fitSize:YES];
 }
 
-- (UIImage *)imageByRotate180 {
+- (UIImage *)tfy_imageByRotate180 {
     return [self _flipHorizontal:YES vertical:YES];
 }
 
-- (UIImage *)imageByFlipVertical {
+- (UIImage *)tfy_imageByFlipVertical {
     return [self _flipHorizontal:NO vertical:YES];
 }
 
-- (UIImage *)imageByFlipHorizontal {
+- (UIImage *)tfy_imageByFlipHorizontal {
     return [self _flipHorizontal:YES vertical:NO];
 }
 
-- (UIImage *)imageByTintColor:(UIColor *)color {
+- (UIImage *)tfy_imageByTintColor:(UIColor *)color {
     UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
     CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
     [color set];
@@ -578,27 +579,27 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     return newImage;
 }
 
-- (UIImage *)imageByGrayscale {
-    return [self imageByBlurRadius:0 tintColor:nil tintMode:0 saturation:0 maskImage:nil];
+- (UIImage *)tfy_imageByGrayscale {
+    return [self tfy_imageByBlurRadius:0 tintColor:nil tintMode:0 saturation:0 maskImage:nil];
 }
 
-- (UIImage *)imageByBlurSoft {
-    return [self imageByBlurRadius:60 tintColor:[UIColor colorWithWhite:0.84 alpha:0.36] tintMode:kCGBlendModeNormal saturation:1.8 maskImage:nil];
+- (UIImage *)tfy_imageByBlurSoft {
+    return [self tfy_imageByBlurRadius:60 tintColor:[UIColor colorWithWhite:0.84 alpha:0.36] tintMode:kCGBlendModeNormal saturation:1.8 maskImage:nil];
 }
 
-- (UIImage *)imageByBlurLight {
-    return [self imageByBlurRadius:60 tintColor:[UIColor colorWithWhite:1.0 alpha:0.3] tintMode:kCGBlendModeNormal saturation:1.8 maskImage:nil];
+- (UIImage *)tfy_imageByBlurLight {
+    return [self tfy_imageByBlurRadius:60 tintColor:[UIColor colorWithWhite:1.0 alpha:0.3] tintMode:kCGBlendModeNormal saturation:1.8 maskImage:nil];
 }
 
-- (UIImage *)imageByBlurExtraLight {
-    return [self imageByBlurRadius:40 tintColor:[UIColor colorWithWhite:0.97 alpha:0.82] tintMode:kCGBlendModeNormal saturation:1.8 maskImage:nil];
+- (UIImage *)tfy_imageByBlurExtraLight {
+    return [self tfy_imageByBlurRadius:40 tintColor:[UIColor colorWithWhite:0.97 alpha:0.82] tintMode:kCGBlendModeNormal saturation:1.8 maskImage:nil];
 }
 
-- (UIImage *)imageByBlurDark {
-    return [self imageByBlurRadius:40 tintColor:[UIColor colorWithWhite:0.11 alpha:0.73] tintMode:kCGBlendModeNormal saturation:1.8 maskImage:nil];
+- (UIImage *)tfy_imageByBlurDark {
+    return [self tfy_imageByBlurRadius:40 tintColor:[UIColor colorWithWhite:0.11 alpha:0.73] tintMode:kCGBlendModeNormal saturation:1.8 maskImage:nil];
 }
 
-- (UIImage *)imageByBlurWithTint:(UIColor *)tintColor {
+- (UIImage *)tfy_imageByBlurWithTint:(UIColor *)tintColor {
     const CGFloat EffectColorAlpha = 0.6;
     UIColor *effectColor = tintColor;
     size_t componentCount = CGColorGetNumberOfComponents(tintColor.CGColor);
@@ -613,10 +614,10 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
             effectColor = [UIColor colorWithRed:r green:g blue:b alpha:EffectColorAlpha];
         }
     }
-    return [self imageByBlurRadius:20 tintColor:effectColor tintMode:kCGBlendModeNormal saturation:-1.0 maskImage:nil];
+    return [self tfy_imageByBlurRadius:20 tintColor:effectColor tintMode:kCGBlendModeNormal saturation:-1.0 maskImage:nil];
 }
 
-- (UIImage *)imageByBlurRadius:(CGFloat)blurRadius
+- (UIImage *)tfy_imageByBlurRadius:(CGFloat)blurRadius
                      tintColor:(UIColor *)tintColor
                       tintMode:(CGBlendMode)tintBlendMode
                     saturation:(CGFloat)saturation
@@ -892,7 +893,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
 /**
  *  获取图片宽
  */
-- (CGFloat)width {
+- (CGFloat)tfy_width {
     
     return self.size.width;
 }
@@ -900,7 +901,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
 /**
  *  获取图片高
  */
-- (CGFloat)height {
+- (CGFloat)tfy_height {
     
     return self.size.height;
 }
@@ -910,7 +911,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  @return 启动页图片
  */
-+ (UIImage *)launchImage {
++ (UIImage *)tfy_launchImage {
     
     UIImage               *lauchImage      = nil;
     NSString              *viewOrientation = nil;
@@ -944,7 +945,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  @param image 图片名
  */
-+ (UIImage *)loadImage:(NSString *)image {
++ (UIImage *)tfy_loadImage:(NSString *)image {
     
     return [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:image]];
 }
@@ -956,7 +957,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  images  bundle名：images.bundle
  */
-+ (UIImage *)bundleImage:(NSString *)image Resource:(NSString *)name{
++ (UIImage *)tfy_bundleImage:(NSString *)image Resource:(NSString *)name{
     
     return [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] pathForResource:name ofType:@"bundle"] stringByAppendingPathComponent:image]];
 }
@@ -970,13 +971,13 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  images bundle名：images.bundle
  */
-+ (UIImage *)fileImage:(NSString *)fileImage fileName:(NSString *)fileName Resource:(NSString *)name{
++ (UIImage *)tfy_fileImage:(NSString *)fileImage fileName:(NSString *)fileName Resource:(NSString *)name{
     
     return [UIImage imageWithContentsOfFile:[[[[NSBundle mainBundle] pathForResource:name ofType:@"bundle"] stringByAppendingPathComponent:fileName] stringByAppendingPathComponent:fileImage]];
 }
 
 //字符串转图片
-+ (UIImage *)base64StrToUIImage:(NSString *)encodedImageStr {
++ (UIImage *)tfy_base64StrToUIImage:(NSString *)encodedImageStr {
     
     NSData *decodedImageData = [[NSData alloc]initWithBase64EncodedString:encodedImageStr options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
     UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
@@ -985,7 +986,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
 }
 
 //图片转字符串
-+ (NSString *)imageToBase64Str:(UIImage *)image {
++ (NSString *)tfy_imageToBase64Str:(UIImage *)image {
     
     NSData *data = UIImageJPEGRepresentation(image, 1.0f);
     NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
@@ -993,7 +994,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
 }
 
 /** 图片上绘制文字 */
-- (UIImage *)imageAddTitle:(NSString *)title font:(UIFont *)font color:(nonnull UIColor *)color {
+- (UIImage *)tfy_imageAddTitle:(NSString *)title font:(UIFont *)font color:(nonnull UIColor *)color {
     
     //画布大小
     CGSize size = CGSizeMake(self.size.width,self.size.height);
@@ -1031,7 +1032,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  @return 切割好的图片
  */
-+ (UIImage *)cutImage:(UIImage*)image andSize:(CGSize)newImageSize
++ (UIImage *)tfy_cutImage:(UIImage*)image andSize:(CGSize)newImageSize
 {
     
     UIGraphicsBeginImageContextWithOptions(newImageSize, NO, 0.0);
@@ -1052,9 +1053,9 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  @return 切割好的头像
  */
-+ (UIImage *)captureCircleImageWithURL:(NSString *)iconUrl andBorderWith:(CGFloat)border andBorderColor:(UIColor *)color
++ (UIImage *)tfy_captureCircleImageWithURL:(NSString *)iconUrl andBorderWith:(CGFloat)border andBorderColor:(UIColor *)color
 {
-    return [self captureCircleImageWithImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:iconUrl]]] andBorderWith:border andBorderColor:color];
+    return [self tfy_captureCircleImageWithImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:iconUrl]]] andBorderWith:border andBorderColor:color];
 }
 
 /**
@@ -1066,7 +1067,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  @return 切割好的头像
  */
-+ (UIImage *)captureCircleImageWithImage:(UIImage *)iconImage andBorderWith:(CGFloat)border andBorderColor:(UIColor *)color
++ (UIImage *)tfy_captureCircleImageWithImage:(UIImage *)iconImage andBorderWith:(CGFloat)border andBorderColor:(UIColor *)color
 {
     CGFloat imageW = iconImage.size.width + border * 2;
     CGFloat imageH = iconImage.size.height + border * 2;
@@ -1104,9 +1105,9 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  @return 返回模糊化之后的图片
  */
-+ (UIImage *)blurredImageWithImage:(UIImage *)image andBlurAmount:(CGFloat)blurAmount
++ (UIImage *)tfy_blurredImageWithImage:(UIImage *)image andBlurAmount:(CGFloat)blurAmount
 {
-    return [image blurredImage:blurAmount];
+    return [image tfy_blurredImage:blurAmount];
 }
 
 /**
@@ -1116,7 +1117,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  @return 生成的图片
  */
-+ (UIImage *)viewShotWithView:(UIView *)view{
++ (UIImage *)tfy_viewShotWithView:(UIView *)view{
     
     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]){
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, [UIScreen mainScreen].scale);
@@ -1133,7 +1134,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
 /**
  *  截屏 返回截取的屏幕的图像
  */
--(UIImage *)screenShot
+-(UIImage *)tfy_screenShot
 {
     CGSize imageSize = [[UIScreen mainScreen] bounds].size;
     //开启图形上下文
@@ -1168,7 +1169,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  @return 压缩之后的图片
  */
-+(UIImage *)reduceImage:(UIImage *)image percent:(float)percent
++(UIImage *)tfy_reduceImage:(UIImage *)image percent:(float)percent
 {
     NSData *imageData = UIImageJPEGRepresentation(image, percent);
     UIImage *newImage = [UIImage imageWithData:imageData];
@@ -1184,7 +1185,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  @return 压缩好的图片
  */
-+ (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
++ (UIImage*)tfy_imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
 {
     UIGraphicsBeginImageContext(newSize);
     [image drawInRect:CGRectMake(0, 0, newSize.width,newSize.height)];
@@ -1202,7 +1203,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  @return 压缩好的图片
  */
-+ (UIImage *)imageWithImageSimple:(UIImage*)image scaledToKB:(NSInteger)kb {
++ (UIImage *)tfy_imageWithImageSimple:(UIImage*)image scaledToKB:(NSInteger)kb {
     
     if (!image) {
         return image;
@@ -1233,7 +1234,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  @return 压缩好的图片
  */
-+ (UIImage *)compressImage:(UIImage *)image toByte:(NSInteger)maxLength {
++ (UIImage *)tfy_compressImage:(UIImage *)image toByte:(NSInteger)maxLength {
     // Compress by quality
     CGFloat compression = 1;
     NSData *data = UIImageJPEGRepresentation(image, compression);
@@ -1277,7 +1278,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  @param blurAmount 模糊化指数
  */
-- (UIImage*)blurredImage:(CGFloat)blurAmount
+- (UIImage*)tfy_blurredImage:(CGFloat)blurAmount
 {
     if (blurAmount < 0.0 || blurAmount > 2.0) {
         blurAmount = 0.5;
@@ -1343,7 +1344,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  *
  *  @return 模糊好的图片
  */
-- (UIImage *)blearImageWithBlurLevel:(CGFloat)blurLevel
+- (UIImage *)tfy_blearImageWithBlurLevel:(CGFloat)blurLevel
 {
     CIContext *context = [CIContext contextWithOptions:nil];
     CIImage *inputImage = [[CIImage alloc] initWithImage:self];
@@ -1370,7 +1371,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
 
 
 
-+ (UIImage *)videoPreViewImage:(NSURL *)path {
++ (UIImage *)tfy_videoPreViewImage:(NSURL *)path {
     
     AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:path options:nil];
     AVAssetImageGenerator *assetGen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
@@ -1385,7 +1386,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
     return videoImage;
 }
 
-+ (UIImage *)createImage:(UIColor *)imageColor {
++ (UIImage *)tfy_createImage:(UIColor *)imageColor {
     
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
@@ -1400,7 +1401,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
     return image;
 }
 
-+ (UIImage *)imageFromGradientColors:(NSArray *)colors gradientType:(TFY_GradientType)gradientType imageSize:(CGSize)imageSize {
++ (UIImage *)tfy_imageFromGradientColors:(NSArray *)colors gradientType:(TFY_GradientType)gradientType imageSize:(CGSize)imageSize {
     
     NSMutableArray *array = [NSMutableArray array];
     for(UIColor *color in colors) {
@@ -1446,7 +1447,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
     return image;
 }
 
-+ (BOOL)imageEqualToImage:(UIImage *)image anotherImage:(UIImage *)anotherImage {
++ (BOOL)tfy_imageEqualToImage:(UIImage *)image anotherImage:(UIImage *)anotherImage {
     
     NSData *orginalData = UIImagePNGRepresentation(image);
     NSData *anotherData = UIImagePNGRepresentation(anotherImage);
@@ -1456,7 +1457,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
     return NO;
 }
 
-+ (UIImage *)imageByApplyingAlpha:(CGFloat)alpha  image:(UIImage*)image {
++ (UIImage *)tfy_imageByApplyingAlpha:(CGFloat)alpha  image:(UIImage*)image {
     
     UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0f);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
@@ -1472,7 +1473,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
     
 }
 
-+ (UIImage *)spliceFirstImage:(UIImage *)firstImage secondImage:(UIImage *)secondImage {
++ (UIImage *)tfy_spliceFirstImage:(UIImage *)firstImage secondImage:(UIImage *)secondImage {
     
     CGSize size1 = firstImage.size;
     
@@ -1487,7 +1488,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
     return newPic;
 }
 
-+ (UIImage *)qrCodeImageForDataDic:(id)dataDic size:(CGSize)size waterImage:(UIImage *)waterImage {
++ (UIImage *)tfy_qrCodeImageForDataDic:(id)dataDic size:(CGSize)size waterImage:(UIImage *)waterImage {
     
     //创建名为"CIQRCodeGenerator"的CIFilter
     CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
@@ -1512,13 +1513,13 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
     //如果有水印图片，那么添加水印后在调整清晰度，
     //如果没有直接，直接调节清晰度
     if (!waterImage) {
-        return [[[self alloc] init] getHDImageWithCIImage:outPutImage size:size];
+        return [[[self alloc] init] tfy_getHDImageWithCIImage:outPutImage size:size];
     } else {
-        return [[[self alloc] init] getHDImageWithCIImage:outPutImage size:size waterImage:waterImage];;
+        return [[[self alloc] init] tfy_getHDImageWithCIImage:outPutImage size:size waterImage:waterImage];;
     }
 }
 //生成二维码
-+ (UIImage *)generateQRCodeWithString:(NSString *)string Size:(CGFloat)size
++ (UIImage *)tfy_generateQRCodeWithString:(NSString *)string Size:(CGFloat)size
 {
     //创建过滤器
     CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
@@ -1529,12 +1530,12 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
     [filter setValue:data forKey:@"inputMessage"];
     //获取二维码过滤器生成二维码
     CIImage *image = [filter outputImage];
-    UIImage *img = [[[self alloc] init] createNonInterpolatedUIImageFromCIImage:image WithSize:size];
+    UIImage *img = [[[self alloc] init] tfy_createNonInterpolatedUIImageFromCIImage:image WithSize:size];
     return img;
 }
 
 //二维码清晰
-- (UIImage *)createNonInterpolatedUIImageFromCIImage:(CIImage *)image WithSize:(CGFloat)size
+- (UIImage *)tfy_createNonInterpolatedUIImageFromCIImage:(CIImage *)image WithSize:(CGFloat)size
 {
     CGRect extent = CGRectIntegral(image.extent);
     CGFloat scale = MIN(size/CGRectGetWidth(extent), size/CGRectGetHeight(extent));
@@ -1563,7 +1564,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  @param size 二维码的宽高
  @return 清晰的二维码图片
  */
-- (UIImage *)getHDImageWithCIImage:(CIImage *)image size:(CGSize)size {
+- (UIImage *)tfy_getHDImageWithCIImage:(CIImage *)image size:(CGSize)size {
     
     CGRect extent = CGRectIntegral(image.extent);
     CGFloat scale = MIN(size.width/CGRectGetWidth(extent), size.height/CGRectGetHeight(extent));
@@ -1604,7 +1605,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  @param waterImage 水印图片
  @return 添加水印图片后，清晰的二维码图片
  */
-- (UIImage *)getHDImageWithCIImage:(CIImage *)image size:(CGSize)size waterImage:(UIImage *)waterImage {
+- (UIImage *)tfy_getHDImageWithCIImage:(CIImage *)image size:(CGSize)size waterImage:(UIImage *)waterImage {
     
     CGRect extent = CGRectIntegral(image.extent);
     CGFloat scale = MIN(size.width/CGRectGetWidth(extent), size.height/CGRectGetHeight(extent));
@@ -1645,7 +1646,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
     return newPic;
 }
 
-+ (UIImage *)changeColorWithQRCodeImage:(UIImage *)image red:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue {
++ (UIImage *)tfy_changeColorWithQRCodeImage:(UIImage *)image red:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue {
     
     const int imageWidth = image.size.width;
     const int imageHeight = image.size.height;
@@ -1657,7 +1658,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
     CGContextDrawImage(context, (CGRect){(CGPointZero), (image.size)}, image.CGImage);
     //遍历像素
     int pixelNumber = imageHeight * imageWidth;
-    [self changeColorOnPixel:rgbImageBuf pixelNum:pixelNumber red:red green:green blue:blue];
+    [self tfy_changeColorOnPixel:rgbImageBuf pixelNum:pixelNumber red:red green:green blue:blue];
     
     CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL, rgbImageBuf, bytesPerRow, TFY_ProviderReleaseData);
     
@@ -1678,7 +1679,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
  @param green green
  @param blue blue
  */
-+ (void)changeColorOnPixel: (uint32_t *)rgbImageBuf pixelNum: (int)pixelNum red: (NSUInteger)red green: (NSUInteger)green blue: (NSUInteger)blue {
++ (void)tfy_changeColorOnPixel: (uint32_t *)rgbImageBuf pixelNum: (int)pixelNum red: (NSUInteger)red green: (NSUInteger)green blue: (NSUInteger)blue {
     
     uint32_t * pCurPtr = rgbImageBuf;
     
@@ -1704,7 +1705,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
 }
 
 //布局颜色设置
--(UIImage *)imageWithColor:(UIColor *)color{
+-(UIImage *)tfy_imageWithColor:(UIColor *)color{
     
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
@@ -1720,7 +1721,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
 }
 
 // 可以把NSString 的参数 改成NSArray 数组存放参数 (就是可以修改多个)
-+(UIImage *)stretchImageWith:(NSString *)imageString{
++(UIImage *)tfy_stretchImageWith:(NSString *)imageString{
     //实例化Image对象
     UIImage *otherImage = [UIImage imageNamed:imageString];
     //计算图片的中心点
@@ -1730,7 +1731,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
     return [otherImage resizableImageWithCapInsets:UIEdgeInsetsMake(halfHeight, halfWidth, halfHeight, halfWidth) resizingMode:UIImageResizingModeStretch];
 }
 
-+(UIImage *)stringToUIImage:(NSString *)string {
++(UIImage *)tfy_stringToUIImage:(NSString *)string {
     if(string){
         NSData *data = [[NSData alloc]initWithBase64EncodedString:string options:0];
         
@@ -1740,7 +1741,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
 }
 
 //随机一个数组和随机个数
-+(UIImage *)RandomButtonImage:(NSArray *)changeArray Integer:(NSInteger )index{
++(UIImage *)tfy_RandomButtonImage:(NSArray *)changeArray Integer:(NSInteger )index{
     
     NSMutableString *getStr = [[NSMutableString alloc] initWithCapacity:index];
     
@@ -1758,7 +1759,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
     return img;
 }
 
-+(UIImage *)imageByScalingToSize:(CGSize)targetSize andSourceImage:(UIImage *)sourceImage{
++(UIImage *)tfy_imageByScalingToSize:(CGSize)targetSize andSourceImage:(UIImage *)sourceImage{
     UIImage *newImage = nil;
     CGSize imageSize = sourceImage.size;
     CGFloat width = imageSize.width;
@@ -1803,7 +1804,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
  * mastermidImage  中间视图的图片，生成的图片的宽度为midView的宽度，拼接在headerImageView的下面
  * masterfootImage  下边视图的图片，生成的图片的宽度为footerImageView的宽度，拼接在midView的下面
  */
-+ (UIImage *)addSlaveHeaderImage:(UIImage *)slaveheaderImage toMasterMidImage:(UIImage *)mastermidImage toMasterFootImage:(UIImage *)masterfootImage{
++ (UIImage *)tfy_addSlaveHeaderImage:(UIImage *)slaveheaderImage toMasterMidImage:(UIImage *)mastermidImage toMasterFootImage:(UIImage *)masterfootImage{
     CGSize size;
     size.width = slaveheaderImage.size.width;
     size.height = slaveheaderImage.size.height + mastermidImage.size.height + masterfootImage.size.height;
@@ -1833,7 +1834,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
  * rightImage 右侧图片
  * masterfootImage 底部图片
  */
-+ (UIImage *)combineWithHeaderImage:(UIImage *)slaveheaderImage LeftImg:(UIImage*)leftImage toMasterImage:(UIImage *)masterImage rightImg:(UIImage*)rightImage FootImage:(UIImage *)masterfootImage{
++ (UIImage *)tfy_combineWithHeaderImage:(UIImage *)slaveheaderImage LeftImg:(UIImage*)leftImage toMasterImage:(UIImage *)masterImage rightImg:(UIImage*)rightImage FootImage:(UIImage *)masterfootImage{
    
     CGFloat width = masterImage.size.width + leftImage.size.width + rightImage.size.width;
     CGFloat height = slaveheaderImage.size.height + masterImage.size.height + masterfootImage.size.height;
@@ -1870,7 +1871,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
 
 
 //leftImage:左侧图片 rightImage:右侧图片 margin:两者间隔
-- (UIImage *)combineWithLeftImg:(UIImage*)leftImage rightImg:(UIImage*)rightImage withMargin:(NSInteger)margin{
+- (UIImage *)tfy_combineWithLeftImg:(UIImage*)leftImage rightImg:(UIImage*)rightImage withMargin:(NSInteger)margin{
     if (rightImage == nil) {
         return leftImage;
     }
@@ -1897,7 +1898,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
  * *masterImage  主图片，生成的图片的宽度为masterImage的宽度
  * slaveImage   从图片，拼接在masterImage的下面
  */
-+ (UIImage *)addSlaveImage:(UIImage *)slaveImage toMasterImage:(UIImage *)masterImage{
++ (UIImage *)tfy_addSlaveImage:(UIImage *)slaveImage toMasterImage:(UIImage *)masterImage{
     
     CGFloat width = masterImage.size.width;
     if (masterImage.size.width<slaveImage.size.width) {
@@ -1928,12 +1929,12 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
  *  拼接快照 imagesArr 快照的数组
  */
 #pragma mark 拼接快照
-+ (UIImage *)getImageFromImagesArray:(NSArray *)imagesArr
++ (UIImage *)tfy_getImageFromImagesArray:(NSArray *)imagesArr
 {
 
     UIImage *image;
     @autoreleasepool{
-        CGSize imageTotalSize = [self getImageTotalSizeFromImagesArray:imagesArr];
+        CGSize imageTotalSize = [self tfy_getImageTotalSizeFromImagesArray:imagesArr];
         UIGraphicsBeginImageContextWithOptions(imageTotalSize, NO, [UIScreen mainScreen].scale);
         
         //拼接图片
@@ -1951,7 +1952,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
 }
 
 #pragma mark 获取全部图片拼接后size
-+ (CGSize)getImageTotalSizeFromImagesArray:(NSArray *)imagesArr
++ (CGSize)tfy_getImageTotalSizeFromImagesArray:(NSArray *)imagesArr
 {
     CGSize totalSize = CGSizeZero;
     for (UIImage *image in imagesArr) {
@@ -1962,7 +1963,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
     return totalSize;
 }
 
-+ (UIImage*)cutOutImageWithRect:(CGPoint)point image:(UIImage *)image{
++ (UIImage*)tfy_cutOutImageWithRect:(CGPoint)point image:(UIImage *)image{
     CGFloat imageWidth = CGImageGetWidth(image.CGImage);
     CGFloat imageHeight = CGImageGetHeight(image.CGImage);
     CGRect rect = CGRectMake(point.x*image.scale, point.y*image.scale, imageWidth-point.x*image.scale, imageHeight-point.y*image.scale);

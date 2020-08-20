@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSNumber (TFY_Tools)
-+ (nullable NSNumber *)numberWithString:(NSString *)string;
++ (nullable NSNumber *)tfy_numberWithString:(NSString *)string;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,38 +10,38 @@
 #import "NSString+TFY_String.h"
 
 @implementation NSFileManager (TFY_Tools)
-- (NSURL *)documentsURL {
+- (NSURL *)tfy_documentsURL {
     return [[self
              URLsForDirectory:NSDocumentDirectory
              inDomains:NSUserDomainMask] lastObject];
 }
 
-- (NSString *)documentsPath {
+- (NSString *)tfy_documentsPath {
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
 }
 
-- (NSURL *)cachesURL {
+- (NSURL *)tfy_cachesURL {
     return [[self
              URLsForDirectory:NSCachesDirectory
              inDomains:NSUserDomainMask] lastObject];
 }
 
-- (NSString *)cachesPath {
+- (NSString *)tfy_cachesPath {
     return [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
 }
 
-- (NSURL *)libraryURL {
+- (NSURL *)tfy_libraryURL {
     return [[self
              URLsForDirectory:NSLibraryDirectory
              inDomains:NSUserDomainMask] lastObject];
 }
 
-- (NSString *)libraryPath {
+- (NSString *)tfy_libraryPath {
     return [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
 }
 
 
-- (void)replaceFilePath:(NSString *)path nameString:(NSString *)string withNewString:(NSString *)newString{
+- (void)tfy_replaceFilePath:(NSString *)path nameString:(NSString *)string withNewString:(NSString *)newString{
     BOOL isD = NO;
     if (![self fileExistsAtPath:path isDirectory:&isD]) return;
     if (!isD) {
@@ -72,7 +72,7 @@
     }
 }
 
-- (void)addPreNameAtPath:(NSString *)path preName:(NSString *)preName{
+- (void)tfy_addPreNameAtPath:(NSString *)path preName:(NSString *)preName{
     BOOL isD = NO;
     if (![self fileExistsAtPath:path isDirectory:&isD]) return;
     if (!isD) {

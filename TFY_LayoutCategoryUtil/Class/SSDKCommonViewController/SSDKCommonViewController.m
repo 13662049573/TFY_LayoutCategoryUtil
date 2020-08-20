@@ -42,7 +42,7 @@ static NSMutableSet *_ssdkCommonProtocolSwizzleSet(){
 
 static void _ssdkCommonProtocolSwizzle(id self){
     @synchronized (_ssdkCommonProtocolSwizzleSet()) {
-        if ([_ssdkCommonProtocolSwizzleSet() containsObject:[self clasName]])return;
+        if ([_ssdkCommonProtocolSwizzleSet() containsObject:[self tfy_clasName]])return;
         Protocol *pT = @protocol(SSDKCommonTableViewProtocol);
         if (pT && class_conformsToProtocol([self class], pT)) {
             SEL sel = sel_registerName("tableViewModel");
@@ -63,7 +63,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
                 }), "@@:");
             }
         }
-        [_ssdkCommonProtocolSwizzleSet() addObject:[self clasName]];
+        [_ssdkCommonProtocolSwizzleSet() addObject:[self tfy_clasName]];
     }
     
 }
@@ -178,7 +178,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
     SEL sel = NSSelectorFromString(@"commonTableViewModel:");
     SSDKCommonTableViewModel *model = [SSDKCommonTableViewModel new];
     if ([self respondsToSelector:sel]) {
-        [self performSelectorWithArguments:sel,model];
+        [self tfy_performSelectorWithArguments:sel,model];
     }
     Class class;
     if (model.clas.length > 0) {
@@ -203,7 +203,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
     UIView *view = self.view;
     SEL sel1 = NSSelectorFromString(@"comonTableViewSuperView");
     if ([self respondsToSelector:sel1]) {
-        view = [self performSelectorWithArguments:sel1];
+        view = [self tfy_performSelectorWithArguments:sel1];
     }
     if (model.tableView) {
         model.tableView(tableView);
@@ -298,7 +298,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
     SEL sel = NSSelectorFromString(@"commonCollectionModel:");
     SSDKCommonCollectionViewModel *model = [SSDKCommonCollectionViewModel new];
     if ([self respondsToSelector:sel]) {
-        [self performSelectorWithArguments:sel,model];
+        [self tfy_performSelectorWithArguments:sel,model];
     }
     UICollectionViewFlowLayout *layout = model.layout;
     if (!layout) {
@@ -321,7 +321,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
     SEL sel1 = NSSelectorFromString(@"commonCollectionViewSuperView");
     UIView *view = self.view;
     if ([self respondsToSelector:sel1]) {
-        view = [self performSelectorWithArguments:sel1];
+        view = [self tfy_performSelectorWithArguments:sel1];
     }
     if (view) {
         [view addSubview:collectionView];
@@ -353,7 +353,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
     UIView * view = self.view;
     SEL superSel = NSSelectorFromString(@"commonNavigationViewSuperView");
     if ([self respondsToSelector:superSel]) {
-        view = [self performSelectorWithArguments:superSel];
+        view = [self tfy_performSelectorWithArguments:superSel];
     }
     [view addSubview:bar];
     if (self.view == view) {
@@ -367,7 +367,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
 
 
 - (NSString *)viewControllerName{
-    return self.clasName;
+    return self.tfy_clasName;
 }
 
 - (NSMutableDictionary *)extraInfo{

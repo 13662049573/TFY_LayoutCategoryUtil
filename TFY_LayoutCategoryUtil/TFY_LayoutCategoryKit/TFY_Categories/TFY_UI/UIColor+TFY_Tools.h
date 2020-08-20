@@ -169,30 +169,30 @@ typedef NS_ENUM(NSInteger, GradientChangeDirection) {
 
 @end
 
-CG_INLINE UIColor *UIColorHexString(NSString *hexString){
+CG_INLINE UIColor *TFY_ColorHexString(NSString *hexString){
     return [UIColor tfy_colorWithHexString:hexString];
 }
 
-CG_INLINE UIColor *UIColorHexAlpha(NSString *hexString, CGFloat alpha){
+CG_INLINE UIColor *TFY_ColorHexAlpha(NSString *hexString, CGFloat alpha){
     return [UIColor tfy_colorWithHexString:hexString alpha:alpha];
 }
 /** RGBA颜色，传整数 */
-CG_INLINE UIColor *UIColorRGBAlpha(CGFloat r, CGFloat g, CGFloat b, CGFloat alpha){
+CG_INLINE UIColor *TFY_ColorRGBAlpha(CGFloat r, CGFloat g, CGFloat b, CGFloat alpha){
     return [UIColor tfy_percentR:r g:g b:b alpha:alpha];
 }
 
 /** RGB颜色，传整数  */
-CG_INLINE UIColor *UIColorRGB(CGFloat r, CGFloat g, CGFloat b){
-    return UIColorRGBAlpha(r,g,b,1);
+CG_INLINE UIColor *TFY_ColorRGB(CGFloat r, CGFloat g, CGFloat b){
+    return TFY_ColorRGBAlpha(r,g,b,1);
 }
 /** RGBA颜色传分数 */
-CG_INLINE UIColor *UIColorRGBAlphaPercent(CGFloat r, CGFloat g, CGFloat b, CGFloat alpha){
+CG_INLINE UIColor *TFY_ColorRGBAlphaPercent(CGFloat r, CGFloat g, CGFloat b, CGFloat alpha){
     return [UIColor tfy_r:r g:g b:b alpha:alpha];
 }
 
 /** RGB颜色传分数 */
-CG_INLINE UIColor *UIColorRGBPercent(CGFloat r, CGFloat g, CGFloat b){
-    return UIColorRGBAlphaPercent(r,g,b,1);
+CG_INLINE UIColor *TFY_ColorRGBPercent(CGFloat r, CGFloat g, CGFloat b){
+    return TFY_ColorRGBAlphaPercent(r,g,b,1);
 }
 
 #define RGBAlphaPercent(r,g,b,a) UIColorRGBAlphaPercent(r,g,b,a)

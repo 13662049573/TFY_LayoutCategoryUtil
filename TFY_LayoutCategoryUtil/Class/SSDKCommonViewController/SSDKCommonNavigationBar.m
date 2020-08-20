@@ -72,8 +72,8 @@
     if (!_leftButton && _delegate) {
         _leftButton = [[self getButtonClassIndex:0] buttonWithType:UIButtonTypeCustom];
         _leftButton.makeChain
-        .textColor(UIColorHexString(@"666666"), UIControlStateNormal)
-        .font([UIFont PingFangSCRegularAndSize:17])
+        .textColor(TFY_ColorHexString(@"666666"), UIControlStateNormal)
+        .font([UIFont tfy_PingFangSCRegularAndSize:17])
         .userInteractionEnabled(NO)
         .addToSuperView(self.leftView)
         .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
@@ -113,8 +113,8 @@
     if (!_middleButton) {
         _middleButton = [[self getButtonClassIndex:1] buttonWithType:UIButtonTypeCustom];
         _middleButton.makeChain
-        .font([UIFont PingFangSCRegularAndSize:17])
-        .textColor(UIColorHexString(@"1a1d1e"), UIControlStateNormal)
+        .font([UIFont tfy_PingFangSCRegularAndSize:17])
+        .textColor(TFY_ColorHexString(@"1a1d1e"), UIControlStateNormal)
         .addToSuperView(self)
         .addTarget(self, @selector(middleButtonTap), UIControlEventTouchUpInside)
         .lineBreakMode(NSLineBreakByWordWrapping)
@@ -140,8 +140,8 @@
     if (!_rightButton && _delegate) {
         _rightButton = [[self getButtonClassIndex:2] buttonWithType:UIButtonTypeCustom];
         _rightButton.makeChain
-        .textColor(UIColorHexString(@"474747"), UIControlStateNormal)
-        .font([UIFont PingFangSCRegularAndSize:17])
+        .textColor(TFY_ColorHexString(@"474747"), UIControlStateNormal)
+        .font([UIFont tfy_PingFangSCRegularAndSize:17])
         .userInteractionEnabled(NO)
         .addToSuperView(self.rightView)
         .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
@@ -196,7 +196,7 @@
 - (UIView *)line{
     if (!_line) {
         _line = [UIView new].makeChain
-        .backgroundColor(UIColorHexString(@"dbdbdb"))
+        .backgroundColor(TFY_ColorHexString(@"dbdbdb"))
         .addToSuperView(self).view;
     }
     return _line;

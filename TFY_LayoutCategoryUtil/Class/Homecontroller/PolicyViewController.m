@@ -54,7 +54,7 @@
     .textAlignment(NSTextAlignmentCenter)
     .part_first()
     .font(Font(PingFangSemibold, 17))
-    .textColor(UIColorHexString(@"000000"))
+    .textColor(TFY_ColorHexString(@"000000"))
     .text(@"TFY_Link Demo隐私条款")
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
         make.centerX.equalTo(self.contentView);
@@ -64,7 +64,7 @@
     })
     .part_range(NSMakeRange(1, 2))
     .font(Font(PingFangLight, 13))
-    .textColor(UIColorHexAlpha(@"000000", 0.45))
+    .textColor(TFY_ColorHexAlpha(@"000000", 0.45))
     .textAlignment(NSTextAlignmentCenter)
     .part_sencond()
     .text(@"最近更新日期：2019年12月13日")
@@ -90,8 +90,8 @@
     .masksToBounds(YES)
     .addToSuperView(self.contentView)
     .part_first()
-    .textColor(UIColorHexString(@"000000"), UIControlStateNormal)
-    .backgroundColor(UIColorHexString(@"#ECECEC"))
+    .textColor(TFY_ColorHexString(@"000000"), UIControlStateNormal)
+    .backgroundColor(TFY_ColorHexString(@"#ECECEC"))
     .addTarget(self, @selector(cancelClick), UIControlEventTouchUpInside)
     .text(@"取消", UIControlStateNormal)
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
@@ -101,8 +101,8 @@
         make.right.equalTo(self.contentView.mas_centerX).offset(-9.5);
     })
     .part_sencond()
-    .textColor(UIColorHexString(@"ffffff"), UIControlStateNormal)
-    .backgroundColor(UIColorHexString(@"#FF7800"))
+    .textColor(TFY_ColorHexString(@"ffffff"), UIControlStateNormal)
+    .backgroundColor(TFY_ColorHexString(@"#FF7800"))
     .addTarget(self, @selector(confirmClick), UIControlEventTouchUpInside)
     .text(@"同意", UIControlStateNormal)
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
@@ -117,7 +117,7 @@
     });
     
     UITextViewModelSet()
-    .textColor(UIColorHexString(@"000000"))
+    .textColor(TFY_ColorHexString(@"000000"))
     .font(Font(PingFangReguler, 14))
     .addToSuperView(self.contentView)
     .delegate(self)
@@ -147,10 +147,10 @@
     
     NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:@"    欢迎您使用提供的演示提供了一步实现移动端深度链接的功能，不仅极大地方便了您的终端用户的服务体验，更为您实时了解终端用户的数据进行了统计分析。为了对您的TFY_Link功能进行来源追溯并帮助您更精细化运营，我们将依据的《隐私政策》来帮助你了解我们需要收集哪些数据。\n\n\n详情点击:" attributes:@{
         NSFontAttributeName :Font(PingFangReguler, 13),
-        NSForegroundColorAttributeName:UIColorHexString(@"000000")
+        NSForegroundColorAttributeName:TFY_ColorHexString(@"000000")
     }];
     
-    _contentTextView.linkTextAttributes = @{NSForegroundColorAttributeName:UIColorHexString(@"FF7800")};
+    _contentTextView.linkTextAttributes = @{NSForegroundColorAttributeName:TFY_ColorHexString(@"FF7800")};
     
      self.contentTextView.attributedText = attribute;
     

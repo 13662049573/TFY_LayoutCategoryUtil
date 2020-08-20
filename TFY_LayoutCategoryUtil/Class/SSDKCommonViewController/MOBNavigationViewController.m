@@ -22,11 +22,11 @@
     self.navigationBar.middleButton.makeChain
     .text(self.title, UIControlStateNormal)
     .font(Font(PingFangMedium, 17))
-    .textColor(UIColorHexString(@"464646"), UIControlStateNormal);
+    .textColor(TFY_ColorHexString(@"464646"), UIControlStateNormal);
     
     self.navigationBar.leftButton.makeChain
-    .image(UIImageNamed(@"nav_icon_back"), UIControlStateNormal)
-    .textColor(UIColorHexString(@"464646"), UIControlStateNormal);
+    .image(TFY_ImageNamed(@"nav_icon_back"), UIControlStateNormal)
+    .textColor(TFY_ColorHexString(@"464646"), UIControlStateNormal);
     // Do any additional setup after loading the view.
 }
 

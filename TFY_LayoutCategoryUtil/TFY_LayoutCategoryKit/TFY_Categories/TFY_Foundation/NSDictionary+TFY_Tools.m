@@ -12,12 +12,12 @@
 
 @implementation NSDictionary (TFY_Tools)
 
-- (NSArray <id>*)allKeysSorted{
+- (NSArray <id>*)tfy_allKeysSorted{
     return [[self allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 }
 
-- (NSArray <id>*)allValuesSortedByKeys{
-    NSArray *sortedKeys = [self allKeysSorted];
+- (NSArray <id>*)tfy_allValuesSortedByKeys{
+    NSArray *sortedKeys = [self tfy_allKeysSorted];
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     for (id key in sortedKeys) {
         [arr addObject:self[key]];
@@ -25,13 +25,13 @@
     return arr;
 }
 
-- (BOOL)containsObjectForKey:(id)key{
+- (BOOL)tfy_containsObjectForKey:(id)key{
     if (!key) return NO;
     return self[key] != nil;
 }
 
 
-- (NSDictionary *)entriesForKeys:(NSArray <id>*)keys{
+- (NSDictionary *)tfy_entriesForKeys:(NSArray <id>*)keys{
     NSMutableDictionary *dic = [NSMutableDictionary new];
     for (id key in keys) {
         id value = self[key];
@@ -40,7 +40,7 @@
     return dic;
 }
 
-- (NSString *)jsonString{
+- (NSString *)tfy_jsonString{
     if ([NSJSONSerialization isValidJSONObject:self]) {
         NSError *error;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self options:0 error:&error];
@@ -50,7 +50,7 @@
     return nil;
 }
 
-- (NSString *)jsonPrettyString{
+- (NSString *)tfy_jsonPrettyString{
     if ([NSJSONSerialization isValidJSONObject:self]) {
         NSError *error;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self options:NSJSONWritingPrettyPrinted error:&error];
@@ -63,24 +63,24 @@
 
 @implementation NSDictionary (Plist)
 
-+ (NSDictionary *)dictionaryWithPlistData:(NSData *)plist {
++ (NSDictionary *)tfy_dictionaryWithPlistData:(NSData *)plist {
     if (!plist) return nil;
     NSDictionary *dictionary = [NSPropertyListSerialization propertyListWithData:plist options:NSPropertyListImmutable format:NULL error:NULL];
     if ([dictionary isKindOfClass:[NSDictionary class]]) return dictionary;
     return nil;
 }
 
-+ (NSDictionary *)dictionaryWithPlistString:(NSString *)plist {
++ (NSDictionary *)tfy_dictionaryWithPlistString:(NSString *)plist {
     if (!plist) return nil;
     NSData* data = [plist dataUsingEncoding:NSUTF8StringEncoding];
-    return [self dictionaryWithPlistData:data];
+    return [self tfy_dictionaryWithPlistData:data];
 }
 
-- (NSData *)plistData {
+- (NSData *)tfy_plistData {
     return [NSPropertyListSerialization dataWithPropertyList:self format:NSPropertyListBinaryFormat_v1_0 options:kNilOptions error:NULL];
 }
 
-- (NSString *)plistString {
+- (NSString *)tfy_plistString {
     NSData *xmlData = [NSPropertyListSerialization dataWithPropertyList:self format:NSPropertyListXMLFormat_v1_0 options:kNilOptions error:NULL];
     if (xmlData) return xmlData.tfy_utf8String;
     return nil;
@@ -120,67 +120,67 @@ if ([value isKindOfClass:[NSString class]]) return NSNumberFromID(value)._type_;
 return def;
 
 @implementation NSDictionary (ValueDefault)
-- (BOOL)boolValueForKey:(NSString *)key default:(BOOL)def {
+- (BOOL)tfy_boolValueForKey:(NSString *)key default:(BOOL)def {
     RETURN_VALUE(boolValue);
 }
 
-- (char)charValueForKey:(NSString *)key default:(char)def {
+- (char)tfy_charValueForKey:(NSString *)key default:(char)def {
     RETURN_VALUE(charValue);
 }
 
-- (unsigned char)unsignedCharValueForKey:(NSString *)key default:(unsigned char)def {
+- (unsigned char)tfy_unsignedCharValueForKey:(NSString *)key default:(unsigned char)def {
     RETURN_VALUE(unsignedCharValue);
 }
 
-- (short)shortValueForKey:(NSString *)key default:(short)def {
+- (short)tfy_shortValueForKey:(NSString *)key default:(short)def {
     RETURN_VALUE(shortValue);
 }
 
-- (unsigned short)unsignedShortValueForKey:(NSString *)key default:(unsigned short)def {
+- (unsigned short)tfy_unsignedShortValueForKey:(NSString *)key default:(unsigned short)def {
     RETURN_VALUE(unsignedShortValue);
 }
 
-- (int)intValueForKey:(NSString *)key default:(int)def {
+- (int)tfy_intValueForKey:(NSString *)key default:(int)def {
     RETURN_VALUE(intValue);
 }
 
-- (unsigned int)unsignedIntValueForKey:(NSString *)key default:(unsigned int)def {
+- (unsigned int)tfy_unsignedIntValueForKey:(NSString *)key default:(unsigned int)def {
     RETURN_VALUE(unsignedIntValue);
 }
 
-- (long)longValueForKey:(NSString *)key default:(long)def {
+- (long)tfy_longValueForKey:(NSString *)key default:(long)def {
     RETURN_VALUE(longValue);
 }
 
-- (unsigned long)unsignedLongValueForKey:(NSString *)key default:(unsigned long)def {
+- (unsigned long)tfy_unsignedLongValueForKey:(NSString *)key default:(unsigned long)def {
     RETURN_VALUE(unsignedLongValue);
 }
 
-- (long long)longLongValueForKey:(NSString *)key default:(long long)def {
+- (long long)tfy_longLongValueForKey:(NSString *)key default:(long long)def {
     RETURN_VALUE(longLongValue);
 }
 
-- (unsigned long long)unsignedLongLongValueForKey:(NSString *)key default:(unsigned long long)def {
+- (unsigned long long)tfy_unsignedLongLongValueForKey:(NSString *)key default:(unsigned long long)def {
     RETURN_VALUE(unsignedLongLongValue);
 }
 
-- (float)floatValueForKey:(NSString *)key default:(float)def {
+- (float)tfy_floatValueForKey:(NSString *)key default:(float)def {
     RETURN_VALUE(floatValue);
 }
 
-- (double)doubleValueForKey:(NSString *)key default:(double)def {
+- (double)tfy_doubleValueForKey:(NSString *)key default:(double)def {
     RETURN_VALUE(doubleValue);
 }
 
-- (NSInteger)integerValueForKey:(NSString *)key default:(NSInteger)def {
+- (NSInteger)tfy_integerValueForKey:(NSString *)key default:(NSInteger)def {
     RETURN_VALUE(integerValue);
 }
 
-- (NSUInteger)unsignedIntegerValueForKey:(NSString *)key default:(NSUInteger)def {
+- (NSUInteger)tfy_unsignedIntegerValueForKey:(NSString *)key default:(NSUInteger)def {
     RETURN_VALUE(unsignedIntegerValue);
 }
 
-- (NSNumber *)numberValueForKey:(NSString *)key default:(NSNumber *)def {
+- (NSNumber *)tfy_numberValueForKey:(NSString *)key default:(NSNumber *)def {
     if (!key) return def;
     id value = self[key];
     if (!value || value == [NSNull null]) return def;
@@ -189,7 +189,7 @@ return def;
     return def;
 }
 
-- (NSString *)stringValueForKey:(NSString *)key default:(NSString *)def {
+- (NSString *)tfy_stringValueForKey:(NSString *)key default:(NSString *)def {
     if (!key) return def;
     id value = self[key];
     if (!value || value == [NSNull null]) return def;
@@ -197,14 +197,14 @@ return def;
     if ([value isKindOfClass:[NSNumber class]]) return ((NSNumber *)value).description;
     return def;
 }
-- (NSArray *)arrayValueForKey:(NSString *)key default:(NSArray *)def{
+- (NSArray *)tfy_arrayValueForKey:(NSString *)key default:(NSArray *)def{
     if (!key) return def;
     id value = self[key];
     if (!value || value == [NSNull null]) return def;
     if (![value isKindOfClass:[NSArray class]]) return def;
     return value;
 }
-- (NSDictionary *)dicValueForKey:(NSString *)key default:(NSDictionary *)def{
+- (NSDictionary *)tfy_dicValueForKey:(NSString *)key default:(NSDictionary *)def{
     if (!key) return def;
     id value = self[key];
     if (!value || value == [NSNull null]) return def;
@@ -214,27 +214,27 @@ return def;
 @end
 @implementation NSMutableDictionary (SSDKCategory)
 
-+ (NSMutableDictionary *)dictionaryWithPlistData:(NSData *)plist {
++ (NSMutableDictionary *)tfy_dictionaryWithPlistData:(NSData *)plist {
     if (!plist) return nil;
     NSMutableDictionary *dictionary = [NSPropertyListSerialization propertyListWithData:plist options:NSPropertyListMutableContainersAndLeaves format:NULL error:NULL];
     if ([dictionary isKindOfClass:[NSMutableDictionary class]]) return dictionary;
     return nil;
 }
 
-+ (NSMutableDictionary *)dictionaryWithPlistString:(NSString *)plist {
++ (NSMutableDictionary *)tfy_dictionaryWithPlistString:(NSString *)plist {
     if (!plist) return nil;
     NSData* data = [plist dataUsingEncoding:NSUTF8StringEncoding];
-    return [self dictionaryWithPlistData:data];
+    return [self tfy_dictionaryWithPlistData:data];
 }
 
-- (id)popObjectForKey:(id)aKey {
+- (id)tfy_popObjectForKey:(id)aKey {
     if (!aKey) return nil;
     id value = self[aKey];
     [self removeObjectForKey:aKey];
     return value;
 }
 
-- (NSDictionary *)popEntriesForKeys:(NSArray *)keys {
+- (NSDictionary *)tfy_popEntriesForKeys:(NSArray *)keys {
     NSMutableDictionary *dic = [NSMutableDictionary new];
     for (id key in keys) {
         id value = self[key];

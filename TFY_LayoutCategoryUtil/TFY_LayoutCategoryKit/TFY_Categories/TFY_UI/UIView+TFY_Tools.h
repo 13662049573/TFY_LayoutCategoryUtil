@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(void)tfy_setShadow:(CGSize)size shadowOpacity:(CGFloat)opacity shadowRadius:(CGFloat)radius shadowColor:(UIColor *)color;
 
-#pragma -------------------------------------点击事件方法---------------------------------
+#pragma mark-------------------------------------点击事件方法---------------------------------
 
 /**
  *  添加点击事件
@@ -100,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)tfy_addTarget:(id)target action:(SEL)action;
 
-#pragma -------------------------------------添加圆角方法---------------------------------
+#pragma mark-------------------------------------添加圆角方法---------------------------------
 
 /**圆角*/
 @property(nonatomic, assign) CGFloat tfy_clipRadius;
@@ -120,7 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)tfy_addBorderWithColor:(UIColor *_Nonnull)color borderWidth:(CGFloat)borderWidth;
 
-#pragma -------------------------------------加边框方法---------------------------------
+#pragma mark-------------------------------------加边框方法---------------------------------
 
 /** 使用layer的borderWidth统一设置*/
 - (void)tfy_addBorderWithInset:(UIEdgeInsets)inset Color:(UIColor *_Nonnull)borderColor direction:(BorderDirection)directions;
@@ -141,7 +141,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**移除所有追加的边框*/
 - (void)tfy_removeAllBorders;
 
-#pragma -------------------------------------手势点击添加方法---------------------------------
+#pragma mark-------------------------------------手势点击添加方法---------------------------------
 
 /**
  *  添加Tap手势事件  target 事件目标  vaction 事件  返回添加的手势
@@ -178,7 +178,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (UIScreenEdgePanGestureRecognizer *)tfy_addGestureScreenEdgePanTarget:(id)target action:(SEL)action;
 
-#pragma  ---------------------手势回调------------------------------
+#pragma  mark---------------------手势回调------------------------------
 
 /**
  *  添加Tap手势block事件  event block事件  返回添加的手势

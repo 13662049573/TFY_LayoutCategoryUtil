@@ -11,12 +11,12 @@
 
 @implementation UIWindow (TFY_Tools)
 
-- (void)showOnCurrentScene{
-    [self showOnScene:[UIApplication currentScene]];
+- (void)tfy_showOnCurrentScene{
+    [self tfy_showOnScene:[UIApplication tfy_currentScene]];
 }
 
-- (void)showOnScene:(id)scene{
-    if (UIApplication.isSceneApp) {
+- (void)tfy_showOnScene:(id)scene{
+    if (UIApplication.tfy_isSceneApp) {
         if (scene && [scene isKindOfClass:NSClassFromString(@"UIWindowScene")]) {
             ((void (*)(id, SEL,id))objc_msgSend)(self,sel_registerName("setWindowScene:"),scene);
         }

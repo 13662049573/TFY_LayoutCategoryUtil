@@ -12,29 +12,29 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (TFY_Tools)
 
-@property (nonatomic, copy, readonly) NSString * clasName;
+@property (nonatomic, copy, readonly) NSString * tfy_clasName;
 
-+ (NSString *)clasName;
++ (NSString *)tfy_clasName;
 
-+ (BOOL)swizzleClassMethod:(SEL)originalSel with:(SEL)newSel;
++ (BOOL)tfy_swizzleClassMethod:(SEL)originalSel with:(SEL)newSel;
 
-+ (BOOL)swizzleInstanceMethod:(SEL)originalSel with:(SEL)newSel;
++ (BOOL)tfy_swizzleInstanceMethod:(SEL)originalSel with:(SEL)newSel;
 
-- (void)setAssociateValue:(id)value forKey:(void *)key;
+- (void)tfy_setAssociateValue:(id)value forKey:(void *)key;
 
-- (id)getAssociateValueByKey:(void *)key;
+- (id)tfy_getAssociateValueByKey:(void *)key;
 
-- (void)removeAllAssociatedValues;
+- (void)tfy_removeAllAssociatedValues;
 
-- (nullable id)performSelectorWithArguments:(SEL)sel, ...;
+- (nullable id)tfy_performSelectorWithArguments:(SEL)sel, ...;
 
-- (void)performSelectorWithArguments:(SEL)sel delay:(NSTimeInterval)delay, ...;
+- (void)tfy_performSelectorWithArguments:(SEL)sel delay:(NSTimeInterval)delay, ...;
 
-- (nullable id)performSelectorWaitUntilDone:(BOOL)wait onMainThreadWithArguments:(SEL)sel ,...;
+- (nullable id)tfy_performSelectorWaitUntilDone:(BOOL)wait onMainThreadWithArguments:(SEL)sel ,...;
 
-- (nullable id)performSelectorwaitUntilDone:(BOOL)wait withArguments:(SEL)sel onThread:(NSThread *)thread, ...;
+- (nullable id)tfy_performSelectorwaitUntilDone:(BOOL)wait withArguments:(SEL)sel onThread:(NSThread *)thread, ...;
 
-- (void)performSelectorWithArgumentsInBackground:(SEL)sel, ...;
+- (void)tfy_performSelectorWithArgumentsInBackground:(SEL)sel, ...;
 @end
 
 NS_ASSUME_NONNULL_END

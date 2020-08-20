@@ -28,14 +28,14 @@
        [[TFY_ScenePackageTools defaultPackage] addBeforeWindowEvent:^(TFY_ScenePackageTools * _Nonnull application) {
            if ([GuideViewController isFirstRun])
            {
-               [UIApplication window].rootViewController = [[GuideViewController alloc] init];
-               [[UIApplication window].rootViewController addViewDidDisappearBlock:^(UIViewController * _Nonnull vc, BOOL animated) {
+               [UIApplication tfy_window].rootViewController = [[GuideViewController alloc] init];
+               [[UIApplication tfy_window].rootViewController addViewDidDisappearBlock:^(UIViewController * _Nonnull vc, BOOL animated) {
                    [[PolicyManager defaultManager] show];
                }];
            }
            else
            {
-               [UIApplication window].rootViewController = [[MainViewController alloc] init];
+               [UIApplication tfy_window].rootViewController = [[MainViewController alloc] init];
                [[PolicyManager defaultManager] show];
            }
            [self setupNavigationBar];
@@ -54,10 +54,10 @@
     navigationBar.backIndicatorTransitionMaskImage = image;
     
     // 设置标题属性
-    [navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName :UIColorRGB(255, 255, 255), NSFontAttributeName : Font(PingFangSemibold, 18)}];
+    [navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName :TFY_ColorRGB(255, 255, 255), NSFontAttributeName : Font(PingFangSemibold, 18)}];
     // 设置bar颜色
     
-    [navigationBar setBarTintColor:UIColorRGB(50, 102, 255)];
+    [navigationBar setBarTintColor:TFY_ColorRGB(50, 102, 255)];
 }
 
 @end

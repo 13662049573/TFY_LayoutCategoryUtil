@@ -11,9 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSAttributedString (TFY_Tools)
-- (CGSize)sizeWithLimitSize:(CGSize)size;
+- (CGSize)tfy_sizeWithLimitSize:(CGSize)size;
 
-- (CGSize)sizeWithoutLimitSize;
+- (CGSize)tfy_sizeWithoutLimitSize;
 @end
 
 NS_ASSUME_NONNULL_END

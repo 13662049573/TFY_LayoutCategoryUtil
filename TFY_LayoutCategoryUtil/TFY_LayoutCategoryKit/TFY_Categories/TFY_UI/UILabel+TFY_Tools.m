@@ -23,7 +23,7 @@
 @implementation NSAttributedString (Chain)
 
 
-+(NSAttributedString *)getAttributeId:(id)sender string:(NSString *)string orginFont:(CGFloat)orginFont orginColor:(UIColor *)orginColor attributeFont:(CGFloat)attributeFont attributeColor:(UIColor *)attributeColor
++(NSAttributedString *)tfy_getAttributeId:(id)sender string:(NSString *)string orginFont:(CGFloat)orginFont orginColor:(UIColor *)orginColor attributeFont:(CGFloat)attributeFont attributeColor:(UIColor *)attributeColor
 {
     __block  NSMutableAttributedString *totalStr = [[NSMutableAttributedString alloc] initWithString:string];
     [totalStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:orginFont] range:NSMakeRange(0, string.length)];
@@ -88,26 +88,26 @@ static char kShowContentInsetsKey;
 - (void)tfy_drawTextInRect:(CGRect)rect {
     id show = objc_getAssociatedObject(self, &kShowContentInsetsKey);
     if (show) {
-        rect = UIEdgeInsetsInsetRect(rect, self.contentInsets);
+        rect = UIEdgeInsetsInsetRect(rect, self.tfy_contentInsets);
     }
     [self tfy_drawTextInRect:rect];
 }
 
-- (CGSize)sizeWithoutLimitSize {
-    return [self sizeWithLimitSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+- (CGSize)tfy_sizeWithoutLimitSize {
+    return [self tfy_sizeWithLimitSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
 }
 
-- (CGSize)sizeWithLimitSize:(CGSize)size {
+- (CGSize)tfy_sizeWithLimitSize:(CGSize)size {
     CGRect strRect = [self.text boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:self.font} context:nil];
     return strRect.size;
 }
 
-- (void)setContentInsets:(UIEdgeInsets)contentInsets {
-    objc_setAssociatedObject(self, &kContentInsetsKey, NSStringFromUIEdgeInsets(contentInsets), OBJC_ASSOCIATION_COPY_NONATOMIC);
+- (void)setTfy_contentInsets:(UIEdgeInsets)tfy_contentInsets {
+    objc_setAssociatedObject(self, &kContentInsetsKey, NSStringFromUIEdgeInsets(tfy_contentInsets), OBJC_ASSOCIATION_COPY_NONATOMIC);
     objc_setAssociatedObject(self, &kShowContentInsetsKey, @YES, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (UIEdgeInsets)contentInsets{
+- (UIEdgeInsets)tfy_contentInsets{
     return UIEdgeInsetsFromString(objc_getAssociatedObject(self, &kContentInsetsKey));
 }
 
@@ -151,16 +151,16 @@ static char kShowContentInsetsKey;
     objc_setAssociatedObject(self, @selector(tapBlock), tapBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (BOOL)enabledTapEffect {
+- (BOOL)tfy_enabledTapEffect {
     return [objc_getAssociatedObject(self, _cmd) boolValue];
 }
 
-- (void)setEnabledTapEffect:(BOOL)enabledTapEffect {
-    objc_setAssociatedObject(self, @selector(enabledTapEffect), @(enabledTapEffect), OBJC_ASSOCIATION_ASSIGN);
-    self.isTapEffect = enabledTapEffect;
+- (void)setTfy_enabledTapEffect:(BOOL)tfy_enabledTapEffect {
+    objc_setAssociatedObject(self, @selector(tfy_enabledTapEffect), @(tfy_enabledTapEffect), OBJC_ASSOCIATION_ASSIGN);
+    self.isTapEffect = tfy_enabledTapEffect;
 }
 
-- (BOOL)enlargeTapArea {
+- (BOOL)tfy_enlargeTapArea {
     NSNumber * number = objc_getAssociatedObject(self, _cmd);
     if (!number) {
         number = @(YES);
@@ -169,11 +169,11 @@ static char kShowContentInsetsKey;
     return [number boolValue];
 }
 
-- (void)setEnlargeTapArea:(BOOL)enlargeTapArea {
-    objc_setAssociatedObject(self, @selector(enlargeTapArea), @(enlargeTapArea), OBJC_ASSOCIATION_ASSIGN);
+- (void)setTfy_enlargeTapArea:(BOOL)tfy_enlargeTapArea {
+    objc_setAssociatedObject(self, @selector(tfy_enlargeTapArea), @(tfy_enlargeTapArea), OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (UIColor *)tapHighlightedColor {
+- (UIColor *)tfy_tapHighlightedColor {
     UIColor * color = objc_getAssociatedObject(self, _cmd);
     if (!color) {
         color = [UIColor lightGrayColor];
@@ -182,8 +182,8 @@ static char kShowContentInsetsKey;
     return color;
 }
 
-- (void)setTapHighlightedColor:(UIColor *)tapHighlightedColor {
-    objc_setAssociatedObject(self, @selector(tapHighlightedColor), tapHighlightedColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setTfy_tapHighlightedColor:(UIColor *)tfy_tapHighlightedColor {
+    objc_setAssociatedObject(self, @selector(tfy_tapHighlightedColor), tfy_tapHighlightedColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)isTapEffect {
@@ -195,9 +195,9 @@ static char kShowContentInsetsKey;
 }
 
 #pragma mark - mainFunction
-- (void)addAttributeTapActionWithStrings:(NSArray <NSString *> *)strings tapClicked:(void (^) (UILabel * label, NSString *string, NSRange range, NSInteger index))tapClick
+- (void)tfy_addAttributeTapActionWithStrings:(NSArray <NSString *> *)strings tapClicked:(void (^) (UILabel * label, NSString *string, NSRange range, NSInteger index))tapClick
 {
-    [self removeAttributeTapActions];
+    [self tfy_removeAttributeTapActions];
     [self getRangesWithStrings:strings];
     self.userInteractionEnabled = YES;
     
@@ -206,9 +206,9 @@ static char kShowContentInsetsKey;
     }
 }
 
-- (void)addAttributeTapActionWithStrings:(NSArray <NSString *> *)strings delegate:(id <RichTextDelegate> )delegate
+- (void)tfy_addAttributeTapActionWithStrings:(NSArray <NSString *> *)strings delegate:(id <RichTextDelegate> )delegate
 {
-    [self removeAttributeTapActions];
+    [self tfy_removeAttributeTapActions];
     [self getRangesWithStrings:strings];
     self.userInteractionEnabled = YES;
     
@@ -217,9 +217,9 @@ static char kShowContentInsetsKey;
     }
 }
 
-- (void)addAttributeTapActionWithRanges:(NSArray<NSString *> *)ranges tapClicked:(void (^)(UILabel *, NSString *, NSRange, NSInteger))tapClick
+- (void)tfy_addAttributeTapActionWithRanges:(NSArray<NSString *> *)ranges tapClicked:(void (^)(UILabel *, NSString *, NSRange, NSInteger))tapClick
 {
-    [self removeAttributeTapActions];
+    [self tfy_removeAttributeTapActions];
     [self getRangesWithRanges:ranges];
     self.userInteractionEnabled = YES;
     
@@ -228,9 +228,9 @@ static char kShowContentInsetsKey;
     }
 }
 
-- (void)addAttributeTapActionWithRanges:(NSArray<NSString *> *)ranges delegate:(id<RichTextDelegate>)delegate
+- (void)tfy_addAttributeTapActionWithRanges:(NSArray<NSString *> *)ranges delegate:(id<RichTextDelegate>)delegate
 {
-    [self removeAttributeTapActions];
+    [self tfy_removeAttributeTapActions];
     [self getRangesWithRanges:ranges];
     self.userInteractionEnabled = YES;
     
@@ -239,7 +239,7 @@ static char kShowContentInsetsKey;
     }
 }
 
-- (void)removeAttributeTapActions {
+- (void)tfy_removeAttributeTapActions {
     self.tapBlock = nil;
     self.delegate = nil;
     self.effectDic = nil;
@@ -254,8 +254,8 @@ static char kShowContentInsetsKey;
         return;
     }
     
-    if (objc_getAssociatedObject(self, @selector(enabledTapEffect))) {
-        self.isTapEffect = self.enabledTapEffect;
+    if (objc_getAssociatedObject(self, @selector(tfy_enabledTapEffect))) {
+        self.isTapEffect = self.tfy_enabledTapEffect;
     }
     
     UITouch *touch = [touches anyObject];
@@ -300,8 +300,8 @@ static char kShowContentInsetsKey;
             weakSelf.tapBlock (weakSelf, string, range, index);
         }
         
-        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(tapAttributeInLabel:string:range:index:)]) {
-            [weakSelf.delegate tapAttributeInLabel:weakSelf string:string range:range index:index];
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(tfy_tapAttributeInLabel:string:range:index:)]) {
+            [weakSelf.delegate tfy_tapAttributeInLabel:weakSelf string:string range:range index:index];
         }
     }];
     if (!ret) {
@@ -328,8 +328,8 @@ static char kShowContentInsetsKey;
             weakSelf.tapBlock (weakSelf, string, range, index);
         }
         
-        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(tapAttributeInLabel:string:range:index:)]) {
-            [weakSelf.delegate tapAttributeInLabel:weakSelf string:string range:range index:index];
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(tfy_tapAttributeInLabel:string:range:index:)]) {
+            [weakSelf.delegate tfy_tapAttributeInLabel:weakSelf string:string range:range index:index];
         }
     }];
     if (!ret) {
@@ -380,7 +380,7 @@ static char kShowContentInsetsKey;
         
         rect.origin.y = lineOutSpace + [self getLineOrign:line];
         
-        if (self.enlargeTapArea) {
+        if (self.tfy_enlargeTapArea) {
             rect.origin.y -= 5;
             rect.size.height += 10;
         }
@@ -479,7 +479,7 @@ static char kShowContentInsetsKey;
         NSRange range = NSRangeFromString([[self.effectDic allKeys] firstObject]);
         
         if (status) {
-            [subAtt addAttribute:NSBackgroundColorAttributeName value:self.tapHighlightedColor range:NSMakeRange(0, subAtt.string.length)];
+            [subAtt addAttribute:NSBackgroundColorAttributeName value:self.tfy_tapHighlightedColor range:NSMakeRange(0, subAtt.string.length)];
             
             [attStr replaceCharactersInRange:range withAttributedString:subAtt];
         }else {

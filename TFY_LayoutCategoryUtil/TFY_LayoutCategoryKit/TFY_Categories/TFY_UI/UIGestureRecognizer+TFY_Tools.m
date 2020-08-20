@@ -32,29 +32,30 @@ static const int block_key;
 @end
 
 @implementation UIGestureRecognizer (TFY_Tools)
+
 - (instancetype)initWithActionBlock:(void (^)(id sender))block {
     self = [self init];
-    [self addTargetBlock:block];
+    [self tfy_addTargetBlock:block];
     return self;
 }
 
-- (void)addTargetBlock:(GestureTargetAction)block{
+- (void)tfy_addTargetBlock:(GestureTargetAction)block{
     TFY_GetureTarget *target = [[TFY_GetureTarget alloc]initWithBlock:block];
     [self addTarget:target action:@selector(sendGesture:)];
     [[self TFY_getstureTagetsArr] addObject:target];
 }
-- (void)addTargetBlock:(GestureTargetAction)block tag:(NSString *)tag{
+- (void)tfy_addTargetBlock:(GestureTargetAction)block tag:(NSString *)tag{
     if (!block) return;
     if (!tag) {
-        [self addTargetBlock:block];
+        [self tfy_addTargetBlock:block];
     }else{
-      [self removeTargetBlockByTag:tag];
+      [self tfy_removeTargetBlockByTag:tag];
       TFY_GetureTarget *target = [[TFY_GetureTarget alloc]initWithBlock:block];
       [self addTarget:target action:@selector(sendGesture:)];
       [[self TFY_getstureTagetsDic] setObject:target forKey:tag];
     }
 }
-- (void)removeTargetBlockByTag:(NSString *)tag{
+- (void)tfy_removeTargetBlockByTag:(NSString *)tag{
     if (!tag) return;
     NSMutableDictionary *targets = [self TFY_getstureTagetsDic];
     TFY_GetureTarget *target = [targets objectForKey:tag];
@@ -62,7 +63,7 @@ static const int block_key;
     [self removeTarget:target action:@selector(sendGesture:)];
     [targets removeObjectForKey:tag];
 }
-- (void)removeAllTargetBlock{
+- (void)tfy_removeAllTargetBlock{
     [[self TFY_getstureTagetsDic] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         [self removeTarget:obj action:@selector(sendGesture:)];
     }];

@@ -16,11 +16,11 @@
     }
 }
 
-+ (NSTimer *)scheduledTimerWithBlock:(void (^) (NSTimer *timer))block timeInterval:(NSTimeInterval)seconds repeats:(BOOL)repeats{
++ (NSTimer *)tfy_scheduledTimerWithBlock:(void (^) (NSTimer *timer))block timeInterval:(NSTimeInterval)seconds repeats:(BOOL)repeats{
     return [NSTimer scheduledTimerWithTimeInterval:seconds target:self selector:@selector(tfy_ExecBlock:) userInfo:[block copy] repeats:repeats];
 }
 
-+ (NSTimer *)timerWithBlock:(void (^) (NSTimer *timer))block timeInterval:(NSTimeInterval)seconds repeats:(BOOL)repeats{
++ (NSTimer *)tfy_timerWithBlock:(void (^) (NSTimer *timer))block timeInterval:(NSTimeInterval)seconds repeats:(BOOL)repeats{
     return [NSTimer timerWithTimeInterval:seconds target:self selector:@selector(tfy_ExecBlock:) userInfo:[block copy] repeats:repeats];
 }
 

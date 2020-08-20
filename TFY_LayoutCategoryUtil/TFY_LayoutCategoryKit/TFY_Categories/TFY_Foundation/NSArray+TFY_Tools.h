@@ -12,17 +12,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSArray<__covariant ObjectType> (TFY_Tools)
 
-- (ObjectType)safe_objectAtIndex:(NSUInteger)index;
+- (ObjectType)tfy_safe_objectAtIndex:(NSUInteger)index;
 
-- (ObjectType)randomObject;
+- (ObjectType)tfy_randomObject;
 /**
  快捷计算
  */
-- (CGFloat)maxObject;
+- (CGFloat)tfy_maxObject;
 
-- (CGFloat)minObject;
+- (CGFloat)tfy_minObject;
 
-- (CGFloat)sumObject;
+- (CGFloat)tfy_sumObject;
 @end
 
 @interface NSArray<ObjectType> (Plist)
@@ -30,29 +30,29 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  从一个二进制数据中读取一个数组
  */
-+ (nullable NSArray <ObjectType>*)arrayWithPlistData:(NSData *)plist;
++ (nullable NSArray <ObjectType>*)tfy_arrayWithPlistData:(NSData *)plist;
 
-+ (nullable NSArray <ObjectType>*)arrayWithPlistString:(NSString *)plist;
++ (nullable NSArray <ObjectType>*)tfy_arrayWithPlistString:(NSString *)plist;
 
 /**
  数组转换为plist二进制数据
  */
-- (nullable NSData *)plistData;
+- (nullable NSData *)tfy_plistData;
 
 /**
  数组转化为xml字符串
  */
-- (nullable NSString *)plistString;
+- (nullable NSString *)tfy_plistString;
 
 /**
  json字符串
  */
-- (NSString *)jsonString;
+- (NSString *)tfy_jsonString;
 
 /**
  更具可读性的json字符串
  */
-- (NSString *)jsonPrettyString;
+- (NSString *)tfy_jsonPrettyString;
 
 @end
 
@@ -60,15 +60,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSMutableArray <ObjectType>(TFY_Tools)
 
-+ (nullable NSMutableArray <ObjectType>*)arrayWithPlistData:(NSData *)plist;
++ (nullable NSMutableArray <ObjectType>*)tfy_arrayWithPlistData:(NSData *)plist;
 
-+ (nullable NSMutableArray <ObjectType>*)arrayWithPlistString:(NSString *)plist;
++ (nullable NSMutableArray <ObjectType>*)tfy_arrayWithPlistString:(NSString *)plist;
 
-- (void)removeFirstObject;
+- (void)tfy_removeFirstObject;
 
-- (ObjectType)popFirstObject;
+- (ObjectType)tfy_popFirstObject;
 
-- (ObjectType)popLastObject;
+- (ObjectType)tfy_popLastObject;
 
 TFY_MUTABLEARRAY_PROPERTY (^addObjectChain) (ObjectType anObject);
 
@@ -82,9 +82,9 @@ TFY_MUTABLEARRAY_PROPERTY (^addObjectsChainPre) (NSArray <ObjectType>* objects);
 
 TFY_MUTABLEARRAY_PROPERTY (^insertObjectsChainAtIndex) (NSArray <ObjectType>* objects, NSUInteger index);
 
-- (void)reverse;
+- (void)tfy_reverse;
 
-- (void)shuffle;
+- (void)tfy_shuffle;
 
 @end
 NS_ASSUME_NONNULL_END

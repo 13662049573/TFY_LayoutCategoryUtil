@@ -15,83 +15,83 @@ NS_ASSUME_NONNULL_BEGIN
  升序排列所有keys
  
  */
-- (NSArray <KeyType>*)allKeysSorted;
+- (NSArray <KeyType>*)tfy_allKeysSorted;
 
 /**
  升序排列所有keys
  @return 所有value
  */
-- (NSArray <ObjectType>*)allValuesSortedByKeys;
+- (NSArray <ObjectType>*)tfy_allValuesSortedByKeys;
 
-- (BOOL)containsObjectForKey:(KeyType)key;
+- (BOOL)tfy_containsObjectForKey:(KeyType)key;
 
 /**
  查找字典中包含的key并返回字典
  */
-- (NSDictionary *)entriesForKeys:(NSArray <KeyType>*)keys;
+- (NSDictionary *)tfy_entriesForKeys:(NSArray <KeyType>*)keys;
 
 /**
  json字符串
  */
-- (NSString *)jsonString;
+- (NSString *)tfy_jsonString;
 
 /**
  更具可读性的json字符串
  */
-- (NSString *)jsonPrettyString;
+- (NSString *)tfy_jsonPrettyString;
 @end
 @interface NSDictionary <KeyType, ObjectType> (Plist)
 
-+ (nullable NSDictionary <KeyType ,ObjectType>*)dictionaryWithPlistData:(NSData *)plist;
++ (nullable NSDictionary <KeyType ,ObjectType>*)tfy_dictionaryWithPlistData:(NSData *)plist;
 
-+ (nullable NSDictionary <KeyType ,ObjectType>*)dictionaryWithPlistString:(NSString *)plist;
++ (nullable NSDictionary <KeyType ,ObjectType>*)tfy_dictionaryWithPlistString:(NSString *)plist;
 
-- (nullable NSData *)plistData;
+- (nullable NSData *)tfy_plistData;
 
-- (nullable NSString *)plistString;
+- (nullable NSString *)tfy_plistString;
 
 @end
 
 @interface NSDictionary (ValueDefault)
 
-- (BOOL)boolValueForKey:(NSString *)key default:(BOOL)def;
+- (BOOL)tfy_boolValueForKey:(NSString *)key default:(BOOL)def;
 
-- (char)charValueForKey:(NSString *)key default:(char)def;
-- (unsigned char)unsignedCharValueForKey:(NSString *)key default:(unsigned char)def;
+- (char)tfy_charValueForKey:(NSString *)key default:(char)def;
+- (unsigned char)tfy_unsignedCharValueForKey:(NSString *)key default:(unsigned char)def;
 
-- (short)shortValueForKey:(NSString *)key default:(short)def;
-- (unsigned short)unsignedShortValueForKey:(NSString *)key default:(unsigned short)def;
+- (short)tfy_shortValueForKey:(NSString *)key default:(short)def;
+- (unsigned short)tfy_unsignedShortValueForKey:(NSString *)key default:(unsigned short)def;
 
-- (int)intValueForKey:(NSString *)key default:(int)def;
-- (unsigned int)unsignedIntValueForKey:(NSString *)key default:(unsigned int)def;
+- (int)tfy_intValueForKey:(NSString *)key default:(int)def;
+- (unsigned int)tfy_unsignedIntValueForKey:(NSString *)key default:(unsigned int)def;
 
-- (long)longValueForKey:(NSString *)key default:(long)def;
-- (unsigned long)unsignedLongValueForKey:(NSString *)key default:(unsigned long)def;
+- (long)tfy_longValueForKey:(NSString *)key default:(long)def;
+- (unsigned long)tfy_unsignedLongValueForKey:(NSString *)key default:(unsigned long)def;
 
-- (long long)longLongValueForKey:(NSString *)key default:(long long)def;
-- (unsigned long long)unsignedLongLongValueForKey:(NSString *)key default:(unsigned long long)def;
+- (long long)tfy_longLongValueForKey:(NSString *)key default:(long long)def;
+- (unsigned long long)tfy_unsignedLongLongValueForKey:(NSString *)key default:(unsigned long long)def;
 
-- (float)floatValueForKey:(NSString *)key default:(float)def;
-- (double)doubleValueForKey:(NSString *)key default:(double)def;
+- (float)tfy_floatValueForKey:(NSString *)key default:(float)def;
+- (double)tfy_doubleValueForKey:(NSString *)key default:(double)def;
 
-- (NSInteger)integerValueForKey:(NSString *)key default:(NSInteger)def;
-- (NSUInteger)unsignedIntegerValueForKey:(NSString *)key default:(NSUInteger)def;
+- (NSInteger)tfy_integerValueForKey:(NSString *)key default:(NSInteger)def;
+- (NSUInteger)tfy_unsignedIntegerValueForKey:(NSString *)key default:(NSUInteger)def;
 
-- (nullable NSNumber *)numberValueForKey:(NSString *)key default:(nullable NSNumber *)def;
-- (nullable NSString *)stringValueForKey:(NSString *)key default:(nullable NSString *)def;
+- (nullable NSNumber *)tfy_numberValueForKey:(NSString *)key default:(nullable NSNumber *)def;
+- (nullable NSString *)tfy_stringValueForKey:(NSString *)key default:(nullable NSString *)def;
 
-- (NSArray *)arrayValueForKey:(NSString *)key default:(nullable NSArray *)def;
-- (NSDictionary *)dicValueForKey:(NSString *)key default:(nullable NSDictionary *)def;
+- (NSArray *)tfy_arrayValueForKey:(NSString *)key default:(nullable NSArray *)def;
+- (NSDictionary *)tfy_dicValueForKey:(NSString *)key default:(nullable NSDictionary *)def;
 
 @end
 #define TFY_MUTABLEDICTION_PROPERTY @property (nonatomic, strong, readonly) NSMutableDictionary <KeyType, ObjectType> *
 
 @interface NSMutableDictionary <KeyType, ObjectType> (TFY_Category)
-+ (nullable NSMutableDictionary <KeyType ,ObjectType>*)dictionaryWithPlistData:(NSData *)plist;
++ (nullable NSMutableDictionary <KeyType ,ObjectType>*)tfy_dictionaryWithPlistData:(NSData *)plist;
 
-+ (nullable NSMutableDictionary <KeyType ,ObjectType>*)dictionaryWithPlistString:(NSString *)plist;
++ (nullable NSMutableDictionary <KeyType ,ObjectType>*)tfy_dictionaryWithPlistString:(NSString *)plist;
 
-- (nullable ObjectType)popObjectForKey:(KeyType)aKey;
+- (nullable ObjectType)tfy_popObjectForKey:(KeyType)aKey;
 
 - (NSDictionary <KeyType, ObjectType>*)popEntriesForKeys:(NSArray <KeyType>*)keys;
 

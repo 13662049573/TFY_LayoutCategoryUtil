@@ -15,46 +15,46 @@ typedef void(^controlTargeAction)(id sender);
 /**
  移除所有点击事件
  */
-- (void)removeAllEvents;
+- (void)tfy_removeAllEvents;
 
 /**
  添加一个点击事件
  */
-- (void)addEventBlock:(controlTargeAction)block forEvents:(UIControlEvents)events;
+- (void)tfy_addEventBlock:(controlTargeAction)block forEvents:(UIControlEvents)events;
 
 /**
  移除所有事件，并添加一个新的事件
  */
-- (void)setTarget:(id)target eventAction:(SEL)action forControlEvents:(UIControlEvents)events;
+- (void)tfy_setTarget:(id)target eventAction:(SEL)action forControlEvents:(UIControlEvents)events;
 
 
 /**
  是否包含某个tag
  
  */
-- (BOOL)containsEventBlockForKey:(NSString *)key;
+- (BOOL)tfy_containsEventBlockForKey:(NSString *)key;
 /**
  添加点击block
  @param key 键值
  */
-- (void)addEventBlock:(controlTargeAction)block forEvents:(UIControlEvents)events ForKey:(NSString *)key;
+- (void)tfy_addEventBlock:(controlTargeAction)block forEvents:(UIControlEvents)events ForKey:(NSString *)key;
 
 /**
  移除点击block
  
  @param key 键值
  */
-- (void)removeEventBlockForKey:(NSString *)key event:(UIControlEvents)events;
+- (void)tfy_removeEventBlockForKey:(NSString *)key event:(UIControlEvents)events;
 
 /**
  移除所有block，并添加一个新的block
  */
-- (void)setEventBlock:(controlTargeAction)block forEvents:(UIControlEvents)events;
+- (void)tfy_setEventBlock:(controlTargeAction)block forEvents:(UIControlEvents)events;
 
 /**
  移除所有block事件
  */
-- (void)removeAllEventBlocksForEvents:(UIControlEvents)controlEvents;
+- (void)tfy_removeAllEventBlocksForEvents:(UIControlEvents)controlEvents;
 @end
 
 NS_ASSUME_NONNULL_END

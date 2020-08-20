@@ -15,34 +15,34 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * statusBar的frame
  */
-+ (CGRect)statusBarFrame;
++ (CGRect)tfy_statusBarFrame;
 
 /**
  * 当前的windowScene
  */
-+ (id)currentScene;
++ (id)tfy_currentScene;
 
 /**
  * 当前windowSceneDelegate
  */
-+ (id)currentSceneDelegate;
++ (id)tfy_currentSceneDelegate;
 
 /**
  * 最上面的window
  */
-+ (UIWindow *)currentWindow;
++ (UIWindow *)tfy_currentWindow;
 
 /**
  * 当前关键视图
  */
-+ (UIWindow *)currentKeyWindow;
++ (UIWindow *)tfy_currentKeyWindow;
 
 /**
  * 当前操作的window
  */
-+ (UIWindow *)window;
++ (UIWindow *)tfy_window;
 
-+ (UIWindow *)keyWindow;
++ (UIWindow *)tfy_keyWindow;
 
 /**
  * app的 delegate
@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (__kindof UIViewController *)rootViewController;
 
 
-@property (nonatomic, assign, class, readonly) BOOL isSceneApp;
+@property (nonatomic, assign, class, readonly) BOOL tfy_isSceneApp;
 /**
  * 最上层的非TabbarController和NavigationBarController的控制器
  */

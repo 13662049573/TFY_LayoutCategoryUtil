@@ -68,7 +68,7 @@ TFY_CATEGORY_CHAIN_GESTURE_IMPLEMENTATION(name, NSString *)
     return ^ (GestureTargetAction action){
         if (action) {
             [self enumerateObjectsUsingBlock:^(id  _Nonnull obj) {
-                [obj addTargetBlock:action];
+                [obj tfy_addTargetBlock:action];
             }];
         }
         return self;
@@ -79,7 +79,7 @@ TFY_CATEGORY_CHAIN_GESTURE_IMPLEMENTATION(name, NSString *)
     return ^ (GestureTargetAction action, NSString *tag){
         if (action) {
             [self enumerateObjectsUsingBlock:^(id  _Nonnull obj) {
-                [obj addTargetBlock:action tag:tag];
+                [obj tfy_addTargetBlock:action tag:tag];
             }];
         }
         return self;
@@ -90,7 +90,7 @@ TFY_CATEGORY_CHAIN_GESTURE_IMPLEMENTATION(name, NSString *)
     return ^ (NSString *tag){
         if (tag) {
             [self enumerateObjectsUsingBlock:^(id  _Nonnull obj) {
-                [obj removeTargetBlockByTag:tag];
+                [obj tfy_removeTargetBlockByTag:tag];
             }];
             
         }
@@ -101,7 +101,7 @@ TFY_CATEGORY_CHAIN_GESTURE_IMPLEMENTATION(name, NSString *)
 - (id  _Nonnull (^)(void))removeAllTargetBlock{
     return ^(){
         [self enumerateObjectsUsingBlock:^(UIGestureRecognizer * _Nonnull obj) {
-            [obj removeAllTargetBlock];
+            [obj tfy_removeAllTargetBlock];
         }];
         return self;
     };

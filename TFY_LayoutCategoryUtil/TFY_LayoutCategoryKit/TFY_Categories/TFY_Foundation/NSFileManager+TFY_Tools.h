@@ -14,30 +14,30 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Documents
  */
-@property (nonatomic, readonly) NSURL *documentsURL;
-@property (nonatomic, readonly) NSString *documentsPath;
+@property (nonatomic, readonly) NSURL *tfy_documentsURL;
+@property (nonatomic, readonly) NSString *tfy_documentsPath;
 
 /**
  Caches
  */
-@property (nonatomic, readonly) NSURL *cachesURL;
-@property (nonatomic, readonly) NSString *cachesPath;
+@property (nonatomic, readonly) NSURL *tfy_cachesURL;
+@property (nonatomic, readonly) NSString *tfy_cachesPath;
 
 /**
  Library
  */
-@property (nonatomic, readonly) NSURL *libraryURL;
-@property (nonatomic, readonly) NSString *libraryPath;
+@property (nonatomic, readonly) NSURL *tfy_libraryURL;
+@property (nonatomic, readonly) NSString *tfy_libraryPath;
 
 /**
  将文件一个文件夹或文件中所有包含string的文件替换为新的文件
  */
-- (void)replaceFilePath:(NSString *)path  nameString:(NSString *)string withNewString:(NSString *)newString;
+- (void)tfy_replaceFilePath:(NSString *)path  nameString:(NSString *)string withNewString:(NSString *)newString;
 
 /**
  给一个路径的所有文件添加前缀
  */
-- (void)addPreNameAtPath:(NSString *)path preName:(NSString *)preName;
+- (void)tfy_addPreNameAtPath:(NSString *)path preName:(NSString *)preName;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -374,7 +374,7 @@
 }
 
 - (NSNumber *)tfy_numberValue {
-    return [NSNumber numberWithString:self];
+    return [NSNumber tfy_numberWithString:self];
 }
 
 - (NSData *)tfy_dataValue {

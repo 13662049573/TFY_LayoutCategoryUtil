@@ -26,20 +26,20 @@ TFY_CATEGORY_CHAIN_LABLE_IMPLEMENTATION(minimumScaleFactor, CGFloat);
 
 - (CGSize (^)(CGSize))sizeWithLimitSize{
     return ^ (CGSize size){
-        return [(UILabel *)self.view sizeWithLimitSize:size];
+        return [(UILabel *)self.view tfy_sizeWithLimitSize:size];
     };
 }
 
 - (CGSize (^)(void))sizeWithOutLimitSize{
     return ^ (){
-        return [(UILabel *)self.view sizeWithoutLimitSize];
+        return [(UILabel *)self.view tfy_sizeWithoutLimitSize];
     };
 }
 
 - (TFY_LabelChainModel * _Nonnull (^)(UIEdgeInsets))contentInsets{
     return ^(UIEdgeInsets contentInsets){
         [self enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj) {
-            obj.contentInsets = contentInsets;
+            obj.tfy_contentInsets = contentInsets;
         }];
         return self;
     };

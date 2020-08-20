@@ -693,7 +693,7 @@ NSString const *BlockKey = @"BlockKey";
     }
     return obj;
 }
-#pragma -------------------------------------加边框方法---------------------------------
+#pragma mark-------------------------------------加边框方法---------------------------------
 
 - (void)tfy_addBorderWithInset:(UIEdgeInsets)inset Color:(UIColor *)borderColor direction:(BorderDirection)directions{
     [self tfy_addBorderWithInset:inset Color:borderColor BorderWidth:self.layer.borderWidth direction:directions];
@@ -832,7 +832,7 @@ NSString const *BlockKey = @"BlockKey";
     return objc_getAssociatedObject(self, _cmd);
 }
 
-#pragma -------------------------------------手势点击添加方法---------------------------------
+#pragma mark-------------------------------------手势点击添加方法---------------------------------
 
 - (id)tfy_addGestureTarget:(id)target action:(SEL)action gestureClass:(Class)class {
     UIGestureRecognizer *gesture = [[class alloc] initWithTarget:target action:action];

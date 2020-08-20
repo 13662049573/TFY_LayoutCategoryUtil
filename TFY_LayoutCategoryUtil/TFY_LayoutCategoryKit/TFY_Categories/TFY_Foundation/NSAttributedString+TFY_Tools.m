@@ -9,12 +9,14 @@
 #import "NSAttributedString+TFY_Tools.h"
 
 @implementation NSAttributedString (TFY_Tools)
-- (CGSize)sizeWithLimitSize:(CGSize)size{
+
+- (CGSize)tfy_sizeWithLimitSize:(CGSize)size{
     CGRect strRect = [self boundingRectWithSize:size options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) context:nil];
     return strRect.size;
 }
 
-- (CGSize)sizeWithoutLimitSize{
-    return [self sizeWithLimitSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+- (CGSize)tfy_sizeWithoutLimitSize{
+    return [self tfy_sizeWithLimitSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
 }
+
 @end

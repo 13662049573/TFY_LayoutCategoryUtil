@@ -86,7 +86,7 @@ CG_INLINE void UI_swizzleButtonIfNeed(Class swizzleClass){
 
 @implementation UIButton (TFY_Tools)
 
-- (void)imageDirection:(ButtonImageDirection)direction space:(CGFloat)space{
+- (void)tfy_imageDirection:(ButtonImageDirection)direction space:(CGFloat)space{
     CGFloat imageWidth, imageHeight, textWidth, textHeight, x, y;
     imageWidth = self.currentImage.size.width;
     imageHeight = self.currentImage.size.height;
@@ -128,7 +128,7 @@ CG_INLINE void UI_swizzleButtonIfNeed(Class swizzleClass){
     }
 }
 
-- (UIButton * _Nonnull (^)(ButtonLimitTimesTapBlock _Nonnull))buttonTapTime{
+- (UIButton * _Nonnull (^)(ButtonLimitTimesTapBlock _Nonnull))tfy_buttonTapTime{
     return ^(ButtonLimitTimesTapBlock block){
         if (block != nil) {
             UI_swizzleButtonIfNeed(object_getClass(self));
@@ -138,7 +138,7 @@ CG_INLINE void UI_swizzleButtonIfNeed(Class swizzleClass){
     };
 }
 
-- (UIButton * _Nonnull (^)(NSTimeInterval))tapSpaceTime{
+- (UIButton * _Nonnull (^)(NSTimeInterval))tfy_tapSpaceTime{
     return ^(NSTimeInterval time){
         UI_swizzleButtonIfNeed(object_getClass(self));
         objc_setAssociatedObject(self, ButtonRuntimeLimitTapSpaceTimes, @(time), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -146,24 +146,24 @@ CG_INLINE void UI_swizzleButtonIfNeed(Class swizzleClass){
     };
 }
 
-- (void)cancelRecordTime{
+- (void)tfy_cancelRecordTime{
     if (!objc_getAssociatedObject(self, ButtonRuntimeLimitTapLastTimes)) return;
     objc_setAssociatedObject(self, ButtonRuntimeLimitTapLastTimes, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (void)setTime:(NSInteger)time{
-    objc_setAssociatedObject(self, @selector(time), @(time), OBJC_ASSOCIATION_ASSIGN);
+- (void)setTfy_time:(NSInteger)tfy_time{
+    objc_setAssociatedObject(self, @selector(tfy_time), @(tfy_time), OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (NSInteger)time {
+- (NSInteger)tfy_time {
     return  [objc_getAssociatedObject(self, _cmd) integerValue];
 }
 
-- (void)setFormat:(NSString *)format {
-    objc_setAssociatedObject(self, @selector(format), format, OBJC_ASSOCIATION_COPY);
+- (void)setTfy_format:(NSString *)tfy_format {
+    objc_setAssociatedObject(self, @selector(tfy_format), tfy_format, OBJC_ASSOCIATION_COPY);
 }
 
-- (NSString *)format {
+- (NSString *)tfy_format {
     return objc_getAssociatedObject(self, _cmd);
 }
 
@@ -191,26 +191,26 @@ CG_INLINE void UI_swizzleButtonIfNeed(Class swizzleClass){
     return objc_getAssociatedObject(self, _cmd);
 }
 
-- (void)startTimer {
-    if (!self.time) {
-        self.time = TimeInterval;
+- (void)tfy_startTimer {
+    if (!self.tfy_time) {
+        self.tfy_time = TimeInterval;
     }
-    if (!self.format) {
-        self.format = ButtonTitleFormat;
+    if (!self.tfy_format) {
+        self.tfy_format = ButtonTitleFormat;
     }
     dispatch_queue_t globalQueue = dispatch_get_global_queue(0, 0);
     dispatch_queue_t mainQueue = dispatch_get_main_queue();
     self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, globalQueue);
     dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
     dispatch_source_set_event_handler(self.timer, ^{
-        if (self.time <= 1) {
+        if (self.tfy_time <= 1) {
             dispatch_source_cancel(self.timer);
         }else
         {
-            self.time --;
+            self.tfy_time --;
             dispatch_async(mainQueue, ^{
                 self.enabled = NO;
-                [self setTitle:[NSString stringWithFormat:self.format,self.time] forState:UIControlStateNormal];
+                [self setTitle:[NSString stringWithFormat:self.tfy_format,self.tfy_time] forState:UIControlStateNormal];
             });
         }
     });
@@ -222,17 +222,17 @@ CG_INLINE void UI_swizzleButtonIfNeed(Class swizzleClass){
                 self.CompleteBlock();
             }
             if (self.userTime) {
-                self.time = self.userTime;
+                self.tfy_time = self.userTime;
             }else
             {
-                self.time = TimeInterval;
+                self.tfy_time = TimeInterval;
             }
         });
     });
     dispatch_resume(self.timer);
 }
 
-- (void)endTimer{
+- (void)tfy_endTimer{
     dispatch_source_cancel(self.timer);
 }
 

@@ -185,11 +185,11 @@ CG_INLINE void TFY_RemoveOneNotification(id observer,NSNotificationName aName,id
 
 //仅仅是状态栏的高度
 CG_INLINE CGFloat kStatusBarHeight() {
-    return (TFY_SafeArea([UIApplication window]).top);
+    return (TFY_SafeArea([UIApplication tfy_window]).top);
 }
 
 CG_INLINE CGFloat kDefaultNavigationBarHeight() {
-    return (TFY_SafeArea([UIApplication window]).top + 44);
+    return (TFY_SafeArea([UIApplication tfy_window]).top + 44);
 }
 
 //这个高度如果有tabbar高度则包含tabbar高度，否则不包含

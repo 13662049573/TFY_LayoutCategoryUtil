@@ -12,34 +12,34 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIScreen (TFY_Tools)
 
-+ (CGFloat)scale;
++ (CGFloat)tfy_scale;
 
-+ (CGRect)bounds;
++ (CGRect)tfy_bounds;
 
-+ (CGSize)size;
++ (CGSize)tfy_size;
 
-+ (CGFloat)width;
++ (CGFloat)tfy_width;
 
-+ (CGFloat)height;
++ (CGFloat)tfy_height;
 /**
  宽度，恒定
  */
-+ (CGFloat)screenWidth;
++ (CGFloat)tfy_screenWidth;
 /**
  高度，恒定
  */
-+ (CGFloat)screenHeight;
++ (CGFloat)tfy_screenHeight;
 
 /**
  适配比例
  */
-+ (CGFloat)screenScale;
++ (CGFloat)tfy_screenScale;
 /**
  当前设备屏幕边界
  */
-- (CGRect)currentBounds NS_EXTENSION_UNAVAILABLE_IOS("");
+- (CGRect)tfy_currentBounds NS_EXTENSION_UNAVAILABLE_IOS("");
 
-- (CGRect)boundsForOrientation:(UIInterfaceOrientation)orientation;
+- (CGRect)tfy_boundsForOrientation:(UIInterfaceOrientation)orientation;
 
 @end
 
@@ -59,15 +59,15 @@ CG_INLINE BOOL TFY_isPortrait() {
 
 /**屏幕高*/
 CG_INLINE CGFloat TFY_Height_H() {
-    return [UIScreen screenHeight];
+    return [UIScreen tfy_screenHeight];
 }
 /**屏幕宽*/
 CG_INLINE CGFloat TFY_Width_W() {
-    return [UIScreen screenWidth];
+    return [UIScreen tfy_screenWidth];
 }
 /**是配比*/
 CG_INLINE CGFloat TFY_SCALE() {
-    return [UIScreen screenScale];
+    return [UIScreen tfy_screenScale];
 }
 
 /**等比宽*/

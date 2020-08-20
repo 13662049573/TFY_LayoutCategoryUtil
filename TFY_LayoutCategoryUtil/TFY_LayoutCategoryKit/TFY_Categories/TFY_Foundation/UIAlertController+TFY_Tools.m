@@ -30,15 +30,15 @@ static void *ktfyCategoryActionViewActionIndex = &ktfyCategoryActionViewActionIn
     return objc_getAssociatedObject(self, ktfyCategoryActionViewController);
 }
 
-- (UIAlertController *)alertViewController{
+- (UIAlertController *)tfy_alertViewController{
     return [self alertViewActionWithController].alertViewController;
 }
 
-- (void)setAlertActionTitleColor:(UIColor *)color{
+- (void)tfy_setAlertActionTitleColor:(UIColor *)color{
     [self setValue:color forKey:@"_titleTextColor"];
 }
 
-- (void)setAlertImage:(UIImage *)image{
+- (void)tfy_setAlertImage:(UIImage *)image{
     [self setValue:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forKey:@"image"];
 }
 
@@ -54,11 +54,11 @@ static void *ktfyCategoryActionViewActionIndex = &ktfyCategoryActionViewActionIn
 
 @implementation UIAlertController (TFY_Tools)
 
-- (UIAlertController * _Nonnull (^)(NSString * _Nonnull, UIAlertActionStyle))addAction{
+- (UIAlertController * _Nonnull (^)(NSString * _Nonnull, UIAlertActionStyle))tfy_addAction{
     return ^ (NSString *title, UIAlertActionStyle style){
         
         __weak typeof(self)weakSelf = self;
-        [self addActionTitle:title style:style block:^(UIAlertAction * _Nonnull action) {
+        [self tfy_addActionTitle:title style:style block:^(UIAlertAction * _Nonnull action) {
             if ([weakSelf tfy_actionBlock]) {
                 [weakSelf tfy_actionBlock](action.tfy_actionTag, action);
             }
@@ -67,30 +67,30 @@ static void *ktfyCategoryActionViewActionIndex = &ktfyCategoryActionViewActionIn
     };
 }
 
-- (UIAlertController * _Nonnull (^)(NSInteger))actionIndex{
+- (UIAlertController * _Nonnull (^)(NSInteger))tfy_actionIndex{
     return ^ (NSInteger index){
         self.actions.lastObject.tfy_actionTag = index;
         return self;
     };
 }
 
-- (UIAlertController * _Nonnull (^)(NSString * _Nonnull))addDesAction{
+- (UIAlertController * _Nonnull (^)(NSString * _Nonnull))tfy_addDesAction{
     return ^ (NSString *title){
-        return self.addAction(title, UIAlertActionStyleDestructive);
+        return self.tfy_addAction(title, UIAlertActionStyleDestructive);
     };
 }
-- (UIAlertController * _Nonnull (^)(NSString * _Nonnull))addCancelAction{
+- (UIAlertController * _Nonnull (^)(NSString * _Nonnull))tfy_addCancelAction{
     return ^ (NSString *title){
-        return self.addAction(title, UIAlertActionStyleCancel);
+        return self.tfy_addAction(title, UIAlertActionStyleCancel);
     };
 }
-- (UIAlertController * _Nonnull (^)(NSString * _Nonnull))addDefaultAction{
+- (UIAlertController * _Nonnull (^)(NSString * _Nonnull))tfy_addDefaultAction{
     return ^ (NSString *title){
-        return self.addAction(title, UIAlertActionStyleDefault);
+        return self.tfy_addAction(title, UIAlertActionStyleDefault);
     };
 }
 
-- (UIAlertController * _Nonnull (^)(void (^ _Nonnull)(UIAlertAction * _Nonnull)))actionStyle{
+- (UIAlertController * _Nonnull (^)(void (^ _Nonnull)(UIAlertAction * _Nonnull)))tfy_actionStyle{
     return ^ (void (^style) (UIAlertAction *action)){
         if (style) {
             style([self tfy_currentAction]);
@@ -99,21 +99,21 @@ static void *ktfyCategoryActionViewActionIndex = &ktfyCategoryActionViewActionIn
     };
 }
 
-- (UIAlertController * _Nonnull (^)(tfy_AlertTapBlock _Nonnull))actionTap{
+- (UIAlertController * _Nonnull (^)(tfy_AlertTapBlock _Nonnull))tfy_actionTap{
     return ^ (tfy_AlertTapBlock block){
         [self setWtc_actionBlock:block];
         return self;
     };
 }
 
-- (UIAlertController * _Nonnull (^)(void (^ _Nonnull)(UITextField * _Nonnull)))addTextField{
+- (UIAlertController * _Nonnull (^)(void (^ _Nonnull)(UITextField * _Nonnull)))tfy_addTextField{
     return ^ (void (^ textField)(UITextField * textField)){
         [self addTextFieldWithConfigurationHandler:textField];
         return self;
     };
 }
 
-- (UIAlertController * _Nonnull (^)(void (^ _Nonnull)(UIAlertController * _Nonnull)))alertStyle{
+- (UIAlertController * _Nonnull (^)(void (^ _Nonnull)(UIAlertController * _Nonnull)))tfy_alertStyle{
     return ^ (void(^ alert) (UIAlertController * alert)){
         if (alert) {
             alert(self);
@@ -135,89 +135,89 @@ static void *ktfyCategoryActionViewActionIndex = &ktfyCategoryActionViewActionIn
 }
 
 
-- (UIAlertController * _Nonnull (^)(NSUInteger))alertTitleMaxNum{
+- (UIAlertController * _Nonnull (^)(NSUInteger))tfy_alertTitleMaxNum{
     return ^ (NSUInteger number){
-        [self setACTitleLineMaxNumber:number];
+        [self tfy_setACTitleLineMaxNumber:number];
         return self;
     };
 }
 
-- (UIAlertController * _Nonnull (^)(NSLineBreakMode))alertTitleLineBreakMode{
+- (UIAlertController * _Nonnull (^)(NSLineBreakMode))tfy_alertTitleLineBreakMode{
     return ^ (NSLineBreakMode mode){
-        [self setACTitleLineBreakModel:mode];
+        [self tfy_setACTitleLineBreakModel:mode];
         return self;
     };
 }
 
 
-- (UIAlertController * _Nonnull (^)(UIFont * _Nonnull, UIColor * _Nonnull))alertTitleAttributeFontWithColor{
+- (UIAlertController * _Nonnull (^)(UIFont * _Nonnull, UIColor * _Nonnull))tfy_alertTitleAttributeFontWithColor{
     return ^ (UIFont *font,UIColor *color){
-        return self.alertTitleAttributeWidthDictionary(^(NSMutableDictionary * _Nonnull attributes) {
+        return self.tfy_alertTitleAttributeWidthDictionary(^(NSMutableDictionary * _Nonnull attributes) {
             attributes[NSFontAttributeName] = font;
             attributes[NSForegroundColorAttributeName] = color;
         });
     };
 }
 
-- (UIAlertController * _Nonnull (^)(void (^ _Nonnull)(NSMutableDictionary * _Nonnull)))alertTitleAttributeWidthDictionary{
+- (UIAlertController * _Nonnull (^)(void (^ _Nonnull)(NSMutableDictionary * _Nonnull)))tfy_alertTitleAttributeWidthDictionary{
     return ^ (void (^attribute)(NSMutableDictionary *attribute)){
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         if (attribute) {
             attribute(dic);
         }
         if (self.message.length > 0) {
-            [self setACTitleAttributedString:[[NSAttributedString alloc]initWithString:self.title attributes:dic]];
+            [self tfy_setACTitleAttributedString:[[NSAttributedString alloc]initWithString:self.title attributes:dic]];
         }else{
-            [self setACTitleAttributedString:nil];
+            [self tfy_setACTitleAttributedString:nil];
         }
         return self;
     };
 }
 
-- (UIAlertController * _Nonnull (^)(UIFont * _Nonnull, UIColor * _Nonnull))alertMessageAttributeFontWithColor{
+- (UIAlertController * _Nonnull (^)(UIFont * _Nonnull, UIColor * _Nonnull))tfy_alertMessageAttributeFontWithColor{
     return ^ (UIFont *font,UIColor *color){
-        return self.alertMessageAttributeWidthDictionary(^(NSMutableDictionary * _Nonnull attributes) {
+        return self.tfy_alertMessageAttributeWidthDictionary(^(NSMutableDictionary * _Nonnull attributes) {
             attributes[NSFontAttributeName] = font;
             attributes[NSForegroundColorAttributeName] = color;
         });
     };
 }
 
-- (UIAlertController * _Nonnull (^)(void (^ _Nonnull)(NSMutableDictionary * _Nonnull)))alertMessageAttributeWidthDictionary{
+- (UIAlertController * _Nonnull (^)(void (^ _Nonnull)(NSMutableDictionary * _Nonnull)))tfy_alertMessageAttributeWidthDictionary{
     return ^ (void (^attribute)(NSMutableDictionary *attribute)){
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         if (attribute) {
             attribute(dic);
         }
         if (self.message.length > 0) {
-            [self setACMessageAttributedString:[[NSAttributedString alloc]initWithString:self.message attributes:dic]];
+            [self tfy_setACMessageAttributedString:[[NSAttributedString alloc]initWithString:self.message attributes:dic]];
         }else{
-            [self setACMessageAttributedString:nil];
+            [self tfy_setACMessageAttributedString:nil];
         }
         return self;
     };
 }
-- (void)setACTitleAttributedString:(NSAttributedString *)attributedString{
+- (void)tfy_setACTitleAttributedString:(NSAttributedString *)attributedString{
     [self setValue:attributedString forKey:@"attributedTitle"];
 }
 
-- (void)setACDetailAttributedString:(NSAttributedString *)attributedString{
+- (void)tfy_setACDetailAttributedString:(NSAttributedString *)attributedString{
     [self setValue:attributedString forKey:@"_attributedDetailMessage"];
 }
 
-- (void)setACMessageAttributedString:(NSAttributedString *)attributedString{
+- (void)tfy_setACMessageAttributedString:(NSAttributedString *)attributedString{
     [self setValue:attributedString forKey:@"attributedMessage"];
 }
 
-- (void)setACTitleLineMaxNumber:(NSInteger)number{
+- (void)tfy_setACTitleLineMaxNumber:(NSInteger)number{
     [self setValue:@(number) forKey:@"titleMaximumLineCount"];
 }
 
-- (void)setACTitleLineBreakModel:(NSLineBreakMode)mode{
+- (void)tfy_setACTitleLineBreakModel:(NSLineBreakMode)mode{
     [self setValue:@(mode) forKey:@"titleLineBreakMode"];
 }
 
-- (UIAlertAction *)addActionTitle:(NSString *)title style:(UIAlertActionStyle)style block:(void (^)(UIAlertAction * _Nonnull))block{
+- (UIAlertAction *)tfy_addActionTitle:(NSString *)title style:(UIAlertActionStyle)style block:(void (^)(UIAlertAction * _Nonnull))block{
     UIAlertAction *action = [UIAlertAction actionWithTitle:title style:style handler:block];
     [self addAction:action];
     UIAlertActionWithController *model = [UIAlertActionWithController new];

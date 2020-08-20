@@ -19,46 +19,46 @@ if (!invoctation) {[self doesNotRecognizeSelector:sel]; return _return_;}\
 [invoctation setSelector:sel];\
 va_list args;\
 va_start(args, _args);\
-[NSObject setInv:invoctation withSig:sig andArgs:args];\
+[NSObject tfy_setInv:invoctation withSig:sig andArgs:args];\
 va_end(args);
 
 @implementation NSObject (TFY_Tools)
 
-- (NSString *)clasName{
+- (NSString *)tfy_clasName{
     return [NSString stringWithUTF8String:class_getName([self class])];
 }
 
-+ (NSString *)clasName{
++ (NSString *)tfy_clasName{
     return NSStringFromClass(self);
 }
 
-- (nullable id)performSelectorWithArguments:(SEL)sel, ... {
+- (nullable id)tfy_performSelectorWithArguments:(SEL)sel, ... {
     PERFORMSELECROR(sel, nil)
     [invoctation invoke];
-    return [self getInvocationFromInv:invoctation sig:sig];
+    return [self tfy_getInvocationFromInv:invoctation sig:sig];
 }
 
-- (void)performSelectorWithArguments:(SEL)sel delay:(NSTimeInterval)delay, ...{
+- (void)tfy_performSelectorWithArguments:(SEL)sel delay:(NSTimeInterval)delay, ...{
     PERFORMSELECROR(delay, )
     [invoctation retainArguments];
     [invoctation performSelector:sel withObject:nil afterDelay:delay];
 }
 
-- (nullable id)performSelectorWaitUntilDone:(BOOL)wait onMainThreadWithArguments:(SEL)sel, ...{
+- (nullable id)tfy_performSelectorWaitUntilDone:(BOOL)wait onMainThreadWithArguments:(SEL)sel, ...{
     PERFORMSELECROR(sel, nil)
     if (!wait) [invoctation retainArguments];
     [invoctation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:wait];
-    return wait?[NSObject getInvocationFromInv:invoctation sig:sig]:nil;
+    return wait?[NSObject tfy_getInvocationFromInv:invoctation sig:sig]:nil;
 }
 
-- (nullable id)performSelectorwaitUntilDone:(BOOL)wait withArguments:(SEL)sel onThread:(NSThread *)thread, ...{
+- (nullable id)tfy_performSelectorwaitUntilDone:(BOOL)wait withArguments:(SEL)sel onThread:(NSThread *)thread, ...{
     PERFORMSELECROR(thread, nil)
     if (!wait) [invoctation retainArguments];
     [invoctation performSelector:@selector(invoke) onThread:thread withObject:nil waitUntilDone:wait];
-    return wait ? [NSObject getInvocationFromInv:invoctation sig:sig] : nil;
+    return wait ? [NSObject tfy_getInvocationFromInv:invoctation sig:sig] : nil;
 }
 
-- (void)performSelectorWithArgumentsInBackground:(SEL)sel, ...{
+- (void)tfy_performSelectorWithArgumentsInBackground:(SEL)sel, ...{
     PERFORMSELECROR(sel, )
     [invoctation retainArguments];
     [invoctation performSelectorInBackground:sel withObject:nil];
@@ -66,7 +66,7 @@ va_end(args);
 
 #undef PERFORMSELECROR
 
-- (id)getInvocationFromInv:(NSInvocation *)inv sig:sig{
+- (id)tfy_getInvocationFromInv:(NSInvocation *)inv sig:sig{
     NSUInteger length = [sig methodReturnLength];
     if (length == 0) return nil;
     
@@ -134,7 +134,7 @@ return @(ret);\
 #undef return_with_number
 }
 
-+ (void)setInv:(NSInvocation *)inv withSig:(NSMethodSignature *)sig andArgs:(va_list)args{
++ (void)tfy_setInv:(NSInvocation *)inv withSig:(NSMethodSignature *)sig andArgs:(va_list)args{
     NSUInteger count = [sig numberOfArguments];
     for (int index = 2; index < count; index++) {
         char *type = (char *)[sig getArgumentTypeAtIndex:index];
@@ -305,7 +305,7 @@ struct dummy arg = va_arg(args, struct dummy); \
     }
 }
 
-+ (BOOL)swizzleInstanceMethod:(SEL)originalSel with:(SEL)newSel {
++ (BOOL)tfy_swizzleInstanceMethod:(SEL)originalSel with:(SEL)newSel {
     Method originalMethod = class_getInstanceMethod(self, originalSel);
     Method newMethod = class_getInstanceMethod(self, newSel);
     if (!originalMethod || !newMethod) return NO;
@@ -324,7 +324,7 @@ struct dummy arg = va_arg(args, struct dummy); \
     return YES;
 }
 
-+ (BOOL)swizzleClassMethod:(SEL)originalSel with:(SEL)newSel {
++ (BOOL)tfy_swizzleClassMethod:(SEL)originalSel with:(SEL)newSel {
     Class class = object_getClass(self);
     Method originalMethod = class_getInstanceMethod(class, originalSel);
     Method newMethod = class_getInstanceMethod(class, newSel);
@@ -333,15 +333,15 @@ struct dummy arg = va_arg(args, struct dummy); \
     return YES;
 }
 
-- (void)setAssociateValue:(id)value forKey:(void *)key{
+- (void)tfy_setAssociateValue:(id)value forKey:(void *)key{
     objc_setAssociatedObject(self, key, value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (id)getAssociateValueByKey:(void *)key{
+- (id)tfy_getAssociateValueByKey:(void *)key{
      return objc_getAssociatedObject(self, key);
 }
 
-- (void)removeAllAssociatedValues{
+- (void)tfy_removeAllAssociatedValues{
     objc_removeAssociatedObjects(self);
 }
 

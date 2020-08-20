@@ -11,20 +11,21 @@
 #import <objc/runtime.h>
 
 @implementation UITextField (TFY_Tools)
-- (void)addLeftViewBlock:(UIView * (^) (UITextField *))leftBlock mode:(UITextFieldViewMode)mode{
+
+- (void)tfy_addLeftViewBlock:(UIView * (^) (UITextField *))leftBlock mode:(UITextFieldViewMode)mode{
     if (leftBlock) {
         self.leftView = leftBlock(self);
         self.leftViewMode = mode;
     }
 }
-- (void)addRightViewBlock:(UIView * (^) (UITextField *))rightBlock mode:(UITextFieldViewMode)mode{
+- (void)tfy_addRightViewBlock:(UIView * (^) (UITextField *))rightBlock mode:(UITextFieldViewMode)mode{
     if (rightBlock) {
         self.rightView = rightBlock(self);
         self.rightViewMode = mode;
     }
 }
 
-- (NSRange)selectedRange
+- (NSRange)tfy_selectedRange
 {
     UITextPosition *beginning = self.beginningOfDocument;
     
@@ -38,13 +39,13 @@
     return NSMakeRange(location, length);
 }
 
-- (void)selectedText
+- (void)tfy_selectedText
 {
     UITextRange *range = [self textRangeFromPosition:self.beginningOfDocument toPosition:self.endOfDocument];
     [self setSelectedTextRange:range];
 }
 
-- (void)setSelectedRange:(NSRange)range
+- (void)tfy_setSelectedRange:(NSRange)range
 {
     UITextPosition *beginning = self.beginningOfDocument;
     UITextPosition *startPosition = [self positionFromPosition:beginning offset:range.location];
@@ -54,13 +55,13 @@
 }
 
 
-- (void)setEditedText:(void (^)(NSString * _Nonnull))editedText{
-    objc_setAssociatedObject(self, @selector(editedText), editedText, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setTfy_editedText:(void (^)(NSString * _Nonnull))tfy_editedText{
+    objc_setAssociatedObject(self, @selector(tfy_editedText), tfy_editedText, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [self addObserver];
 }
 
-- (void (^)(NSString * _Nonnull))editedText{
-    return objc_getAssociatedObject(self, @selector(editedText));
+- (void (^)(NSString * _Nonnull))tfy_editedText{
+    return objc_getAssociatedObject(self, @selector(tfy_editedText));
 }
 
 - (NSUInteger)limitLength{
@@ -75,9 +76,9 @@
 
 
 - (void)addObserver{
-    if ([self containsEventBlockForKey:NSStringFromClass([self class])]) return;
+    if ([self tfy_containsEventBlockForKey:NSStringFromClass([self class])]) return;
     __weak typeof(self)weakSelf = self;
-    [self addEventBlock:^(id  _Nonnull sender) {
+    [self tfy_addEventBlock:^(id  _Nonnull sender) {
         [weakSelf textFieldTextDidChange];
     } forEvents:UIControlEventEditingChanged ForKey:NSStringFromClass([self class])];
 }
@@ -88,11 +89,11 @@
     UITextRange *selectedRange = [self markedTextRange];
     UITextPosition *position = [self positionFromPosition:selectedRange.start offset:0];
     NSInteger loction = [self offsetFromPosition:self.beginningOfDocument toPosition:selectedRange.start];
-    if (self.editedText) {
+    if (self.tfy_editedText) {
         if (!position) {
-            self.editedText(toBeString);
+            self.tfy_editedText(toBeString);
         }else{
-            self.editedText([toBeString substringToIndex:loction]);
+            self.tfy_editedText([toBeString substringToIndex:loction]);
         }
     }
     if (!position && (limit > 0 && toBeString.length > limit)) {

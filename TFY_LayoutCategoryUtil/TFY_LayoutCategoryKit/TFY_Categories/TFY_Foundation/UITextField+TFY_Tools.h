@@ -12,20 +12,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITextField (TFY_Tools)
 
-- (void)addLeftViewBlock:(UIView * (^) (UITextField *))leftBlock mode:(UITextFieldViewMode)mode;
+- (void)tfy_addLeftViewBlock:(UIView * (^) (UITextField *))leftBlock mode:(UITextFieldViewMode)mode;
 
-- (void)addRightViewBlock:(UIView * (^) (UITextField *))rightBlock mode:(UITextFieldViewMode)mode;
+- (void)tfy_addRightViewBlock:(UIView * (^) (UITextField *))rightBlock mode:(UITextFieldViewMode)mode;
 
-- (NSRange)selectedRange;
+- (NSRange)tfy_selectedRange;
 
-- (void)selectedText;
+- (void)tfy_selectedText;
 
-- (void)setSelectedRange:(NSRange)range;
+- (void)tfy_setSelectedRange:(NSRange)range;
 
 /**
  已输入字符串
  */
-@property (nonatomic, copy) void (^ editedText) (NSString *text);
+@property (nonatomic, copy) void (^tfy_editedText) (NSString *text);
 /**
  需要结合delegate中的方法
  */

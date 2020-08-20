@@ -27,7 +27,7 @@ TFY_CATEGORY_CHAIN_CONTROL_IMPLEMENTATION(contentHorizontalAlignment, UIControlC
 - ( id  _Nonnull (^)(id _Nonnull, SEL _Nonnull, UIControlEvents))setTarget{
     return ^ (id target, SEL action, UIControlEvents events){
         [self enumerateObjectsUsingBlock:^(UIControl * _Nonnull obj) {
-             [obj setTarget:target eventAction:action forControlEvents:events];
+             [obj tfy_setTarget:target eventAction:action forControlEvents:events];
         }];
        
         return self;
@@ -36,7 +36,7 @@ TFY_CATEGORY_CHAIN_CONTROL_IMPLEMENTATION(contentHorizontalAlignment, UIControlC
 - (id  _Nonnull (^)(TFY_TargetActionBlock _Nonnull, UIControlEvents))addTargetBlock{
     return ^ (controlTargeAction block, UIControlEvents events){
         [self enumerateObjectsUsingBlock:^(UIControl * _Nonnull obj) {
-            [obj addEventBlock:block forEvents:events];
+            [obj tfy_addEventBlock:block forEvents:events];
         }];
         return self;
     };
@@ -44,7 +44,7 @@ TFY_CATEGORY_CHAIN_CONTROL_IMPLEMENTATION(contentHorizontalAlignment, UIControlC
 - (id  _Nonnull (^)(TFY_TargetActionBlock _Nonnull, UIControlEvents))setTargetBlock{
     return ^ (controlTargeAction block, UIControlEvents events){
         [self enumerateObjectsUsingBlock:^(UIControl * _Nonnull obj) {
-            [obj setEventBlock:block forEvents:events];
+            [obj tfy_setEventBlock:block forEvents:events];
         }];
         return self;
     };
@@ -61,7 +61,7 @@ TFY_CATEGORY_CHAIN_CONTROL_IMPLEMENTATION(contentHorizontalAlignment, UIControlC
 - ( id  _Nonnull (^)(void))removeAllTarget{
     return ^ (){
         [self enumerateObjectsUsingBlock:^(UIControl * _Nonnull obj) {
-            [obj removeAllEvents];
+            [obj tfy_removeAllEvents];
         }];
         
         return self;
@@ -70,7 +70,7 @@ TFY_CATEGORY_CHAIN_CONTROL_IMPLEMENTATION(contentHorizontalAlignment, UIControlC
 - ( id  _Nonnull (^)(UIControlEvents))removeAllTargetBlock{
     return ^ (UIControlEvents events){
         [self enumerateObjectsUsingBlock:^(UIControl * _Nonnull obj) {
-            [obj removeAllEventBlocksForEvents:events];
+            [obj tfy_removeAllEventBlocksForEvents:events];
         }];
         return self;
     };
