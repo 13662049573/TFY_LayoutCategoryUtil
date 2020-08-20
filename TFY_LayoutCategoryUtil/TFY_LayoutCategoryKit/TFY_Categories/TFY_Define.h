@@ -66,7 +66,7 @@ CG_INLINE void TFY_ObserveNotification(id observer,SEL aSelector,NSNotificationN
     return [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:aName object:obj];
 }
 /** 移除所有通知 */
-CG_INLINE void TFY_RemoveNotification(id<WKHTTPCookieStoreObserver> observer) API_AVAILABLE(ios(11.0)) {
+CG_INLINE void TFY_RemoveNotification(id observer) API_AVAILABLE(ios(11.0)) {
     return [[NSNotificationCenter defaultCenter] removeObserver:observer];
 }
 /** 移除一个已知通知 */
