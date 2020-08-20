@@ -16,8 +16,9 @@
 #import "UIGestureRecognizer+TFY_Tools.h"
 #import "UIImage+TFY_Tools.h"
 #import "UIScrollView+TFY_Tools.h"
-#import "UITableView+TFY_Tools.h"
 #import "UIViewController+TFY_Tools.h"
 #import "WKWebView+TFY_Extension.h"
+#import "UITableView+TFY_LayoutCell.h"
+#import "UITableViewCell+TFY_Chain.h"
 
 #endif /* TFY_UIHeader_h */
