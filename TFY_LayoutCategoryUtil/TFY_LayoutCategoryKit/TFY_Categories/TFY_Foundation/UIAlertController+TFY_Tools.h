@@ -12,13 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  快速创建
  */
-static inline UIAlertController *UIAlertControllerCreate( NSString *_Nullable title, NSString *_Nullable message, UIAlertControllerStyle style){
+CG_INLINE UIAlertController *UIAlertControllerCreate( NSString *_Nullable title, NSString *_Nullable message, UIAlertControllerStyle style){
     return [UIAlertController alertControllerWithTitle:title message:message preferredStyle:style];
 }
-static inline UIAlertController *UIAlertControllerAlertCreate(NSString *_Nullable title,NSString *_Nullable message){
+CG_INLINE UIAlertController *UIAlertControllerAlertCreate(NSString *_Nullable title,NSString *_Nullable message){
     return [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
 }
-static inline UIAlertController *UIAlertControllerSheetCreate(NSString *_Nullable title, NSString *_Nullable message){
+CG_INLINE UIAlertController *UIAlertControllerSheetCreate(NSString *_Nullable title, NSString *_Nullable message){
     return [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleActionSheet];
 }
 

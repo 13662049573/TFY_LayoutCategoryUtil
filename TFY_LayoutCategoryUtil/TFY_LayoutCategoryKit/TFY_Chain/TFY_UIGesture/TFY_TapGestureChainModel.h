@@ -16,7 +16,7 @@ TFY_CATEGORY_CHAIN_PROPERTY TFY_TapGestureChainModel * (^ numberOfTapsRequired) 
 
 TFY_CATEGORY_EXINTERFACE(UITapGestureRecognizer, TFY_TapGestureChainModel)
 
-static inline UITapGestureRecognizer *_Nonnull UITapGestureRecognizerCreateWithTarget(void (^ targetBlock) (id ges)){
+CG_INLINE UITapGestureRecognizer *_Nonnull UITapGestureRecognizerCreateWithTarget(void (^ targetBlock) (id ges)){
     return UITapGestureRecognizerSet().makeChain.addTargetBlock(targetBlock).gesture;
 }
 

@@ -31,7 +31,7 @@ TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel * (^ adJustedContentIOS
 TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel * (^ reloadData)(void);
 @end
 
-static inline UICollectionView *UICollectionViewCreateWithLayout(UICollectionViewFlowLayout *layout){
+CG_INLINE UICollectionView *UICollectionViewCreateWithLayout(UICollectionViewFlowLayout *layout){
     return [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
 }
 TFY_CATEGORY_EXINTERFACE_(UICollectionView, TFY_CollectionViewChainModel)

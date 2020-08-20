@@ -46,7 +46,7 @@
 }
 
 #define TFY_CATEGORY_EXINTERFACE(TFY_Class, ModelType)\
-       static inline TFY_Class *TFY_Class##Set(void){\
+static inline TFY_Class *TFY_Class##Set(void){\
        return [TFY_Class new];\
 }\
 static inline ModelType *TFY_Class##ModelSet(void){\

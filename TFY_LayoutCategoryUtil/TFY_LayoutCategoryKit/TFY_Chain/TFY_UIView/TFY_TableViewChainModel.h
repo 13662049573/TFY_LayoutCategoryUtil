@@ -49,7 +49,7 @@ TFY_CATEGORY_CHAIN_PROPERTY TFY_TableViewChainModel *(^ registerViewNib)(UINib *
 
 @end
 
-static inline UITableView * UITableViewCreateWithStyle(UITableViewStyle style){
+CG_INLINE UITableView * UITableViewCreateWithStyle(UITableViewStyle style){
     return [[UITableView alloc]initWithFrame:CGRectZero style:style];
 }
 TFY_CATEGORY_EXINTERFACE(UITableView, TFY_TableViewChainModel)

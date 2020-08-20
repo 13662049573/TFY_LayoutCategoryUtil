@@ -343,7 +343,7 @@ CG_INLINE CGFloat TFY_DegreesToRadians(CGFloat degrees) {
 + (UIImage*)cutOutImageWithRect:(CGPoint)point image:(UIImage *)image;
 @end
 
-static inline UIImage *UIImageNamed(NSString *imageName){
+CG_INLINE UIImage *UIImageNamed(NSString *imageName){
     if (![imageName isKindOfClass:[NSString class]] || imageName.length == 0) return nil;
     return [UIImage imageNamed:imageName];
 }

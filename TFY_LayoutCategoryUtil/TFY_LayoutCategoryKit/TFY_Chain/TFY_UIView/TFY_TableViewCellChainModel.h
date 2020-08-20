@@ -22,7 +22,7 @@ TFY_CATEGORY_CHAIN_PROPERTY TFY_TableViewCellChainModel * (^ userInteractionEnab
 
 @end
 
-static inline UITableViewCell * UITableViewCellCreateWithStyleAndIndentify(UITableViewCellStyle style, NSString *identifier){
+CG_INLINE UITableViewCell * UITableViewCellCreateWithStyleAndIndentify(UITableViewCellStyle style, NSString *identifier){
     return [[UITableViewCell alloc] initWithStyle:style reuseIdentifier:identifier];
 }
 

@@ -34,7 +34,7 @@ static const void *ButtonRuntimeLimitIsStop        = &ButtonRuntimeLimitIsStop;
 
 static NSString *UI_swizzleButtonMethodName = @"_UI_swizzleButtonLimitTimeMethod";
 
-static inline void UI_swizzleButtonIfNeed(Class swizzleClass){
+CG_INLINE void UI_swizzleButtonIfNeed(Class swizzleClass){
     @synchronized (swizzleClass) {
         if (class_getMethodImplementation(swizzleClass, NSSelectorFromString(UI_swizzleButtonMethodName)) !=_objc_msgForward) return;
         class_addMethod(swizzleClass, NSSelectorFromString(UI_swizzleButtonMethodName), imp_implementationWithBlock(^(id object,SEL sel){}), "v@:");

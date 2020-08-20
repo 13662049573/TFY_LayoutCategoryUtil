@@ -55,7 +55,7 @@ TFY_CATEGORY_CHAIN_PROPERTY TFY_ButtonChainModel *(^ imageAndTitle)(TFY_ButtonIm
 @end
 
 
-static inline UIButton *UIButtonCreateWithType(UIButtonType buttonType){
+CG_INLINE UIButton *UIButtonCreateWithType(UIButtonType buttonType){
     return [UIButton buttonWithType:buttonType];
 }
 TFY_CATEGORY_EXINTERFACE(UIButton, TFY_ButtonChainModel)

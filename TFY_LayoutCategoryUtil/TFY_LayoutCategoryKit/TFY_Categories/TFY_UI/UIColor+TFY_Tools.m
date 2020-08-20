@@ -8,7 +8,7 @@
 
 #import "UIColor+TFY_Tools.h"
 
-static inline NSUInteger hexStrToInt(NSString *str) {
+CG_INLINE NSUInteger hexStrToInt(NSString *str) {
     uint32_t result = 0;
     sscanf([str UTF8String], "%X", &result);
     return result;

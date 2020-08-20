@@ -781,7 +781,7 @@ static void * kScenePackageReturnNavigationControllerKey = &kScenePackageReturnN
 static void *kScenePackageViewLifeEventTasksKey = &kScenePackageViewLifeEventTasksKey;
 static void *kScenePackageViewLifeEventFlagTag = &kScenePackageViewLifeEventFlagTag;
 static void *kScenePackageViewLifeEventOnceKey = &kScenePackageViewLifeEventOnceKey;
-static inline void ScenePackageViewLifeEventSwizzledMethodExp(Class swizzleClass, NSString *sel){
+CG_INLINE void ScenePackageViewLifeEventSwizzledMethodExp(Class swizzleClass, NSString *sel){
     @synchronized (swizzleClass) {
         NSMutableArray *sels = objc_getAssociatedObject(swizzleClass, kScenePackageViewLifeEventFlagTag);
         if (!sels) {
@@ -830,7 +830,7 @@ static inline void ScenePackageViewLifeEventSwizzledMethodExp(Class swizzleClass
     }
 }
 
-static inline void ScenePackageViewLifeEventSwizzledNoParametersMethodExp(Class swizzleClass, NSString *sel){
+CG_INLINE void ScenePackageViewLifeEventSwizzledNoParametersMethodExp(Class swizzleClass, NSString *sel){
     @synchronized (swizzleClass) {
         NSMutableArray *sels = objc_getAssociatedObject(swizzleClass, kScenePackageViewLifeEventFlagTag);
         if (!sels) {
@@ -942,7 +942,7 @@ static inline void ScenePackageViewLifeEventSwizzledNoParametersMethodExp(Class 
 static const void *RuntimeDeallocTasks = &RuntimeDeallocTasks;
 static const void *RuntimeDeallocClassTag = &RuntimeDeallocClassTag;
 
-static inline void tfy_swizzleDeallocIfNeed(Class swizzleClass){
+CG_INLINE void tfy_swizzleDeallocIfNeed(Class swizzleClass){
     @synchronized (swizzleClass) {
         if (objc_getAssociatedObject(swizzleClass, RuntimeDeallocClassTag)) return;
         objc_setAssociatedObject(swizzleClass, RuntimeDeallocClassTag, @1, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
