@@ -11,6 +11,7 @@
 #import <objc/message.h>
 #import <sys/sysctl.h>
 #import <mach/mach.h>
+#import <objc/runtime.h>
 
 #ifndef SYNTH_DYNAMIC_PROPERTY_OBJECT
 

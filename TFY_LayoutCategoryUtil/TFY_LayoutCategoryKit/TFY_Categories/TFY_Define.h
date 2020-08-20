@@ -12,6 +12,7 @@
 #import <UIKit/UIKit.h>
 #import <objc/message.h>
 #import "UIApplication+TFY_Tools.h"
+#import "UIView+TFY_Tools.h"
 
 #pragma mark-------------------------------------------线程---------------------------------------------
 /***线程****/
