@@ -1,3 +1,6 @@
+使用方法：pod 'TFY_LayoutCategoryKit' 
+这里不能和pod 'TFY_Category' 公用。TFY_LayoutCategoryKit 是TFY_Category 的更高一层分装和使用。
+
 # TFY_LayoutCategoryUtil
 全新链式的界面初始化和界面跳转，布局基于Masonry
 
