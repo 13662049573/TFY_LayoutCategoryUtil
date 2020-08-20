@@ -223,7 +223,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
             if (topView) {
                 make.top.equalTo(topView.mas_bottom);
             }else{
-                make.top.equalTo(self.view.mas_top).offset(kStatusBarHeight);
+                make.top.equalTo(self.view.mas_top).offset(kStatusBarHeight());
             }
             make.left.bottom.right.mas_offset(0);
         }];
@@ -233,7 +233,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
 - (void)viewSafeAreaInsetsDidChange API_AVAILABLE(ios(11.0)){
     [super viewSafeAreaInsetsDidChange];
     UIEdgeInsets edge = TFY_SafeArea(self.view);
-    CGFloat barHeight = kDefaultNavigationBarHeight;
+    CGFloat barHeight = kDefaultNavigationBarHeight();
     
     SSDKCommonNavigationBar *view = nil;
     if (_isConformsNavigationBar) {
@@ -256,7 +256,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
             if (view) {
                 make.top.equalTo(view.mas_bottom);
             }else{
-                make.top.equalTo(self.view).offset(kStatusBarHeight);
+                make.top.equalTo(self.view).offset(kStatusBarHeight());
             }
             make.left.mas_offset(edge.left);
             make.right.mas_offset(- edge.right);
@@ -274,7 +274,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
             if (view) {
                 make.top.equalTo(view.mas_bottom);
             }else{
-                make.top.equalTo(self.view).offset(kStatusBarHeight);
+                make.top.equalTo(self.view).offset(kStatusBarHeight());
             }
             make.left.mas_offset(edge.left);
             make.right.mas_offset(- edge.right);
@@ -336,7 +336,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
             if (topView) {
                 make.top.equalTo(topView.mas_bottom);
             }else{
-                make.top.equalTo(self.view).offset(kStatusBarHeight);
+                make.top.equalTo(self.view).offset(kStatusBarHeight());
             }
             make.left.bottom.right.mas_offset(0);
         }];
@@ -357,7 +357,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
     }
     [view addSubview:bar];
     if (self.view == view) {
-        CGFloat barHeight = kDefaultNavigationBarHeight;
+        CGFloat barHeight = kDefaultNavigationBarHeight();
         [bar mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.mas_offset(0);
             make.height.mas_equalTo(barHeight);

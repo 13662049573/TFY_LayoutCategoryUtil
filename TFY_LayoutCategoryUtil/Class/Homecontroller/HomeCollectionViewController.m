@@ -47,6 +47,12 @@
         make.height.mas_equalTo(80);
     });
     
+    UIViewModelSet().backgroundColor(UIColor.redColor).clipRadius(CornerClipTypeBothTop, 10).addToSuperView(self.view).makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+           make.left.equalTo(self.titleLabel);
+           make.right.equalTo(self.titleLabel);
+           make.top.equalTo(self.textfiled.mas_bottom).offset(20);
+           make.height.mas_equalTo(80);
+    });
     
 }
 

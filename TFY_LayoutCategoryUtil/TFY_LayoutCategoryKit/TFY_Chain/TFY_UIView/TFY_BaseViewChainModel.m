@@ -8,7 +8,6 @@
 
 #import "TFY_BaseViewChainModel.h"
 #import "TFY_GestureChainHeader.h"
-#import "UIView+TFY_Tools.h"
 #import "TFY_ChainBaseModel+TFY_Tools.h"
 #import <objc/runtime.h>
 
@@ -112,6 +111,18 @@ TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(autoresizesSubviews, BOOL)
         return [self.view convertPointFrom:point :view];
     };
 }
+/**
+ * 便捷添加圆角 clipType 圆角类型  radius 圆角角度
+ */
+- (id  _Nonnull (^)(CornerClipType, CGFloat))clipRadius{
+    return ^(CornerClipType clipType, CGFloat radius){
+        [self enumerateObjectsUsingBlock:^(UIView * _Nonnull obj) {
+            [obj tfy_clipWithType:clipType radius:radius];
+        }];
+        return self;
+    };
+}
+
 #pragma mark - show -
 
 TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(backgroundColor, UIColor *)

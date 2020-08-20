@@ -18,9 +18,21 @@
         __VA_ARGS__\
         [CATransaction commit];
 
-#define TFY_CATEGORY_CHAIN_PROPERTY @property (nonatomic, copy, readonly)
+#pragma mark-------------------------------------------属性对象---------------------------------------------
 
+/**BLOCK*/
+#define TFY_CATEGORY_CHAIN_BLOCK_PROPERTY @property (nonatomic, copy, nullable)
+/**assign*/
+#define TFY_CATEGORY_ASSIGN_PROPERTY @property(nonatomic , assign)
+/** weak*/
+#define TFY_CATEGORY_WEAK_PROPERTY @property(nonatomic , weak)
+//copy
+#define TFY_CATEGORY_CHAIN_PROPERTY @property (nonatomic, copy, readonly)
+//strong
 #define TFY_CATEGORY_STRONG_PROPERTY @property (nonatomic, strong, readonly)
+
+/**点语法*/
+#pragma mark-------------------------------------------点语法---------------------------------------------
 
 #define TFY_CATEGORY_CHAIN_IMPLEMENTATION(TFY_Method,TFY_ParaType, TFY_ModelType, TFY_PropertyClass)\
 - (TFY_ModelType  _Nonnull (^)(TFY_ParaType))TFY_Method {\

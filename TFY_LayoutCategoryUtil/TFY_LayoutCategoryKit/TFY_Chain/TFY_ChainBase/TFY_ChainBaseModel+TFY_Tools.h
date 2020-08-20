@@ -11,9 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TFY_ChainBaseModel (TFY_Tools)
-
+//初始一个对象
 - (instancetype)initWithModelObject:(id)object modelClass:(Class)modelClass;
-
+//初始对象属性数组
 - (instancetype)initWithModelObjects:(NSArray *)objects modelClass:(Class)modelClass;
 
 @end

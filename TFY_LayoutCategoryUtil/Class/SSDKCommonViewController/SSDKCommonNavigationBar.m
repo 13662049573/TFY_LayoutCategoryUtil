@@ -121,7 +121,7 @@
         .numberOfLines(1)
         .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
             make.centerX.equalTo(self);
-            make.width.lessThanOrEqualTo(@([UIScreen mainScreen].bounds.size.width - 200 *TFY_SCALE));
+            make.width.lessThanOrEqualTo(@(TFY_Width_W() - 200 *TFY_SCALE()));
             make.top.mas_offset(kStatusBarHeight);
             make.bottom.mas_offset(-self->_lineHeight);
         });
@@ -164,7 +164,7 @@
             make.right.mas_offset(0);
             make.bottom.mas_offset(-self->_lineHeight);
             make.top.mas_offset(kStatusBarHeight);
-            make.width.lessThanOrEqualTo(@(100 *TFY_SCALE));
+            make.width.lessThanOrEqualTo(@(100 *TFY_SCALE()));
         });
         
     }

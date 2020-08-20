@@ -7,6 +7,7 @@
 //
 
 #import "TFY_ChainBaseModel.h"
+#import "UIView+TFY_Tools.h"
 
 #define TFY_CATEGORY_CHAIN_VIEWCLASS_IMPLEMENTATION(TFY_Method,TFY_ParaType, TFY_ModelType, TFY_PropertyClass) TFY_CATEGORY_CHAIN_IMPLEMENTATION(TFY_Method,TFY_ParaType, TFY_ModelType, TFY_PropertyClass)
 
@@ -107,6 +108,8 @@ TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ autoresizingMask) (UIViewAutoresizing)
 TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ autoresizesSubviews) (BOOL);
 
 TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ makeTag) (NSInteger);
+
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ clipRadius) (CornerClipType,CGFloat);
 
 #pragma mark - control -
 

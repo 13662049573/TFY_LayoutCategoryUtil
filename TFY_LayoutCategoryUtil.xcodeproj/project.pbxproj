@@ -165,7 +165,6 @@
 		36C334AA24ED2D1E00DA6FB2 /* TFY_HandlerVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_HandlerVideo.m; sourceTree = "<group>"; };
 		36C334AB24ED2D1E00DA6FB2 /* TFY_CommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CommonUtils.h; sourceTree = "<group>"; };
 		36C334AE24ED2D4D00DA6FB2 /* TFY_ToolsHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_ToolsHeader.h; sourceTree = "<group>"; };
-		36C334AF24ED2EB300DA6FB2 /* TFY_CategoryType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CategoryType.h; sourceTree = "<group>"; };
 		56558366243196E000020D3C /* TFY_LayoutCategoryUtil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TFY_LayoutCategoryUtil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56558375243196E000020D3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56558378243196E000020D3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -457,7 +456,6 @@
 			isa = PBXGroup;
 			children = (
 				565583B52431993900020D3C /* TFY_LayoutCategoryHeader.h */,
-				36C334AF24ED2EB300DA6FB2 /* TFY_CategoryType.h */,
 				565583AD2431990A00020D3C /* TFY_Categories */,
 				565583B02431990A00020D3C /* TFY_Chain */,
 				565583B42431990A00020D3C /* TFY_Tools */,

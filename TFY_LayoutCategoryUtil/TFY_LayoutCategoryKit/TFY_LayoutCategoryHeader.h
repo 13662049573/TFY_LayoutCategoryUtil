@@ -14,7 +14,5 @@
 #import "TFY_ChainHeader.h"
 /**额外工具*/
 #import "TFY_ToolsHeader.h"
-//定义的一些宏
-#import "TFY_CategoryType.h"
 
 #endif /* TFY_LayoutCategoryHeader_h */
