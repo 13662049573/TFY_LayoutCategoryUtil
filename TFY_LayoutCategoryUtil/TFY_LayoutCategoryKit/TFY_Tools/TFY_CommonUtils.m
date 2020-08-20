@@ -37,7 +37,7 @@
 #define IOS_10_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0)
 
 
-#pragma *******************************************判断获取网络数据****************************************
+#pragma mark*******************************************判断获取网络数据****************************************
 
 NSString *kReachabilityChangedNotification = @"kNetworkReachabilityChangedNotification";
 
@@ -94,7 +94,7 @@ const char* jailbreak_tool_pathes[] = {
     "/etc/apt"
 };
 
-#pragma ------------------------------------------gcd定时器方法---------------------------------------
+#pragma mark------------------------------------------gcd定时器方法---------------------------------------
 
 - (instancetype)initWithInterval:(NSTimeInterval)interval repeats:(BOOL)repeats queue:(dispatch_queue_t)queue block:(void (^)(void))block {
     self = [super init];
@@ -146,7 +146,7 @@ const char* jailbreak_tool_pathes[] = {
 }
 
 
-#pragma ------------------------------------------手机获取网络监听方法---------------------------------------
+#pragma mark------------------------------------------手机获取网络监听方法---------------------------------------
 
 + (instancetype)tfy_reachabilityWithHostName:(NSString *)hostName{
     TFY_CommonUtils* returnValue = NULL;
@@ -362,7 +362,7 @@ const char* jailbreak_tool_pathes[] = {
     return (__bridge NSString *)(uuidStr);
 }
 
-#pragma ---------------------------------------手机权限授权方法开始---------------------------------------
+#pragma mark---------------------------------------手机权限授权方法开始---------------------------------------
 /*
  * 单例
  */
@@ -482,7 +482,7 @@ const char* jailbreak_tool_pathes[] = {
     }
 }
 
-#pragma ------------------------------------------各种方法使用------------------------------------------
+#pragma mark------------------------------------------各种方法使用------------------------------------------
 
 - (void)tfy_initLanguage{
     NSString *language=[self tfy_currentLanguage];
@@ -533,7 +533,7 @@ const char* jailbreak_tool_pathes[] = {
     return [UIApplication sharedApplication].keyWindow;
 }
 
-#pragma ------------------------------------------国际化设置---------------------------------------
+#pragma mark------------------------------------------国际化设置---------------------------------------
 
 
 /**

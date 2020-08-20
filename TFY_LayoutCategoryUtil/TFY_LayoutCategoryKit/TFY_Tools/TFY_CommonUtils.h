@@ -16,7 +16,7 @@ static NSString * _Nonnull const AppLanguage = @"appLanguage";
 
 NS_ASSUME_NONNULL_BEGIN
 
-#pragma *******************************************判断获取网络数据****************************************
+#pragma mark*******************************************判断获取网络数据****************************************
 
 typedef enum : NSInteger {
     TFY_NotReachable = 0,
@@ -26,7 +26,7 @@ typedef enum : NSInteger {
 
 extern NSString *kReachabilityChangedNotification;
 
-#pragma ****************************************手机权限授权方法开始****************************************
+#pragma mark****************************************手机权限授权方法开始****************************************
 
 typedef enum : NSInteger {
     TFY_Celsius = 0,
@@ -36,7 +36,7 @@ typedef enum : NSInteger {
 
 @interface TFY_CommonUtils : NSObject
 
-#pragma ------------------------------------------gcd定时器方法---------------------------------------
+#pragma mark------------------------------------------gcd定时器方法---------------------------------------
 /***初始化计时器*/
 - (instancetype)initWithInterval:(NSTimeInterval)interval repeats:(BOOL)repeats queue:(dispatch_queue_t)queue block:(void (^)(void))block;
 
@@ -51,7 +51,7 @@ typedef enum : NSInteger {
 /**销毁*/
 - (void)tfy_cancel;
 
-#pragma ------------------------------------------手机获取网络监听方法---------------------------------------
+#pragma mark------------------------------------------手机获取网络监听方法---------------------------------------
 /** v用于检查给定主机名的可访问性。*/
 + (instancetype)tfy_reachabilityWithHostName:(NSString *)hostName;
 
@@ -72,9 +72,9 @@ typedef enum : NSInteger {
 /**获取网络状态 2G/3G/4G/wifi*/
 +(NSString *)tfy_getNetconnType;
 
-#pragma ------------------------------------------各种方法使用------------------------------------------
+#pragma mark------------------------------------------各种方法使用------------------------------------------
 
-#pragma ------------------------------------------国际化设置---------------------------------------
+#pragma mark------------------------------------------国际化设置---------------------------------------
 
 +(instancetype)shareInstance;
 
@@ -91,7 +91,7 @@ typedef enum : NSInteger {
 - (void)tfy_systemLanguage;
 /**将视图添加最上层的--Window--*/
 - (UIWindow*)tfy_lastWindow;
-#pragma ****************************************字符串方法***************************************
+#pragma mark****************************************字符串方法***************************************
 /***  NSDictionary或NSArray转换为NSString*/
 +(NSString *)tfy_toJSONString:(id)theData;
 
@@ -274,7 +274,7 @@ typedef enum : NSInteger {
  * 传入时间 2020-04-09 返回 星座
  */
 +(NSString *)tfy_getXingzuo:(NSDate *)in_date;
-#pragma ****************************************判断方法****************************************
+#pragma mark****************************************判断方法****************************************
 /***  判断字符串是否是纯数字*/
 +(BOOL)tfy_isPureNumber:(NSString *)string;
 
@@ -398,7 +398,7 @@ typedef enum : NSInteger {
  * 识别整体字符串里面是否包含指定字符串  YES
  */
 +(BOOL)tfy_judgmentstring:(NSString *)string OfString:(NSString *)ofString;
-#pragma ****************************************没有返回方法****************************************
+#pragma mark****************************************没有返回方法****************************************
 
 #pragma  mark - NSUserDefaults存取操作
 /***  存储当前BOOL*/
@@ -510,7 +510,7 @@ typedef enum : NSInteger {
 /***  截取控制器所生产图片*/
 + (void)tfy_screenSnapshot:(UIView *)snapshotView finishBlock:(void(^)(UIImage *snapShotImage))finishBloc;
 
-#pragma ****************************************其他方法****************************************
+#pragma mark****************************************其他方法****************************************
 /***  过滤数组中相等的数据*/
 +(NSArray *)tfy_filterSameObject:(NSArray *)array;
 
