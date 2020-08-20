@@ -10,7 +10,6 @@
 #define TFY_Define_h
 
 #import <UIKit/UIKit.h>
-#import <WebKit/WebKit.h>
 
 #pragma mark-------------------------------------------线程---------------------------------------------
 /***线程****/
