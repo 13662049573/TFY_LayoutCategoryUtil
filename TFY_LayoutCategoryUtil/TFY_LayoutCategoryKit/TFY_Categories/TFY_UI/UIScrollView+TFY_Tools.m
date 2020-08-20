@@ -81,6 +81,7 @@ static CGFloat const oriImageH = 200;
         [self setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
 }
+
 + (void)load{
     [self tfy_swizzleInstanceSelector:@selector(setTableHeaderView:) swizzleSelector:@selector(setTfy_TableHeaderView:)];
 }

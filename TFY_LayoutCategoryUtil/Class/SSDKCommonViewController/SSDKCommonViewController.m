@@ -7,8 +7,8 @@
 //
 
 #import "SSDKCommonViewController.h"
-#import "UITableView+TFY_Tools.h"
 #import <objc/message.h>
+
 @implementation SSDKCommonTableViewModel
 
 @end
@@ -190,7 +190,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
     objc_setAssociatedObject(self, kSSDKCommonViewControllerTableViewModelKey, model, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     UITableViewStyle style = model.style;
     
-    UITableView *tableView = [class tableViewStyle:style];
+    UITableView *tableView = [class tfy_tableViewStyle:style];
     
     tableView.makeChain
     .adJustedContentIOS11()
@@ -381,14 +381,5 @@ static void _ssdkCommonProtocolSwizzle(id self){
     return UIStatusBarStyleDefault;
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

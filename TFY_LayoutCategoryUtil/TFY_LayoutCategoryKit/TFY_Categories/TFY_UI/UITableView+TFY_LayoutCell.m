@@ -567,6 +567,15 @@ static void __TFY_TEMPLATE_LAYOUT_CELL_PRIMARY_CALL_IF_CRASH_NOT_OUR_BUG__(void 
     }];
 }
 
++ (UITableView *)tfy_tableViewStyle:(UITableViewStyle)style{
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.backgroundColor = [UIColor whiteColor];
+    tableView.showsVerticalScrollIndicator = NO;
+    tableView.showsHorizontalScrollIndicator = NO;
+    return tableView;
+}
+
 @end
 
 @implementation UITableView (TemplateLayoutHeaderFooterView)

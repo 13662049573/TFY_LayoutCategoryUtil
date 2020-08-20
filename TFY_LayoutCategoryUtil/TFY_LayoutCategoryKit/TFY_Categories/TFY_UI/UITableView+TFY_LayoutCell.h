@@ -136,7 +136,10 @@ NS_ASSUME_NONNULL_BEGIN
  *  取消选择tableView中的所有行。动画YES表示转换动画，NO表示立即转换。
  */
 - (void)tfy_clearSelectedRowsAnimated:(BOOL)animated;
-
+/**
+ * 初始一个容器
+ */
++ (UITableView *)tfy_tableViewStyle:(UITableViewStyle)style;
 @end
 
 @interface UITableView (TemplateLayoutHeaderFooterView)

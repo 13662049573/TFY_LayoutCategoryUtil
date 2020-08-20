@@ -40,6 +40,7 @@ TFY_CATEGORY_CHAIN_SCROLLVIEW_IMPLEMENTATION(directionalLockEnabled, BOOL)
 TFY_CATEGORY_CHAIN_SCROLLVIEW_IMPLEMENTATION(minimumZoomScale, CGFloat)
 TFY_CATEGORY_CHAIN_SCROLLVIEW_IMPLEMENTATION(zoomScale, CGFloat)
 TFY_CATEGORY_CHAIN_SCROLLVIEW_IMPLEMENTATION(maximumZoomScale, CGFloat)
+TFY_CATEGORY_CHAIN_SCROLLVIEW_IMPLEMENTATION(automaticallyAdjustsScrollIndicatorInsets, BOOL);
 
 - (id  _Nonnull (^)(CGPoint, BOOL))contentOffsetAnimated{
     return ^ (CGPoint point, BOOL animated){

@@ -32,6 +32,7 @@ TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ contentOffsetAnimated)(CGPoint, BOOL);
 TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ contentOffsetToVisible)(CGRect, BOOL);
 TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ delegate) (id <UIScrollViewDelegate>);
 TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ adJustedContentIOS11)(void);
+TFY_CATEGORY_CHAIN_PROPERTY ObjectType (^ automaticallyAdjustsScrollIndicatorInsets) (BOOL) API_AVAILABLE(ios(13.0));
 @end
 
 NS_ASSUME_NONNULL_END
