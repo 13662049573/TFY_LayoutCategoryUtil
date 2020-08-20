@@ -10,6 +10,8 @@
 #define TFY_Define_h
 
 #import <UIKit/UIKit.h>
+#import <objc/message.h>
+#import "UIApplication+TFY_Tools.h"
 
 #pragma mark-------------------------------------------线程---------------------------------------------
 /***线程****/
@@ -53,27 +55,26 @@
 
 #endif
 
-
-#pragma mark-------------------------------------------内联函数---------------------------------------------
-
-/** 发送通知 */
-CG_INLINE void TFY_PostNotification(NSNotificationName name,id obj,NSDictionary *info) {
-    return [[NSNotificationCenter defaultCenter] postNotificationName:name object:obj userInfo:info];
-}
-/** 监听通知 */
-CG_INLINE void TFY_ObserveNotification(id observer,SEL aSelector,NSNotificationName aName,id obj) {
-    return [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:aName object:obj];
-}
-/** 移除所有通知 */
-CG_INLINE void TFY_RemoveNotification(id observer) API_AVAILABLE(ios(11.0)) {
-    return [[NSNotificationCenter defaultCenter] removeObserver:observer];
-}
-/** 移除一个已知通知 */
-CG_INLINE void TFY_RemoveOneNotification(id observer,NSNotificationName aName,id obj) {
-    return [[NSNotificationCenter defaultCenter] removeObserver:observer name:aName object:obj];
-}
-
 #pragma mark-------------------------------------------单例---------------------------------------------
+
+#define TFY_SafeArea(view)\
+({\
+UIEdgeInsets safeInsets = UIEdgeInsetsMake(20, 0, 0, 0);\
+      if(view){\
+          static IMP imp = _objc_msgForward;\
+          static dispatch_once_t onceToken;\
+          dispatch_once(&onceToken, ^{\
+                  Method method = class_getInstanceMethod([view class], sel_registerName("safeAreaInsets"));\
+                  if (method) {\
+                     imp = method_getImplementation(method);\
+                  }\
+          });\
+      if (imp != _objc_msgForward) {\
+          safeInsets = ((UIEdgeInsets (*)(id, SEL))imp)(view,sel_registerName("safeAreaInsets"));\
+     }\
+  }\
+ safeInsets;\
+})
 
 #define  TFY_adjustsScrollViewInsets_NO(scrollView,vc)\
 do { \
@@ -161,6 +162,49 @@ static class *sharedInstance_; \
 #define TFY_WEAK  __weak typeof(self)weakSelf = self;
 
 #define TFY_STRONG  __strong typeof(weakSelf)self = weakSelf;
+
+#pragma mark-------------------------------------------内联函数---------------------------------------------
+
+/** 发送通知 */
+CG_INLINE void TFY_PostNotification(NSNotificationName name,id obj,NSDictionary *info) {
+    return [[NSNotificationCenter defaultCenter] postNotificationName:name object:obj userInfo:info];
+}
+/** 监听通知 */
+CG_INLINE void TFY_ObserveNotification(id observer,SEL aSelector,NSNotificationName aName,id obj) {
+    return [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:aName object:obj];
+}
+/** 移除所有通知 */
+CG_INLINE void TFY_RemoveNotification(id observer) API_AVAILABLE(ios(11.0)) {
+    return [[NSNotificationCenter defaultCenter] removeObserver:observer];
+}
+/** 移除一个已知通知 */
+CG_INLINE void TFY_RemoveOneNotification(id observer,NSNotificationName aName,id obj) {
+    return [[NSNotificationCenter defaultCenter] removeObserver:observer name:aName object:obj];
+}
+
+//仅仅是状态栏的高度
+CG_INLINE CGFloat kStatusBarHeight() {
+    return (TFY_SafeArea([UIApplication window]).top);
+}
+
+CG_INLINE CGFloat kDefaultNavigationBarHeight() {
+    return (TFY_SafeArea([UIApplication window]).top + 44);
+}
+
+//这个高度如果有tabbar高度则包含tabbar高度，否则不包含
+CG_INLINE CGFloat KHomeIndicatorHeight() {
+    return (TFY_SafeArea([UIApplication currentTopViewController].view).bottom);
+}
+//这个高度只是tabbarHeight的高度
+CG_INLINE CGFloat KTabbarHeight() {
+    return ([UIApplication rootViewController].tabBarController.tabBar.height);
+}
+
+//当前显示的navigationbar的高度
+CG_INLINE CGFloat kNavigationBarHeight() {
+    UINavigationBar *bar = [UIApplication currentTopViewController].navigationController.navigationBar;
+    return bar.isHidden?0:bar.height + kStatusBarHeight();
+}
 
 #endif /* TFY_Define_h */
 
