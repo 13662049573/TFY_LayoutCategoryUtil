@@ -37,7 +37,8 @@ typedef enum : NSInteger {
 @interface TFY_CommonUtils : NSObject
 
 #pragma mark------------------------------------------gcd定时器方法---------------------------------------
-/***初始化计时器*/
+
+/**初始化计时器*/
 - (instancetype)initWithInterval:(NSTimeInterval)interval repeats:(BOOL)repeats queue:(dispatch_queue_t)queue block:(void (^)(void))block;
 
 /**启动*/
@@ -78,10 +79,10 @@ typedef enum : NSInteger {
 
 +(instancetype)shareInstance;
 
-/***初始化多语言功能*/
+/**初始化多语言功能*/
 - (void)tfy_initLanguage;
 
-/***当前语言*/
+/**当前语言*/
 - (NSString *)tfy_currentLanguage;
 
 /***设置要转换的语言*/

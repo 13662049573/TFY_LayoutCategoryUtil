@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blueColor];
+    self.view.backgroundColor = TFY_ColorHexString(@"ffffff");
     
     UIButtonModelSet().backgroundColor(UIColor.orangeColor).text(@"这是一个按钮", UIControlStateNormal).font([UIFont systemFontOfSize:15 weight:UIFontWeightBold]).assignTo(^(__kindof UIView * _Nonnull view) {
         self.confirmButton = view;
@@ -38,7 +38,7 @@
         self.titleLabel = view;
     });
     
-    UITextFieldModelSet().placeholder(@"这是一个输入框").placeholderColor(UIColor.whiteColor).allowsEditingTextAttributes(YES).font([UIFont systemFontOfSize:30 weight:UIFontWeightBold]).textColor(UIColor.redColor).backgroundColor(UIColor.lightTextColor).cornerRadius(10).addToSuperView(self.view).assignTo(^(__kindof UIView * _Nonnull view) {
+    UITextFieldModelSet().placeholder(@"这是一个输入框").placeholderColor(UIColor.lightTextColor).allowsEditingTextAttributes(YES).font([UIFont systemFontOfSize:30 weight:UIFontWeightBold]).textColor(UIColor.redColor).backgroundColor(UIColor.lightTextColor).cornerRadius(10).addToSuperView(self.view).assignTo(^(__kindof UIView * _Nonnull view) {
         self.textfiled = view;
     }).makeMasonry(^(MASConstraintMaker * _Nonnull make) {
         make.left.equalTo(self.titleLabel);
@@ -47,7 +47,7 @@
         make.height.mas_equalTo(80);
     });
     
-    UIViewModelSet().backgroundColor(UIColor.redColor).clipRadius(CornerClipTypeBothTop, 10).addToSuperView(self.view).makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+    UIViewModelSet().backgroundColor(TFY_ColorHexString(@"4e5f6g")).clipRadius(CornerClipTypeBothTop, 10).addToSuperView(self.view).makeMasonry(^(MASConstraintMaker * _Nonnull make) {
            make.left.equalTo(self.titleLabel);
            make.right.equalTo(self.titleLabel);
            make.top.equalTo(self.textfiled.mas_bottom).offset(20);
