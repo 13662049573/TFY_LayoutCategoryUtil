@@ -19,17 +19,21 @@
         [CATransaction commit];
 
 #pragma mark-------------------------------------------属性对象---------------------------------------------
-
-/**BLOCK*/
-#define TFY_CATEGORY_CHAIN_BLOCK_PROPERTY @property (nonatomic, copy, nullable)
-/**assign*/
-#define TFY_CATEGORY_ASSIGN_PROPERTY @property(nonatomic , assign)
-/** weak*/
-#define TFY_CATEGORY_WEAK_PROPERTY @property(nonatomic , weak)
 //copy
 #define TFY_CATEGORY_CHAIN_PROPERTY @property (nonatomic, copy, readonly)
 //strong
 #define TFY_CATEGORY_STRONG_PROPERTY @property (nonatomic, strong, readonly)
+
+//copy category
+#define TFY_PROPERTY_CHAIN @property (nonatomic, copy)
+//strong
+#define TFY_PROPERTY_STRONG @property (nonatomic, strong)
+/**BLOCK*/
+#define TFY_PROPERTY_CHAIN_BLOCK @property (nonatomic, copy, nullable)
+/**assign*/
+#define TFY_PROPERTY_ASSIGN @property(nonatomic , assign)
+/** weak*/
+#define TFY_PROPERTY_WEAK @property(nonatomic , weak)
 
 /**点语法*/
 #pragma mark-------------------------------------------点语法---------------------------------------------
