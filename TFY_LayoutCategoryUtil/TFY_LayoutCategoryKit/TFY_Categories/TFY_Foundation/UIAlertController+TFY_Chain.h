@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-static inline UIAlertController * _Nonnull UIAlertControllerCreate(NSString *_Nullable title, NSString *_Nullable message, UIAlertControllerStyle style){
+CG_INLINE UIAlertController * _Nonnull TFY_AlertControllerCreate(NSString *_Nullable title, NSString *_Nullable message, UIAlertControllerStyle style){
     return [UIAlertController alertControllerWithTitle:title message:message preferredStyle:style];
 }
-static inline UIAlertController * _Nonnull UIAlertControllerAlertCreate(NSString *_Nullable title,NSString *_Nullable message){
+CG_INLINE UIAlertController * _Nonnull TFY_AlertControllerAlertCreate(NSString *_Nullable title,NSString *_Nullable message){
     return [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
 }
-static inline UIAlertController * _Nonnull UIAlertControllerSheetCreate(NSString *_Nullable title, NSString *_Nullable message){
+CG_INLINE UIAlertController * _Nonnull TFY_AlertControllerSheetCreate(NSString *_Nullable title, NSString *_Nullable message){
     return [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleActionSheet];
 }
 typedef void (^AlertTapBlock)(NSInteger index, UIAlertAction * _Nonnull action);
