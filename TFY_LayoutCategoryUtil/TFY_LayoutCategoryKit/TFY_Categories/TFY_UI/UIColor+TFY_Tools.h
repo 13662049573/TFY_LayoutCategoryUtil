@@ -168,11 +168,11 @@ typedef NS_ENUM(NSInteger, GradientChangeDirection) {
 - (UIColor *)tfy_antiColor;
 
 @end
-
+/**十六进制字符串获取颜色*/
 CG_INLINE UIColor *TFY_ColorHexString(NSString *hexString){
     return [UIColor tfy_colorWithHexString:hexString];
 }
-
+/**十六进制字符串获取颜色，alpha需要自己传递*/
 CG_INLINE UIColor *TFY_ColorHexAlpha(NSString *hexString, CGFloat alpha){
     return [UIColor tfy_colorWithHexString:hexString alpha:alpha];
 }
