@@ -149,7 +149,6 @@ TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(transform, CGAffineTransform)
         [self enumerateObjectsUsingBlock:^(UIView * _Nonnull obj) {
             [obj endEditing:end];
         }];
-        
         return self;
     };
 }

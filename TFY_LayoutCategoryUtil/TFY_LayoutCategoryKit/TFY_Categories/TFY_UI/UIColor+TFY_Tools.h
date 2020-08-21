@@ -194,6 +194,10 @@ CG_INLINE UIColor *TFY_ColorRGBAlphaPercent(CGFloat r, CGFloat g, CGFloat b, CGF
 CG_INLINE UIColor *TFY_ColorRGBPercent(CGFloat r, CGFloat g, CGFloat b){
     return TFY_ColorRGBAlphaPercent(r,g,b,1);
 }
+/**渐变色*/
+CG_INLINE UIColor *TFY_ColorGradient(CGSize size,GradientChangeDirection direction,UIColor *starcolor,UIColor *endcolor){
+    return [UIColor tfy_colorGradientChangeWithSize:size direction:direction startColor:starcolor endColor:endcolor];
+}
 
 #define RGBAlphaPercent(r,g,b,a) UIColorRGBAlphaPercent(r,g,b,a)
 
