@@ -13,7 +13,6 @@
 #import "UIScreen+TFY_Tools.h"
 #import "UIFont+TFY_Tools.h"
 #import "UIControl+TFY_Tools.h"
-#import "UIAlertController+TFY_Tools.h"
 #import "UIDevice+TFY_Tools.h"
 #import "NSObject+TFY_Tools.h"
 #import "NSArray+TFY_Tools.h"
@@ -25,5 +24,6 @@
 #import "NSTimer+TFY_Tools.h"
 #import "NSData+TFY_Data.h"
 #import "NSDate+TFY_Date.h"
+#import "UIAlertController+TFY_Chain.h"
 
 #endif /* TFY_FoundationHeader_h */
