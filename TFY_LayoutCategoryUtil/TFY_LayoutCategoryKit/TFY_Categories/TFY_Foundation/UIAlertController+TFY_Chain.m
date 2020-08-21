@@ -1,33 +1,31 @@
 //
-//  UIAlertController+TFY_Tools.m
-//  TFY_LayoutCategoryUtil
+//  UIAlertController+TFY_Chain.m
+//  TFY_Category
 //
-//  Created by tiandengyou on 2020/3/30.
-//  Copyright © 2020 田风有. All rights reserved.
+//  Created by 田风有 on 2019/11/23.
+//  Copyright © 2019 恋机科技. All rights reserved.
 //
 
-#import "UIAlertController+TFY_Tools.h"
+#import "UIAlertController+TFY_Chain.h"
 #import <objc/runtime.h>
 
-static void *ktfy_ActionBlock = & ktfy_ActionBlock;
-static void *ktfyCategoryActionViewController = &ktfyCategoryActionViewController;
-static void *ktfyCategoryActionViewActionIndex = &ktfyCategoryActionViewActionIndex;
+static void *kActionBlock = & kActionBlock;
+static void *kCategoryActionViewController = &kCategoryActionViewController;
+
 @interface UIAlertActionWithController : NSObject
 @property (nonatomic, weak) UIAlertController * alertViewController;
 @end
 @implementation UIAlertActionWithController
-
-
 @end
 
-@implementation UIAlertAction (TFY_Tools)
+@implementation UIAlertAction (Category)
 
 - (void)setAlertViewController:(UIAlertActionWithController *)model{
-    objc_setAssociatedObject(self, ktfyCategoryActionViewController, model, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, kCategoryActionViewController, model, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (UIAlertActionWithController *)alertViewActionWithController{
-    return objc_getAssociatedObject(self, ktfyCategoryActionViewController);
+    return objc_getAssociatedObject(self, kCategoryActionViewController);
 }
 
 - (UIAlertController *)tfy_alertViewController{
@@ -42,51 +40,37 @@ static void *ktfyCategoryActionViewActionIndex = &ktfyCategoryActionViewActionIn
     [self setValue:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forKey:@"image"];
 }
 
-- (NSInteger)tfy_actionTag{
-    return [objc_getAssociatedObject(self, ktfyCategoryActionViewActionIndex) integerValue];
-}
-
-- (void)setTfy_actionTag:(NSInteger)tfy_actionTag{
-    objc_setAssociatedObject(self, ktfyCategoryActionViewActionIndex, @(tfy_actionTag), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 @end
 
-@implementation UIAlertController (TFY_Tools)
 
-- (UIAlertController * _Nonnull (^)(NSString * _Nonnull, UIAlertActionStyle))tfy_addAction{
-    return ^ (NSString *title, UIAlertActionStyle style){
+@implementation UIAlertController (TFY_Chain)
+
+- (UIAlertController * _Nonnull (^)(NSString * _Nonnull, UIAlertActionStyle, NSInteger))tfy_addAction{
+    return ^ (NSString *title, UIAlertActionStyle style, NSInteger index){
         
         __weak typeof(self)weakSelf = self;
         [self tfy_addActionTitle:title style:style block:^(UIAlertAction * _Nonnull action) {
             if ([weakSelf tfy_actionBlock]) {
-                [weakSelf tfy_actionBlock](action.tfy_actionTag, action);
+                [weakSelf tfy_actionBlock](index, action);
             }
         }];
         return self;
     };
 }
 
-- (UIAlertController * _Nonnull (^)(NSInteger))tfy_actionIndex{
-    return ^ (NSInteger index){
-        self.actions.lastObject.tfy_actionTag = index;
-        return self;
+- (UIAlertController * _Nonnull (^)(NSString * _Nonnull, NSInteger))tfy_addDesAction{
+    return ^ (NSString *title, NSInteger index){
+        return self.tfy_addAction(title, UIAlertActionStyleDestructive, index);
     };
 }
-
-- (UIAlertController * _Nonnull (^)(NSString * _Nonnull))tfy_addDesAction{
-    return ^ (NSString *title){
-        return self.tfy_addAction(title, UIAlertActionStyleDestructive);
+- (UIAlertController * _Nonnull (^)(NSString * _Nonnull, NSInteger))tfy_addCancelAction{
+    return ^ (NSString *title, NSInteger index){
+        return self.tfy_addAction(title, UIAlertActionStyleCancel, index);
     };
 }
-- (UIAlertController * _Nonnull (^)(NSString * _Nonnull))tfy_addCancelAction{
-    return ^ (NSString *title){
-        return self.tfy_addAction(title, UIAlertActionStyleCancel);
-    };
-}
-- (UIAlertController * _Nonnull (^)(NSString * _Nonnull))tfy_addDefaultAction{
-    return ^ (NSString *title){
-        return self.tfy_addAction(title, UIAlertActionStyleDefault);
+- (UIAlertController * _Nonnull (^)(NSString * _Nonnull, NSInteger))tfy_addDefaultAction{
+    return ^ (NSString *title, NSInteger index){
+        return self.tfy_addAction(title, UIAlertActionStyleDefault, index);
     };
 }
 
@@ -99,8 +83,8 @@ static void *ktfyCategoryActionViewActionIndex = &ktfyCategoryActionViewActionIn
     };
 }
 
-- (UIAlertController * _Nonnull (^)(tfy_AlertTapBlock _Nonnull))tfy_actionTap{
-    return ^ (tfy_AlertTapBlock block){
+- (UIAlertController * _Nonnull (^)(AlertTapBlock _Nonnull))tfy_actionTap{
+    return ^ (AlertTapBlock block){
         [self setWtc_actionBlock:block];
         return self;
     };
@@ -126,25 +110,26 @@ static void *ktfyCategoryActionViewActionIndex = &ktfyCategoryActionViewActionIn
     return [self.actions lastObject];
 }
 
-- (tfy_AlertTapBlock)tfy_actionBlock{
-    return objc_getAssociatedObject(self, ktfy_ActionBlock);
+- (AlertTapBlock)tfy_actionBlock{
+    return objc_getAssociatedObject(self, kActionBlock);
 }
 
-- (void)setWtc_actionBlock:(tfy_AlertTapBlock)block{
-    objc_setAssociatedObject(self, ktfy_ActionBlock, block,OBJC_ASSOCIATION_COPY);
+
+- (void)setWtc_actionBlock:(AlertTapBlock)block{
+    objc_setAssociatedObject(self, kActionBlock, block,OBJC_ASSOCIATION_COPY);
 }
 
 
 - (UIAlertController * _Nonnull (^)(NSUInteger))tfy_alertTitleMaxNum{
     return ^ (NSUInteger number){
-        [self tfy_setACTitleLineMaxNumber:number];
+        [self tfy_setTitleLineMaxNumber:number];
         return self;
     };
 }
 
 - (UIAlertController * _Nonnull (^)(NSLineBreakMode))tfy_alertTitleLineBreakMode{
     return ^ (NSLineBreakMode mode){
-        [self tfy_setACTitleLineBreakModel:mode];
+        [self tfy_setTitleLineBreakModel:mode];
         return self;
     };
 }
@@ -166,9 +151,9 @@ static void *ktfyCategoryActionViewActionIndex = &ktfyCategoryActionViewActionIn
             attribute(dic);
         }
         if (self.message.length > 0) {
-            [self tfy_setACTitleAttributedString:[[NSAttributedString alloc]initWithString:self.title attributes:dic]];
+            [self tfy_setTitleAttributedString:[[NSAttributedString alloc]initWithString:self.title attributes:dic]];
         }else{
-            [self tfy_setACTitleAttributedString:nil];
+            [self tfy_setTitleAttributedString:nil];
         }
         return self;
     };
@@ -190,30 +175,31 @@ static void *ktfyCategoryActionViewActionIndex = &ktfyCategoryActionViewActionIn
             attribute(dic);
         }
         if (self.message.length > 0) {
-            [self tfy_setACMessageAttributedString:[[NSAttributedString alloc]initWithString:self.message attributes:dic]];
+            [self tfy_setMessageAttributedString:[[NSAttributedString alloc]initWithString:self.message attributes:dic]];
         }else{
-            [self tfy_setACMessageAttributedString:nil];
+            [self tfy_setMessageAttributedString:nil];
         }
         return self;
     };
 }
-- (void)tfy_setACTitleAttributedString:(NSAttributedString *)attributedString{
+
+- (void)tfy_setTitleAttributedString:(NSAttributedString *)attributedString{
     [self setValue:attributedString forKey:@"attributedTitle"];
 }
 
-- (void)tfy_setACDetailAttributedString:(NSAttributedString *)attributedString{
+- (void)tfy_setDetailAttributedString:(NSAttributedString *)attributedString{
     [self setValue:attributedString forKey:@"_attributedDetailMessage"];
 }
 
-- (void)tfy_setACMessageAttributedString:(NSAttributedString *)attributedString{
+- (void)tfy_setMessageAttributedString:(NSAttributedString *)attributedString{
     [self setValue:attributedString forKey:@"attributedMessage"];
 }
 
-- (void)tfy_setACTitleLineMaxNumber:(NSInteger)number{
+- (void)tfy_setTitleLineMaxNumber:(NSInteger)number{
     [self setValue:@(number) forKey:@"titleMaximumLineCount"];
 }
 
-- (void)tfy_setACTitleLineBreakModel:(NSLineBreakMode)mode{
+- (void)tfy_setTitleLineBreakModel:(NSLineBreakMode)mode{
     [self setValue:@(mode) forKey:@"titleLineBreakMode"];
 }
 
@@ -226,5 +212,11 @@ static void *ktfyCategoryActionViewActionIndex = &ktfyCategoryActionViewActionIn
     return action;
 }
 
+- (UIAlertController * _Nonnull (^)(UIViewController * _Nonnull))tfy_showFromViewController{
+    return  ^ (UIViewController *vc){
+        [vc presentViewController:self animated:YES completion:nil];
+        return self;
+    };
+}
 
 @end
