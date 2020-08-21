@@ -86,6 +86,35 @@
     return nil;
 }
 
+/**
+ *   返回字典所获取的数据
+ */
++(nullable NSDictionary *)tfy_pathForResource:(nullable NSString *)name ofType:(nullable NSString *)ext{
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:ext];
+    
+    NSString *shoppingStr = [NSString stringWithContentsOfFile:path usedEncoding:nil error:nil];
+    
+    NSDictionary *shoppingDic = [self tfy_dictionaryWithJsonString:shoppingStr];
+    
+    return shoppingDic;
+}
+
++(NSDictionary *)tfy_dictionaryWithJsonString:(NSString *)jsonString
+{
+    if (jsonString == nil) {
+        return nil;
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+    if(err)
+    {
+        return nil;
+    }
+    return dic;
+}
+
 @end
 
 
