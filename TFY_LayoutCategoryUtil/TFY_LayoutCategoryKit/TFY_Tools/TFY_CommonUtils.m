@@ -13,6 +13,7 @@
 #pragma 获取网络系统库头文件
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import <SystemConfiguration/SystemConfiguration.h>
+#import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #pragma 手机授权需求系统库头文件
 #import <Photos/Photos.h>
@@ -286,22 +287,137 @@ const char* jailbreak_tool_pathes[] = {
 
 //针对蜂窝网络判断是3G或者4G
 +(NSString *)tfy_getNetType{
-    NSString *netconnType = nil;
-    CTTelephonyNetworkInfo *info = [[CTTelephonyNetworkInfo alloc] init];
-    NSString *currentStatus = info.currentRadioAccessTechnology;
-    if ([currentStatus isEqualToString:@"CTRadioAccessTechnologyGPRS"]) {netconnType = @"GPRS";}
-    else if ([currentStatus isEqualToString:@"CTRadioAccessTechnologyEdge"]) {netconnType = @"2.75G EDGE";}
-    else if ([currentStatus isEqualToString:@"CTRadioAccessTechnologyWCDMA"]){netconnType = @"3G";}
-    else if ([currentStatus isEqualToString:@"CTRadioAccessTechnologyHSDPA"]){netconnType = @"3.5G HSDPA";}
-    else if ([currentStatus isEqualToString:@"CTRadioAccessTechnologyHSUPA"]){netconnType = @"3.5G HSUPA";}
-    else if ([currentStatus isEqualToString:@"CTRadioAccessTechnologyCDMA1x"]){netconnType = @"2G";}
-    else if ([currentStatus isEqualToString:@"CTRadioAccessTechnologyCDMAEVDORev0"]){netconnType = @"3G";}
-    else if ([currentStatus isEqualToString:@"CTRadioAccessTechnologyCDMAEVDORevA"]){netconnType = @"3G";}
-    else if ([currentStatus isEqualToString:@"CTRadioAccessTechnologyCDMAEVDORevB"]){netconnType = @"3G";}
-    else if ([currentStatus isEqualToString:@"CTRadioAccessTechnologyeHRPD"]){netconnType = @"HRPD";}
-    else if ([currentStatus isEqualToString:@"CTRadioAccessTechnologyLTE"]){netconnType = @"4G";}
+    __block NSString *netconnType = nil;
+    NSArray *typeStrings2G = @[CTRadioAccessTechnologyEdge,
+            CTRadioAccessTechnologyGPRS,
+            CTRadioAccessTechnologyCDMA1x];
+      
+     NSArray *typeStrings3G = @[CTRadioAccessTechnologyHSDPA,
+            CTRadioAccessTechnologyWCDMA,
+            CTRadioAccessTechnologyHSUPA,
+            CTRadioAccessTechnologyCDMAEVDORev0,
+            CTRadioAccessTechnologyCDMAEVDORevA,
+            CTRadioAccessTechnologyCDMAEVDORevB,
+            CTRadioAccessTechnologyeHRPD];
+      
+     NSArray *typeStrings4G = @[CTRadioAccessTechnologyLTE];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        CTTelephonyNetworkInfo *teleInfo= [[CTTelephonyNetworkInfo alloc] init];
+        if (@available(iOS 12.0, *)) {
+            NSDictionary<NSString *, NSString *> *currentStatus = teleInfo.serviceCurrentRadioAccessTechnology;
+            if (currentStatus.allKeys.count==0) {
+                netconnType = @"未知";
+            }
+            [currentStatus enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+                if ([typeStrings4G containsObject:obj]) {
+                    netconnType = @"4G";
+                } else if ([typeStrings3G containsObject:obj]) {
+                    netconnType = @"3G";
+                } else if ([typeStrings2G containsObject:obj]) {
+                    netconnType = @"2G";
+                } else {
+                    netconnType = @"未知";
+                }
+            }];
+        } else {
+            NSString *accessString = teleInfo.currentRadioAccessTechnology;
+            if ([typeStrings4G containsObject:accessString]) {
+                netconnType = @"4G";
+            } else if ([typeStrings3G containsObject:accessString]) {
+                netconnType = @"3G";
+            } else if ([typeStrings2G containsObject:accessString]) {
+                netconnType = @"2G";
+            } else {
+                netconnType = @"未知";
+            }
+        }
+    }
+    else {
+       netconnType = @"未知";
+    }
     return netconnType;
 }
+/**是否开插sim卡*/
++ (BOOL)simCardInseerted {
+    CTTelephonyNetworkInfo *netIInfo = [[CTTelephonyNetworkInfo alloc] init];
+    __block BOOL result = NO;
+    if (@available(iOS 12.0, *)) {
+        NSDictionary<NSString *, CTCarrier *>*currentStatus = netIInfo.serviceSubscriberCellularProviders;
+        [currentStatus enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, CTCarrier * _Nonnull obj, BOOL * _Nonnull stop) {
+            if (obj.isoCountryCode.length) {
+                *stop = YES;
+                result = YES;
+            }
+        }];
+    } else {
+        CTCarrier *obj = netIInfo.subscriberCellularProvider;
+        if (obj.isoCountryCode.length) {
+            result = YES;
+        }
+    }
+    return result;
+}
+
+// 获取运营商类型
++ (SSOperatorsType)tfy_getOperatorsType{
+    CTTelephonyNetworkInfo *telephonyInfo = [[CTTelephonyNetworkInfo alloc] init];
+    if (@available(iOS 12.0, *)) {
+        NSDictionary *dic = telephonyInfo.serviceSubscriberCellularProviders;
+        if (dic.count == 2) {
+            //双卡
+            UIApplication *app = [UIApplication sharedApplication];
+            id statusBar = [app valueForKeyPath:@"statusBar"];
+            
+            if ([statusBar isKindOfClass:NSClassFromString(@"UIStatusBar_Modern")]) {
+                id curData = [statusBar valueForKeyPath:@"statusBar.currentData.cellularEntry.string"];
+                if ([curData isEqualToString:@"中国电信"]) {
+                    return SSOperatorsTypeTelecom;
+                }else if ([curData isEqualToString:@"中国联通"]){
+                    return SSOperatorsTypeChinaUnicom;
+                }else if ([curData isEqualToString:@"中国移动"]){
+                    return SSOperatorsTypeChinaMobile;
+                }
+            }else{
+                return SSOperatorsTypeUnknown;
+            }
+        }
+    }
+    CTCarrier *carrier = [telephonyInfo subscriberCellularProvider];
+    NSString *currentCountryCode = [carrier mobileCountryCode];
+    NSString *mobileNetWorkCode = [carrier mobileNetworkCode];
+    
+    if (![currentCountryCode isEqualToString:@"460"]) {
+        return SSOperatorsTypeUnknown;
+    }
+    if ([mobileNetWorkCode isEqualToString:@"00"] ||
+        [mobileNetWorkCode isEqualToString:@"02"] ||
+        [mobileNetWorkCode isEqualToString:@"07"]) {
+        // 中国移动
+        return SSOperatorsTypeChinaMobile;
+    }
+    
+    if ([mobileNetWorkCode isEqualToString:@"01"] ||
+        [mobileNetWorkCode isEqualToString:@"06"] ||
+        [mobileNetWorkCode isEqualToString:@"09"]) {
+        // 中国联通
+        return SSOperatorsTypeChinaUnicom;
+    }
+    
+    if ([mobileNetWorkCode isEqualToString:@"03"] ||
+        [mobileNetWorkCode isEqualToString:@"05"] ||
+        [mobileNetWorkCode isEqualToString:@"11"]) {
+        // 中国电信
+        return SSOperatorsTypeTelecom;
+    }
+    
+    if ([mobileNetWorkCode isEqualToString:@"20"]) {
+        // 中国铁通
+        return SSOperatorsTypeChinaTietong;
+    }
+    return SSOperatorsTypeUnknown;
+}
+
 
 +(NSString *)tfy_getDeviceIDFV{
     NSString* idfvStr      = [[UIDevice currentDevice] identifierForVendor].UUIDString;
@@ -2881,9 +2997,16 @@ static CGRect oldframe;
  *  反归档
  */
 +(NSArray *)tfy_keyedUnArchiverForKey:(NSString *)key FromFile:(NSString *)path{
+    NSError *error=nil;
     NSData *data=[NSData dataWithContentsOfFile:path];
-    NSKeyedUnarchiver *unArch=[[NSKeyedUnarchiver alloc]initForReadingWithData:data];
-    NSArray *arr = [unArch decodeObjectForKey:key];
+    NSArray *arr;
+    if (@available(iOS 11.0, *)) {
+        NSKeyedUnarchiver *unArch=[[NSKeyedUnarchiver alloc] initForReadingFromData:data error:&error];
+        arr = [unArch decodeObjectForKey:key];
+    } else {
+        NSKeyedUnarchiver *unArch=[[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+        arr = [unArch decodeObjectForKey:key];
+    }
     return arr;
 }
 
