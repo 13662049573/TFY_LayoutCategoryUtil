@@ -147,10 +147,18 @@ static TFY_HandlerVideo *instance = nil;
     CGSize size = CGSizeMake(CGImageGetWidth(img.CGImage), CGImageGetHeight(img.CGImage));
     //    NSLog(@"Size: %@", NSStringFromCGSize(size));
     
-    NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:AVVideoCodecH264, AVVideoCodecKey,
-                                   [NSNumber numberWithInt:size.width], AVVideoWidthKey,
-                                   [NSNumber numberWithInt:size.height], AVVideoHeightKey, nil];
-    AVAssetWriterInput *writerInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:videoSettings];
+    AVAssetWriterInput *writerInput;
+    if (@available(iOS 11.0, *)) {
+        NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:AVVideoCodecTypeH264, AVVideoCodecKey,
+                                       [NSNumber numberWithInt:size.width], AVVideoWidthKey,
+                                       [NSNumber numberWithInt:size.height], AVVideoHeightKey, nil];
+       writerInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:videoSettings];
+    } else {
+        NSDictionary *videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:AVVideoCodecH264, AVVideoCodecKey,
+                                       [NSNumber numberWithInt:size.width], AVVideoWidthKey,
+                                       [NSNumber numberWithInt:size.height], AVVideoHeightKey, nil];
+       writerInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:videoSettings];
+    }
     
     NSDictionary *sourcePixelBufferAttributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:kCVPixelFormatType_32ARGB], kCVPixelBufferPixelFormatTypeKey, nil];
     
