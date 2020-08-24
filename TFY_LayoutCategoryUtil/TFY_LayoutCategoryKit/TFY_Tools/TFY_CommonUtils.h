@@ -24,6 +24,15 @@ typedef enum : NSInteger {
     TFY_ReachableViaWWAN
 } TFY_NetworkStatus;
 
+typedef enum : NSUInteger {
+    SSOperatorsTypeChinaTietong,//中国铁通
+    SSOperatorsTypeTelecom,//中国电信
+    SSOperatorsTypeChinaUnicom,//中国联通
+    SSOperatorsTypeChinaMobile,//中国移动
+    SSOperatorsTypeUnknown,//未知
+} SSOperatorsType;
+
+
 extern NSString *kReachabilityChangedNotification;
 
 #pragma mark****************************************手机权限授权方法开始****************************************
@@ -191,7 +200,8 @@ typedef enum : NSInteger {
 
 /***  针对蜂窝网络判断是3G或者4G*/
 +(NSString *)tfy_getNetType;
-
+/**获取营运商*/
++(SSOperatorsType)tfy_getOperatorsType;
 /***  获取设备IDFV*/
 +(NSString *)tfy_getDeviceIDFV;
 
@@ -399,6 +409,8 @@ typedef enum : NSInteger {
  * 识别整体字符串里面是否包含指定字符串  YES
  */
 +(BOOL)tfy_judgmentstring:(NSString *)string OfString:(NSString *)ofString;
+/**是否开插sim卡*/
++ (BOOL)simCardInseerted;
 #pragma mark****************************************没有返回方法****************************************
 
 #pragma  mark - NSUserDefaults存取操作

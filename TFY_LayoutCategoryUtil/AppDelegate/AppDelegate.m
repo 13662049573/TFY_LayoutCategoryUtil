@@ -24,7 +24,6 @@
            self.window.backgroundColor = [UIColor whiteColor];
            [self.window makeKeyAndVisible];
        }
-       
        [[TFY_ScenePackageTools defaultPackage] addBeforeWindowEvent:^(TFY_ScenePackageTools * _Nonnull application) {
            if ([GuideViewController isFirstRun])
            {
