@@ -233,7 +233,9 @@ CG_INLINE void UI_swizzleButtonIfNeed(Class swizzleClass){
 }
 
 - (void)tfy_endTimer{
-    dispatch_source_cancel(self.timer);
+    if (self.timer) {
+        dispatch_source_cancel(self.timer);
+    }
 }
 
 @end

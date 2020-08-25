@@ -47,6 +47,7 @@ TFY_CATEGORY_CHAIN_PROPERTY TFY_ButtonChainModel *(^ numberOfLines)(NSInteger);
 TFY_CATEGORY_CHAIN_PROPERTY TFY_ButtonChainModel *(^ lineBreakMode)(NSLineBreakMode);
 TFY_CATEGORY_CHAIN_PROPERTY TFY_ButtonChainModel *(^ adjustsFontSizeToFitWidth)(BOOL);
 TFY_CATEGORY_CHAIN_PROPERTY TFY_ButtonChainModel *(^ baselineAdjustment)(UIBaselineAdjustment);
+TFY_CATEGORY_CHAIN_PROPERTY TFY_ButtonChainModel *(^ contentHorizontalAlignment)(UIControlContentHorizontalAlignment);
 
 
 TFY_CATEGORY_CHAIN_PROPERTY TFY_ButtonChainModel * (^ imageDirection) (ButtonImageDirection, CGFloat);

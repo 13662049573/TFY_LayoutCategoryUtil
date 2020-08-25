@@ -153,7 +153,7 @@
         NSFontAttributeName :Font(PingFangReguler, 13),
         NSForegroundColorAttributeName:TFY_ColorHexString(@"000000")
     }];
-    
+    self.titleLabel.makeChain.attributedText(attribute);
     _contentTextView.linkTextAttributes = @{NSForegroundColorAttributeName:TFY_ColorHexString(@"FF7800")};
    
 }
@@ -175,7 +175,9 @@
 
 #pragma mark - UITextViewDelegate -
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange{
+
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction{
     MOBPolicyWebViewController *vc = [MOBPolicyWebViewController new];
     vc.title = @"《MobTech隐私政策》";
     vc.extraInfo[@"url"] = URL;

@@ -173,7 +173,7 @@
 
 #pragma mark - UITextViewDelegate -
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange{
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction{
     MOBPolicyWebViewController *vc = [MOBPolicyWebViewController new];
     vc.title = @"《TFY_Tech隐私政策》";
     vc.extraInfo[@"url"] = @"https://www.baidu.com";

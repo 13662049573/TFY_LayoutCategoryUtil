@@ -39,6 +39,16 @@ TFY_CATEGORY_CHAIN_BUTTONLABEL_IMPLEMENTATION(lineBreakMode, NSLineBreakMode)
 TFY_CATEGORY_CHAIN_BUTTONLABEL_IMPLEMENTATION(adjustsFontSizeToFitWidth, BOOL)
 TFY_CATEGORY_CHAIN_BUTTONLABEL_IMPLEMENTATION(baselineAdjustment, UIBaselineAdjustment)
 
+
+- (TFY_ButtonChainModel * _Nonnull (^)(UIControlContentHorizontalAlignment))contentHorizontalAlignment{
+    return ^ (UIControlContentHorizontalAlignment alignment){
+        [self enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj) {
+            obj.contentHorizontalAlignment = alignment;
+        }];
+        return self;
+    };
+}
+
 - (TFY_ButtonChainModel * _Nonnull (^)(UIImage * _Nonnull, UIControlState))image{
     return ^ (UIImage *image, UIControlState state){
         [self enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj) {

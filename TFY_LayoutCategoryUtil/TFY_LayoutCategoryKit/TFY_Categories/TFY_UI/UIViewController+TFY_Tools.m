@@ -28,7 +28,6 @@
 }
 
 - (void)tfy_viewWillAppear:(BOOL)animated {
-
     [self tfy_viewWillAppear:animated];
     UIScrollView *scrollView = nil;
     for (UIView *view in self.view.subviews) {
@@ -37,15 +36,8 @@
             break;
         }
     }
-    if (!self.automaticallyAdjustsScrollViewInsets) {
-        if (@available(iOS 11.0, *)) {
-            scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
-    }
-    else {
-        if (@available(iOS 11.0, *)) {
-            scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
-        }
+    if (@available(iOS 11.0, *)) {
+        scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
 }
 
