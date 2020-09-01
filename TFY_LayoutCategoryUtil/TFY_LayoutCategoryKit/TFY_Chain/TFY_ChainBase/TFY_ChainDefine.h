@@ -34,7 +34,7 @@
 #define TFY_PROPERTY_CHAIN_BLOCK(name,action) @property(nonatomic, copy, nullable) void(^name)(action)
 
 #define TFY_PROPERTY_BOOL(s) TFY_PROPERTY_ASSIGN BOOL  s
-#define TFY_PROPERTY_String(s) TFY_PROPERTY_CHAIN NSString * s
+#define TFY_PROPERTY_NSString(s) TFY_PROPERTY_CHAIN NSString * s
 #define TFY_PROPERTY_NSUInteger(s) TFY_PROPERTY_ASSIGN NSUInteger  s
 #define TFY_PROPERTY_NSInteger(s) TFY_PROPERTY_ASSIGN NSInteger  s
 #define TFY_PROPERTY_Float(s) TFY_PROPERTY_ASSIGN float  s
