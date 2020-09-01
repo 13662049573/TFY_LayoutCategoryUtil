@@ -33,17 +33,17 @@
 #define TFY_PROPERTY_WEAK @property(nonatomic , weak)
 #define TFY_PROPERTY_CHAIN_BLOCK(name,action) @property(nonatomic, copy, nullable) void(^name)(action)
 
-#define TFY_PROPERTY_BOOL(s) TFY_PROPERTY_ASSIGN BOOL  s
-#define TFY_PROPERTY_NSString(s) TFY_PROPERTY_CHAIN NSString * s
-#define TFY_PROPERTY_NSUInteger(s) TFY_PROPERTY_ASSIGN NSUInteger  s
-#define TFY_PROPERTY_NSInteger(s) TFY_PROPERTY_ASSIGN NSInteger  s
-#define TFY_PROPERTY_Float(s) TFY_PROPERTY_ASSIGN float  s
-#define TFY_PROPERTY_LongLong(s) TFY_PROPERTY_ASSIGN long long s
-#define TFY_PROPERTY_NSDictionary(s) TFY_PROPERTY_STRONG NSDictionary * s
-#define TFY_PROPERTY_NSArray(s) TFY_PROPERTY_CHAIN NSArray * s
-#define TFY_PROPERTY_NSMutableArray(s) TFY_PROPERTY_STRONG NSMutableArray * s
-#define TFY_PROPERTY_NSData(s) TFY_PROPERTY_STRONG NSData * s
-#define TFY_PROPERTY_NSMutableDictionary(s) TFY_PROPERTY_STRONG NSMutableDictionary * s
+#define TFY_PROPERTY_BOOL(name) TFY_PROPERTY_ASSIGN BOOL  name
+#define TFY_PROPERTY_NSString(name) TFY_PROPERTY_CHAIN NSString * name
+#define TFY_PROPERTY_NSUInteger(name) TFY_PROPERTY_ASSIGN NSUInteger  name
+#define TFY_PROPERTY_NSInteger(name) TFY_PROPERTY_ASSIGN NSInteger  name
+#define TFY_PROPERTY_Float(name) TFY_PROPERTY_ASSIGN float  name
+#define TFY_PROPERTY_LongLong(name) TFY_PROPERTY_ASSIGN long long name
+#define TFY_PROPERTY_NSDictionary(name) TFY_PROPERTY_STRONG NSDictionary * name
+#define TFY_PROPERTY_NSArray(name) TFY_PROPERTY_CHAIN NSArray * name
+#define TFY_PROPERTY_NSMutableArray(name) TFY_PROPERTY_STRONG NSMutableArray * name
+#define TFY_PROPERTY_NSData(name) TFY_PROPERTY_STRONG NSData * name
+#define TFY_PROPERTY_NSMutableDictionary(name) TFY_PROPERTY_STRONG NSMutableDictionary * name
 
 /**快捷创建对象属性 如 (Label) (name)*/
 #define TFY_PROPERTY_OBJECT(object,name) TFY_PROPERTY_STRONG object  * name
