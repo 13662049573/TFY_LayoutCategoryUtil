@@ -12,7 +12,7 @@
 TFY_PROPERTY_OBJECT(UIButton, confirmButton);
 TFY_PROPERTY_OBJECT(UILabel, titleLabel);
 TFY_PROPERTY_OBJECT(UITextField, textfiled);
-TFY_PROPERTY_String(name);
+TFY_PROPERTY_NSString(name);
 TFY_PROPERTY_CHAIN_BLOCK(my_block, NSDictionary *dict);
 @end
 
