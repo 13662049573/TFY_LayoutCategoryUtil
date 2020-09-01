@@ -24,16 +24,34 @@
 //strong
 #define TFY_CATEGORY_STRONG_PROPERTY @property (nonatomic, strong, readonly)
 
+
+#pragma mark - 属性快速声明
+
 //copy category
 #define TFY_PROPERTY_CHAIN @property (nonatomic, copy)
 //strong
 #define TFY_PROPERTY_STRONG @property (nonatomic, strong)
 /**BLOCK*/
-#define TFY_PROPERTY_CHAIN_BLOCK @property (nonatomic, copy, nullable)
+#define TFY_PROPERTY_CHAIN_BLOCK(name)(action) @property(nonatomic, copy, nullable) void(^name)(action)
 /**assign*/
 #define TFY_PROPERTY_ASSIGN @property(nonatomic , assign)
 /** weak*/
 #define TFY_PROPERTY_WEAK @property(nonatomic , weak)
+//property 属性快速声明
+#define TFY_PROPERTY_BOOL(s) TFY_PROPERTY_ASSIGN BOOL  s
+#define TFY_PROPERTY_String(s) TFY_PROPERTY_CHAIN NSString * s
+#define TFY_PROPERTY_NSUInteger(s) TFY_PROPERTY_ASSIGN NSUInteger  s
+#define TFY_PROPERTY_NSInteger(s) TFY_PROPERTY_ASSIGN NSInteger  s
+#define TFY_PROPERTY_Float(s) TFY_PROPERTY_ASSIGN float  s
+#define TFY_PROPERTY_LongLong(s) TFY_PROPERTY_ASSIGN long long s
+#define TFY_PROPERTY_NSDictionary(s) TFY_PROPERTY_STRONG NSDictionary * s
+#define TFY_PROPERTY_NSArray(s) TFY_PROPERTY_CHAIN NSArray * s
+#define TFY_PROPERTY_NSMutableArray(s) TFY_PROPERTY_STRONG NSMutableArray * s
+#define TFY_PROPERTY_NSData(s) TFY_PROPERTY_STRONG NSData * s
+#define TFY_PROPERTY_NSMutableDictionary(s) TFY_PROPERTY_STRONG NSMutableDictionary * s
+
+/**快捷创建对象属性 如 (Label) (name)*/
+#define TFY_PROPERTY_OBJECT(object)(name) TFY_PROPERTY_STRONG object  * name
 
 /**点语法*/
 #pragma mark-------------------------------------------点语法---------------------------------------------

@@ -12,6 +12,8 @@
 @property (nonatomic, strong) UIButton * confirmButton;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UITextField *textfiled;
+
+TFY_PROPERTY_ASSIGN
 @end
 
 @implementation HomeCollectionViewController
