@@ -11,7 +11,7 @@
 
 #import <UIKit/UIKit.h>
 #import <objc/message.h>
-
+////动画处理
 #define TFY_TansactionDisableActions(...)\
         [CATransaction begin];\
         [CATransaction setDisableActions:YES];\
