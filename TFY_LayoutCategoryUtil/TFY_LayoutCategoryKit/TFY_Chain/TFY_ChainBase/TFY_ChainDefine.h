@@ -32,7 +32,7 @@
 //strong
 #define TFY_PROPERTY_STRONG @property (nonatomic, strong)
 /**BLOCK*/
-#define TFY_PROPERTY_CHAIN_BLOCK(name)(action) @property(nonatomic, copy, nullable) void(^name)(action)
+#define TFY_PROPERTY_CHAIN_BLOCK(name,action) @property(nonatomic, copy, nullable) void(^name)(action)
 /**assign*/
 #define TFY_PROPERTY_ASSIGN @property(nonatomic , assign)
 /** weak*/
@@ -51,7 +51,7 @@
 #define TFY_PROPERTY_NSMutableDictionary(s) TFY_PROPERTY_STRONG NSMutableDictionary * s
 
 /**快捷创建对象属性 如 (Label) (name)*/
-#define TFY_PROPERTY_OBJECT(object)(name) TFY_PROPERTY_STRONG object  * name
+#define TFY_PROPERTY_OBJECT(object,name) TFY_PROPERTY_STRONG object  * name
 
 /**点语法*/
 #pragma mark-------------------------------------------点语法---------------------------------------------
