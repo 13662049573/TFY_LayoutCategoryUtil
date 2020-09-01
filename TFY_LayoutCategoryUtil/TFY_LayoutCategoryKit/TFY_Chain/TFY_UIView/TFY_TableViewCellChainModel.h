@@ -12,13 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_TableViewCellChainModel;
 @interface TFY_TableViewCellChainModel : TFY_BaseViewChainModel<TFY_TableViewCellChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TableViewCellChainModel * (^ selectionStyle) (UITableViewCellSelectionStyle);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TableViewCellChainModel * (^ accessoryType) (UITableViewCellAccessoryType);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TableViewCellChainModel * (^ separatorInset) (UIEdgeInsets);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TableViewCellChainModel * (^ editing) (BOOL);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TableViewCellChainModel * (^ editingWithAnimated) (BOOL, BOOL);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TableViewCellChainModel * (^ focusStyle)(UITableViewCellFocusStyle) API_AVAILABLE(ios(9.0));
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TableViewCellChainModel * (^ userInteractionEnabledWhileDragging)(BOOL) API_AVAILABLE(ios(11.0));
+TFY_PROPERTY_CHAIN_READONLY TFY_TableViewCellChainModel * (^ selectionStyle) (UITableViewCellSelectionStyle);
+TFY_PROPERTY_CHAIN_READONLY TFY_TableViewCellChainModel * (^ accessoryType) (UITableViewCellAccessoryType);
+TFY_PROPERTY_CHAIN_READONLY TFY_TableViewCellChainModel * (^ separatorInset) (UIEdgeInsets);
+TFY_PROPERTY_CHAIN_READONLY TFY_TableViewCellChainModel * (^ editing) (BOOL);
+TFY_PROPERTY_CHAIN_READONLY TFY_TableViewCellChainModel * (^ editingWithAnimated) (BOOL, BOOL);
+TFY_PROPERTY_CHAIN_READONLY TFY_TableViewCellChainModel * (^ focusStyle)(UITableViewCellFocusStyle) API_AVAILABLE(ios(9.0));
+TFY_PROPERTY_CHAIN_READONLY TFY_TableViewCellChainModel * (^ userInteractionEnabledWhileDragging)(BOOL) API_AVAILABLE(ios(11.0));
 
 @end
 

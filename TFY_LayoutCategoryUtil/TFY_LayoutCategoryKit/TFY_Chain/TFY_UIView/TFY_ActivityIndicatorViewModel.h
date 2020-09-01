@@ -12,11 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_ActivityIndicatorViewModel;
 @interface TFY_ActivityIndicatorViewModel : TFY_BaseViewChainModel<TFY_ActivityIndicatorViewModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ActivityIndicatorViewModel * (^ activityIndicatorViewStyle) (UIActivityIndicatorViewStyle activityIndicatorViewStyle);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ActivityIndicatorViewModel * (^ hidesWhenStopped) (BOOL);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ActivityIndicatorViewModel * (^ color) (UIColor *);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ActivityIndicatorViewModel * (^ startAnimating) (void);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ActivityIndicatorViewModel * (^ stopAnimating) (void);
+TFY_PROPERTY_CHAIN_READONLY TFY_ActivityIndicatorViewModel * (^ activityIndicatorViewStyle) (UIActivityIndicatorViewStyle activityIndicatorViewStyle);
+TFY_PROPERTY_CHAIN_READONLY TFY_ActivityIndicatorViewModel * (^ hidesWhenStopped) (BOOL);
+TFY_PROPERTY_CHAIN_READONLY TFY_ActivityIndicatorViewModel * (^ color) (UIColor *);
+TFY_PROPERTY_CHAIN_READONLY TFY_ActivityIndicatorViewModel * (^ startAnimating) (void);
+TFY_PROPERTY_CHAIN_READONLY TFY_ActivityIndicatorViewModel * (^ stopAnimating) (void);
 @end
 
 TFY_CATEGORY_EXINTERFACE(UIActivityIndicatorView, TFY_ActivityIndicatorViewModel)

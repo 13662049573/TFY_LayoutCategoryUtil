@@ -14,11 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TFY_LongPressGestureChainModel : TFY_BaseGestureChainModel<TFY_LongPressGestureChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LongPressGestureChainModel * (^ numberOfTapsRequired) (NSUInteger numberOfTapsRequired);
+TFY_PROPERTY_CHAIN_READONLY TFY_LongPressGestureChainModel * (^ numberOfTapsRequired) (NSUInteger numberOfTapsRequired);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LongPressGestureChainModel * (^ minimumPressDuration) (NSTimeInterval minimumPressDuration);
+TFY_PROPERTY_CHAIN_READONLY TFY_LongPressGestureChainModel * (^ minimumPressDuration) (NSTimeInterval minimumPressDuration);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LongPressGestureChainModel * (^ allowableMovement) (CGFloat allowableMovement);
+TFY_PROPERTY_CHAIN_READONLY TFY_LongPressGestureChainModel * (^ allowableMovement) (CGFloat allowableMovement);
 
 @end
 

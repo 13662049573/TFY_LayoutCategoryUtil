@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_ScrollLayerChainModel;
 @interface TFY_ScrollLayerChainModel : TFY_BaseLayerChainModel<TFY_ScrollLayerChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ScrollLayerChainModel * (^ scrollToPoint) (CGPoint point);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ScrollLayerChainModel * (^ scrollToRect) (CGRect rect);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ScrollLayerChainModel * (^ scrollMode) (CAScrollLayerScrollMode scrollMode);
+TFY_PROPERTY_CHAIN_READONLY TFY_ScrollLayerChainModel * (^ scrollToPoint) (CGPoint point);
+TFY_PROPERTY_CHAIN_READONLY TFY_ScrollLayerChainModel * (^ scrollToRect) (CGRect rect);
+TFY_PROPERTY_CHAIN_READONLY TFY_ScrollLayerChainModel * (^ scrollMode) (CAScrollLayerScrollMode scrollMode);
 @end
 
 TFY_CATEGORY_EXINTERFACE(CAScrollLayer, TFY_ScrollLayerChainModel)

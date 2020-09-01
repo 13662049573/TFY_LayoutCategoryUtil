@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 @class TFY_SwipeGestureChainModel;
 @interface TFY_SwipeGestureChainModel : TFY_BaseGestureChainModel<TFY_SwipeGestureChainModel *>
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SwipeGestureChainModel * (^ numberOfTapsRequired) (NSUInteger numberOfTapsRequired);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SwipeGestureChainModel * (^ direction) (UISwipeGestureRecognizerDirection direction);
+TFY_PROPERTY_CHAIN_READONLY TFY_SwipeGestureChainModel * (^ numberOfTapsRequired) (NSUInteger numberOfTapsRequired);
+TFY_PROPERTY_CHAIN_READONLY TFY_SwipeGestureChainModel * (^ direction) (UISwipeGestureRecognizerDirection direction);
 
 @end
 TFY_CATEGORY_EXINTERFACE(UISwipeGestureRecognizer, TFY_SwipeGestureChainModel)

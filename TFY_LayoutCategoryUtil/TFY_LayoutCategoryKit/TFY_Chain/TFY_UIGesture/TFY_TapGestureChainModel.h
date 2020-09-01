@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @class TFY_TapGestureChainModel;
 @interface TFY_TapGestureChainModel : TFY_BaseGestureChainModel<TFY_TapGestureChainModel *>
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TapGestureChainModel * (^ numberOfTapsRequired) (NSUInteger numberOfTapsRequired);
+TFY_PROPERTY_CHAIN_READONLY TFY_TapGestureChainModel * (^ numberOfTapsRequired) (NSUInteger numberOfTapsRequired);
 @end
 
 TFY_CATEGORY_EXINTERFACE(UITapGestureRecognizer, TFY_TapGestureChainModel)

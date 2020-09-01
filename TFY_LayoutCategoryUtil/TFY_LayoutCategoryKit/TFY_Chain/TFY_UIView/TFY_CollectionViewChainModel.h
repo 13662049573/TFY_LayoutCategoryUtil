@@ -12,23 +12,23 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_CollectionViewChainModel;
 @interface TFY_CollectionViewChainModel : TFY_BaseScrollViewChainModel<TFY_CollectionViewChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ collectionViewLayout)(UICollectionViewLayout *);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ delegate)(id<UICollectionViewDelegate>);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ dataSource)(id<UICollectionViewDataSource>);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ allowsSelection)(BOOL);
+TFY_PROPERTY_CHAIN_READONLY TFY_CollectionViewChainModel *(^ collectionViewLayout)(UICollectionViewLayout *);
+TFY_PROPERTY_CHAIN_READONLY TFY_CollectionViewChainModel *(^ delegate)(id<UICollectionViewDelegate>);
+TFY_PROPERTY_CHAIN_READONLY TFY_CollectionViewChainModel *(^ dataSource)(id<UICollectionViewDataSource>);
+TFY_PROPERTY_CHAIN_READONLY TFY_CollectionViewChainModel *(^ allowsSelection)(BOOL);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ allowsMultipleSelection)(BOOL);
+TFY_PROPERTY_CHAIN_READONLY TFY_CollectionViewChainModel *(^ allowsMultipleSelection)(BOOL);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ registerCellClass)(Class cellClass, NSString *identifier);
+TFY_PROPERTY_CHAIN_READONLY TFY_CollectionViewChainModel *(^ registerCellClass)(Class cellClass, NSString *identifier);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ registerCellNib)(UINib * nib, NSString *identifier);
+TFY_PROPERTY_CHAIN_READONLY TFY_CollectionViewChainModel *(^ registerCellNib)(UINib * nib, NSString *identifier);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ registerViewClass)(Class viewClass, NSString *identifier, NSString *kind);
+TFY_PROPERTY_CHAIN_READONLY TFY_CollectionViewChainModel *(^ registerViewClass)(Class viewClass, NSString *identifier, NSString *kind);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel *(^ registerViewNib)(UINib * viewNib, NSString *identifier, NSString *kind);
+TFY_PROPERTY_CHAIN_READONLY TFY_CollectionViewChainModel *(^ registerViewNib)(UINib * viewNib, NSString *identifier, NSString *kind);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel * (^ adJustedContentIOS11)(void);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_CollectionViewChainModel * (^ reloadData)(void);
+TFY_PROPERTY_CHAIN_READONLY TFY_CollectionViewChainModel * (^ adJustedContentIOS11)(void);
+TFY_PROPERTY_CHAIN_READONLY TFY_CollectionViewChainModel * (^ reloadData)(void);
 @end
 
 CG_INLINE UICollectionView *UICollectionViewCreateWithLayout(UICollectionViewFlowLayout *layout){

@@ -12,23 +12,23 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_LabelChainModel;
 @interface TFY_LabelChainModel : TFY_BaseViewChainModel<TFY_LabelChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ text)(NSString *);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ font)(UIFont *);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ textColor)(UIColor *);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ attributedText)(NSAttributedString *);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ textAlignment)(NSTextAlignment);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ numberOfLines)(NSInteger);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ lineBreakMode)(NSLineBreakMode);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ adjustsFontSizeToFitWidth)(BOOL);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ baselineAdjustment)(UIBaselineAdjustment);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ allowsDefaultTighteningForTruncation)(BOOL) API_AVAILABLE(ios(9.0));
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ minimumScaleFactor)(CGFloat);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ preferredMaxLayoutWidth)(CGFloat);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_LabelChainModel *(^ contentInsets)(UIEdgeInsets);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ text)(NSString *);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ font)(UIFont *);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ textColor)(UIColor *);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ attributedText)(NSAttributedString *);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ textAlignment)(NSTextAlignment);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ numberOfLines)(NSInteger);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ lineBreakMode)(NSLineBreakMode);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ adjustsFontSizeToFitWidth)(BOOL);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ baselineAdjustment)(UIBaselineAdjustment);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ allowsDefaultTighteningForTruncation)(BOOL) API_AVAILABLE(ios(9.0));
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ minimumScaleFactor)(CGFloat);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ preferredMaxLayoutWidth)(CGFloat);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ contentInsets)(UIEdgeInsets);
 
-TFY_CATEGORY_CHAIN_PROPERTY CGSize (^ sizeWithLimitSize) (CGSize);
+TFY_PROPERTY_CHAIN_READONLY CGSize (^ sizeWithLimitSize) (CGSize);
 
-TFY_CATEGORY_CHAIN_PROPERTY CGSize (^ sizeWithOutLimitSize) (void);
+TFY_PROPERTY_CHAIN_READONLY CGSize (^ sizeWithOutLimitSize) (void);
 
 @end
 

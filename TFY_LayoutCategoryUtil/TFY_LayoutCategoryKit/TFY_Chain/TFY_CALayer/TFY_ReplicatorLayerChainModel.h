@@ -12,15 +12,15 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_ReplicatorLayerChainModel;
 @interface TFY_ReplicatorLayerChainModel : TFY_BaseLayerChainModel<TFY_ReplicatorLayerChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ReplicatorLayerChainModel * (^ instanceCount) (NSInteger instanceCount);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ReplicatorLayerChainModel * (^ preservesDepth) (BOOL preservesDepth);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ReplicatorLayerChainModel * (^ instanceDelay) (CFTimeInterval instanceDelay);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ReplicatorLayerChainModel * (^ instanceTransform) (CATransform3D instanceTransform);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ReplicatorLayerChainModel * (^ instanceColor) (CGColorRef instanceColor);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ReplicatorLayerChainModel * (^ instanceRedOffset) (float instanceRedOffset);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ReplicatorLayerChainModel * (^ instanceGreenOffset) (float instanceGreenOffset);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ReplicatorLayerChainModel * (^ instanceBlueOffset) (float instanceBlueOffset);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_ReplicatorLayerChainModel * (^ instanceAlphaOffset) (float instanceAlphaOffset);
+TFY_PROPERTY_CHAIN_READONLY TFY_ReplicatorLayerChainModel * (^ instanceCount) (NSInteger instanceCount);
+TFY_PROPERTY_CHAIN_READONLY TFY_ReplicatorLayerChainModel * (^ preservesDepth) (BOOL preservesDepth);
+TFY_PROPERTY_CHAIN_READONLY TFY_ReplicatorLayerChainModel * (^ instanceDelay) (CFTimeInterval instanceDelay);
+TFY_PROPERTY_CHAIN_READONLY TFY_ReplicatorLayerChainModel * (^ instanceTransform) (CATransform3D instanceTransform);
+TFY_PROPERTY_CHAIN_READONLY TFY_ReplicatorLayerChainModel * (^ instanceColor) (CGColorRef instanceColor);
+TFY_PROPERTY_CHAIN_READONLY TFY_ReplicatorLayerChainModel * (^ instanceRedOffset) (float instanceRedOffset);
+TFY_PROPERTY_CHAIN_READONLY TFY_ReplicatorLayerChainModel * (^ instanceGreenOffset) (float instanceGreenOffset);
+TFY_PROPERTY_CHAIN_READONLY TFY_ReplicatorLayerChainModel * (^ instanceBlueOffset) (float instanceBlueOffset);
+TFY_PROPERTY_CHAIN_READONLY TFY_ReplicatorLayerChainModel * (^ instanceAlphaOffset) (float instanceAlphaOffset);
 @end
 
 TFY_CATEGORY_EXINTERFACE(CAReplicatorLayer, TFY_ReplicatorLayerChainModel)

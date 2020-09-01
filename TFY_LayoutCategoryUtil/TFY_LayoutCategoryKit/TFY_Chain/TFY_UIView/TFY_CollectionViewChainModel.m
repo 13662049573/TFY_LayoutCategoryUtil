@@ -65,7 +65,6 @@ TFY_CATEGORY_CHAIN_COLLECTIONVIEW_IMPLEMENTATION(allowsMultipleSelection, BOOL)
         [CATransaction setDisableActions:YES];
         [(UICollectionView *)self.view reloadData];
         [CATransaction commit];
-        
         return self;
     };
 }

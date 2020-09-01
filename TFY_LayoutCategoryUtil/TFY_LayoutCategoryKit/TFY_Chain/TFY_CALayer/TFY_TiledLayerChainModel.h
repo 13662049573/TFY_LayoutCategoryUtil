@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_TiledLayerChainModel;
 @interface TFY_TiledLayerChainModel : TFY_BaseLayerChainModel<TFY_TiledLayerChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TiledLayerChainModel * (^ levelsOfDetail) (size_t levelsOfDetail);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TiledLayerChainModel * (^ levelsOfDetailBias) (size_t levelsOfDetailBias);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TiledLayerChainModel * (^ tileSize) (CGSize tileSize);
+TFY_PROPERTY_CHAIN_READONLY TFY_TiledLayerChainModel * (^ levelsOfDetail) (size_t levelsOfDetail);
+TFY_PROPERTY_CHAIN_READONLY TFY_TiledLayerChainModel * (^ levelsOfDetailBias) (size_t levelsOfDetailBias);
+TFY_PROPERTY_CHAIN_READONLY TFY_TiledLayerChainModel * (^ tileSize) (CGSize tileSize);
 @end
 
 TFY_CATEGORY_EXINTERFACE(CATiledLayer, TFY_TiledLayerChainModel)

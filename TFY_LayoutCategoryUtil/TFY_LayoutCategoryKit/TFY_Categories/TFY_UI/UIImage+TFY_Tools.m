@@ -421,8 +421,8 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
       CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
       UIRectFill(CGRectMake(0, 0, asize.width, asize.height));//clear background
       [image drawInRect:rect];
-   　　newimage = UIGraphicsGetImageFromCurrentImageContext();
-   　　UIGraphicsEndImageContext();
+        newimage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
     }
     return newimage;
 }

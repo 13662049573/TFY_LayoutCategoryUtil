@@ -19,11 +19,10 @@
         [CATransaction commit];
 
 #pragma mark-------------------------------------------属性对象---------------------------------------------
-//copy
-#define TFY_CATEGORY_CHAIN_PROPERTY @property (nonatomic, copy, readonly)
-//strong
-#define TFY_CATEGORY_STRONG_PROPERTY @property (nonatomic, strong, readonly)
 
+#define TFY_PROPERTY_CHAIN_READONLY          @property (nonatomic , copy , readonly)
+#define TFY_PROPERTY_STRONG_READONLY         @property (nonatomic , strong , readonly)
+#define TFY_PROPERTY_ASSIGN_READONLY         @property (nonatomic , assign , readonly)
 
 #pragma mark -------------------------------------------属性快速声明-------------------------------------------
 
@@ -52,7 +51,7 @@
 #define TFY_PROPERTY_OBJECT_WEAK(object,name)    TFY_PROPERTY_WEAK   object  * name
 
 /**点语法*/
-#pragma mark-------------------------------------------点语法---------------------------------------------
+#pragma mark-------------------------------------------点语法链式编程---------------------------------------------
 
 #define TFY_CATEGORY_CHAIN_IMPLEMENTATION(TFY_Method,TFY_ParaType, TFY_ModelType, TFY_PropertyClass)\
 - (TFY_ModelType  _Nonnull (^)(TFY_ParaType))TFY_Method {\
@@ -90,7 +89,7 @@ CG_INLINE ModelType * TFY_Class##ModelWithArray(NSArray <TFY_Class *>*objects)\
 
 #define TFY_CATEGORY_EXINTERFACE_(TFY_Class, ModelType)\
 @interface TFY_Class(EXT)\
-    TFY_CATEGORY_CHAIN_PROPERTY ModelType * makeChain;\
+TFY_PROPERTY_CHAIN_READONLY ModelType * makeChain;\
 @end
 
 

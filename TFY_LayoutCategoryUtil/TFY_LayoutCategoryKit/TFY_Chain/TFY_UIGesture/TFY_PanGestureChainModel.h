@@ -11,9 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 @class TFY_PanGestureChainModel;
 @interface TFY_PanGestureChainModel : TFY_BaseGestureChainModel<TFY_PanGestureChainModel *>
-TFY_CATEGORY_CHAIN_PROPERTY TFY_PanGestureChainModel * (^ minimumNumberOfTouches) (NSUInteger minimumNumberOfTouches);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_PanGestureChainModel * (^ maximumNumberOfTouches) (NSUInteger maximumNumberOfTouches);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_PanGestureChainModel * (^ translation) (CGPoint translation,UIView *view);
+TFY_PROPERTY_CHAIN_READONLY TFY_PanGestureChainModel * (^ minimumNumberOfTouches) (NSUInteger minimumNumberOfTouches);
+TFY_PROPERTY_CHAIN_READONLY TFY_PanGestureChainModel * (^ maximumNumberOfTouches) (NSUInteger maximumNumberOfTouches);
+TFY_PROPERTY_CHAIN_READONLY TFY_PanGestureChainModel * (^ translation) (CGPoint translation,UIView *view);
 @end
 TFY_CATEGORY_EXINTERFACE(UIPanGestureRecognizer, TFY_PanGestureChainModel)
 NS_ASSUME_NONNULL_END

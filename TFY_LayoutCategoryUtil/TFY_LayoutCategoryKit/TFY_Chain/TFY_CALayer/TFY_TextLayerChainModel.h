@@ -12,14 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_TextLayerChainModel;
 @interface TFY_TextLayerChainModel : TFY_BaseLayerChainModel<TFY_TextLayerChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TextLayerChainModel * (^ string) (id string);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TextLayerChainModel * (^ font) (CFTypeRef font);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TextLayerChainModel * (^ fontSize) (CGFloat fontSize);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TextLayerChainModel * (^ foregroundColor) (CGColorRef foregroundColor);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TextLayerChainModel * (^ wrapped) (BOOL wrapped);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TextLayerChainModel * (^ truncationMode) (CATextLayerTruncationMode truncationMode);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TextLayerChainModel * (^ alignmentMode) (CATextLayerAlignmentMode alignmentMode);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_TextLayerChainModel * (^ allowsFontSubpixelQuantization) (BOOL allowsFontSubpixelQuantization);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextLayerChainModel * (^ string) (id string);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextLayerChainModel * (^ font) (CFTypeRef font);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextLayerChainModel * (^ fontSize) (CGFloat fontSize);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextLayerChainModel * (^ foregroundColor) (CGColorRef foregroundColor);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextLayerChainModel * (^ wrapped) (BOOL wrapped);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextLayerChainModel * (^ truncationMode) (CATextLayerTruncationMode truncationMode);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextLayerChainModel * (^ alignmentMode) (CATextLayerAlignmentMode alignmentMode);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextLayerChainModel * (^ allowsFontSubpixelQuantization) (BOOL allowsFontSubpixelQuantization);
 
 @end
 TFY_CATEGORY_EXINTERFACE(CATextLayer, TFY_TextLayerChainModel)

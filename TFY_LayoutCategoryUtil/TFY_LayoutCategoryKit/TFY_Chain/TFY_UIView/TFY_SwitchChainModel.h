@@ -12,12 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class TFY_SwitchChainModel;
 @interface TFY_SwitchChainModel : TFY_BaseControlChainModel<TFY_SwitchChainModel *>
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SwitchChainModel *(^ on)(BOOL);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SwitchChainModel *(^ onTintColor)(UIColor *);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SwitchChainModel *(^ thumbTintColor)(UIColor *);
+TFY_PROPERTY_CHAIN_READONLY TFY_SwitchChainModel *(^ on)(BOOL);
+TFY_PROPERTY_CHAIN_READONLY TFY_SwitchChainModel *(^ onTintColor)(UIColor *);
+TFY_PROPERTY_CHAIN_READONLY TFY_SwitchChainModel *(^ thumbTintColor)(UIColor *);
 
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SwitchChainModel *(^ onImage)(UIImage *);
-TFY_CATEGORY_CHAIN_PROPERTY TFY_SwitchChainModel *(^ offImage)(UIImage *);
+TFY_PROPERTY_CHAIN_READONLY TFY_SwitchChainModel *(^ onImage)(UIImage *);
+TFY_PROPERTY_CHAIN_READONLY TFY_SwitchChainModel *(^ offImage)(UIImage *);
 
 @end
 

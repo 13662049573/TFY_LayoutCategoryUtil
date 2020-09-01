@@ -26,7 +26,7 @@ return self;    \
 }
 
 @interface TFY_BaseViewChainModel ()
-@property (nonatomic, assign) NSInteger  tag;
+TFY_PROPERTY_NSInteger(tag);
 @end
 
 @implementation TFY_BaseViewChainModel
@@ -204,7 +204,7 @@ TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(transform, CGAffineTransform)
 - (id  _Nonnull (^)(UIGestureRecognizer * _Nonnull, NSString * _Nonnull))addGestureWithTag{
     return ^(UIGestureRecognizer *ges, NSString *tag){
         if (!tag) return self;
-        NSMutableDictionary *dic = [self TFY__category_gestureDic];
+        NSMutableDictionary *dic = [self tfy_category_gestureDic];
         if ([dic.allKeys containsObject:tag]) {
             self.removeGestureByTag(tag);
         }
@@ -217,7 +217,7 @@ TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(transform, CGAffineTransform)
 - (id  _Nonnull (^)(NSString * _Nonnull))removeGestureByTag{
     return ^(NSString *tag){
         if (!tag) return self;
-        NSMutableDictionary *dic = [self TFY__category_gestureDic];
+        NSMutableDictionary *dic = [self tfy_category_gestureDic];
         UIGestureRecognizer *ges = [dic objectForKey:tag];
         self.removeGesture(ges);
         [dic removeObjectForKey:tag];
@@ -229,18 +229,18 @@ TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(transform, CGAffineTransform)
     return ^(NSString *tag){
         UIGestureRecognizer *ges;
         if (!tag) {
-            NSMutableDictionary *dic = [self TFY__category_gestureDic];
+            NSMutableDictionary *dic = [self tfy_category_gestureDic];
             ges = [dic objectForKey:tag];
         }
         return ges;
     };
 }
 
-- (NSMutableDictionary *)TFY__category_gestureDic{
-    NSMutableDictionary *_dic = objc_getAssociatedObject(self, @selector(TFY__category_gestureDic));
+- (NSMutableDictionary *)tfy_category_gestureDic{
+    NSMutableDictionary *_dic = objc_getAssociatedObject(self, @selector(tfy_category_gestureDic));
     if (!_dic) {
         _dic = [NSMutableDictionary dictionary];
-        objc_setAssociatedObject(self, @selector(TFY__category_gestureDic), _dic, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, @selector(tfy_category_gestureDic), _dic, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return _dic;
 }
