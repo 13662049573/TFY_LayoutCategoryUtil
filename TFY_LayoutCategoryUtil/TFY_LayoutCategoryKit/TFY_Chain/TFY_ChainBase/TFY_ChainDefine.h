@@ -46,7 +46,7 @@
 #define TFY_PROPERTY_NSMutableDictionary(name) TFY_PROPERTY_STRONG NSMutableDictionary * name
 
 /**快捷创建对象属性 如 (Label) (name)*/
-#define TFY_PROPERTY_OBJECT(object,name) TFY_PROPERTY_STRONG object  * name
+#define TFY_PROPERTY_OBJECT(object,name) TFY_PROPERTY_STRONG object name
 
 /**点语法*/
 #pragma mark-------------------------------------------点语法---------------------------------------------
