@@ -9,9 +9,9 @@
 #import "HomeCollectionViewController.h"
 
 @interface HomeCollectionViewController ()
-TFY_PROPERTY_OBJECT(UIButton, *confirmButton);
-TFY_PROPERTY_OBJECT(UILabel, *titleLabel);
-TFY_PROPERTY_OBJECT(UITextField, *textfiled);
+TFY_PROPERTY_OBJECT_STRONG(UIButton, confirmButton);
+TFY_PROPERTY_OBJECT_STRONG(UILabel, titleLabel);
+TFY_PROPERTY_OBJECT_STRONG(UITextField, textfiled);
 TFY_PROPERTY_NSString(name);
 TFY_PROPERTY_CHAIN_BLOCK(my_block, NSDictionary *dict);
 @end
