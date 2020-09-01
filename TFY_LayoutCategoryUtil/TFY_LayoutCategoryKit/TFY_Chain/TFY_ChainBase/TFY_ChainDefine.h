@@ -31,7 +31,7 @@
 #define TFY_PROPERTY_STRONG                   @property (nonatomic , strong)
 #define TFY_PROPERTY_ASSIGN                   @property (nonatomic , assign)
 #define TFY_PROPERTY_WEAK                     @property (nonatomic , weak)
-#define TFY_PROPERTY_CHAIN_BLOCK(name,action) @property (nonatomic , copy, nullable) void(^name)(action)
+#define TFY_PROPERTY_CHAIN_BLOCK(name,...) @property (nonatomic , copy, nullable) void (^name)(__VA_ARGS__)
 
 #define TFY_PROPERTY_BOOL(name)                TFY_PROPERTY_ASSIGN BOOL                  name
 #define TFY_PROPERTY_NSString(name)            TFY_PROPERTY_CHAIN  NSString            * name

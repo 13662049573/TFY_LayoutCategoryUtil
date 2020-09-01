@@ -76,7 +76,10 @@ CG_INLINE CGFloat TFY_DegreesToRadians(CGFloat degrees) {
 - (UIImage *)tfy_imageByResizeToScale:(CGFloat)scale;
 
 - (UIImage *)tfy_imageByResizeToSize:(CGSize)size contentMode:(UIViewContentMode)contentMode;
-
+/**
+ 修改图片尺寸 同比缩放
+ */
++ (UIImage *)tfy_thumbnailWithImageWithoutScale:(UIImage *)image size:(CGSize)asize;
 /**
  裁剪
  */

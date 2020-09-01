@@ -13,7 +13,8 @@ TFY_PROPERTY_OBJECT_STRONG(UIButton, confirmButton);
 TFY_PROPERTY_OBJECT_STRONG(UILabel, titleLabel);
 TFY_PROPERTY_OBJECT_STRONG(UITextField, textfiled);
 TFY_PROPERTY_NSString(name);
-TFY_PROPERTY_CHAIN_BLOCK(my_block, NSDictionary *dict);
+TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
+
 @end
 
 @implementation HomeCollectionViewController
@@ -107,6 +108,12 @@ TFY_PROPERTY_CHAIN_BLOCK(my_block, NSDictionary *dict);
                make.top.equalTo(self.textfiled.mas_bottom).offset(20);
                make.height.mas_equalTo(80);
         });
+    
+    
+    
+    self.myblock = ^(NSString *name, NSString *name2) {
+        NSLog(@"block-----%@---%@",name,name2);
+    };
 }
 
 - (void)btnClick:(UIButton *)btn {
@@ -116,7 +123,7 @@ TFY_PROPERTY_CHAIN_BLOCK(my_block, NSDictionary *dict);
     } else {
         self.confirmButton.backgroundColor = UIColor.yellowColor;
     }
-   
+    self.myblock(@"222", @"33333");
 }
 
 @end
