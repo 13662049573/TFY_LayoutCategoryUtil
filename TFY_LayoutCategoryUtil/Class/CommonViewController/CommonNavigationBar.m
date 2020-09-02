@@ -1,14 +1,14 @@
 //
-//  SSDKCommonNavigationBar.m
-//  mob
+//  CommonNavigationBar.m
+//  TFY_LayoutCategoryUtil
 //
-//  Created by maxl on 2018/12/20.
-//  Copyright © 2018 mob. All rights reserved.
+//  Created by 田风有 on 2020/9/2.
+//  Copyright © 2020 田风有. All rights reserved.
 //
 
-#import "SSDKCommonNavigationBar.h"
+#import "CommonNavigationBar.h"
 
-@interface SSDKCommonNavigationBar()
+@interface CommonNavigationBar ()
 {
     CGFloat _lineHeight;
 }
@@ -20,7 +20,7 @@
 @property (nonatomic, assign) NSInteger  currentTag;
 @end
 
-@implementation SSDKCommonNavigationBar
+@implementation CommonNavigationBar
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -58,7 +58,7 @@
 
 
 
-- (void)setDelegate:(id<SSDKCommonNavigationBarDelegate>)delegate{
+- (void)setDelegate:(id<CommonNavigationBarDelegate>)delegate{
     if (!delegate) return;
     _delegate = delegate;
     if ([_delegate respondsToSelector:@selector(buttonClasses)]) {
@@ -251,12 +251,5 @@
     }];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

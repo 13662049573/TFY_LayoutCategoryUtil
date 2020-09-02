@@ -1,15 +1,17 @@
 //
-//  SSDKCommonViewController.h
-//  mob
+//  CommonViewController.h
+//  TFY_LayoutCategoryUtil
 //
-//  Created by maxl on 2018/12/20.
-//  Copyright © 2018 mob. All rights reserved.
+//  Created by 田风有 on 2020/9/2.
+//  Copyright © 2020 田风有. All rights reserved.
 //
 
-#import "SSDKCommonNavigationBar.h"
+#import <UIKit/UIKit.h>
+#import "CommonNavigationBar.h"
 NS_ASSUME_NONNULL_BEGIN
+
 //------------------tableView
-@interface SSDKCommonTableViewModel : NSObject
+@interface CommonTableViewModel : NSObject
 //tableView的类
 @property (nonatomic, copy) NSString *  clas;
 //tableView的样式
@@ -21,25 +23,25 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 //协议
-@protocol SSDKCommonTableViewProtocol <UITableViewDelegate,UITableViewDataSource>
+@protocol CommonTableViewProtocol <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView;
 
 @optional
 //此方法不需要实现，可直接调用
--  (SSDKCommonTableViewModel *)tableViewModel;
+-  (CommonTableViewModel *)tableViewModel;
 
 //设置父视图
 - (UIView *)comonTableViewSuperView;
 //设置一些属性
-- (void)commonTableViewModel:(SSDKCommonTableViewModel *)model;
+- (void)commonTableViewModel:(CommonTableViewModel *)model;
 
 @end
 
 
 //------------------collectionView
 
-@interface SSDKCommonCollectionViewModel : NSObject
+@interface CommonCollectionViewModel : NSObject
 
 @property (nonatomic, strong) UICollectionViewFlowLayout * layout;
 
@@ -50,24 +52,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@protocol SSDKCommonCollectionViewProtocol <UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@protocol CommonCollectionViewProtocol <UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView * collectionView;
 
 @optional
 
 //此方法不需要实现，可直接调用
-- (SSDKCommonCollectionViewModel *)collectionViewModel;
+- (CommonCollectionViewModel *)collectionViewModel;
 
 - (UIView *)commonCollectionViewSuperView;
 
-- (void)commonCollectionModel:(SSDKCommonCollectionViewModel *)model;
+- (void)commonCollectionModel:(CommonCollectionViewModel *)model;
 
 @end
 
-@protocol SSDKCommonNavigationProtocol <SSDKCommonNavigationBarDelegate>
+@protocol CommonNavigationProtocol <CommonNavigationBarDelegate>
 
-@property (nonatomic, strong) SSDKCommonNavigationBar * navigationBar;
+@property (nonatomic, strong) CommonNavigationBar * navigationBar;
 
 @optional
 
@@ -76,15 +78,15 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-typedef NS_ENUM(NSInteger, SSDKAppOrientation) {
-    SSDKAppOrientationProtrait = 0,//竖向
-    SSDKAppOrientationLeft = 1,
-    SSDKAppOrientationWithOutDown = 2 ,//不向下
-    SSDKAppOrientationLandscape = 3//横向
+typedef NS_ENUM(NSInteger, AppOrientation) {
+    AppOrientationProtrait = 0,//竖向
+    AppOrientationLeft = 1,
+    AppOrientationWithOutDown = 2 ,//不向下
+    AppOrientationLandscape = 3//横向
 };
 
 
-@protocol SSDKCommonViewControllerProtocol <NSObject>
+@protocol CommonViewControllerProtocol <NSObject>
 
 
 @optional
@@ -93,9 +95,8 @@ typedef NS_ENUM(NSInteger, SSDKAppOrientation) {
 - (void)viewSafeAreaInsetsChanged:(UIEdgeInsets)edges;
 
 @end
-#pragma mark - 基础控制器 -
 
-@interface SSDKCommonViewController : UIViewController <SSDKCommonViewControllerProtocol>
+@interface CommonViewController : UIViewController<CommonViewControllerProtocol>
 
 /**
  是否可以左滑
@@ -105,7 +106,7 @@ typedef NS_ENUM(NSInteger, SSDKAppOrientation) {
 /**
  方向
  */
-- (void)orientationLand:(SSDKAppOrientation)orientation;
+- (void)orientationLand:(AppOrientation)orientation;
 
 /**
  额外的信息

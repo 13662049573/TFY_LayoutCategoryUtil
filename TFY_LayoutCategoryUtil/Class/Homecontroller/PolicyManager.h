@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PolicyManager : NSObject
 + (PolicyManager *)defaultManager;
 
-@property (nonatomic, strong, readonly) NSNumber * isAllowPolicy;
+TFY_PROPERTY_STRONG_READONLY NSNumber * isAllowPolicy;
 
 - (void)show;
 

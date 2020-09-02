@@ -1,23 +1,23 @@
 //
-//  SSDKCommonViewController.m
-//  mob
+//  CommonViewController.m
+//  TFY_LayoutCategoryUtil
 //
-//  Created by maxl on 2018/12/20.
-//  Copyright © 2018 mob. All rights reserved.
+//  Created by 田风有 on 2020/9/2.
+//  Copyright © 2020 田风有. All rights reserved.
 //
 
-#import "SSDKCommonViewController.h"
+#import "CommonViewController.h"
 #import <objc/message.h>
 
-@implementation SSDKCommonTableViewModel
+@implementation CommonTableViewModel
 
 @end
 
-@implementation SSDKCommonCollectionViewModel
+@implementation CommonCollectionViewModel
 
 @end
 
-@interface SSDKCommonViewController (){
+@interface CommonViewController (){
     BOOL _isConformsNavigationBar;
     BOOL _isConformsTableView;
     BOOL _isConformsCollectionView;
@@ -26,11 +26,11 @@
 
 @end
 
-static void *kSSDKCommonViewControllerTableViewModelKey = &kSSDKCommonViewControllerTableViewModelKey;
-static void *kSSDKCommonViewControllerCollectionViewModelKey = &kSSDKCommonViewControllerCollectionViewModelKey;
+static void *kCommonViewControllerTableViewModelKey = &kCommonViewControllerTableViewModelKey;
+static void *kCommonViewControllerCollectionViewModelKey = &kCommonViewControllerCollectionViewModelKey;
 
 
-static NSMutableSet *_ssdkCommonProtocolSwizzleSet(){
+static NSMutableSet *_CommonProtocolSwizzleSet(){
     static NSMutableSet *set = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -40,50 +40,55 @@ static NSMutableSet *_ssdkCommonProtocolSwizzleSet(){
     return set;
 }
 
-static void _ssdkCommonProtocolSwizzle(id self){
-    @synchronized (_ssdkCommonProtocolSwizzleSet()) {
-        if ([_ssdkCommonProtocolSwizzleSet() containsObject:[self tfy_clasName]])return;
-        Protocol *pT = @protocol(SSDKCommonTableViewProtocol);
+static void _CommonProtocolSwizzle(id self){
+    @synchronized (_CommonProtocolSwizzleSet()) {
+        if ([_CommonProtocolSwizzleSet() containsObject:[self tfy_clasName]])return;
+        Protocol *pT = @protocol(CommonTableViewProtocol);
         if (pT && class_conformsToProtocol([self class], pT)) {
             SEL sel = sel_registerName("tableViewModel");
             Method method = class_getInstanceMethod([self class], sel);
             if (!method || method_getImplementation(method) != _objc_msgForward) {
                 class_addMethod([self class], sel, imp_implementationWithBlock(^(id objc){
-                    return objc_getAssociatedObject(objc, kSSDKCommonViewControllerTableViewModelKey);
+                    return objc_getAssociatedObject(objc, kCommonViewControllerTableViewModelKey);
                 }), "@@:");
             }
         }
-        Protocol *pC = @protocol(SSDKCommonCollectionViewProtocol);
+        Protocol *pC = @protocol(CommonCollectionViewProtocol);
         if (pC && class_conformsToProtocol([self class], pC)) {
             SEL sel = sel_registerName("collectionViewModel");
             Method method = class_getInstanceMethod([self class], sel);
             if (!method || method_getImplementation(method) != _objc_msgForward) {
                 class_addMethod([self class], sel, imp_implementationWithBlock(^(id objc){
-                    return objc_getAssociatedObject(objc, kSSDKCommonViewControllerCollectionViewModelKey);
+                    return objc_getAssociatedObject(objc, kCommonViewControllerCollectionViewModelKey);
                 }), "@@:");
             }
         }
-        [_ssdkCommonProtocolSwizzleSet() addObject:[self tfy_clasName]];
+        [_CommonProtocolSwizzleSet() addObject:[self tfy_clasName]];
     }
     
 }
-@implementation SSDKCommonViewController
+
+@interface CommonViewController ()
+
+@end
+
+@implementation CommonViewController
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        if ([self conformsToProtocol:@protocol(SSDKCommonNavigationProtocol)]) {
+        if ([self conformsToProtocol:@protocol(CommonNavigationProtocol)]) {
             _isConformsNavigationBar = YES;
         }
-        if ([self conformsToProtocol:@protocol(SSDKCommonTableViewProtocol)]) {
+        if ([self conformsToProtocol:@protocol(CommonTableViewProtocol)]) {
             _isConformsTableView = YES;
         }
-        if ([self conformsToProtocol:@protocol(SSDKCommonCollectionViewProtocol)]) {
+        if ([self conformsToProtocol:@protocol(CommonCollectionViewProtocol)]) {
             _isConformsCollectionView = YES;
         }
         if (_isConformsTableView || _isConformsCollectionView) {
-            _ssdkCommonProtocolSwizzle(self);
+            _CommonProtocolSwizzle(self);
         }
         if ([self respondsToSelector:@selector(viewSafeAreaInsetsChanged:)]) {
             _isRespondsSafeAreaSel = YES;
@@ -129,11 +134,11 @@ static void _ssdkCommonProtocolSwizzle(id self){
     self.navigationController.interactivePopGestureRecognizer.enabled = swipeCanPop;
 }
 
-- (void)orientationLand:(SSDKAppOrientation)orientation{
+- (void)orientationLand:(AppOrientation)orientation{
     NSString *orient = [[NSUserDefaults standardUserDefaults] objectForKey:@"supportedInterfaceOrientationsForWindow"];
     BOOL isSame = NO;
     if (orient) {
-        SSDKAppOrientation onr = [orient integerValue];
+        AppOrientation onr = [orient integerValue];
         if (onr == orientation) {
             isSame = YES;
         }
@@ -147,20 +152,20 @@ static void _ssdkCommonProtocolSwizzle(id self){
         [invocation setTarget:[UIDevice currentDevice]];
         int val;
         switch (orientation) {
-            case SSDKAppOrientationLandscape:
+            case AppOrientationLandscape:
             {
                 val = UIDeviceOrientationLandscapeLeft | UIDeviceOrientationLandscapeRight;
             }
                 break;
-            case SSDKAppOrientationProtrait:{
+            case AppOrientationProtrait:{
                 val = UIDeviceOrientationPortrait;
                 break;
             }
-            case SSDKAppOrientationWithOutDown:{
+            case AppOrientationWithOutDown:{
                 val = UIDeviceOrientationLandscapeLeft | UIDeviceOrientationLandscapeRight | UIDeviceOrientationPortrait;
                 break;
             }
-            case SSDKAppOrientationLeft:{
+            case AppOrientationLeft:{
                 val = UIDeviceOrientationLandscapeLeft;
                 break;
             }
@@ -174,9 +179,9 @@ static void _ssdkCommonProtocolSwizzle(id self){
 
 
 - (void)commonSetupTableView{
-    id <SSDKCommonTableViewProtocol> vc = (id <SSDKCommonTableViewProtocol>) self;
+    id <CommonTableViewProtocol> vc = (id <CommonTableViewProtocol>) self;
     SEL sel = NSSelectorFromString(@"commonTableViewModel:");
-    SSDKCommonTableViewModel *model = [SSDKCommonTableViewModel new];
+    CommonTableViewModel *model = [CommonTableViewModel new];
     if ([self respondsToSelector:sel]) {
         [self tfy_performSelectorWithArguments:sel,model];
     }
@@ -187,7 +192,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
     if (![class isSubclassOfClass:[UITableView class]]) {
         class = [UITableView class];
     }
-    objc_setAssociatedObject(self, kSSDKCommonViewControllerTableViewModelKey, model, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, kCommonViewControllerTableViewModelKey, model, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     UITableViewStyle style = model.style;
     
     UITableView *tableView = [class tfy_tableViewStyle:style];
@@ -214,7 +219,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
     
     UIView *topView = nil;
     if (_isConformsNavigationBar) {
-        topView = [(id <SSDKCommonNavigationProtocol>) vc navigationBar];
+        topView = [(id <CommonNavigationProtocol>) vc navigationBar];
         [self.view bringSubviewToFront:topView];
     }
     
@@ -235,9 +240,9 @@ static void _ssdkCommonProtocolSwizzle(id self){
     UIEdgeInsets edge = TFY_SafeArea(self.view);
     CGFloat barHeight = kDefaultNavigationBarHeight();
     
-    SSDKCommonNavigationBar *view = nil;
+    CommonNavigationBar *view = nil;
     if (_isConformsNavigationBar) {
-        view = [(id<SSDKCommonNavigationProtocol>)self navigationBar];
+        view = [(id<CommonNavigationProtocol>)self navigationBar];
         if (view.superview != self.view) return;
         [view resetLayout:edge];
         [view mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -247,8 +252,8 @@ static void _ssdkCommonProtocolSwizzle(id self){
     }
     UIView *tableView;
     if (_isConformsTableView) {
-        tableView = [(id<SSDKCommonTableViewProtocol>)self tableView];
-        SSDKCommonTableViewModel *model = [(id<SSDKCommonTableViewProtocol>)self tableViewModel];
+        tableView = [(id<CommonTableViewProtocol>)self tableView];
+        CommonTableViewModel *model = [(id<CommonTableViewProtocol>)self tableViewModel];
         if (model.isCustomLayout) return;
         if (tableView.superview != self.view) return;
         
@@ -265,9 +270,9 @@ static void _ssdkCommonProtocolSwizzle(id self){
     }
     UIView *collectionView;
     if (_isConformsCollectionView) {
-        collectionView = [(id<SSDKCommonCollectionViewProtocol>)self collectionView];
+        collectionView = [(id<CommonCollectionViewProtocol>)self collectionView];
         if (collectionView.superview != self.view) return;
-        SSDKCommonCollectionViewModel *model = [(id<SSDKCommonCollectionViewProtocol>)self collectionViewModel];
+        CommonCollectionViewModel *model = [(id<CommonCollectionViewProtocol>)self collectionViewModel];
         if (model.isCustomLayout) return;
         
         [collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -294,9 +299,9 @@ static void _ssdkCommonProtocolSwizzle(id self){
 
 
 - (void)commonSetupCollectionView{
-    id <SSDKCommonCollectionViewProtocol> vc = (id <SSDKCommonCollectionViewProtocol>) self;
+    id <CommonCollectionViewProtocol> vc = (id <CommonCollectionViewProtocol>) self;
     SEL sel = NSSelectorFromString(@"commonCollectionModel:");
-    SSDKCommonCollectionViewModel *model = [SSDKCommonCollectionViewModel new];
+    CommonCollectionViewModel *model = [CommonCollectionViewModel new];
     if ([self respondsToSelector:sel]) {
         [self tfy_performSelectorWithArguments:sel,model];
     }
@@ -308,7 +313,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
         model.layoutSetting(layout);
     }
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-    objc_setAssociatedObject(self, kSSDKCommonViewControllerCollectionViewModelKey, model, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, kCommonViewControllerCollectionViewModelKey, model, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     collectionView.makeChain
     .delegate(vc)
     .dataSource(vc)
@@ -328,7 +333,7 @@ static void _ssdkCommonProtocolSwizzle(id self){
     }
     UIView *topView = nil;
     if (_isConformsNavigationBar) {
-        topView = [(id <SSDKCommonNavigationProtocol>) vc navigationBar];
+        topView = [(id <CommonNavigationProtocol>) vc navigationBar];
         [self.view bringSubviewToFront:topView];
     }
     if (view == self.view && !model.isCustomLayout) {
@@ -346,8 +351,8 @@ static void _ssdkCommonProtocolSwizzle(id self){
 
 
 - (void)commonSetupNavigationView{
-    SSDKCommonNavigationBar *bar = [SSDKCommonNavigationBar new];
-    id <SSDKCommonNavigationProtocol> vc =  (id <SSDKCommonNavigationProtocol>)self;
+    CommonNavigationBar *bar = [CommonNavigationBar new];
+    id <CommonNavigationProtocol> vc =  (id <CommonNavigationProtocol>)self;
     [vc setNavigationBar:bar];
     bar.delegate = vc;
     UIView * view = self.view;

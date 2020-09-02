@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163B24FF336D00CC0024 /* CommonViewController.m */; };
+		3654163F24FF345000CC0024 /* CommonNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163E24FF345000CC0024 /* CommonNavigationBar.m */; };
+		3654164224FF360100CC0024 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164124FF360100CC0024 /* NavigationController.m */; };
+		3654164524FF364A00CC0024 /* PolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164424FF364A00CC0024 /* PolicyViewController.m */; };
+		3654164824FF369C00CC0024 /* PolicyWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164724FF369C00CC0024 /* PolicyWebViewController.m */; };
 		36867DB024EBA0B000A761BC /* UIDevice+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36867DAC24EBA0AF00A761BC /* UIDevice+TFY_Tools.m */; };
 		36867DB424EBA19700A761BC /* UIControl+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36867DB324EBA19600A761BC /* UIControl+TFY_Tools.m */; };
 		36867DB724EBA1DB00A761BC /* UIFont+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36867DB624EBA1DA00A761BC /* UIFont+TFY_Tools.m */; };
@@ -105,12 +110,6 @@
 		565584C32431DCE600020D3C /* GuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584C22431DCE600020D3C /* GuideViewController.m */; };
 		565584C62431DD3B00020D3C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584C52431DD3B00020D3C /* MainViewController.m */; };
 		565584C92431DEEE00020D3C /* PolicyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584C82431DEEE00020D3C /* PolicyManager.m */; };
-		565584CC2431DF6700020D3C /* PolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584CB2431DF6700020D3C /* PolicyViewController.m */; };
-		565584D22431DFBC00020D3C /* SSDKCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584CE2431DFBC00020D3C /* SSDKCommonViewController.m */; };
-		565584D32431DFBC00020D3C /* SSDKCommonNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584D12431DFBC00020D3C /* SSDKCommonNavigationBar.m */; };
-		565584DA2431E0BB00020D3C /* MOBPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584D42431E0BA00020D3C /* MOBPolicyViewController.m */; };
-		565584DB2431E0BB00020D3C /* MOBPolicyWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584D72431E0BA00020D3C /* MOBPolicyWebViewController.m */; };
-		565584DC2431E0BB00020D3C /* MOBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584D92431E0BB00020D3C /* MOBNavigationViewController.m */; };
 		565584DF2431E48200020D3C /* HomeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584DE2431E48200020D3C /* HomeCollectionViewController.m */; };
 		565584E22431E49600020D3C /* PersonalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584E12431E49600020D3C /* PersonalTableViewController.m */; };
 /* End PBXBuildFile section */
@@ -133,6 +132,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3654163A24FF336D00CC0024 /* CommonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonViewController.h; sourceTree = "<group>"; };
+		3654163B24FF336D00CC0024 /* CommonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonViewController.m; sourceTree = "<group>"; };
+		3654163D24FF345000CC0024 /* CommonNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonNavigationBar.h; sourceTree = "<group>"; };
+		3654163E24FF345000CC0024 /* CommonNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonNavigationBar.m; sourceTree = "<group>"; };
+		3654164024FF360100CC0024 /* NavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		3654164124FF360100CC0024 /* NavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		3654164324FF364A00CC0024 /* PolicyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PolicyViewController.h; sourceTree = "<group>"; };
+		3654164424FF364A00CC0024 /* PolicyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PolicyViewController.m; sourceTree = "<group>"; };
+		3654164624FF369C00CC0024 /* PolicyWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PolicyWebViewController.h; sourceTree = "<group>"; };
+		3654164724FF369C00CC0024 /* PolicyWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PolicyWebViewController.m; sourceTree = "<group>"; };
 		36867DAC24EBA0AF00A761BC /* UIDevice+TFY_Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+TFY_Tools.m"; sourceTree = "<group>"; };
 		36867DAD24EBA0AF00A761BC /* UIDevice+TFY_Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+TFY_Tools.h"; sourceTree = "<group>"; };
 		36867DB224EBA19600A761BC /* UIControl+TFY_Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+TFY_Tools.h"; sourceTree = "<group>"; };
@@ -346,18 +355,6 @@
 		565584C52431DD3B00020D3C /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		565584C72431DEEE00020D3C /* PolicyManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PolicyManager.h; sourceTree = "<group>"; };
 		565584C82431DEEE00020D3C /* PolicyManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PolicyManager.m; sourceTree = "<group>"; };
-		565584CA2431DF6700020D3C /* PolicyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PolicyViewController.h; sourceTree = "<group>"; };
-		565584CB2431DF6700020D3C /* PolicyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PolicyViewController.m; sourceTree = "<group>"; };
-		565584CE2431DFBC00020D3C /* SSDKCommonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDKCommonViewController.m; sourceTree = "<group>"; };
-		565584CF2431DFBC00020D3C /* SSDKCommonNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSDKCommonNavigationBar.h; sourceTree = "<group>"; };
-		565584D02431DFBC00020D3C /* SSDKCommonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSDKCommonViewController.h; sourceTree = "<group>"; };
-		565584D12431DFBC00020D3C /* SSDKCommonNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDKCommonNavigationBar.m; sourceTree = "<group>"; };
-		565584D42431E0BA00020D3C /* MOBPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOBPolicyViewController.m; sourceTree = "<group>"; };
-		565584D52431E0BA00020D3C /* MOBPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOBPolicyViewController.h; sourceTree = "<group>"; };
-		565584D62431E0BA00020D3C /* MOBPolicyWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOBPolicyWebViewController.h; sourceTree = "<group>"; };
-		565584D72431E0BA00020D3C /* MOBPolicyWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOBPolicyWebViewController.m; sourceTree = "<group>"; };
-		565584D82431E0BA00020D3C /* MOBNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOBNavigationViewController.h; sourceTree = "<group>"; };
-		565584D92431E0BB00020D3C /* MOBNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOBNavigationViewController.m; sourceTree = "<group>"; };
 		565584DD2431E48200020D3C /* HomeCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCollectionViewController.h; sourceTree = "<group>"; };
 		565584DE2431E48200020D3C /* HomeCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCollectionViewController.m; sourceTree = "<group>"; };
 		565584E02431E49600020D3C /* PersonalTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalTableViewController.h; sourceTree = "<group>"; };
@@ -391,6 +388,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3654163924FF332500CC0024 /* CommonViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3654163D24FF345000CC0024 /* CommonNavigationBar.h */,
+				3654163E24FF345000CC0024 /* CommonNavigationBar.m */,
+				3654163A24FF336D00CC0024 /* CommonViewController.h */,
+				3654163B24FF336D00CC0024 /* CommonViewController.m */,
+				3654164024FF360100CC0024 /* NavigationController.h */,
+				3654164124FF360100CC0024 /* NavigationController.m */,
+				3654164624FF369C00CC0024 /* PolicyWebViewController.h */,
+				3654164724FF369C00CC0024 /* PolicyWebViewController.m */,
+				3654164324FF364A00CC0024 /* PolicyViewController.h */,
+				3654164424FF364A00CC0024 /* PolicyViewController.m */,
+			);
+			path = CommonViewController;
+			sourceTree = "<group>";
+		};
 		36867DC124EBDFFE00A761BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,7 +494,7 @@
 		565583A4243197BB00020D3C /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				565584CD2431DFBC00020D3C /* SSDKCommonViewController */,
+				3654163924FF332500CC0024 /* CommonViewController */,
 				565583A5243197BB00020D3C /* Homecontroller */,
 			);
 			path = Class;
@@ -495,8 +509,6 @@
 				565584C52431DD3B00020D3C /* MainViewController.m */,
 				565584C72431DEEE00020D3C /* PolicyManager.h */,
 				565584C82431DEEE00020D3C /* PolicyManager.m */,
-				565584CA2431DF6700020D3C /* PolicyViewController.h */,
-				565584CB2431DF6700020D3C /* PolicyViewController.m */,
 				565584DD2431E48200020D3C /* HomeCollectionViewController.h */,
 				565584DE2431E48200020D3C /* HomeCollectionViewController.m */,
 				565584E02431E49600020D3C /* PersonalTableViewController.h */,
@@ -777,23 +789,6 @@
 			path = Masonry;
 			sourceTree = "<group>";
 		};
-		565584CD2431DFBC00020D3C /* SSDKCommonViewController */ = {
-			isa = PBXGroup;
-			children = (
-				565584D82431E0BA00020D3C /* MOBNavigationViewController.h */,
-				565584D92431E0BB00020D3C /* MOBNavigationViewController.m */,
-				565584D52431E0BA00020D3C /* MOBPolicyViewController.h */,
-				565584D42431E0BA00020D3C /* MOBPolicyViewController.m */,
-				565584D62431E0BA00020D3C /* MOBPolicyWebViewController.h */,
-				565584D72431E0BA00020D3C /* MOBPolicyWebViewController.m */,
-				565584CE2431DFBC00020D3C /* SSDKCommonViewController.m */,
-				565584CF2431DFBC00020D3C /* SSDKCommonNavigationBar.h */,
-				565584D02431DFBC00020D3C /* SSDKCommonViewController.h */,
-				565584D12431DFBC00020D3C /* SSDKCommonNavigationBar.m */,
-			);
-			path = SSDKCommonViewController;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -931,10 +926,7 @@
 				565583E12431B3E200020D3C /* UIColor+TFY_Tools.m in Sources */,
 				565583F02431B78600020D3C /* UIImage+TFY_Tools.m in Sources */,
 				36C334AC24ED2D1E00DA6FB2 /* TFY_CommonUtils.m in Sources */,
-				565584DC2431E0BB00020D3C /* MOBNavigationViewController.m in Sources */,
-				565584D32431DFBC00020D3C /* SSDKCommonNavigationBar.m in Sources */,
 				565583A8243197BB00020D3C /* SceneDelegate.m in Sources */,
-				565584D22431DFBC00020D3C /* SSDKCommonViewController.m in Sources */,
 				565584172431BE9C00020D3C /* TFY_BaseViewChainModel.m in Sources */,
 				36867DBF24EBA2F600A761BC /* UITextField+TFY_Tools.m in Sources */,
 				565584762431CD0E00020D3C /* TFY_PickerViewChainModel.m in Sources */,
@@ -951,15 +943,16 @@
 				565584732431CCB300020D3C /* TFY_LabelChainModel.m in Sources */,
 				36CBAD1424EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m in Sources */,
 				36C334A724ED284500DA6FB2 /* NSString+TFY_String.m in Sources */,
+				3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */,
 				36867DBA24EBA26400A761BC /* UIScreen+TFY_Tools.m in Sources */,
 				565584C32431DCE600020D3C /* GuideViewController.m in Sources */,
+				3654164224FF360100CC0024 /* NavigationController.m in Sources */,
 				565584522431C7DB00020D3C /* MASLayoutConstraint.m in Sources */,
 				565584B62431D4F600020D3C /* TFY_TextLayerChainModel.m in Sources */,
 				565583D82431B1FE00020D3C /* UIView+TFY_Tools.m in Sources */,
 				565584A72431D3A600020D3C /* TFY_GradientLayerChainModel.m in Sources */,
 				5655840C2431BB7600020D3C /* NSTimer+TFY_Tools.m in Sources */,
 				565584E22431E49600020D3C /* PersonalTableViewController.m in Sources */,
-				565584CC2431DF6700020D3C /* PolicyViewController.m in Sources */,
 				5655842C2431C4DC00020D3C /* TFY_TapGestureChainModel.m in Sources */,
 				565584062431BAFA00020D3C /* NSAttributedString+TFY_Tools.m in Sources */,
 				565584112431BD2100020D3C /* TFY_ChainBaseModel.m in Sources */,
@@ -973,6 +966,7 @@
 				565584C62431DD3B00020D3C /* MainViewController.m in Sources */,
 				565583D22431AFB700020D3C /* NSNumber+TFY_Tools.m in Sources */,
 				565584642431CA5400020D3C /* TFY_ButtonChainModel.m in Sources */,
+				3654164824FF369C00CC0024 /* PolicyWebViewController.m in Sources */,
 				565584292431C48F00020D3C /* TFY_SwipeGestureChainModel.m in Sources */,
 				5655849D2431D1F900020D3C /* UIView+TFY_Chain.m in Sources */,
 				5655848B2431CFB700020D3C /* TFY_TableViewChainModel.m in Sources */,
@@ -983,13 +977,13 @@
 				565584B92431D53B00020D3C /* TFY_TiledLayerChainModel.m in Sources */,
 				5655848E2431D01A00020D3C /* TFY_TextFieldChainModel.m in Sources */,
 				36867DB424EBA19700A761BC /* UIControl+TFY_Tools.m in Sources */,
+				3654164524FF364A00CC0024 /* PolicyViewController.m in Sources */,
 				565584AD2431D42D00020D3C /* TFY_ReplicatorLayerChainModel.m in Sources */,
 				565584512431C7DB00020D3C /* MASConstraintMaker.m in Sources */,
 				5655841A2431C00700020D3C /* TFY_BaseGestureChainModel.m in Sources */,
 				36867DC824EBE1D200A761BC /* UIApplication+TFY_Tools.m in Sources */,
 				5655846D2431CC0B00020D3C /* TFY_DatePickerViewChainModel.m in Sources */,
 				565584972431D12E00020D3C /* TFY_VisualEffectViewChainModel.m in Sources */,
-				565584DA2431E0BB00020D3C /* MOBPolicyViewController.m in Sources */,
 				565584262431C43800020D3C /* TFY_RotationGestureChainModel.m in Sources */,
 				36C334A124ED26CE00DA6FB2 /* NSData+TFY_Data.m in Sources */,
 				565584A02431D28200020D3C /* TFY_BaseLayerChainModel.m in Sources */,
@@ -1006,12 +1000,12 @@
 				565584232431C3DE00020D3C /* TFY_PinchGestureChainModel.m in Sources */,
 				565584942431D0E400020D3C /* TFY_ViewChainModel.m in Sources */,
 				36C334A024ED26CE00DA6FB2 /* NSDate+TFY_Date.m in Sources */,
-				565584DB2431E0BB00020D3C /* MOBPolicyWebViewController.m in Sources */,
 				5655847C2431CDB800020D3C /* TFY_ScrollViewChainModel.m in Sources */,
 				36867DB724EBA1DB00A761BC /* UIFont+TFY_Tools.m in Sources */,
 				565584602431C91300020D3C /* TFY_ActivityIndicatorViewModel.m in Sources */,
 				36BA238724EE488000CE8275 /* UITableViewCell+TFY_Chain.m in Sources */,
 				565584792431CD6200020D3C /* TFY_ProgressViewChainModel.m in Sources */,
+				3654163F24FF345000CC0024 /* CommonNavigationBar.m in Sources */,
 				565584332431C71500020D3C /* TFY_BaseScrollViewChainModel.m in Sources */,
 				565584A42431D35B00020D3C /* TFY_EmiiterLayerChainModel.m in Sources */,
 				565584B02431D46E00020D3C /* TFY_ScrollLayerChainModel.m in Sources */,

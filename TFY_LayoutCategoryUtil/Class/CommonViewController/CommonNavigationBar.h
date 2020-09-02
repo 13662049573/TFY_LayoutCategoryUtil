@@ -1,16 +1,16 @@
 //
-//  SSDKCommonNavigationBar.h
-//  mob
+//  CommonNavigationBar.h
+//  TFY_LayoutCategoryUtil
 //
-//  Created by maxl on 2018/12/20.
-//  Copyright © 2018 mob. All rights reserved.
+//  Created by 田风有 on 2020/9/2.
+//  Copyright © 2020 田风有. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol SSDKCommonNavigationBarDelegate <NSObject>
+@protocol CommonNavigationBarDelegate <NSObject>
 
 @optional
 /**
@@ -45,13 +45,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@class SSDKCommonNavigationBar;
+@class CommonNavigationBar;
 
-typedef void(^nav_Block)(SSDKCommonNavigationBar *bar);
+typedef void(^nav_Block)(CommonNavigationBar *bar);
 
-@interface SSDKCommonNavigationBar : UIView
+@interface CommonNavigationBar : UIView
 
-@property (nonatomic, weak) id <SSDKCommonNavigationBarDelegate> delegate;
+@property (nonatomic, weak) id <CommonNavigationBarDelegate> delegate;
 
 @property (nonatomic, strong, readonly) UIView * leftView;
 
@@ -72,7 +72,6 @@ typedef void(^nav_Block)(SSDKCommonNavigationBar *bar);
 - (void)setTag:(NSInteger)tag;
 
 - (void)resetLayout:(UIEdgeInsets)edge;
-
 @end
 
 NS_ASSUME_NONNULL_END

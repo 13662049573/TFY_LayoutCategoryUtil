@@ -8,10 +8,11 @@
 
 #import "PolicyManager.h"
 #import "PolicyViewController.h"
+
 static NSString * kPolicyManagerSaveKey =  @"kPolicyManagerSaveKey";
 
 @interface PolicyManager ()
-@property (nonatomic, strong) NSNumber * isAllowPolicy;
+TFY_PROPERTY_OBJECT_STRONG(NSNumber, isAllowPolicy);
 @end
 
 @implementation PolicyManager

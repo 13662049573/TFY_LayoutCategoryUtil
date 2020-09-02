@@ -23,23 +23,19 @@
            self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
            self.window.backgroundColor = [UIColor whiteColor];
            [self.window makeKeyAndVisible];
-       }
-       [[TFY_ScenePackageTools defaultPackage] addBeforeWindowEvent:^(TFY_ScenePackageTools * _Nonnull application) {
-           if ([GuideViewController isFirstRun])
-           {
-               [UIApplication tfy_window].rootViewController = [[GuideViewController alloc] init];
-               [[UIApplication tfy_window].rootViewController addViewDidDisappearBlock:^(UIViewController * _Nonnull vc, BOOL animated) {
-                   [[PolicyManager defaultManager] show];
-               }];
-           }
-           else
-           {
-               [UIApplication tfy_window].rootViewController = [[MainViewController alloc] init];
+     }
+    [[TFY_ScenePackageTools defaultPackage] addBeforeWindowEvent:^(TFY_ScenePackageTools * _Nonnull application) {
+       if ([GuideViewController isFirstRun]) {
+           [UIApplication tfy_window].rootViewController = [[GuideViewController alloc] init];
+           [[UIApplication tfy_window].rootViewController addViewDidDisappearBlock:^(UIViewController * _Nonnull vc, BOOL animated) {
                [[PolicyManager defaultManager] show];
-           }
-           [self setupNavigationBar];
-           
-       }];
+           }];
+       } else {
+           [UIApplication tfy_window].rootViewController = [[MainViewController alloc] init];
+           [[PolicyManager defaultManager] show];
+       }
+       [self setupNavigationBar];
+    }];
     return YES;
 }
 

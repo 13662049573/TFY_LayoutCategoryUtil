@@ -2,26 +2,27 @@
 //  PolicyViewController.m
 //  TFY_LayoutCategoryUtil
 //
-//  Created by tiandengyou on 2020/3/30.
+//  Created by 田风有 on 2020/9/2.
 //  Copyright © 2020 田风有. All rights reserved.
 //
 
 #import "PolicyViewController.h"
-#import "MOBPolicyWebViewController.h"
+#import "PolicyWebViewController.h"
 @interface PolicyViewController ()<UITextViewDelegate>
-@property (nonatomic, strong) UIView *contentView;
+TFY_PROPERTY_OBJECT_STRONG(UIView, contentView);
 
-@property (nonatomic, strong) UIButton * cancelButton;
+TFY_PROPERTY_OBJECT_STRONG(UIButton, cancelButton);
 
-@property (nonatomic, strong) UIButton * confirmButton;
+TFY_PROPERTY_OBJECT_STRONG(UIButton, confirmButton);
 
-@property (nonatomic, strong) UITextView *contentTextView;
+TFY_PROPERTY_OBJECT_STRONG(UITextView, contentTextView);
 
-@property (nonatomic, strong) UILabel *titleLabel;
+TFY_PROPERTY_OBJECT_STRONG(UILabel, titleLabel);
 
-@property (nonatomic, strong) UILabel *recentUpdateDate;
+TFY_PROPERTY_OBJECT_STRONG(UILabel, recentUpdateDate);
 
-@property (nonatomic, strong) UILabel *effectDate;
+TFY_PROPERTY_OBJECT_STRONG(UILabel, effectDate);
+
 @end
 
 @implementation PolicyViewController
@@ -31,24 +32,25 @@
     self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
     [self setupUI];
     [self loadData];
+    
 }
 
-- (void)setupUI{//
+- (void)setupUI{
     
     UIViewModelSet()
     .backgroundColor([UIColor whiteColor])
     .addToSuperView(self.view)
     .cornerRadius(17)
     .assignTo(^(__kindof UIView * _Nonnull view) {
-        _contentView = view;
+        self.contentView = view;
     });
     
     UILabelModelSet()
     .multiple(3)
     .assignToObjects(^(NSArray<UILabel *> * _Nonnull objs) {
-        _titleLabel = objs[0];
-        _recentUpdateDate = objs[1];
-        _effectDate = objs[2];
+       self.titleLabel = objs[0];
+        self.recentUpdateDate = objs[1];
+        self.effectDate = objs[2];
     })
     .addToSuperView(self.contentView)
     .textAlignment(NSTextAlignmentCenter)
@@ -112,8 +114,8 @@
         make.left.equalTo(self.contentView.mas_centerX).offset(9.5);
     })
     .assignToObjects(^(NSArray<UIButton *> * _Nonnull objs) {
-        _cancelButton = objs[0];
-        _confirmButton = objs[1];
+        self.cancelButton = objs[0];
+        self.confirmButton = objs[1];
     });
     
     UITextViewModelSet()
@@ -123,7 +125,7 @@
     .delegate(self)
     .editable(NO)
     .assignTo(^(__kindof UIView * _Nonnull view) {
-        _contentTextView = view;
+        self.contentTextView = view;
     })
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
         make.top.equalTo(self.effectDate.mas_bottom).offset(10);
@@ -145,15 +147,13 @@
 
 - (void)loadData{
     
-    NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:@"    欢迎您使用提供的演示提供了一步实现移动端深度链接的功能，不仅极大地方便了您的终端用户的服务体验，更为您实时了解终端用户的数据进行了统计分析。为了对您的TFY_Link功能进行来源追溯并帮助您更精细化运营，我们将依据的《隐私政策》来帮助你了解我们需要收集哪些数据。\n\n\n详情点击:" attributes:@{
+    NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:@"    欢迎您使用TFY_Tech提供的演示DEMO，TFY_Link提供了一步实现移动端深度链接的功能，不仅极大地方便了您的终端用户的服务体验，更为您实时了解终端用户的数据进行了统计分析。为了对您的TFY_Link功能进行来源追溯并帮助您更精细化运营，我们将依据TFY_Tech的《隐私政策》来帮助你了解我们需要收集哪些数据。\n\n\n详情点击:" attributes:@{
         NSFontAttributeName :Font(PingFangReguler, 13),
         NSForegroundColorAttributeName:TFY_ColorHexString(@"000000")
     }];
-    
+    self.titleLabel.makeChain.attributedText(attribute);
     _contentTextView.linkTextAttributes = @{NSForegroundColorAttributeName:TFY_ColorHexString(@"FF7800")};
-    
-     self.contentTextView.attributedText = attribute;
-    
+   
 }
 
 
@@ -173,12 +173,16 @@
 
 #pragma mark - UITextViewDelegate -
 
+
+
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction{
-    MOBPolicyWebViewController *vc = [MOBPolicyWebViewController new];
-    vc.title = @"《TFY_Tech隐私政策》";
-    vc.extraInfo[@"url"] = @"https://www.baidu.com";
+    PolicyWebViewController *vc = [PolicyWebViewController new];
+    vc.title = @"《MobTech隐私政策》";
+    vc.extraInfo[@"url"] = URL;
     vc.showAnimated(YES).push();
     return NO;
 }
+
+
 
 @end

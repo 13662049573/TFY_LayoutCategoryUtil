@@ -10,13 +10,10 @@
 #import "MainViewController.h"
 #import "AppDelegate.h"
 @interface GuideViewController ()<UIScrollViewDelegate>
-@property (nonatomic, strong) UIPageControl *pageControl;
-
-@property (nonatomic, strong) NSArray *imageNames;
-
-@property (nonatomic, strong) NSArray *titles;
-
-@property (nonatomic, strong) NSArray *contents;
+TFY_PROPERTY_OBJECT_STRONG(UIPageControl, pageControl);
+TFY_PROPERTY_NSArray(imageNames);
+TFY_PROPERTY_NSArray(titles);
+TFY_PROPERTY_NSArray(contents);
 @end
 
 @implementation GuideViewController
@@ -25,12 +22,13 @@
     [super viewDidLoad];
      self.imageNames = @[@"yd_1", @"yd_3", @"yd_3"];
        
-       self.titles = @[@"场景还原", @"无码邀请", @"关系匹配"];
+    self.titles = @[@"场景还原", @"无码邀请", @"关系匹配"];
        
-       self.contents = @[@"Web端打开页面场景，可直达App端指定内页", @"告别邀请码，自动关联邀请关系，自动统计相关值", @"自带社交关系，智能匹配好友，提高留存率"];
+    self.contents = @[@"Web端打开页面场景，可直达App端指定内页", @"告别邀请码，自动关联邀请关系，自动统计相关值", @"自带社交关系，智能匹配好友，提高留存率"];
        
-       [self createGuideScrollView];
+    [self createGuideScrollView];
 }
+
 + (BOOL)isFirstRun
 {
     static NSString *const MLDAlreadyRun = @"AlreadyRun";
@@ -135,8 +133,8 @@
         [guideScrollView addSubview:skipBtn];
     }
     
-    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH / 2, 30)];
-    self.pageControl.center = CGPointMake(viewCenter.x, SCREEN_HEIGHT - 90);
+    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, TFY_Width_W() / 2, 30)];
+    self.pageControl.center = CGPointMake(viewCenter.x, TFY_Height_H() - 90);
     [self.view addSubview:self.pageControl];
     self.pageControl.numberOfPages = imagesCount;
     self.pageControl.pageIndicatorTintColor = [UIColor colorWithRed:236/255.0 green:239/255.0 blue:241/255.0 alpha:1.0];
@@ -172,7 +170,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    self.pageControl.currentPage = scrollView.contentOffset.x / SCREEN_WIDTH;
+    self.pageControl.currentPage = scrollView.contentOffset.x / TFY_Width_W();
 }
 
 
