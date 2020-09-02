@@ -30,6 +30,19 @@ NS_ASSUME_NONNULL_BEGIN
  需要结合delegate中的方法
  */
 @property (nonatomic, assign) NSUInteger limitLength;
+
+/**行间距 必须在文本输入之后赋值*/
+@property (nonatomic , assign)CGFloat tfy_lineSpace;
+
+/**字体间距 必须在文本输入之后赋值*/
+@property (nonatomic , assign)CGFloat tfy_textSpace;
+
+/**首行缩进 必须在文本输入之后赋值*/
+@property (nonatomic , assign)CGFloat tfy_firstLineHeadIndent;
+
+/**修改label内容距 `top` `left` `bottom` `right` 边距*/
+@property (nonatomic, assign) UIEdgeInsets tfy_contentInsets;
+
 @end
 
 NS_ASSUME_NONNULL_END

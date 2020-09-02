@@ -31,8 +31,8 @@ TFY_PROPERTY_NSInteger(currentTag);
 }
 
 - (void)setup{
-    self.lineHeight = 0.5;
-    self.currentTag = -999;
+    _lineHeight = 0.5;
+    _currentTag = -999;
     self.backgroundColor = [UIColor whiteColor];
     if ([self.delegate respondsToSelector:@selector(navigationClick:)]) {
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(naviTap)]];

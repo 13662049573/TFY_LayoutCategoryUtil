@@ -90,7 +90,16 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
             self.titleLabel = view;
         });
     
-        UITextFieldModelSet().placeholder(@"这是一个输入框").placeholderColor(UIColor.whiteColor).allowsEditingTextAttributes(YES).font([UIFont systemFontOfSize:30 weight:UIFontWeightBold]).textColor(UIColor.redColor).backgroundColor(UIColor.orangeColor).cornerRadius(10).addToSuperView(self.view)
+        UITextFieldModelSet()
+    .placeholder(@"这是一个输入框")
+    .placeholderColor(UIColor.whiteColor)
+    .allowsEditingTextAttributes(YES)
+    .font([UIFont systemFontOfSize:15 weight:UIFontWeightBold])
+    .textColor(UIColor.redColor)
+    .contentInsets(UIEdgeInsetsMake(10, 10, 10, 10))
+    .backgroundColor(UIColor.orangeColor)
+    .cornerRadius(10)
+    .addToSuperView(self.view)
         .assignTo(^(__kindof UIView * _Nonnull view) {
             self.textfiled = view;
         })
@@ -98,7 +107,7 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
             make.left.equalTo(self.titleLabel);
             make.right.equalTo(self.titleLabel);
             make.top.equalTo(self.titleLabel.mas_bottom).offset(20);
-            make.height.mas_equalTo(80);
+            make.height.mas_equalTo(50);
         });
     
         UIViewModelSet().backgroundColor(TFY_ColorHexString(@"4e5f6g")).clipRadius(CornerClipTypeBothTop, 10).addToSuperView(self.view)
@@ -124,6 +133,10 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
         self.confirmButton.backgroundColor = UIColor.yellowColor;
     }
     self.myblock(@"222", @"33333");
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.textfiled resignFirstResponder];
 }
 
 @end

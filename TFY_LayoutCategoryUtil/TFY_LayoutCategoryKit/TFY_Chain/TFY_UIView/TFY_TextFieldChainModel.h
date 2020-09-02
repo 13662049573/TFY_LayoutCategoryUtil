@@ -63,6 +63,10 @@ TFY_PROPERTY_CHAIN_READONLY TFY_TextFieldChainModel *(^ enablesReturnKeyAutomati
 TFY_PROPERTY_CHAIN_READONLY TFY_TextFieldChainModel *(^ secureTextEntry)(BOOL);
 TFY_PROPERTY_CHAIN_READONLY TFY_TextFieldChainModel *(^ textContentType)(UITextContentType) API_AVAILABLE(ios(10.0));
 
+TFY_PROPERTY_CHAIN_READONLY TFY_TextFieldChainModel *(^ contentInsets)(UIEdgeInsets);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextFieldChainModel *(^ lineSpace)(CGFloat);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextFieldChainModel *(^ textSpace)(CGFloat);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextFieldChainModel *(^ firstLineHeadIndent)(CGFloat);
 @end
 
 TFY_CATEGORY_EXINTERFACE(UITextField, TFY_TextFieldChainModel)

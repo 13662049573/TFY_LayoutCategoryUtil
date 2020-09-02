@@ -69,6 +69,41 @@ TFY_CATEGORY_CHAIN_TEXTFIELD_IMPLEMENTATION(textContentType, UITextContentType);
     };
 }
 
+- (TFY_TextFieldChainModel * _Nonnull (^)(UIEdgeInsets))contentInsets{
+    return ^(UIEdgeInsets contentInsets){
+        [self enumerateObjectsUsingBlock:^(UITextField * _Nonnull obj) {
+            obj.tfy_contentInsets = contentInsets;
+        }];
+        return self;
+    };
+}
+/**行间距 必须在文本输入之后赋值*/
+- (TFY_TextFieldChainModel * _Nonnull (^)(CGFloat))lineSpace{
+    return ^(CGFloat lineSpace){
+        [self enumerateObjectsUsingBlock:^(UITextField * _Nonnull obj) {
+            obj.tfy_lineSpace = lineSpace;
+        }];
+        return self;
+    };
+}
+/**字体间距 必须在文本输入之后赋值*/
+- (TFY_TextFieldChainModel * _Nonnull (^)(CGFloat))textSpace{
+    return ^(CGFloat textSpace){
+        [self enumerateObjectsUsingBlock:^(UITextField * _Nonnull obj) {
+            obj.tfy_textSpace = textSpace;
+        }];
+        return self;
+    };
+}
+/**首行缩进 必须在文本输入之后赋值*/
+- (TFY_TextFieldChainModel * _Nonnull (^)(CGFloat))firstLineHeadIndent{
+    return ^(CGFloat firstLineHeadIndent){
+        [self enumerateObjectsUsingBlock:^(UITextField * _Nonnull obj) {
+            obj.tfy_firstLineHeadIndent = firstLineHeadIndent;
+        }];
+        return self;
+    };
+}
 @end
 TFY_CATEGORY_VIEW_IMPLEMENTATION(UITextField, TFY_TextFieldChainModel)
 #undef TFY_CATEGORY_CHAIN_TEXTFIELD_IMPLEMENTATION
