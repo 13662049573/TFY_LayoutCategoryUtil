@@ -25,6 +25,10 @@ TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ allowsDefaultTighteningForTr
 TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ minimumScaleFactor)(CGFloat);
 TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ preferredMaxLayoutWidth)(CGFloat);
 TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ contentInsets)(UIEdgeInsets);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ lineSpace)(CGFloat);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ textSpace)(CGFloat);
+TFY_PROPERTY_CHAIN_READONLY TFY_LabelChainModel *(^ firstLineHeadIndent)(CGFloat);
+
 
 TFY_PROPERTY_CHAIN_READONLY CGSize (^ sizeWithLimitSize) (CGSize);
 

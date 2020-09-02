@@ -185,13 +185,9 @@ static NSTimeInterval _CGImageSourceGetGIFFrameDelayAtIndex(CGImageSourceRef sou
     }
 }
 
-
-
-
 + (UIImage *)tfy_animatedGifName:(NSString *)name{
     return [self tfy_animatedGifName:name scale:1];
 }
-
 
 + (UIImage *)tfy_animatedGifName:(NSString *)name scale:(CGFloat)scale{
     if (scale > 1.0f) {

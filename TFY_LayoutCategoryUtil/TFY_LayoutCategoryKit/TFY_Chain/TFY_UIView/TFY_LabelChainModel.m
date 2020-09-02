@@ -44,6 +44,33 @@ TFY_CATEGORY_CHAIN_LABLE_IMPLEMENTATION(minimumScaleFactor, CGFloat);
         return self;
     };
 }
+/**行间距 必须在文本输入之后赋值*/
+- (TFY_LabelChainModel * _Nonnull (^)(CGFloat))lineSpace{
+    return ^(CGFloat lineSpace){
+        [self enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj) {
+            obj.tfy_lineSpace = lineSpace;
+        }];
+        return self;
+    };
+}
+/**字体间距 必须在文本输入之后赋值*/
+- (TFY_LabelChainModel * _Nonnull (^)(CGFloat))textSpace{
+    return ^(CGFloat textSpace){
+        [self enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj) {
+            obj.tfy_textSpace = textSpace;
+        }];
+        return self;
+    };
+}
+/**首行缩进 必须在文本输入之后赋值*/
+- (TFY_LabelChainModel * _Nonnull (^)(CGFloat))firstLineHeadIndent{
+    return ^(CGFloat firstLineHeadIndent){
+        [self enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj) {
+            obj.tfy_firstLineHeadIndent = firstLineHeadIndent;
+        }];
+        return self;
+    };
+}
 
 @end
 
