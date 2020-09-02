@@ -13,19 +13,18 @@ NS_ASSUME_NONNULL_BEGIN
 //------------------tableView
 @interface CommonTableViewModel : NSObject
 //tableView的类
-@property (nonatomic, copy) NSString *  clas;
+TFY_PROPERTY_NSString(clas);
 //tableView的样式
-@property (nonatomic, assign) UITableViewStyle  style;
+TFY_PROPERTY_OBJECT_ASSIGN(UITableViewStyle, style);
 //是否自定义布局
-@property (nonatomic, assign) BOOL  isCustomLayout;
+TFY_PROPERTY_BOOL(isCustomLayout);
 //详细设置tableView属性
-@property (nonatomic, copy) void (^tableView) (UITableView *tableView);
+TFY_PROPERTY_CHAIN_BLOCK(tableView,UITableView *tableView);
 @end
 
 //协议
 @protocol CommonTableViewProtocol <UITableViewDelegate,UITableViewDataSource>
-
-@property (nonatomic, strong) UITableView * tableView;
+TFY_PROPERTY_OBJECT_STRONG(UITableView, tableView);
 
 @optional
 //此方法不需要实现，可直接调用
@@ -42,19 +41,13 @@ NS_ASSUME_NONNULL_BEGIN
 //------------------collectionView
 
 @interface CommonCollectionViewModel : NSObject
-
-@property (nonatomic, strong) UICollectionViewFlowLayout * layout;
-
-@property (nonatomic, copy) void (^layoutSetting) (UICollectionViewFlowLayout *layout);
-
-//是否自定义布局
-@property (nonatomic, assign) BOOL  isCustomLayout;
-
+TFY_PROPERTY_OBJECT_STRONG(UICollectionViewFlowLayout, layout);
+TFY_PROPERTY_CHAIN_BLOCK(layoutSetting,UICollectionViewFlowLayout *layout);
+TFY_PROPERTY_BOOL(isCustomLayout);//是否自定义布局
 @end
 
 @protocol CommonCollectionViewProtocol <UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-
-@property (nonatomic, strong) UICollectionView * collectionView;
+TFY_PROPERTY_OBJECT_STRONG(UICollectionView, collectionView);
 
 @optional
 
@@ -68,8 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @protocol CommonNavigationProtocol <CommonNavigationBarDelegate>
-
-@property (nonatomic, strong) CommonNavigationBar * navigationBar;
+TFY_PROPERTY_OBJECT_STRONG(CommonNavigationBar, navigationBar);
 
 @optional
 
@@ -101,8 +93,7 @@ typedef NS_ENUM(NSInteger, AppOrientation) {
 /**
  是否可以左滑
  */
-@property (nonatomic, assign) BOOL swipeCanPop;
-
+TFY_PROPERTY_BOOL(swipeCanPop);
 /**
  方向
  */
@@ -111,7 +102,7 @@ typedef NS_ENUM(NSInteger, AppOrientation) {
 /**
  额外的信息
  */
-@property (nonatomic, strong) NSMutableDictionary * extraInfo;
+TFY_PROPERTY_NSMutableDictionary(extraInfo);
 
 @end
 

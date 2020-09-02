@@ -8,16 +8,15 @@
 
 #import "CommonNavigationBar.h"
 
-@interface CommonNavigationBar ()
-{
+@interface CommonNavigationBar (){
     CGFloat _lineHeight;
 }
+TFY_PROPERTY_OBJECT_STRONG(UIView, leftView);
+TFY_PROPERTY_OBJECT_STRONG(UIView, rightView);
+TFY_PROPERTY_NSArray(buttonClass);
+TFY_PROPERTY_NSMutableDictionary(statusDic);
+TFY_PROPERTY_NSInteger(currentTag);
 
-@property (nonatomic, strong) NSArray * buttonClass;
-@property (nonatomic, strong) UIView * leftView;
-@property (nonatomic, strong) UIView * rightView;
-@property (nonatomic, strong) NSMutableDictionary * statusDic;
-@property (nonatomic, assign) NSInteger  currentTag;
 @end
 
 @implementation CommonNavigationBar
@@ -32,10 +31,10 @@
 }
 
 - (void)setup{
-    _lineHeight = 0.5;
-    _currentTag = -999;
+    self.lineHeight = 0.5;
+    self.currentTag = -999;
     self.backgroundColor = [UIColor whiteColor];
-    if ([_delegate respondsToSelector:@selector(navigationClick:)]) {
+    if ([self.delegate respondsToSelector:@selector(navigationClick:)]) {
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(naviTap)]];
     }
     
@@ -46,7 +45,7 @@
 }
 
 - (void)naviTap{
-    [_delegate navigationClick:self];
+    [self.delegate navigationClick:self];
 }
 
 - (NSMutableDictionary *)statusDic{
@@ -104,8 +103,8 @@
 }
 
 - (void)leftViewTap{
-    if ([_delegate respondsToSelector:@selector(leftButtonTap:)]) {
-        [_delegate leftButtonTap:_leftButton];
+    if ([self.delegate respondsToSelector:@selector(leftButtonTap:)]) {
+        [self.delegate leftButtonTap:self.leftButton];
     }
 }
 
@@ -131,8 +130,8 @@
 
 
 - (void)middleButtonTap{
-    if ([_delegate respondsToSelector:@selector(middleButtonTap:)]) {
-        [_delegate middleButtonTap:_middleButton];
+    if ([self.delegate respondsToSelector:@selector(middleButtonTap:)]) {
+        [self.delegate middleButtonTap:self.middleButton];
     }
 }
 
@@ -172,15 +171,15 @@
 }
 
 - (void)rightViewTap{
-    if ([_delegate respondsToSelector:@selector(rightButtonTap:)]) {
-        [_delegate rightButtonTap:_rightButton];
+    if ([self.delegate respondsToSelector:@selector(rightButtonTap:)]) {
+        [self.delegate rightButtonTap:self.rightButton];
     }
 }
 
 - (Class)getButtonClassIndex:(NSInteger)index{
-    if (_buttonClass.count <= index || index < 0) return [UIButton class];
+    if (self.buttonClass.count <= index || index < 0) return [UIButton class];
     
-    NSString *clas = _buttonClass[index];
+    NSString *clas = self.buttonClass[index];
     Class class;
     if (clas.length == 0) {
         class = [UIButton class];
@@ -204,8 +203,8 @@
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
     UIView *hitView = [super hitTest:point withEvent:event];
-    if ([_delegate respondsToSelector:@selector(navigationEventsShoulSSDKass)]) {
-        if ([_delegate navigationEventsShoulSSDKass]) {
+    if ([self.delegate respondsToSelector:@selector(navigationEventsShoulSSDKass)]) {
+        if ([self.delegate navigationEventsShoulSSDKass]) {
             if (hitView == self) {
                 return nil;
             }
@@ -225,27 +224,27 @@
 
 - (void)setupTag:(NSInteger)tag WithBlock:(nav_Block)block{
     if (block) {
-        [_statusDic setObject:block forKey:@(tag)];
+        [self.statusDic setObject:block forKey:@(tag)];
     }else{
-        [_statusDic removeObjectForKey:@(tag)];
+        [self.statusDic removeObjectForKey:@(tag)];
     }
 }
 
 
 - (void)resetLayout:(UIEdgeInsets)edge{
     
-    [_line mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.line mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(edge.left);
         make.right.mas_offset(-edge.right);
     }];
-    [_middleButton mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.middleButton mas_updateConstraints:^(MASConstraintMaker *make) {
        make.top.mas_offset(kStatusBarHeight);
     }];
-    [_leftView mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.leftView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(kStatusBarHeight);
         make.left.mas_offset(edge.left);
     }];
-    [_rightView mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.rightView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(kStatusBarHeight);
         make.right.mas_offset(-edge.right);
     }];

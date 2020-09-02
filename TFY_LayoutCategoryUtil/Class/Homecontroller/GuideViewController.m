@@ -56,7 +56,7 @@ TFY_PROPERTY_NSArray(contents);
     
     NSInteger imagesCount = self.imageNames.count;
     
-    guideScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * imagesCount, SCREEN_HEIGHT);
+    guideScrollView.contentSize = CGSizeMake(TFY_Width_W() * imagesCount, TFY_Height_H());
     
     
     CGPoint viewCenter = self.view.center;
@@ -66,16 +66,16 @@ TFY_PROPERTY_NSArray(contents);
         CALayer *imageLayer = [CALayer layer];
         imageLayer.contents = (__bridge id)[UIImage imageNamed:self.imageNames[i]].CGImage;
         imageLayer.contentsGravity = kCAGravityResizeAspect;
-        imageLayer.bounds = CGRectMake(0, 0, SCREEN_WIDTH * 0.8, SCREEN_HEIGHT * 0.8);
+        imageLayer.bounds = CGRectMake(0, 0, TFY_Width_W() * 0.8, TFY_Height_H() * 0.8);
         
-        imageLayer.position = CGPointMake(viewCenter.x + SCREEN_WIDTH * i, viewCenter.y - SCREEN_HEIGHT * 0.1);
+        imageLayer.position = CGPointMake(viewCenter.x + TFY_Width_W() * i, viewCenter.y - TFY_Height_H() * 0.1);
         
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.text = self.titles[i];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         
-        titleLabel.bounds = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 0.2);
-        titleLabel.center = CGPointMake(viewCenter.x + SCREEN_WIDTH * i, viewCenter.y + SCREEN_HEIGHT * 0.23);
+        titleLabel.bounds = CGRectMake(0, 0, TFY_Width_W(), TFY_Height_H() * 0.2);
+        titleLabel.center = CGPointMake(viewCenter.x + TFY_Width_W() * i, viewCenter.y + TFY_Height_H() * 0.23);
         
         titleLabel.font = Font(PingFangSemibold, 27);
         titleLabel.textColor = [UIColor colorWithRed:23/255.0 green:25/255.0 blue:34/255.0 alpha:1.0];
@@ -86,8 +86,8 @@ TFY_PROPERTY_NSArray(contents);
         contentLabel.textAlignment = NSTextAlignmentCenter;
         contentLabel.numberOfLines = 0;
         
-        contentLabel.bounds = CGRectMake(0, 0, SCREEN_WIDTH * 0.6, SCREEN_HEIGHT * 0.2);
-        contentLabel.center = CGPointMake(viewCenter.x + SCREEN_WIDTH * i, viewCenter.y + SCREEN_HEIGHT * 0.3);
+        contentLabel.bounds = CGRectMake(0, 0, TFY_Width_W() * 0.6, TFY_Height_H() * 0.2);
+        contentLabel.center = CGPointMake(viewCenter.x + TFY_Width_W() * i, viewCenter.y + TFY_Height_H() * 0.3);
         
         contentLabel.font = Font(PingFangReguler, 15);
         contentLabel.textColor = [UIColor colorWithRed:23/255.0 green:25/255.0 blue:34/255.0 alpha:1.0];
@@ -98,7 +98,7 @@ TFY_PROPERTY_NSArray(contents);
 
         if (i < imagesCount - 1)
         {
-            skipBtn.frame = CGRectMake(SCREEN_WIDTH * (i + 1) - 90, 40 + TFY_LINK_TabbarSafeBottomMargin, 65, 28);
+            skipBtn.frame = CGRectMake(TFY_Width_W() * (i + 1) - 90, TFY_kBottomBarHeight(), 65, 28);
             
             [skipBtn setTitle:@"跳过" forState:UIControlStateNormal];
             [skipBtn setTitleColor:[UIColor colorWithRed:48/255.0 green:79/255.0 blue:255/255.0 alpha:1.0] forState:UIControlStateNormal];
@@ -111,9 +111,9 @@ TFY_PROPERTY_NSArray(contents);
         }
         else
         {
-            skipBtn.bounds = CGRectMake(0, 0, SCREEN_WIDTH * 0.8, 50);
+            skipBtn.bounds = CGRectMake(0, 0, TFY_Width_W() * 0.8, 50);
             
-            skipBtn.center = CGPointMake(viewCenter.x + SCREEN_WIDTH * i, SCREEN_HEIGHT - 50);
+            skipBtn.center = CGPointMake(viewCenter.x + TFY_Width_W() * i, TFY_Height_H() - 50);
             
             [skipBtn setTitle:@"进入DEMO" forState:UIControlStateNormal];
             [skipBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

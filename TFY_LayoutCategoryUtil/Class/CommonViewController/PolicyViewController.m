@@ -52,6 +52,7 @@ TFY_PROPERTY_OBJECT_STRONG(UILabel, effectDate);
         self.recentUpdateDate = objs[1];
         self.effectDate = objs[2];
     })
+    .numberOfLines(0)
     .addToSuperView(self.contentView)
     .textAlignment(NSTextAlignmentCenter)
     .part_first()
@@ -69,7 +70,7 @@ TFY_PROPERTY_OBJECT_STRONG(UILabel, effectDate);
     .textColor(TFY_ColorHexAlpha(@"000000", 0.45))
     .textAlignment(NSTextAlignmentCenter)
     .part_sencond()
-    .text(@"最近更新日期：2019年12月13日")
+    .text(@"最近更新日期：2020年09月02日")
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
         make.centerX.equalTo(self.contentView);
         make.top.equalTo(self.titleLabel.mas_bottom).mas_offset(15);
@@ -77,7 +78,7 @@ TFY_PROPERTY_OBJECT_STRONG(UILabel, effectDate);
         make.right.mas_offset(-15);
     })
     .part_third()
-    .text(@"版本生效日期：2019年12月20日")
+    .text(@"版本生效日期：2020年09月01日")
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
         make.centerX.equalTo(self.contentView);
         make.top.equalTo(self.recentUpdateDate.mas_bottom).mas_offset(1);
@@ -152,7 +153,7 @@ TFY_PROPERTY_OBJECT_STRONG(UILabel, effectDate);
         NSForegroundColorAttributeName:TFY_ColorHexString(@"000000")
     }];
     self.titleLabel.makeChain.attributedText(attribute);
-    _contentTextView.linkTextAttributes = @{NSForegroundColorAttributeName:TFY_ColorHexString(@"FF7800")};
+    self.contentTextView.linkTextAttributes = @{NSForegroundColorAttributeName:TFY_ColorHexString(@"FF7800")};
    
 }
 

@@ -51,21 +51,21 @@ typedef void(^nav_Block)(CommonNavigationBar *bar);
 
 @interface CommonNavigationBar : UIView
 
-@property (nonatomic, weak) id <CommonNavigationBarDelegate> delegate;
+TFY_PROPERTY_OBJECT_WEAK(id <CommonNavigationBarDelegate>, delegate);
 
-@property (nonatomic, strong, readonly) UIView * leftView;
+TFY_PROPERTY_STRONG_READONLY UIView * leftView;
 
-@property (nonatomic, strong, readonly) UIView * rightView;
+TFY_PROPERTY_STRONG_READONLY UIView * rightView;
 
-@property (nonatomic, strong) UIButton * leftButton;
+TFY_PROPERTY_ASSIGN_READONLY NSInteger  currentTag;
 
-@property (nonatomic, strong) UIButton * rightButton;
+TFY_PROPERTY_OBJECT_STRONG(UIButton, leftButton);
 
-@property (nonatomic, strong) UIButton * middleButton;
+TFY_PROPERTY_OBJECT_STRONG(UIButton, rightButton);
 
-@property (nonatomic, strong) UIView * line;
+TFY_PROPERTY_OBJECT_STRONG(UIButton, middleButton);
 
-@property (nonatomic, assign, readonly) NSInteger  currentTag;
+TFY_PROPERTY_OBJECT_STRONG(UIView, line);
 
 - (void)setupTag:(NSInteger)tag WithBlock:(nav_Block)block;
 

@@ -48,7 +48,7 @@
 #define TFY_PROPERTY_OBJECT_STRONG(object,name)  TFY_PROPERTY_STRONG object  * name
 #define TFY_PROPERTY_OBJECT_CHAIN(object,name)   TFY_PROPERTY_CHAIN  object  * name
 #define TFY_PROPERTY_OBJECT_ASSIGN(object,name)  TFY_PROPERTY_ASSIGN object    name
-#define TFY_PROPERTY_OBJECT_WEAK(object,name)    TFY_PROPERTY_WEAK   object  * name
+#define TFY_PROPERTY_OBJECT_WEAK(object,name)    TFY_PROPERTY_WEAK   object    name
 
 /**点语法*/
 #pragma mark-------------------------------------------点语法链式编程---------------------------------------------
