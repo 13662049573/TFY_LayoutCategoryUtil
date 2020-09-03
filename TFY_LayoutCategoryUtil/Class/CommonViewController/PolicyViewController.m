@@ -178,7 +178,7 @@ TFY_PROPERTY_OBJECT_STRONG(UILabel, effectDate);
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction{
     PolicyWebViewController *vc = [PolicyWebViewController new];
-    vc.title = @"《MobTech隐私政策》";
+    vc.title = @"《隐私政策》";
     vc.extraInfo[@"url"] = URL;
     vc.showAnimated(YES).push();
     return NO;
