@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360118A425007ECA00449922 /* UITextView+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 360118A325007ECA00449922 /* UITextView+TFY_Tools.m */; };
 		3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163B24FF336D00CC0024 /* CommonViewController.m */; };
 		3654163F24FF345000CC0024 /* CommonNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163E24FF345000CC0024 /* CommonNavigationBar.m */; };
 		3654164224FF360100CC0024 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164124FF360100CC0024 /* NavigationController.m */; };
@@ -132,6 +133,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		360118A225007ECA00449922 /* UITextView+TFY_Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextView+TFY_Tools.h"; sourceTree = "<group>"; };
+		360118A325007ECA00449922 /* UITextView+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextView+TFY_Tools.m"; sourceTree = "<group>"; };
 		3654163A24FF336D00CC0024 /* CommonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonViewController.h; sourceTree = "<group>"; };
 		3654163B24FF336D00CC0024 /* CommonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonViewController.m; sourceTree = "<group>"; };
 		3654163D24FF345000CC0024 /* CommonNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonNavigationBar.h; sourceTree = "<group>"; };
@@ -562,6 +565,8 @@
 				36BA238424EE487F00CE8275 /* UITableViewCell+TFY_Chain.m */,
 				565583FE2431BA8700020D3C /* UIViewController+TFY_Tools.h */,
 				565583FF2431BA8700020D3C /* UIViewController+TFY_Tools.m */,
+				360118A225007ECA00449922 /* UITextView+TFY_Tools.h */,
+				360118A325007ECA00449922 /* UITextView+TFY_Tools.m */,
 			);
 			path = TFY_UI;
 			sourceTree = "<group>";
@@ -943,6 +948,7 @@
 				565584732431CCB300020D3C /* TFY_LabelChainModel.m in Sources */,
 				36CBAD1424EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m in Sources */,
 				36C334A724ED284500DA6FB2 /* NSString+TFY_String.m in Sources */,
+				360118A425007ECA00449922 /* UITextView+TFY_Tools.m in Sources */,
 				3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */,
 				36867DBA24EBA26400A761BC /* UIScreen+TFY_Tools.m in Sources */,
 				565584C32431DCE600020D3C /* GuideViewController.m in Sources */,

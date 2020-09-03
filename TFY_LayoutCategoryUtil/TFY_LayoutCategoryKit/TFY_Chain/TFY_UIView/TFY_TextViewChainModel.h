@@ -8,6 +8,8 @@
 
 #import "TFY_BaseScrollViewChainModel.h"
 
+typedef void(^TFY_placeholderLabel)(__kindof UILabel * _Nonnull label);
+
 NS_ASSUME_NONNULL_BEGIN
 @class TFY_TextViewChainModel;
 @interface TFY_TextViewChainModel : TFY_BaseScrollViewChainModel<TFY_TextViewChainModel *>
@@ -43,6 +45,11 @@ TFY_PROPERTY_CHAIN_READONLY TFY_TextViewChainModel *(^ returnKeyType)(UIReturnKe
 TFY_PROPERTY_CHAIN_READONLY TFY_TextViewChainModel *(^ enablesReturnKeyAutomatically)(BOOL);
 TFY_PROPERTY_CHAIN_READONLY TFY_TextViewChainModel *(^ secureTextEntry)(BOOL);
 TFY_PROPERTY_CHAIN_READONLY TFY_TextViewChainModel *(^ textContentType)(UITextContentType) API_AVAILABLE(ios(10));
+
+TFY_PROPERTY_CHAIN_READONLY TFY_TextViewChainModel *(^ limitNum)(NSInteger);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextViewChainModel *(^ placeholder)(NSString*);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextViewChainModel *(^ placeholderLabel)(TFY_placeholderLabel);
+
 @end
 
 TFY_CATEGORY_EXINTERFACE(UITextView, TFY_TextViewChainModel)
