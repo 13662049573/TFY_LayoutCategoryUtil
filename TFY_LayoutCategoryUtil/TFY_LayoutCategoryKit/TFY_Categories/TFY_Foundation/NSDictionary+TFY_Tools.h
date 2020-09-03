@@ -89,6 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define TFY_MUTABLEDICTION_PROPERTY @property (nonatomic, strong, readonly) NSMutableDictionary <KeyType, ObjectType> *
 
 @interface NSMutableDictionary <KeyType, ObjectType> (TFY_Category)
+
 + (nullable NSMutableDictionary <KeyType ,ObjectType>*)tfy_dictionaryWithPlistData:(NSData *)plist;
 
 + (nullable NSMutableDictionary <KeyType ,ObjectType>*)tfy_dictionaryWithPlistString:(NSString *)plist;
