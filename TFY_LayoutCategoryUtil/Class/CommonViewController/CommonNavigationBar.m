@@ -203,8 +203,8 @@ TFY_PROPERTY_NSInteger(currentTag);
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
     UIView *hitView = [super hitTest:point withEvent:event];
-    if ([self.delegate respondsToSelector:@selector(navigationEventsShoulSSDKass)]) {
-        if ([self.delegate navigationEventsShoulSSDKass]) {
+    if ([self.delegate respondsToSelector:@selector(navigationEventsShoulass)]) {
+        if ([self.delegate navigationEventsShoulass]) {
             if (hitView == self) {
                 return nil;
             }

@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  导航点击事件是否可以向下传递
  */
-- (BOOL)navigationEventsShoulSSDKass;
+- (BOOL)navigationEventsShoulass;
 
 /**
  设置button的类，如果为UIButton传@[@"",@"",@""]，或不传
