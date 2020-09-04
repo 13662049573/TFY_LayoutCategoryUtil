@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , copy) NSString * _Nonnull tfy_placeholder;
 /**默认文字 这里可以按照需求更改颜色，字体，添加 富文本*/
 @property (nonatomic , strong , readonly)UILabel *tfy_placeholderLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END
