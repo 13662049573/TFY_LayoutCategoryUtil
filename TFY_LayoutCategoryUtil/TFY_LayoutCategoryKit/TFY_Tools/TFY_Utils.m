@@ -1,12 +1,12 @@
 //
-//  TFY_CommonUtils.m
-//  TFY_AutoLayoutModelTools
+//  Utils.m
+//  LayoutCategoryUtil
 //
-//  Created by 田风有 on 2019/5/10.
-//  Copyright © 2019 恋机科技. All rights reserved.
+//  Created by 田风有 on 2020/9/4.
+//  Copyright © 2020 田风有. All rights reserved.
 //
 
-#import "TFY_CommonUtils.h"
+#import "TFY_Utils.h"
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
 
@@ -67,13 +67,13 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 {
 #pragma unused (target, flags)
     NSCAssert(info != NULL, @"info was NULL in ReachabilityCallback");
-    NSCAssert([(__bridge NSObject*) info isKindOfClass: [TFY_CommonUtils class]], @"info was wrong class in ReachabilityCallback");
+    NSCAssert([(__bridge NSObject*) info isKindOfClass: [TFY_Utils class]], @"info was wrong class in ReachabilityCallback");
     
-    TFY_CommonUtils* noteObject = (__bridge TFY_CommonUtils *)info;
+    TFY_Utils* noteObject = (__bridge TFY_Utils *)info;
     [[NSNotificationCenter defaultCenter] postNotificationName: kReachabilityChangedNotification object: noteObject];
 }
 
-@interface TFY_CommonUtils ()
+@interface TFY_Utils ()
 #pragma 获取网络需求
 @property(nonatomic , assign)SCNetworkReachabilityRef reachabilityRef;
 @property (strong, nonatomic) dispatch_source_t timer;
@@ -85,8 +85,8 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 @end
 
 
-@implementation TFY_CommonUtils
-static TFY_CommonUtils *_instance; //单例数据需求
+@implementation TFY_Utils
+static TFY_Utils *_instance; //单例数据需求
 const char* jailbreak_tool_pathes[] = {
     "/Applications/Cydia.app",
     "/Library/MobileSubstrate/MobileSubstrate.dylib",
@@ -114,9 +114,9 @@ const char* jailbreak_tool_pathes[] = {
 }
 
 - (void)dealloc {
-    [self tfy_cancel];
+    [self cancel];
     
-    [self tfy_stopNotifier];
+    [self stopNotifier];
     if (_reachabilityRef != NULL)
     {
         CFRelease(_reachabilityRef);
@@ -124,23 +124,23 @@ const char* jailbreak_tool_pathes[] = {
 }
 
 //暂停
-- (void)tfy_pause{
+- (void)pause{
     if (self.timer) {
         dispatch_suspend(self.timer);
     }
 }
 //继续
-- (void)tfy_resume{
+- (void)resume{
     if (self.timer) {
         dispatch_resume(self.timer);
     }
 }
 //启动
-- (void)tfy_start{
-    [self tfy_resume];
+- (void)start{
+    [self resume];
 }
 //销毁
-- (void)tfy_cancel {
+- (void)cancel {
     if (self.timer) {
         dispatch_source_cancel(self.timer);
     }
@@ -149,8 +149,8 @@ const char* jailbreak_tool_pathes[] = {
 
 #pragma mark------------------------------------------手机获取网络监听方法---------------------------------------
 
-+ (instancetype)tfy_reachabilityWithHostName:(NSString *)hostName{
-    TFY_CommonUtils* returnValue = NULL;
++ (instancetype)reachabilityWithHostName:(NSString *)hostName{
+    TFY_Utils* returnValue = NULL;
     SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL, [hostName UTF8String]);
     if (reachability != NULL)
     {
@@ -167,10 +167,10 @@ const char* jailbreak_tool_pathes[] = {
 }
 
 
-+ (instancetype)tfy_reachabilityWithAddress:(const struct sockaddr *)hostAddress{
++ (instancetype)reachabilityWithAddress:(const struct sockaddr *)hostAddress{
     SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, hostAddress);
     
-    TFY_CommonUtils* returnValue = NULL;
+    TFY_Utils* returnValue = NULL;
     
     if (reachability != NULL)
     {
@@ -187,16 +187,16 @@ const char* jailbreak_tool_pathes[] = {
 }
 
 
-+ (instancetype)tfy_reachabilityForInternetConnection{
++ (instancetype)reachabilityForInternetConnection{
     struct sockaddr_in zeroAddress;
     bzero(&zeroAddress, sizeof(zeroAddress));
     zeroAddress.sin_len = sizeof(zeroAddress);
     zeroAddress.sin_family = AF_INET;
     
-    return [self tfy_reachabilityWithAddress: (const struct sockaddr *) &zeroAddress];
+    return [self reachabilityWithAddress: (const struct sockaddr *) &zeroAddress];
 }
 
-- (BOOL)tfy_startNotifier{
+- (BOOL)startNotifier{
     BOOL returnValue = NO;
     SCNetworkReachabilityContext context = {0, (__bridge void *)(self), NULL, NULL, NULL};
     if (SCNetworkReachabilitySetCallback(_reachabilityRef, ReachabilityCallback, &context)){
@@ -207,24 +207,24 @@ const char* jailbreak_tool_pathes[] = {
     return returnValue;
 }
 
-- (void)tfy_stopNotifier{
+- (void)stopNotifier{
     if (_reachabilityRef != NULL){
         SCNetworkReachabilityUnscheduleFromRunLoop(_reachabilityRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
     }
 }
 #pragma mark - Network Flag Handling
 
-- (TFY_NetworkStatus)tfy_networkStatusForFlags:(SCNetworkReachabilityFlags)flags{
+- (NetworkStatus)networkStatusForFlags:(SCNetworkReachabilityFlags)flags{
     PrintReachabilityFlags(flags, "networkStatusForFlags");
     if ((flags & kSCNetworkReachabilityFlagsReachable) == 0)
     {
-        return TFY_NotReachable;
+        return NotReachable;
     }
-    TFY_NetworkStatus returnValue = TFY_NotReachable;
+    NetworkStatus returnValue = NotReachable;
     
     if ((flags & kSCNetworkReachabilityFlagsConnectionRequired) == 0)
     {
-        returnValue = TFY_ReachableViaWiFi;
+        returnValue = ReachableViaWiFi;
     }
     if ((((flags & kSCNetworkReachabilityFlagsConnectionOnDemand ) != 0) ||
          (flags & kSCNetworkReachabilityFlagsConnectionOnTraffic) != 0))
@@ -232,17 +232,17 @@ const char* jailbreak_tool_pathes[] = {
         
         if ((flags & kSCNetworkReachabilityFlagsInterventionRequired) == 0)
         {
-            returnValue = TFY_ReachableViaWiFi;
+            returnValue = ReachableViaWiFi;
         }
     }
     if ((flags & kSCNetworkReachabilityFlagsIsWWAN) == kSCNetworkReachabilityFlagsIsWWAN){
-        returnValue = TFY_ReachableViaWWAN;
+        returnValue = ReachableViaWWAN;
     }
     return returnValue;
 }
 
 
-- (BOOL)tfy_connectionRequired{
+- (BOOL)connectionRequired{
     NSAssert(_reachabilityRef != NULL, @"connectionRequired called with NULL reachabilityRef");
     SCNetworkReachabilityFlags flags;
     if (SCNetworkReachabilityGetFlags(_reachabilityRef, &flags)){
@@ -251,13 +251,13 @@ const char* jailbreak_tool_pathes[] = {
     return NO;
 }
 
-- (TFY_NetworkStatus)tfy_currentReachabilityStatus{
+- (NetworkStatus)currentReachabilityStatus{
     NSAssert(_reachabilityRef != NULL, @"currentNetworkStatus called with NULL SCNetworkReachabilityRef");
-    TFY_NetworkStatus returnValue = TFY_NotReachable;
+    NetworkStatus returnValue = NotReachable;
     SCNetworkReachabilityFlags flags;
     
     if (SCNetworkReachabilityGetFlags(_reachabilityRef, &flags)){
-        returnValue = [self tfy_networkStatusForFlags:flags];
+        returnValue = [self networkStatusForFlags:flags];
     }
     return returnValue;
 }
@@ -265,20 +265,20 @@ const char* jailbreak_tool_pathes[] = {
 /**
  获取网络状态 2G/3G/4G/wifi
  */
-+(NSString *)tfy_getNetconnType{
++(NSString *)getNetconnType{
     NSString *netcomType = @"";
-    TFY_CommonUtils *reach = [TFY_CommonUtils tfy_reachabilityWithHostName:@"www.apple.com"];
-    switch ([reach tfy_currentReachabilityStatus]) {
-        case TFY_NotReachable:{
+    TFY_Utils *reach = [TFY_Utils reachabilityWithHostName:@"www.apple.com"];
+    switch ([reach currentReachabilityStatus]) {
+        case NotReachable:{
             netcomType = @"network";
         }
         break;
-        case TFY_ReachableViaWiFi:{
+        case ReachableViaWiFi:{
             netcomType = @"Wifi";
         }
         break;
-        case TFY_ReachableViaWWAN:{
-            netcomType = [self tfy_getNetType];
+        case ReachableViaWWAN:{
+            netcomType = [self getNetType];
         }
         break;
     }
@@ -286,7 +286,7 @@ const char* jailbreak_tool_pathes[] = {
 }
 
 //针对蜂窝网络判断是3G或者4G
-+(NSString *)tfy_getNetType{
++(NSString *)getNetType{
     __block NSString *netconnType = nil;
     NSArray *typeStrings2G = @[CTRadioAccessTechnologyEdge,
             CTRadioAccessTechnologyGPRS,
@@ -360,7 +360,7 @@ const char* jailbreak_tool_pathes[] = {
 }
 
 // 获取运营商类型
-+ (SSOperatorsType)tfy_getOperatorsType{
++ (SSOperatorsType)getOperatorsType{
     CTTelephonyNetworkInfo *telephonyInfo = [[CTTelephonyNetworkInfo alloc] init];
     if (@available(iOS 12.0, *)) {
         NSDictionary *dic = telephonyInfo.serviceSubscriberCellularProviders;
@@ -419,17 +419,17 @@ const char* jailbreak_tool_pathes[] = {
 }
 
 
-+(NSString *)tfy_getDeviceIDFV{
++(NSString *)getDeviceIDFV{
     NSString* idfvStr      = [[UIDevice currentDevice] identifierForVendor].UUIDString;
     return idfvStr;
 }
 //Git上的erica的UIDevice扩展文件，以前可用但由于IOKit framework没有公开，所以也无法使用。就算手动导入，依旧无法使用，看来获取IMEI要失败了,同时失败的还有IMSI。不过还存在另外一种可能，Stack Overflow上有人提供采用com.apple.coretelephony.Identity.get entitlement方法，but device must be jailbroken；在此附上链接，供大家参考：http://stackoverflow.com/questions/16667988/how-to-get-imei-on-iphone-5/16677043#16677043
-+(NSString *)tfy_getDeviceIMEI{
++(NSString *)getDeviceIMEI{
     NSString* imeiStr = @"回头吧，翻遍国内外了，failed，快看代码注释";
     return imeiStr;
 }
 
-+(NSString*)tfy_getDeviceMAC{
++(NSString*)getDeviceMAC{
     int mib[6];
     size_t len;
     char *buf;
@@ -471,7 +471,7 @@ const char* jailbreak_tool_pathes[] = {
     free(buf);
     return macStr;
 }
-+(NSString*)tfy_getDeviceUUID{
++(NSString*)getDeviceUUID{
     CFUUIDRef uuid = CFUUIDCreate(NULL);
     assert(uuid != NULL);
     CFStringRef uuidStr = CFUUIDCreateString(NULL, uuid);
@@ -491,17 +491,17 @@ const char* jailbreak_tool_pathes[] = {
 }
 
 +(id)allocWithZone:(struct _NSZone *)zone{
-    return [TFY_CommonUtils shareInstance] ;
+    return [TFY_Utils shareInstance] ;
 }
 
 -(id)copyWithZone:(struct _NSZone *)zone{
-    return [TFY_CommonUtils shareInstance] ;
+    return [TFY_Utils shareInstance] ;
 }
 
 /*
  *跳转设置
  */
-- (void)tfy_pushSetting:(NSString*)urlStr{
+- (void)pushSetting:(NSString*)urlStr{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"%@%@",urlStr,@"尚未开启,是否前往设置"] preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -517,20 +517,20 @@ const char* jailbreak_tool_pathes[] = {
         }
     }];
     [alert addAction:okAction];
-    [[TFY_CommonUtils tfy_getCurrentVC] presentViewController:alert animated:YES completion:nil];
+    [[TFY_Utils getCurrentVC] presentViewController:alert animated:YES completion:nil];
 }
 
 //获取当前VC
-+ (UIViewController *)tfy_getCurrentVC
++ (UIViewController *)getCurrentVC
 {
     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     
-    UIViewController *currentVC = [self tfy_getCurrentVCFrom:rootViewController];
+    UIViewController *currentVC = [self getCurrentVCFrom:rootViewController];
     
     return currentVC;
 }
 
-+ (UIViewController *)tfy_getCurrentVCFrom:(UIViewController *)rootVC
++ (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC
 {
     UIViewController *currentVC;
     
@@ -541,11 +541,11 @@ const char* jailbreak_tool_pathes[] = {
     
     if ([rootVC isKindOfClass:[UITabBarController class]]) {
         // 根视图为UITabBarController
-        currentVC = [self tfy_getCurrentVCFrom:[(UITabBarController *)rootVC selectedViewController]];
+        currentVC = [self getCurrentVCFrom:[(UITabBarController *)rootVC selectedViewController]];
         
     } else if ([rootVC isKindOfClass:[UINavigationController class]]){
         // 根视图为UINavigationController
-        currentVC = [self tfy_getCurrentVCFrom:[(UINavigationController *)rootVC visibleViewController]];
+        currentVC = [self getCurrentVCFrom:[(UINavigationController *)rootVC visibleViewController]];
         
     } else {
         // 根视图为非导航类
@@ -557,7 +557,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  截取控制器所生产图片
  */
-+ (void )tfy_screenSnapshot:(UIView *)snapshotView finishBlock:(void(^)(UIImage *snapShotImage))finishBlock{
++ (void )screenSnapshot:(UIView *)snapshotView finishBlock:(void(^)(UIImage *snapShotImage))finishBlock{
     UIView *snapshotFinalView = snapshotView;
     
     if([snapshotView isKindOfClass:[WKWebView class]]){
@@ -579,7 +579,7 @@ const char* jailbreak_tool_pathes[] = {
         NSLog(@"不支持的类型");
     }
     
-    [snapshotFinalView tfy_screenSnapshot:^(UIImage *snapShotImage) {
+    [snapshotFinalView screenSnapshot:^(UIImage *snapShotImage) {
         if (snapShotImage != nil && finishBlock) {
             finishBlock(snapShotImage);
         }
@@ -590,8 +590,8 @@ const char* jailbreak_tool_pathes[] = {
 /**
  * 温度单位转换方法
  */
-+(CGFloat)tfy_temperatureUnitExchangeValue:(CGFloat)value changeTo:(TFY_Temperature)unit{
-    if (unit == TFY_Fahrenheit) {
++(CGFloat)temperatureUnitExchangeValue:(CGFloat)value changeTo:(Temperature)unit{
+    if (unit == Fahrenheit) {
         return 32 + 1.8 * value; //华氏度
     }else {
         return (value - 32) / 1.8; //摄氏度
@@ -600,27 +600,27 @@ const char* jailbreak_tool_pathes[] = {
 
 #pragma mark------------------------------------------各种方法使用------------------------------------------
 
-- (void)tfy_initLanguage{
-    NSString *language=[self tfy_currentLanguage];
+- (void)initLanguage{
+    NSString *language=[self currentLanguage];
     if (language.length>0) {
         NSLog(@"自设置语言:%@",language);
     }else{
-        [self tfy_systemLanguage];
+        [self systemLanguage];
     }
 }
 
-- (NSString *)tfy_currentLanguage{
+- (NSString *)currentLanguage{
     NSString *language=[[NSUserDefaults standardUserDefaults]objectForKey:AppLanguage];
     return language;
 }
 
-- (void)tfy_setLanguage:(NSString *)language{
-    [NSBundle tfy_setLanguage:language];
+- (void)setLanguage:(NSString *)language{
+    [NSBundle setLanguage:language];
     [[NSUserDefaults standardUserDefaults] setObject:language forKey:AppLanguage];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)tfy_systemLanguage{
+- (void)systemLanguage{
     NSString *languageCode = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"][0];
     NSLog(@"系统语言:%@",languageCode);
     if([languageCode hasPrefix:@"zh-Hans"]){
@@ -628,10 +628,10 @@ const char* jailbreak_tool_pathes[] = {
     }else if([languageCode hasPrefix:@"en"]){
         languageCode = @"en";//英语
     }
-    [self tfy_setLanguage:languageCode];
+    [self setLanguage:languageCode];
 }
 
-- (UIWindow*)tfy_lastWindow {
+- (UIWindow*)lastWindow {
     NSEnumerator  *frontToBackWindows = [UIApplication.sharedApplication.windows reverseObjectEnumerator];
     for (UIWindow *window in frontToBackWindows) {
         BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
@@ -651,21 +651,8 @@ const char* jailbreak_tool_pathes[] = {
 
 #pragma mark------------------------------------------国际化设置---------------------------------------
 
-
-/**
- *  NSDictionary或NSArray转换为NSString
- */
-+(NSString *)tfy_toJSONString:(id)theData{
-    NSError *error = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:theData options:NSJSONWritingPrettyPrinted error:&error];
-    if ([jsonData length] > 0 && error == nil){
-        NSString *jsonStr_ = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        return jsonStr_;
-    }
-    else{return nil;}
-}
 //formart时间戳格式("yyyy-MM-dd HH-mm-ss")
-+(NSString *)tfy_dateStringWithDate:(NSDate *)date formart:(NSString *)formart
++(NSString *)dateStringWithDate:(NSDate *)date formart:(NSString *)formart
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:formart];
@@ -675,7 +662,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  //时间戳转化为NSDate formart时间戳格式("yyyy-MM-dd HH-mm-ss")
  */
-+(NSDate *)tfy_dateWithNSString:(NSString*)string formart:(NSString *)formart{
++(NSDate *)dateWithNSString:(NSString*)string formart:(NSString *)formart{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:formart];
     NSDate *date = [dateFormatter dateFromString:string];
@@ -684,7 +671,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  根据日期计算N个月前的日期
  */
-+(NSDate *)tfy_dateOfPreviousMonth:(NSInteger)previousMonthCount WithDate:(NSDate *)fromDate{
++(NSDate *)dateOfPreviousMonth:(NSInteger)previousMonthCount WithDate:(NSDate *)fromDate{
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     
     NSDateComponents *comps = nil;
@@ -706,7 +693,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  获取长度为stringLength的随机字符串, 随机数字字符混合类型字符串函数
  */
-+(NSString *)tfy_getRandomString:(NSInteger)stringLength{
++(NSString *)getRandomString:(NSInteger)stringLength{
     NSMutableString *randomString_ = [NSMutableString string];
     NSString *baseString_ = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     for (int i=0; i<stringLength; i++)
@@ -720,7 +707,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  随机数字类型字符串函数
  */
-+(NSString *)tfy_getRandomNumberString:(NSInteger)stringLength{
++(NSString *)getRandomNumberString:(NSInteger)stringLength{
     NSMutableString *randomString_ = [NSMutableString string];
     NSString *baseString_ = @"0123456789";
     for (int i=0; i<stringLength; i++)
@@ -735,7 +722,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  随机字符类型字符串函数
  */
-+(NSString *)tfy_getRandomCharacterString:(NSInteger)stringLength{
++(NSString *)getRandomCharacterString:(NSInteger)stringLength{
     NSMutableString *randomString_ = [NSMutableString string];
     NSString *baseString_ = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     for (int i=0; i<stringLength; i++)
@@ -750,7 +737,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  获取wifi信号 method
  */
-+(NSString*)tfy_currentWifiSSID{
++(NSString*)currentWifiSSID{
     NSString *ssid = nil;
     NSArray *ifs = (__bridge  id)CNCopySupportedInterfaces();
     for (NSString *ifnam in ifs)
@@ -765,7 +752,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  获取设备的UUID
  */
-+(NSString *)tfy_gen_uuid{
++(NSString *)gen_uuid{
     CFUUIDRef uuid_ref = CFUUIDCreate(NULL);
     CFStringRef uuid_string_ref= CFUUIDCreateString(NULL, uuid_ref);
     CFRelease(uuid_ref);
@@ -776,7 +763,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  替换掉Json字符串中的换行符
  */
-+(NSString *)tfy_ReplacingNewLineAndWhitespaceCharactersFromJson:(NSString *)jsonStr{
++(NSString *)ReplacingNewLineAndWhitespaceCharactersFromJson:(NSString *)jsonStr{
     NSScanner *scanner = [[NSScanner alloc] initWithString:jsonStr];
     [scanner setCharactersToBeSkipped:nil];
     NSMutableString *result = [[NSMutableString alloc] init];
@@ -801,11 +788,11 @@ const char* jailbreak_tool_pathes[] = {
 /**
  * 直接调用这个方法即可签名成功
  */
-+ (NSString *)tfy_serializeURL:(NSString *)baseURL Token:(NSString *)token params:(NSDictionary *)params
++ (NSString *)serializeURL:(NSString *)baseURL Token:(NSString *)token params:(NSDictionary *)params
 {
     
     NSURL* parsedURL = [NSURL URLWithString:[baseURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
-    NSMutableDictionary *paramsDic = [NSMutableDictionary dictionaryWithDictionary:[self tfy_parseQueryString:[parsedURL query]]];
+    NSMutableDictionary *paramsDic = [NSMutableDictionary dictionaryWithDictionary:[self parseQueryString:[parsedURL query]]];
     if (params)
     {
         [paramsDic setValuesForKeysWithDictionary:params];
@@ -829,14 +816,14 @@ const char* jailbreak_tool_pathes[] = {
     [paramsString appendString:str];
     
     NSString *md5=[NSString stringWithFormat:@"%@%@",str,token];//Token公司秘钥
-    NSString * mdfiveString = [self tfy_md5HexDigest:md5];//MD5加密
+    NSString * mdfiveString = [self md5HexDigest:md5];//MD5加密
     
     [paramsString appendFormat:@"&sign=%@", mdfiveString];//加密后即获得签名串
     
     return [NSString stringWithFormat:@"%@://%@%@?%@", [parsedURL scheme], [parsedURL host], [parsedURL path], [paramsString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
 }
 
-+(NSDictionary *)tfy_parseQueryString:(NSString *)query
++(NSDictionary *)parseQueryString:(NSString *)query
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:6];
     NSArray *pairs = [query componentsSeparatedByString:@"&"];
@@ -854,7 +841,7 @@ const char* jailbreak_tool_pathes[] = {
 }
 
 /*MD5加密*/
-+(NSString *)tfy_md5HexDigest:(NSString *)str
++(NSString *)md5HexDigest:(NSString *)str
 {
     const char *original_str = [str UTF8String];
     unsigned char result[CC_MD5_DIGEST_LENGTH];
@@ -869,7 +856,7 @@ const char* jailbreak_tool_pathes[] = {
     return mdfiveString;
 }
 
-+(NSString *)tfy_HTTPBodyWithParameters:(NSDictionary *)parameters Token:(NSString *)token{
++(NSString *)HTTPBodyWithParameters:(NSDictionary *)parameters Token:(NSString *)token{
     
     NSMutableArray *parametersArray = [[NSMutableArray alloc] init];
     
@@ -882,12 +869,12 @@ const char* jailbreak_tool_pathes[] = {
         
     }
     NSString *md5=[NSString stringWithFormat:@"%@%@",[parametersArray componentsJoinedByString : @"&"],token];
-    return  [self tfy_md5HexDigest:md5];
+    return  [self md5HexDigest:md5];
 }
 /**
  *  返回一个请求头
  */
-+(NSString *)tfy_parmereaddWithDict:(NSDictionary *)dict Token:(NSString *)token{
++(NSString *)parmereaddWithDict:(NSDictionary *)dict Token:(NSString *)token{
     NSMutableArray *parametersArray = [[NSMutableArray alloc] init];
     
     NSArray *sortedKeys = [[dict allKeys] sortedArrayUsingSelector: @selector(compare:)];//排序
@@ -896,14 +883,14 @@ const char* jailbreak_tool_pathes[] = {
     {
         [parametersArray addObject :[NSString stringWithFormat:@"%@=%@",key,[dict objectForKey:key]]];
     }
-    NSString *parme=[NSString stringWithFormat:@"%@&sign=%@",[parametersArray componentsJoinedByString : @"&"],[self tfy_HTTPBodyWithParameters:dict Token:token]];
+    NSString *parme=[NSString stringWithFormat:@"%@&sign=%@",[parametersArray componentsJoinedByString : @"&"],[self HTTPBodyWithParameters:dict Token:token]];
     
     return  parme;
 }
 /**
  *  把多个json字符串转为一个json字符串
  */
-+(NSString *)tfy_objArrayToJSON:(NSArray *)array{
++(NSString *)objArrayToJSON:(NSArray *)array{
     NSString *jsonStr = @"[";
     for (NSInteger i = 0; i < array.count; ++i) {
         if (i != 0) {
@@ -917,7 +904,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *   获取当前时间
  */
-+(NSString *)tfy_audioTime{
++(NSString *)audioTime{
     NSString* date;
     NSDateFormatter * formatter = [[NSDateFormatter alloc ] init];
     [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
@@ -928,7 +915,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *   字符串时间——时间戳
  */
-+(NSString *)tfy_cTimestampFromString:(NSString *)theTime{
++(NSString *)cTimestampFromString:(NSString *)theTime{
     //装换为时间戳
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -944,7 +931,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *   时间戳——字符串时间
  */
-+(NSString *)tfy_cStringFromTimestamp:(NSString *)timestamp{
++(NSString *)cStringFromTimestamp:(NSString *)timestamp{
     //时间戳转时间的方法
     NSDate *timeData = [NSDate dateWithTimeIntervalSince1970:[timestamp intValue]];
     NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];
@@ -955,7 +942,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  两个时间之差
  */
-+(NSString *)tfy_intervalFromLastDate:(NSString *)dateString1 toTheDate:(NSString *)dateString2{
++(NSString *)intervalFromLastDate:(NSString *)dateString1 toTheDate:(NSString *)dateString2{
     NSArray *timeArray1=[dateString1 componentsSeparatedByString:@"."];
     dateString1=[timeArray1 objectAtIndex:0];
     
@@ -990,7 +977,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *   一个时间距现在的时间
  */
-+(NSString *)tfy_intervalSinceNow:(NSString *)theDate{
++(NSString *)intervalSinceNow:(NSString *)theDate{
     NSArray *timeArray=[theDate componentsSeparatedByString:@"."];
     theDate=[timeArray objectAtIndex:0];
     
@@ -1029,7 +1016,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  将字符串转化为中文时间
  */
-+(NSString *)tfy_Formatter:(NSString *)time{
++(NSString *)Formatter:(NSString *)time{
     NSString* string = time;
     NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
     [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
@@ -1040,11 +1027,11 @@ const char* jailbreak_tool_pathes[] = {
     [outputFormatter setDateFormat:@"yyyy年MM月"];
     NSString *str = [outputFormatter stringFromDate:inputDate];
     NSString *index=[str substringWithRange:NSMakeRange(5,2)];
-    NSString *sssss= [self tfy_mone:[index integerValue]];
+    NSString *sssss= [self mone:[index integerValue]];
     // NSString *string5= [self translation:index];
     return sssss;
 }
-+(NSString *)tfy_mone:(NSInteger )mones{
++(NSString *)mone:(NSInteger )mones{
     switch (mones) {
         case 1:
             return @"一月";
@@ -1088,7 +1075,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  去掉手机号码上的+号和+86
  */
-+ (NSString *)tfy_formatPhoneNum:(NSString *)phone{
++ (NSString *)formatPhoneNum:(NSString *)phone{
     if ([phone hasPrefix:@"86"]) {
         NSString *formatStr = [phone substringWithRange:NSMakeRange(2, [phone length]-2)];
         return formatStr;
@@ -1110,43 +1097,43 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  手机系统版本
  */
-+(NSString *)tfy_phoneVersions{
++(NSString *)phoneVersions{
     return [[UIDevice currentDevice] systemVersion];
 }
 /**
  *  设备名称
  */
-+(NSString *)tfy_deviceName{
++(NSString *)deviceName{
     return [[UIDevice currentDevice] systemName];
 }
 /**
  *  获取当前版本号
  */
-+(NSString *)tfy_cfbundleVersion{
++(NSString *)cfbundleVersion{
     return [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
 }
 /**
  *  获取当前应用名称
  */
-+(NSString *)tfy_cfbundleDisplayName{
++(NSString *)cfbundleDisplayName{
     return [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"];
 }
 /**
  *  当前应用软件版本
  */
-+(NSString *)tfy_cfbundleShortVersionString{
++(NSString *)cfbundleShortVersionString{
     return [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
 }
 /**
  *  国际化区域名称
  */
-+(NSString *)tfy_localizedModel{
++(NSString *)localizedModel{
     return [[UIDevice currentDevice] localizedModel];
 }
 /**
  *  获取当前年份
  */
-+(NSString *)tfy_setDateFormat{
++(NSString *)setDateFormat{
     NSDate *  senddate=[NSDate date];
     NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
     [dateformatter setDateFormat:@"yyyy-MM-dd"];
@@ -1156,7 +1143,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  当前使用的语言
  */
-+(NSString *)tfy_defaultsTH{
++(NSString *)defaultsTH{
     //取得用户默认信息
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     // 取得 iPhone 支持的所有语言设置
@@ -1168,47 +1155,47 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  程序主目录，可见子目录(3个):Documents、Library、tmp
  */
-+ (NSString *)tfy_homePath{
++ (NSString *)homePath{
     return NSHomeDirectory();
 }
 /**
  *   程序目录，不能存任何东西
  */
-+(NSString *)tfy_appPath{
++(NSString *)appPath{
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSUserDomainMask, YES);
     return [paths objectAtIndex:0];
 }
 /**
  *  文档目录，需要ITUNES同步备份的数据存这里，可存放用户数据
  */
-+(NSString *)tfy_docPath{
++(NSString *)docPath{
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     return [paths objectAtIndex:0];
 }
 /**
  *  配置目录，配置文件存这里
  */
-+(NSString *)tfy_libPrefPath{
++(NSString *)libPrefPath{
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     return [[paths objectAtIndex:0] stringByAppendingFormat:@"/Preference"];
 }
 /**
  *  缓存目录，系统永远不会删除这里的文件，ITUNES会删除
  */
-+(NSString *)tfy_libCachePath{
++(NSString *)libCachePath{
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     return [[paths objectAtIndex:0] stringByAppendingFormat:@"/Caches"];
 }
 /**
  *  临时缓存目录，APP退出后，系统可能会删除这里的内容
  */
-+(NSString *)tfy_tmpPath{
++(NSString *)tmpPath{
     return [NSHomeDirectory() stringByAppendingFormat:@"/tmp"];
 }
 /**
  *  获取本机IP
  */
-+(NSString *)tfy_getIPAddress{
++(NSString *)getIPAddress{
     NSURL *ipURL = [NSURL URLWithString:@"http://ip.taobao.com/service/getIpInfo.php?ip=myip"];
     NSData *data = [NSData dataWithContentsOfURL:ipURL];
     if (data==nil) {
@@ -1225,16 +1212,16 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  获取WIFI的MAC地址
  */
-+(NSString *)tfy_getWifiBSSID{
-    return (NSString *)[self tfy_fetchSSIDInfo][@"BSSID"];
++(NSString *)getWifiBSSID{
+    return (NSString *)[self fetchSSIDInfo][@"BSSID"];
 }
 /**
  *   获取WIFI名字
  */
-+(NSString *)tfy_getWifiSSID{
-     return (NSString *)[self tfy_fetchSSIDInfo][@"SSID"];
++(NSString *)getWifiSSID{
+     return (NSString *)[self fetchSSIDInfo][@"SSID"];
 }
-+ (id)tfy_fetchSSIDInfo
++ (id)fetchSSIDInfo
 {
     NSArray *ifs = (__bridge_transfer id)CNCopySupportedInterfaces();
     id info = nil;
@@ -1250,13 +1237,13 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  截取字符串后几位
  */
-+(NSString *)tfy_substring:(NSString *)substring length:(NSInteger )lengths{
++(NSString *)substring:(NSString *)substring length:(NSInteger )lengths{
     return [substring substringFromIndex:substring.length-lengths];
 }
 /**
  *  不需要加密的参数请求
  */
-+(NSString *)tfy_requestparmereaddWithDict:(NSDictionary *)dict{
++(NSString *)requestparmereaddWithDict:(NSDictionary *)dict{
     NSMutableArray *parametersArray = [[NSMutableArray alloc] init];
     
     NSArray *sortedKeys = [[dict allKeys] sortedArrayUsingSelector: @selector(compare:)];//排序
@@ -1272,7 +1259,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  秒数转换成时间,时，分，秒 转换成时分秒
  */
-+(NSString *)tfy_timeFormatted:(int)totalSeconds{
++(NSString *)timeFormatted:(int)totalSeconds{
     int seconds = totalSeconds % 60;
     int minutes = (totalSeconds / 60) % 60;
     int hours = totalSeconds / 3600;
@@ -1282,7 +1269,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  视频显示时间
  */
-+(NSString *)tfy_convertSecond2Time:(int)second
++(NSString *)convertSecond2Time:(int)second
 {
     NSString* timeStr = @"" ;
     int oneHour = 3600;// 一小时 3600s
@@ -1298,7 +1285,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *   将时间数据（毫秒）转换为天和小时
  */
-+(NSString*)tfy_getOvertime:(NSString*)mStr{
++(NSString*)getOvertime:(NSString*)mStr{
     long msec = (long)[mStr longLongValue];
     
     if (msec <= 0){
@@ -1338,7 +1325,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *   获取图片格式
  */
-+(NSString *)tfy_typeForImageData:(NSData *)data{
++(NSString *)typeForImageData:(NSData *)data{
     uint8_t c;
     
     [data getBytes:&c length:1];
@@ -1370,13 +1357,13 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  指定字符串末尾倒数第5个 是 . 替换成自己需要的字符
  */
-+(NSString *)tfy_stringByReplacing_String:(NSString *)str withString:(NSString *)String{
++(NSString *)stringByReplacing_String:(NSString *)str withString:(NSString *)String{
     return [str stringByReplacingOccurrencesOfString:@"." withString:String options:NSBackwardsSearch range:NSMakeRange(str.length-5, 5)];
 }
 /**
  *  字典转化成字符串
  */
-+(NSString*)tfy_dictionaryToJsonString:(NSDictionary *)dic{
++(NSString*)dictionaryToJsonString:(NSDictionary *)dic{
     NSError *error = nil;
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
@@ -1389,14 +1376,14 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  图片转f字符串
  */
-+(NSString *)tfy_imageToString:(UIImage *)image{
++(NSString *)imageToString:(UIImage *)image{
     NSData *data = UIImageJPEGRepresentation(image, 1);
     return [data base64EncodedStringWithOptions:0];
 }
 /**
  *   出生日期计算星座
  */
-+(NSString *)tfy_getAstroWithMonth:(int)m day:(int)d{
++(NSString *)getAstroWithMonth:(int)m day:(int)d{
     NSString *astroString = @"摩羯水瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手摩羯";
     NSString *astroFormat = @"102123444543";
     NSString *result;
@@ -1417,7 +1404,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *   计算生肖
  */
-+(NSString *)tfy_getZodiacWithYear:(NSString *)year{
++(NSString *)getZodiacWithYear:(NSString *)year{
     NSInteger constellation = ([year integerValue] - 4)%12;
     NSString * result;
     switch (constellation) {
@@ -1441,7 +1428,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  将中文字符串转为拼音
  */
-+(NSString *)tfy_chineseStringToPinyin:(NSString *)string{
++(NSString *)chineseStringToPinyin:(NSString *)string{
     // 将中文字符串转成可变字符串
     NSMutableString *pinyinText = [[NSMutableString alloc] initWithString:string];
     // 先转换为带声调的拼音
@@ -1456,8 +1443,8 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  iOS 隐藏手机号码中间的四位数字
  */
-+(NSString *)tfy_numberSuitScanf:(NSString*)number{
-    BOOL isOk = [TFY_CommonUtils tfy_mobilePhoneNumber:number];;
++(NSString *)numberSuitScanf:(NSString*)number{
+    BOOL isOk = [TFY_Utils mobilePhoneNumber:number];;
     if (isOk) {//如果是手机号码的话
         NSString *numberString = [number stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
         return numberString;
@@ -1467,7 +1454,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  设置银行卡号的格式方法
  */
-+(NSString *)tfy_getNewBankNumWitOldBankNum:(NSString *)bankNum{
++(NSString *)getNewBankNumWitOldBankNum:(NSString *)bankNum{
     NSMutableString *mutableStr;
     if (bankNum.length) {
         mutableStr = [NSMutableString stringWithString:bankNum];
@@ -1494,7 +1481,7 @@ const char* jailbreak_tool_pathes[] = {
     return bankNum;
 }
 
-+(NSString *)tfy_hiddenEmailNum:(NSString *)EmailStr
++(NSString *)hiddenEmailNum:(NSString *)EmailStr
 {
     NSString *symbolStr = @"******************";
     NSString * lastStr =  @"@";//截取符
@@ -1522,7 +1509,7 @@ const char* jailbreak_tool_pathes[] = {
 
 
 //去掉小数点后无效的0
-+ (NSString *)tfy_deleteFailureZero:(NSString *)string
++ (NSString *)deleteFailureZero:(NSString *)string
 {
     if ([string rangeOfString:@"."].length == 0) {
         return string;
@@ -1546,13 +1533,13 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  根据字节大小返回文件大小字符KB、MB
  */
-+ (NSString *)tfy_stringFromByteCount:(long long)byteCount{
++ (NSString *)stringFromByteCount:(long long)byteCount{
     return [NSByteCountFormatter stringFromByteCount:byteCount countStyle:NSByteCountFormatterCountStyleFile];
 }
 /**
  *  根据字节大小返回文件大小字符KB、MB GB
  */
-+(NSString *)tfy_convertFileSize:(long long)size{
++(NSString *)convertFileSize:(long long)size{
     long kb = 1024;
     long mb = kb * 1024;
     long gb = mb * 1024;
@@ -1577,7 +1564,7 @@ const char* jailbreak_tool_pathes[] = {
         return [NSString stringWithFormat:@"%lld B", size];
 }
 //获得设备型号
-+ (NSString *)tfy_getCurrentDeviceModel
++ (NSString *)getCurrentDeviceModel
 {
     int mib[2];
     size_t len;
@@ -1681,15 +1668,15 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  获取缓存数据单位 M
  */
-+(float)tfy_readCacheSize{
++(float)readCacheSize{
     NSString *cachePath = [NSSearchPathForDirectoriesInDomains (NSCachesDirectory , NSUserDomainMask , YES) firstObject];
-    return [ self tfy_folderSizeAtPath :cachePath];
+    return [ self folderSizeAtPath :cachePath];
 }
 
 /**
  *  遍历文件夹获得文件夹大小，返回多少 M
  */
-+(float)tfy_folderSizeAtPath:(NSString *)folderPath{
++(float)folderSizeAtPath:(NSString *)folderPath{
     
     NSFileManager * manager = [NSFileManager defaultManager];
     if (![manager fileExistsAtPath :folderPath]) return 0 ;
@@ -1699,7 +1686,7 @@ const char* jailbreak_tool_pathes[] = {
     while ((fileName = [childFilesEnumerator nextObject]) != nil ){
         //获取文件全路径
         NSString * fileAbsolutePath = [folderPath stringByAppendingPathComponent :fileName];
-        folderSize += [self tfy_fileSizeAtPath:fileAbsolutePath];
+        folderSize += [self fileSizeAtPath:fileAbsolutePath];
     }
     
     return folderSize/( 1024.0 * 1024.0);
@@ -1708,7 +1695,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  计算 单个文件的大小
  */
-+(long long)tfy_fileSizeAtPath:( NSString *) filePath{
++(long long)fileSizeAtPath:( NSString *) filePath{
     NSFileManager * manager = [NSFileManager defaultManager];
     if ([manager fileExistsAtPath :filePath]){
         return [[manager attributesOfItemAtPath :filePath error : nil] fileSize];
@@ -1718,7 +1705,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  清楚缓存数据
  */
-+(void)tfy_clearFile
++(void)clearFile
 {
     NSString * cachePath = [NSSearchPathForDirectoriesInDomains (NSCachesDirectory , NSUserDomainMask , YES ) firstObject];
     NSArray * files = [[NSFileManager defaultManager ] subpathsAtPath :cachePath];
@@ -1736,7 +1723,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  打印成员变量列表
  */
-+ (void)tfy_runTimeConsoleMemberListWithClassName:(Class)className{
++ (void)runTimeConsoleMemberListWithClassName:(Class)className{
     unsigned int outCount = 0;
     Ivar *ivars = class_copyIvarList(className, &outCount);
     for (unsigned int i = 0; i < outCount; i++) {
@@ -1750,7 +1737,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  打印属性列表
  */
-+ (void)tfy_runTimeConsolePropertyListWithClassName:(Class)className{
++ (void)runTimeConsolePropertyListWithClassName:(Class)className{
     unsigned int outCount = 0;
     objc_property_t * properties = class_copyPropertyList(className, &outCount);
     for (unsigned int i = 0; i < outCount; i ++) {
@@ -1777,7 +1764,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  判断字符串是否是纯数字
  */
-+(BOOL)tfy_isPureNumber:(NSString *)string{
++(BOOL)isPureNumber:(NSString *)string{
     NSString *numberRegex = @"([1-9][0-9]*||[0-9][0-9]+)";
     NSPredicate *idCardNumberTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numberRegex];
     BOOL isPureNum_ = [idCardNumberTest evaluateWithObject:string];
@@ -1786,7 +1773,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  判断数组是否为空
  */
-+(BOOL)tfy_isBlankArray:(NSArray *)array{
++(BOOL)isBlankArray:(NSArray *)array{
     if (array == nil || [array isKindOfClass:[NSNull class]] || ![array isKindOfClass:[NSArray class]] || array.count == 0) {
         return YES;
     }
@@ -1795,14 +1782,14 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  拿去存储的当前状态
  */
-+(BOOL)tfy_addWithisLink:(NSString *)isLink{
++(BOOL)addWithisLink:(NSString *)isLink{
     NSUserDefaults *defaultison = [NSUserDefaults standardUserDefaults];
     return [defaultison boolForKey:isLink];
 }
 /**
  *  判断目录是否存在，不存在则创建
  */
-+(BOOL)tfy_hasLive:(NSString *)path{
++(BOOL)hasLive:(NSString *)path{
     if ( NO == [[NSFileManager defaultManager] fileExistsAtPath:path] ){
         return [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:NULL];
     }
@@ -1811,7 +1798,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *   判断字符串是否为空  @return YES or NO
  */
-+(BOOL)tfy_judgeIsEmptyWithString:(NSString *)string{
++(BOOL)judgeIsEmptyWithString:(NSString *)string{
     if (string.length == 0 || [string isEqualToString:@""] || string == nil || string == NULL || [string isEqual:[NSNull null]] || [string isEqualToString:@" "] || [string isEqualToString:@"(null)"] || [string isEqualToString:@"<null>"])
     {
         return YES;
@@ -1821,7 +1808,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  * 检测用户输入密码是否以字母开头，6-18位数字和字母组合
  */
-+(BOOL)tfy_detectionIsPasswordQualified:(NSString *)patternStr{
++(BOOL)detectionIsPasswordQualified:(NSString *)patternStr{
     NSString *pattern = @"^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{6,18}";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
     BOOL isMatch = [pred evaluateWithObject:patternStr];
@@ -1830,7 +1817,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  * 检测字符串中是否包含表情符号
  */
-+(BOOL)tfy_stringContainsEmoji:(NSString *)string{
++(BOOL)stringContainsEmoji:(NSString *)string{
     __block BOOL returnValue = NO;
     [string enumerateSubstringsInRange:NSMakeRange(0, [string length]) options:NSStringEnumerationByComposedCharacterSequences usingBlock:
      ^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
@@ -1872,7 +1859,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  * 判断字符串是否是整形数字
  */
-+(BOOL)tfy_isPureInt:(NSString *)string{
++(BOOL)isPureInt:(NSString *)string{
     NSScanner* scan = [NSScanner scannerWithString:string];
     int val;
     return [scan scanInt:&val] && [scan isAtEnd];
@@ -1880,7 +1867,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  * 判断是否为空NSNumber对象，nil,NSNull都为空，不是NSNumber对象也判为空
  */
-+(BOOL)tfy_emptyNSNumber:(NSNumber *)number{
++(BOOL)emptyNSNumber:(NSNumber *)number{
     if (number == nil || [number isKindOfClass:[NSNull class]] || ![number isKindOfClass:[NSNumber class]]) {
         return YES;
     }
@@ -1889,7 +1876,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  判断是否为空NSDictionary对象，nil,NSNull,@{}都为空,零个键值对也是空，不是NSDictionary对象也判为空
  */
-+(BOOL)tfy_emptyNSDictionary:(NSDictionary *)dictionary{
++(BOOL)emptyNSDictionary:(NSDictionary *)dictionary{
     if (dictionary == nil || [dictionary isKindOfClass:[NSNull class]] || ![dictionary isKindOfClass:[NSDictionary class]] || dictionary.allKeys == 0) {
         return YES;
     }
@@ -1898,7 +1885,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  判断是否为空NSSet对象，nil,NSNull,@{}都为空，零个键值对也是空不是NSSet对象也判为空
  */
-+(BOOL)tfy_emptyNSSet:(NSSet *)set{
++(BOOL)emptyNSSet:(NSSet *)set{
     if (set == nil || [set isKindOfClass:[NSNull class]] || ![set isKindOfClass:[NSSet class]] || set.count == 0) {
         return YES;
     }
@@ -1907,16 +1894,16 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  判断email格式是否正确，正则表达式不够好，慎用
  */
-+(BOOL)tfy_email:(NSString *)email{
++(BOOL)email:(NSString *)email{
     NSString *patternEmail = @"\\b([a-zA-Z0-9%_.+\\-]+)@([a-zA-Z0-9.\\-]+?\\.[a-zA-Z]{2,6})\\b";
     
-    if ([self tfy_judgeIsEmptyWithString:email]) {
+    if ([self judgeIsEmptyWithString:email]) {
         return NO;
     } else {
-        return [self tfy_regular:patternEmail withString:email];
+        return [self regular:patternEmail withString:email];
     }
 }
-+(BOOL)tfy_regular:(NSString *)regular withString:(NSString *)string {
++(BOOL)regular:(NSString *)regular withString:(NSString *)string {
     NSError *error = NULL;
     
     NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:regular options:0 error:&error];
@@ -1931,15 +1918,15 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  验证手机号
  */
-+(BOOL)tfy_mobilePhoneNumber:(NSString *)mobile{
-    BOOL  mobilebool =[self tfy_isPureNumber:mobile];
++(BOOL)mobilePhoneNumber:(NSString *)mobile{
+    BOOL  mobilebool =[self isPureNumber:mobile];
     if (mobilebool==YES) {
         NSString *patternMobile = @"^((13[0-9])|(15[^4,\\D])|(18[0,0-9])|(17[0-9]))\\d{8}$";
         
-        if ([self tfy_judgeIsEmptyWithString:mobile]) {
+        if ([self judgeIsEmptyWithString:mobile]) {
             return NO;
         } else {
-            return [self tfy_regular:patternMobile withString:mobile];
+            return [self regular:patternMobile withString:mobile];
         }
     }
     else{
@@ -1949,19 +1936,19 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  判断是否全数字 符合则为YES，不符合则为NO
  */
-+ (BOOL)tfy_OnlyDigitalNumber:(NSString *)number{
++ (BOOL)OnlyDigitalNumber:(NSString *)number{
     NSString *patternFloatNumber = @"^[0-9]+$";
-    if ([self tfy_judgeIsEmptyWithString:number]) {
+    if ([self judgeIsEmptyWithString:number]) {
         return NO;
     } else {
-        return [self tfy_regular:patternFloatNumber withString:number];
+        return [self regular:patternFloatNumber withString:number];
     }
 }
 /**
  * 判断是不是小数，如1.2这样  符合则为YES，不符合则为NO
  */
-+(BOOL)tfy_floatNumber:(NSString *)number{
-    if ([self tfy_judgeIsEmptyWithString:number]) {
++(BOOL)floatNumber:(NSString *)number{
+    if ([self judgeIsEmptyWithString:number]) {
         return NO;
     } else {
         
@@ -1973,13 +1960,13 @@ const char* jailbreak_tool_pathes[] = {
         
         NSRange dotRange = [finalString rangeOfString:@"."];
         if (dotRange.location == NSNotFound) {
-            return [self tfy_OnlyDigitalNumber:finalString];
+            return [self OnlyDigitalNumber:finalString];
         } else {
             if (dotRange.length ==1) {
                 NSString *leftSting = [finalString substringToIndex:dotRange.location];
                 NSString *rightString = [finalString substringFromIndex:dotRange.location+1];
                 
-                return [self tfy_OnlyDigitalNumber:leftSting] && [self tfy_OnlyDigitalNumber:rightString];
+                return [self OnlyDigitalNumber:leftSting] && [self OnlyDigitalNumber:rightString];
                 
             } else {
                 return NO;
@@ -1991,24 +1978,24 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *   判断版本号是否发生变化，有为 yes
  */
-+(BOOL)tfy_version_CFBundleShortVersionString{
++(BOOL)version_CFBundleShortVersionString{
     // 1.当前应用软件版本
-    NSString *currentVersion = [self tfy_cfbundleShortVersionString];
+    NSString *currentVersion = [self cfbundleShortVersionString];
     // 2.获取上一次的版本号
-    NSString *lastVersion = [self tfy_getStrValueInUDWithKey:@"VersionKey"];
+    NSString *lastVersion = [self getStrValueInUDWithKey:@"VersionKey"];
     
     if ([currentVersion isEqualToString:lastVersion]) {
         return NO;
     }else{
-        [self tfy_saveStrValueInUD:currentVersion forKey:@"VersionKey"];
+        [self saveStrValueInUD:currentVersion forKey:@"VersionKey"];
         return YES;
     }
 }
 /*
  *  判断手机是否越狱
  */
-+(BOOL)tfy_isJailBreak{
-    BOOL isYUEYU = [self tfy_mgjpf_isJailbroken];
++(BOOL)isJailBreak{
+    BOOL isYUEYU = [self mgjpf_isJailbroken];
     if (isYUEYU) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"警告" message:@"检测到此设备为越狱设备，此应用暂不支持该设备使用" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -2021,7 +2008,7 @@ const char* jailbreak_tool_pathes[] = {
     }
     return isYUEYU;
 }
-+(BOOL)tfy_mgjpf_isJailbroken
++(BOOL)mgjpf_isJailbroken
 {
     //以下检测的过程是越往下，越狱越高级
     
@@ -2036,15 +2023,15 @@ const char* jailbreak_tool_pathes[] = {
         jailbroken = YES;
     }
     
-    if ([self tfy_isJailBreak1]) {
+    if ([self isJailBreak1]) {
         jailbroken = YES;
     }
     
-    if ([self tfy_isJailBreak2]) {
+    if ([self isJailBreak2]) {
         jailbroken = YES;
     }
     
-    if ([self tfy_isJailBreak3]) {
+    if ([self isJailBreak3]) {
         jailbroken = YES;
     }
     //可能存在hook了NSFileManager方法，此处用底层C stat去检测
@@ -2091,7 +2078,7 @@ const char* jailbreak_tool_pathes[] = {
     }
     return jailbroken;
 }
-+(BOOL)tfy_isJailBreak3
++(BOOL)isJailBreak3
 {
     for (int i=0; i<ARRAY_SIZE(jailbreak_tool_pathes); i++) {
         if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithUTF8String:jailbreak_tool_pathes[i]]]) {
@@ -2103,7 +2090,7 @@ const char* jailbreak_tool_pathes[] = {
     
     return NO;
 }
-+(BOOL)tfy_isJailBreak1
++(BOOL)isJailBreak1
 {
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"cydia://"]]) {
         NSLog(@"The device is jail broken!");
@@ -2117,7 +2104,7 @@ const char* jailbreak_tool_pathes[] = {
 
 #define USER_APP_PATH   @"/User/Applications/"
 
-+(BOOL)tfy_isJailBreak2
++(BOOL)isJailBreak2
 {
     if ([[NSFileManager defaultManager] fileExistsAtPath:USER_APP_PATH]) {
         NSLog(@"The device is jail broken!");
@@ -2131,7 +2118,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  判断是否需要过滤的特殊字符：~￥#&*<>《》()[]{}【】^@/￡¤￥|§¨「」『』￠￢￣~@#￥&*（）——+|《》$_€。
  */
-+(BOOL)tfy_isIncludeSpecialCharact:(NSString *)str{
++(BOOL)isIncludeSpecialCharact:(NSString *)str{
     //***需要过滤的特殊字符：~￥#&*<>《》()[]{}【】^@/￡¤￥|§¨「」『』￠￢￣~@#￥&*（）——+|《》$_€。
     NSRange urgentRange = [str rangeOfCharacterFromSet: [NSCharacterSet characterSetWithCharactersInString: @"~￥#&*<>《》()[]{}【】^@/￡¤￥|§¨「」『』￠￢￣~@#￥&*（）——+|《》$_€"]];
     if (urgentRange.location == NSNotFound)
@@ -2143,7 +2130,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  验证身份证号码
  */
-+ (BOOL)tfy_isIdentityCardNumber:(NSString *)number{
++ (BOOL)isIdentityCardNumber:(NSString *)number{
     NSString *cardNum = @"^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9]|[X|x])";
     
     NSPredicate *identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", cardNum];
@@ -2157,7 +2144,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  验证香港身份证号码
  */
-+ (BOOL)tfy_isIdentityHKCardNumber:(NSString *)number{
++ (BOOL)isIdentityHKCardNumber:(NSString *)number{
     NSString *cardNum = @"^[A-Z]{1,2}[0-9]{6}\\(?[0-9A]\\)?$";
     
     NSPredicate *identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", cardNum];
@@ -2171,7 +2158,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  验证密码格式（包含大写、小写、数字）
  */
-+ (BOOL)tfy_isConformSXPassword:(NSString *)password{
++ (BOOL)isConformSXPassword:(NSString *)password{
     NSString *conText = @"(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9]{6,20}";
     
     NSPredicate *regextestMobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", conText];
@@ -2185,7 +2172,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  验证护照
  */
-+ (BOOL)tfy_isPassportNumber:(NSString *)number{
++ (BOOL)isPassportNumber:(NSString *)number{
     NSString *portNum = @"^1[45][0-9]{7}|([P|p|S|s]\\d{7})|([S|s|G|g]\\d{8})|([Gg|Tt|Ss|Ll|Qq|Dd|Aa|Ff]\\d{8})|([H|h|M|m]\\d{8，10})$";
     NSPredicate *identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", portNum];
     if ([identityCardPredicate evaluateWithObject:number] == YES) {
@@ -2198,17 +2185,17 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  判断是否为纯汉字
  */
-+ (BOOL)tfy_isChineseCharacters:(NSString *)string{
++ (BOOL)isChineseCharacters:(NSString *)string{
     //中文编码范围是0x4e00~0x9fa5
        NSString *regex = @"[\u4e00-\u9fa5]+";
        
-       return [self tfy_isValidateByRegex:regex Object:string];
+       return [self isValidateByRegex:regex Object:string];
 }
 
 /**
  * 判断是否包含字母
  */
-+ (BOOL)tfy_isContainLetters:(NSString *)string{
++ (BOOL)isContainLetters:(NSString *)string{
     if (!string) {return NO;}
     
     NSRegularExpression *numberRegular = [NSRegularExpression regularExpressionWithPattern:@"[A-Za-z]" options:NSRegularExpressionCaseInsensitive error:nil];
@@ -2223,55 +2210,55 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  判断4-8位汉字：位数可更改
  */
-+ (BOOL)tfy_combinationChineseCharacters:(NSString *)string{
++ (BOOL)combinationChineseCharacters:(NSString *)string{
     NSString *regex = @"^[\u4e00-\u9fa5]{4,8}$";
     
-    return [self tfy_isValidateByRegex:regex Object:string];
+    return [self isValidateByRegex:regex Object:string];
 }
 /**
  *  判断6-18位字母或数字组合：位数可更改
  */
-+ (BOOL)tfy_combinationOfLettersOrNumbers:(NSString *)string{
++ (BOOL)combinationOfLettersOrNumbers:(NSString *)string{
     NSString *regex = @"^[A-Za-z0-9]{6,18}+$";
     
-    return [self tfy_isValidateByRegex:regex Object:string];
+    return [self isValidateByRegex:regex Object:string];
 }
 /**
  *  判断仅中文、字母或数字
  */
-+ (BOOL)tfy_isChineseOrLettersOrNumbers:(NSString *)string{
++ (BOOL)isChineseOrLettersOrNumbers:(NSString *)string{
     NSString *regex = @"^[A-Za-z0-9\\u4e00-\u9fa5]+?$";
     
-    return [self tfy_isValidateByRegex:regex Object:string];
+    return [self isValidateByRegex:regex Object:string];
 }
 /**
  * 判断6~18位字母开头，只能包含“字母”，“数字”，“下划线”：位数可更改
  */
-+ (BOOL)tfy_isValidPassword:(NSString *)string{
++ (BOOL)isValidPassword:(NSString *)string{
     NSString *regex = @"^([a-zA-Z]|[a-zA-Z0-9_]|[0-9]){6,18}$";
-    return [self tfy_isValidateByRegex:regex Object:string];
+    return [self isValidateByRegex:regex Object:string];
 }
 /**
  * 判断是否为大写字母
  */
-+ (BOOL)tfy_isCapitalLetters:(NSString *)string{
++ (BOOL)isCapitalLetters:(NSString *)string{
     NSString *regex =@"[A-Z]*";
        
-       return [self tfy_isValidateByRegex:regex Object:string];
+       return [self isValidateByRegex:regex Object:string];
 }
 
 /**
  *  判断是否为小写字母
  */
-+ (BOOL)tfy_isLowercaseLetters:(NSString *)string{
++ (BOOL)isLowercaseLetters:(NSString *)string{
     NSString *regex =@"[a-z]*";
        
-       return [self tfy_isValidateByRegex:regex Object:string];
+       return [self isValidateByRegex:regex Object:string];
 }
 /**
  * 判断是否以字母开头
  */
-+ (BOOL)tfy_isLettersBegin:(NSString *)string{
++ (BOOL)isLettersBegin:(NSString *)string{
     if(string.length <= 0) {
         
         return NO;
@@ -2282,14 +2269,14 @@ const char* jailbreak_tool_pathes[] = {
         
         NSString *regex = @"[a-zA-Z]*";
         
-        return [self tfy_isValidateByRegex:regex Object:firstStr];
+        return [self isValidateByRegex:regex Object:firstStr];
     }
 }
 
 /**
  * 判断是否以汉字开头
  */
-+ (BOOL)tfy_isChineseBegin:(NSString *)string{
++ (BOOL)isChineseBegin:(NSString *)string{
     if(string.length <= 0) {
         
         return NO;
@@ -2300,14 +2287,14 @@ const char* jailbreak_tool_pathes[] = {
         
         NSString *regex = @"[\u4e00-\u9fa5]+";
         
-        return [self tfy_isValidateByRegex:regex Object:firstStr];
+        return [self isValidateByRegex:regex Object:firstStr];
     }
 }
 
 /**
  *  验证运营商:移动
  */
-+ (BOOL)tfy_isMobilePperators:(NSString *)string{
++ (BOOL)isMobilePperators:(NSString *)string{
     if(string.length != 11) {
            
            return NO;
@@ -2318,11 +2305,11 @@ const char* jailbreak_tool_pathes[] = {
             */
            NSString *CM_NUM = @"^((13[4-9])|(147)|(15[0-2,7-9])|(178)|(18[2-4,7-8]))\\d{8}|(1705)\\d{7}$";
            
-           return [self tfy_isValidateByRegex:CM_NUM Object:string];
+           return [self isValidateByRegex:CM_NUM Object:string];
        }
 }
 /** 验证运营商:联通 */
-+ (BOOL)tfy_isUnicomPperators:(NSString *)string {
++ (BOOL)isUnicomPperators:(NSString *)string {
     
     if(string.length != 11) {
         
@@ -2334,12 +2321,12 @@ const char* jailbreak_tool_pathes[] = {
          */
         NSString *CU_NUM = @"^((13[0-2])|(145)|(15[5-6])|(176)|(18[5,6]))\\d{8}|(1709)\\d{7}$";
         
-        return [self tfy_isValidateByRegex:CU_NUM Object:string];
+        return [self isValidateByRegex:CU_NUM Object:string];
     }
 }
 
 /** 验证运营商:电信 */
-+ (BOOL)tfy_isTelecomPperators:(NSString *)string {
++ (BOOL)isTelecomPperators:(NSString *)string {
     
     if(string.length != 11) {
         
@@ -2351,11 +2338,11 @@ const char* jailbreak_tool_pathes[] = {
          */
         NSString *CT_NUM = @"(^1(33|53|77|8[019])\\d{8}$)|(^1700\\d{7}$)";
         
-        return [self tfy_isValidateByRegex:CT_NUM Object:string];
+        return [self isValidateByRegex:CT_NUM Object:string];
     }
 }
 //验证正则表达式
-+ (BOOL)tfy_isValidateByRegex:(NSString *)regex Object:(NSString *)object {
++ (BOOL)isValidateByRegex:(NSString *)regex Object:(NSString *)object {
     
     if(object.length <= 0) {
         
@@ -2366,7 +2353,7 @@ const char* jailbreak_tool_pathes[] = {
         return [pre evaluateWithObject:object];
     }
 }
-+(BOOL)tfy_suibian:(NSArray  *)array{
++(BOOL)suibian:(NSArray  *)array{
     NSMutableArray *tempArr = [NSMutableArray array];
     NSMutableArray *tempArr2 = [NSMutableArray array];
 
@@ -2399,7 +2386,7 @@ const char* jailbreak_tool_pathes[] = {
     
 }
 
-+(BOOL)tfy_hasSerialSubstrWithString:(NSString *)string{
++(BOOL)hasSerialSubstrWithString:(NSString *)string{
     NSUInteger markLength = 3;
     if(markLength > string.length){
         return  NO;
@@ -2490,7 +2477,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  * pincode是相同的或连续的
  */
-+(BOOL)tfy_checkPincode:(NSString*)pincode{
++(BOOL)checkPincode:(NSString*)pincode{
     
     BOOL isTure = NO;//不符合规则，pincode是相同的或连续的
     NSString *pincodeRegex = @"^(?=.*\\d+)(?!.*?([\\d])\\1{4})[\\d]{5}$";
@@ -2506,8 +2493,8 @@ const char* jailbreak_tool_pathes[] = {
            
         }];
        
-        BOOL isInscend = [self tfy_judgeInscend:arr];
-        BOOL isDescend = [self tfy_judgeDescend:arr];
+        BOOL isInscend = [self judgeInscend:arr];
+        BOOL isDescend = [self judgeDescend:arr];
         if ( !isInscend && !isDescend) {
             isTure = YES;
         }
@@ -2515,7 +2502,7 @@ const char* jailbreak_tool_pathes[] = {
     return isTure;
 }
 
-+ (BOOL)tfy_judgeInscend:(NSArray *)arr{
++ (BOOL)judgeInscend:(NSArray *)arr{
     //递增12345
     int j = 0;
     for (int i = 0; i<arr.count; i++) {
@@ -2532,7 +2519,7 @@ const char* jailbreak_tool_pathes[] = {
     }
     return NO;
 }
-+ (BOOL)tfy_judgeDescend:(NSArray *)arr{
++ (BOOL)judgeDescend:(NSArray *)arr{
     //递减54321
     int j=0;//计数归零,用于递减判断
     for (int i = 0; i<arr.count; i++) {
@@ -2551,7 +2538,7 @@ const char* jailbreak_tool_pathes[] = {
 }
  
 //判断是否相等
-+ (BOOL)tfy_judgeEqual:(NSArray *)arr{
++ (BOOL)judgeEqual:(NSArray *)arr{
     int j=0;
     int firstNum = [arr[0] intValue];
     for (int i = 0; i<arr.count; i++) {
@@ -2567,7 +2554,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  * 检测WIFI功能是否打开
  */
-+(BOOL)tfy_isWiFiOpened
++(BOOL)isWiFiOpened
 {
     NSCountedSet * cset = [NSCountedSet new];
     struct ifaddrs *interfaces;
@@ -2584,7 +2571,7 @@ const char* jailbreak_tool_pathes[] = {
     return [cset countForObject:@"awdl0"] > 1 ? YES : NO;
 }
 /**判断当前时间和结束时间是否是将来  YES */
-+(BOOL)tfy_compareDate:(NSDate*)stary withDate:(NSDate*)end{
++(BOOL)compareDate:(NSDate*)stary withDate:(NSDate*)end{
     NSComparisonResult result = [stary compare: end];
       if (result==NSOrderedSame){
         //相等
@@ -2601,7 +2588,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  * 识别整体字符串里面是否包含指定字符串  YES
  */
-+(BOOL)tfy_judgmentstring:(NSString *)string OfString:(NSString *)ofString{
++(BOOL)judgmentstring:(NSString *)string OfString:(NSString *)ofString{
     BOOL str_bool= NO;
     if([string rangeOfString:ofString].location !=NSNotFound){
         str_bool = YES;
@@ -2613,7 +2600,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  * 获取当前IP地址
  */
-+(nullable NSString*)tfy_getCurrentWifiIP
++(nullable NSString*)getCurrentWifiIP
 {
     NSString *address = nil;
     struct ifaddrs *interfaces = NULL;
@@ -2639,170 +2626,11 @@ const char* jailbreak_tool_pathes[] = {
     freeifaddrs(interfaces);
     return address;
 }
-/**
- *  拼接http://或者https://
- */
-+ (NSString *)tfy_getCompleteWebsite:(NSString *)urlStr{
-    NSString *returnUrlStr = nil;
-    NSString *scheme = nil;
-    
-    assert(urlStr != nil);
-    
-    urlStr = [urlStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if ( (urlStr != nil) && (urlStr.length != 0) ) {
-        NSRange  urlRange = [urlStr rangeOfString:@"://"];
-        if (urlRange.location == NSNotFound) {
-            returnUrlStr = [NSString stringWithFormat:@"http://%@", urlStr];
-        } else {
-            scheme = [urlStr substringWithRange:NSMakeRange(0, urlRange.location)];
-            assert(scheme != nil);
-            
-            if ( ([scheme compare:@"http"  options:NSCaseInsensitiveSearch] == NSOrderedSame)
-                || ([scheme compare:@"https" options:NSCaseInsensitiveSearch] == NSOrderedSame) ) {
-                returnUrlStr = urlStr;
-            } else {
-                //不支持的URL方案
-            }
-        }
-    }
-    return returnUrlStr;
-}
 
-+ (NSString *)tfy_getStringWithRange:(NSRange)range
-{
-    NSMutableString *string = [NSMutableString string];
-    for (int i = 0; i < range.length ; i++) {
-        [string appendString:@" "];
-    }
-    return string;
-}
-/**
- * 传入时间 2020-04-09 返回 星座
- */
-+(NSString *)tfy_getXingzuo:(NSDate *)in_date{
-    //计算星座
-    NSString *retStr=@"";
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"MM"];
-    int i_month=0;
-    NSString *theMonth = [dateFormat stringFromDate:in_date];
-    if([[theMonth substringToIndex:0] isEqualToString:@"0"]){
-        i_month = [[theMonth substringFromIndex:1] intValue];
-    }else{
-        i_month = [theMonth intValue];
-    }
-    [dateFormat setDateFormat:@"dd"];
-    int i_day=0;
-    NSString *theDay = [dateFormat stringFromDate:in_date];
-    if([[theDay substringToIndex:0] isEqualToString:@"0"]){
-        i_day = [[theDay substringFromIndex:1] intValue];
-    }else{
-        i_day = [theDay intValue];
-    }
-    switch (i_month) {
-        case 1:
-            if(i_day>=20 && i_day<=31){
-                retStr=@"水瓶座";
-            }
-            if(i_day>=1 && i_day<=19){
-                retStr=@"摩羯座";
-            }
-            break;
-        case 2:
-            if(i_day>=1 && i_day<=18){
-                retStr=@"水瓶座";
-            }
-            if(i_day>=19 && i_day<=31){
-                retStr=@"双鱼座";
-            }
-            break;
-        case 3:
-            if(i_day>=1 && i_day<=20){
-                retStr=@"双鱼座";
-            }
-            if(i_day>=21 && i_day<=31){
-                retStr=@"白羊座";
-            }
-            break;
-        case 4:
-            if(i_day>=1 && i_day<=19){
-                retStr=@"白羊座";
-            }
-            if(i_day>=20 && i_day<=31){
-                retStr=@"金牛座";
-            }
-            break;
-        case 5:
-            if(i_day>=1 && i_day<=20){
-                retStr=@"金牛座";
-            }
-            if(i_day>=21 && i_day<=31){
-                retStr=@"双子座";
-            }
-            break;
-        case 6:
-            if(i_day>=1 && i_day<=21){
-                retStr=@"双子座";
-            }
-            if(i_day>=22 && i_day<=31){
-                retStr=@"巨蟹座";
-            }
-            break;
-        case 7:
-            if(i_day>=1 && i_day<=22){
-                retStr=@"巨蟹座";
-            }
-            if(i_day>=23 && i_day<=31){
-                retStr=@"狮子座";
-            }
-            break;
-        case 8:
-            if(i_day>=1 && i_day<=22){
-                retStr=@"狮子座";
-            }
-            if(i_day>=23 && i_day<=31){
-                retStr=@"处女座";
-            }
-            break;
-        case 9:
-            if(i_day>=1 && i_day<=22){
-                retStr=@"处女座";
-            }
-            if(i_day>=23 && i_day<=31){
-                retStr=@"天秤座";
-            }
-            break;
-        case 10:
-            if(i_day>=1 && i_day<=23){
-                retStr=@"天秤座";
-            }
-            if(i_day>=24 && i_day<=31){
-                retStr=@"天蝎座";
-            }
-            break;
-        case 11:
-            if(i_day>=1 && i_day<=21){
-                retStr=@"天蝎座";
-            }
-            if(i_day>=22 && i_day<=31){
-                retStr=@"射手座";
-            }
-            break;
-        case 12:
-            if(i_day>=1 && i_day<=21){
-                retStr=@"射手座";
-            }
-            if(i_day>=21 && i_day<=31){
-                retStr=@"摩羯座";
-            }
-            break;
-    }
-    return retStr;
-}
 /**
  *  存储当前BOOL
  */
-+(void)tfy_saveBoolValueInUD:(BOOL)value forKey:(NSString *)key{
++(void)saveBoolValueInUD:(BOOL)value forKey:(NSString *)key{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setBool:value forKey:key];
     [ud synchronize];
@@ -2810,7 +2638,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  存储当前NSString
  */
-+(void)tfy_saveStrValueInUD:(NSString *)str forKey:(NSString *)key{
++(void)saveStrValueInUD:(NSString *)str forKey:(NSString *)key{
     if(!str){
         return;
     }
@@ -2821,7 +2649,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  存储当前NSData
  */
-+(void)tfy_saveDataValueInUD:(NSData *)data forKey:(NSString *)key{
++(void)saveDataValueInUD:(NSData *)data forKey:(NSString *)key{
     if(!data){
         return;
     }
@@ -2832,7 +2660,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  存储当前NSDictionary
  */
-+(void)tfy_saveDicValueInUD:(NSDictionary *)dic forKey:(NSString *)key{
++(void)saveDicValueInUD:(NSDictionary *)dic forKey:(NSString *)key{
     if(!dic){
         return;
     }
@@ -2843,7 +2671,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  存储当前NSArray
  */
-+(void)tfy_saveArrValueInUD:(NSArray *)arr forKey:(NSString *)key{
++(void)saveArrValueInUD:(NSArray *)arr forKey:(NSString *)key{
     if(!arr){
         return;
     }
@@ -2855,7 +2683,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  存储当前NSDate
  */
-+(void)tfy_saveDateValueInUD:(NSDate *)date forKey:(NSString *)key{
++(void)saveDateValueInUD:(NSDate *)date forKey:(NSString *)key{
     if(!date){
         return;
     }
@@ -2866,7 +2694,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  存储当前NSInteger
  */
-+(void)tfy_saveIntValueInUD:(NSInteger)value forKey:(NSString *)key{
++(void)saveIntValueInUD:(NSInteger)value forKey:(NSString *)key{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setInteger:value forKey:key];
     [ud synchronize];
@@ -2874,7 +2702,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *   保存模型id
  */
-+(void)tfy_saveValueInUD:(id)value forKey:(NSString *)key{
++(void)saveValueInUD:(id)value forKey:(NSString *)key{
     if(!value){
         return;
     }
@@ -2885,63 +2713,63 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *  获取保存的id
  */
-+(id)tfy_getValueInUDWithKey:(NSString *)key{
++(id)getValueInUDWithKey:(NSString *)key{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     return [ud valueForKey:key];
 }
 /**
  *  获取保存的NSDate
  */
-+(NSDate *)tfy_getDateValueInUDWithKey:(NSString *)key{
++(NSDate *)getDateValueInUDWithKey:(NSString *)key{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     return [ud valueForKey:key];
 }
 /**
  *  获取保存的NSString
  */
-+(NSString *)tfy_getStrValueInUDWithKey:(NSString *)key{
++(NSString *)getStrValueInUDWithKey:(NSString *)key{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     return [ud stringForKey:key];
 }
 /**
  *  获取保存的NSInteger
  */
-+(NSInteger )tfy_getIntValueInUDWithKey:(NSString *)key{
++(NSInteger )getIntValueInUDWithKey:(NSString *)key{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     return [ud integerForKey:key];
 }
 /**
  *  获取保存的NSDictionary
  */
-+(NSDictionary *)tfy_getDicValueInUDWithKey:(NSString *)key{
++(NSDictionary *)getDicValueInUDWithKey:(NSString *)key{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     return [ud dictionaryForKey:key];
 }
 /**
  *  获取保存的NSArray
  */
-+(NSArray *)tfy_getArrValueInUDWithKey:(NSString *)key{
++(NSArray *)getArrValueInUDWithKey:(NSString *)key{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     return [ud arrayForKey:key];
 }
 /**
  *  获取保存的NSData
  */
-+(NSData *)tfy_getdataValueInUDWithKey:(NSString *)key{
++(NSData *)getdataValueInUDWithKey:(NSString *)key{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     return [ud dataForKey:key];
 }
 /**
  *  获取保存的BOOL
  */
-+(BOOL)tfy_getBoolValueInUDWithKey:(NSString *)key{
++(BOOL)getBoolValueInUDWithKey:(NSString *)key{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     return [ud boolForKey:key];
 }
 /**
  *  删除对应的KEY
  */
-+(void)tfy_removeValueInUDWithKey:(NSString *)key{
++(void)removeValueInUDWithKey:(NSString *)key{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud removeObjectForKey:key];
     [ud synchronize];
@@ -2949,7 +2777,7 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *   归档
  */
-+ (void)tfy_keyedArchiverObject:(id)object ForKey:(NSString *)key ToFile:(NSString *)path{
++ (void)keyedArchiverObject:(id)object ForKey:(NSString *)key ToFile:(NSString *)path{
     NSMutableData *md=[NSMutableData data];
     NSKeyedArchiver *arch=[[NSKeyedArchiver alloc]initForWritingWithMutableData:md];
     [arch encodeObject:object forKey:key];
@@ -2960,7 +2788,7 @@ static CGRect oldframe;
 /**
  *  图片点击放大缩小
  */
-+(void)tfy_showImage:(UIImageView*)avatarImageView{
++(void)showImage:(UIImageView*)avatarImageView{
     UIImage *image = avatarImageView.image;
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIView *backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
@@ -2973,7 +2801,7 @@ static CGRect oldframe;
     [backgroundView addSubview:imageView];
     [window addSubview:backgroundView];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tfy_hideImage:)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
     [backgroundView addGestureRecognizer:tap];
     
     [UIView animateWithDuration:0.3 animations:^{
@@ -2983,7 +2811,7 @@ static CGRect oldframe;
         
     }];
 }
-+(void)tfy_hideImage:(UITapGestureRecognizer*)tap{
++(void)hideImage:(UITapGestureRecognizer*)tap{
     UIView *backgroundView = tap.view;
     UIImageView *imageView = (UIImageView*)[tap.view viewWithTag:1];
     [UIView animateWithDuration:0.3 animations:^{
@@ -2996,7 +2824,7 @@ static CGRect oldframe;
 /**
  *  反归档
  */
-+(NSArray *)tfy_keyedUnArchiverForKey:(NSString *)key FromFile:(NSString *)path{
++(NSArray *)keyedUnArchiverForKey:(NSString *)key FromFile:(NSString *)path{
     NSError *error=nil;
     NSData *data=[NSData dataWithContentsOfFile:path];
     NSArray *arr;
@@ -3013,7 +2841,7 @@ static CGRect oldframe;
 /**
 *  将数组拆分成固定长度的子数组
 */
-+(NSArray *)tfy_splitArray:(NSArray *)array withSubSize:(int)subSize{
++(NSArray *)splitArray:(NSArray *)array withSubSize:(int)subSize{
     //  数组将被拆分成指定长度数组的个数
     unsigned long count = array.count % subSize == 0 ? (array.count / subSize) : (array.count / subSize + 1);
     //  用来保存指定长度数组的可变数组对象
@@ -3044,13 +2872,13 @@ static CGRect oldframe;
 /**
  *  直接跳转到手机浏览器
  */
-+(void)tfy_openURLAtSafari:(NSString *)urlString{
++(void)openURLAtSafari:(NSString *)urlString{
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{} completionHandler:^(BOOL success) {}];
 }
 /**
  *  设置语音提示
  */
-+(void)tfy_SpeechSynthesizer:(NSString *)SpeechUtterancestring{
++(void)SpeechSynthesizer:(NSString *)SpeechUtterancestring{
     AVSpeechSynthesizer *av = [[AVSpeechSynthesizer alloc]init];
     
     AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc]initWithString:SpeechUtterancestring];
@@ -3062,7 +2890,7 @@ static CGRect oldframe;
 /**
  *  心跳动画
  */
-+(void)tfy_heartbeatView:(UIView *)view duration:(CGFloat)fDuration maxSize:(CGFloat)fMaxSize durationPerBeat:(CGFloat)fDurationPerBeat{
++(void)heartbeatView:(UIView *)view duration:(CGFloat)fDuration maxSize:(CGFloat)fMaxSize durationPerBeat:(CGFloat)fDurationPerBeat{
     if (view && (fDurationPerBeat > 0.1f))
     {
         CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
@@ -3117,7 +2945,7 @@ static CGRect oldframe;
 /**
  *  保存数组数据以  data.plist
  */
-+(void)tfy_save:(NSArray *)Array data_plist:(NSString *)plistname{
++(void)save:(NSArray *)Array data_plist:(NSString *)plistname{
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSString *namepist=[NSString stringWithFormat:@"%@.plist",plistname];
     
@@ -3128,7 +2956,7 @@ static CGRect oldframe;
 /**
  *  拨打电话号码
  */
-+(void)tfy_makePhoneCallWithNumber:(NSString *)number{
++(void)makePhoneCallWithNumber:(NSString *)number{
     NSInteger length = number.length;
     NSString *realNumber = [NSString string];
     
@@ -3146,20 +2974,20 @@ static CGRect oldframe;
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"telprompt://", realNumber]]])
     {
-        [self tfy_openURLAtSafari:[NSString stringWithFormat:@"%@%@", @"telprompt://", realNumber]];
+        [self openURLAtSafari:[NSString stringWithFormat:@"%@%@", @"telprompt://", realNumber]];
     }
 }
 /**
  *   调转到系统邮箱
  */
-+(void)tfy_makeEmil:(NSString *)mailbox{
-    [self tfy_openURLAtSafari:[NSString stringWithFormat:@"%@%@",@"mailto://",mailbox]];
++(void)makeEmil:(NSString *)mailbox{
+    [self openURLAtSafari:[NSString stringWithFormat:@"%@%@",@"mailto://",mailbox]];
 }
 /**
  *  保存相应viwe的图片到相册
  */
-+(void)tfy_savePhoto:(UIView *)views{
-    UIImage * image = [self tfy_captureImageFromView:views];
++(void)savePhoto:(UIView *)views{
+    UIImage * image = [self captureImageFromView:views];
     //方法1：同步存到系统相册
     __block NSString *createdAssetID =nil;//唯一标识，可以用于图片资源获取
     NSError *error =nil;
@@ -3168,7 +2996,7 @@ static CGRect oldframe;
         createdAssetID = [PHAssetChangeRequest creationRequestForAssetFromImage:image].placeholderForCreatedAsset.localIdentifier;
     } error:&error];
 }
-+(void)tfy_saveImage:(UIImage *)image assetCollectionName:(NSString *)collectionName{
++(void)saveImage:(UIImage *)image assetCollectionName:(NSString *)collectionName{
     // 1. 获取当前App的相册授权状态
     PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatus];
     
@@ -3176,7 +3004,7 @@ static CGRect oldframe;
     if (authorizationStatus == PHAuthorizationStatusAuthorized) {
         
         // 2.1 如果已经授权, 保存图片(调用步骤2的方法)
-        [self tfy_saveImage:image toCollectionWithName:collectionName];
+        [self saveImage:image toCollectionWithName:collectionName];
         
     } else if (authorizationStatus == PHAuthorizationStatusNotDetermined) { // 如果没决定, 弹出指示框, 让用户选择
         
@@ -3184,14 +3012,14 @@ static CGRect oldframe;
             
             // 如果用户选择授权, 则保存图片
             if (status == PHAuthorizationStatusAuthorized) {
-                [self tfy_saveImage:image toCollectionWithName:collectionName];
+                [self saveImage:image toCollectionWithName:collectionName];
             }
         }];
         
     }
 }
 // 保存图片
-+ (void)tfy_saveImage:(UIImage *)image toCollectionWithName:(NSString *)collectionName {
++ (void)saveImage:(UIImage *)image toCollectionWithName:(NSString *)collectionName {
     
     // 1. 获取相片库对象
     PHPhotoLibrary *library = [PHPhotoLibrary sharedPhotoLibrary];
@@ -3203,7 +3031,7 @@ static CGRect oldframe;
         PHAssetCollectionChangeRequest *collectionRequest;
         
         // 2.2 取出指定名称的相册
-        PHAssetCollection *assetCollection = [self tfy_getCurrentPhotoCollectionWithTitle:collectionName];
+        PHAssetCollection *assetCollection = [self getCurrentPhotoCollectionWithTitle:collectionName];
         
         // 2.3 判断相册是否存在
         if (assetCollection) { // 如果存在就使用当前的相册创建相册请求
@@ -3234,7 +3062,7 @@ static CGRect oldframe;
 /**
  *  改变导航栏工具条字体颜色 0 为白色 1 为黑色
  */
-+(void)tfy_BackstatusBarStyle:(NSInteger)index{
++(void)BackstatusBarStyle:(NSInteger)index{
   [UIApplication sharedApplication].statusBarStyle = index==0?(UIStatusBarStyleLightContent):(UIStatusBarStyleDefault);
     
 }
@@ -3242,7 +3070,7 @@ static CGRect oldframe;
 /**
  *  按钮旋转动画
  */
-+(void)tfy_RotatinganimationView:(UIButton *)btn animateWithDuration:(NSTimeInterval)duration{
++(void)RotatinganimationView:(UIButton *)btn animateWithDuration:(NSTimeInterval)duration{
     btn.selected?(btn.selected=YES):(btn.selected=NO);
     if (btn.selected) {
         btn.selected = NO;
@@ -3259,7 +3087,7 @@ static CGRect oldframe;
 }
 
 //步骤三用于获取当前系统中是否有指定的相册
-+ (PHAssetCollection *)tfy_getCurrentPhotoCollectionWithTitle:(NSString *)collectionName {
++ (PHAssetCollection *)getCurrentPhotoCollectionWithTitle:(NSString *)collectionName {
     
     // 1. 创建搜索集合
     PHFetchResult *result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
@@ -3276,7 +3104,7 @@ static CGRect oldframe;
 }
 
 //截图功能
-+(UIImage *)tfy_captureImageFromView:(UIView *)view{
++(UIImage *)captureImageFromView:(UIView *)view{
     
     CGRect screenRect = [view bounds];
     
@@ -3296,7 +3124,7 @@ static CGRect oldframe;
 /**
  *  修改状态栏的颜色
  */
-+ (void)tfy_statusBarBackgroundColor:(UIColor *)statusBarColor{
++ (void)statusBarBackgroundColor:(UIColor *)statusBarColor{
     UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
     
     if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
@@ -3308,7 +3136,7 @@ static CGRect oldframe;
 /**
  *  得到中英文混合字符串长度
  */
-+ (int)tfy_lengthForText:(NSString *)text{
++ (int)lengthForText:(NSString *)text{
     int strlength = 0;
     char *p = (char*)[text cStringUsingEncoding:NSUnicodeStringEncoding];
     for (int i=0 ; i < [text lengthOfBytesUsingEncoding:NSUnicodeStringEncoding]; i++) {
@@ -3326,7 +3154,7 @@ static CGRect oldframe;
 /**
  *  过滤数组中相等的数据
  */
-+(NSArray *)tfy_filterSameObject:(NSArray *)array{
++(NSArray *)filterSameObject:(NSArray *)array{
     NSMutableArray * mArray = [NSMutableArray new];
     for (id object in array) {
         
@@ -3341,7 +3169,7 @@ static CGRect oldframe;
 /**
  *  获取保存好的数组数据以  data.plist
  */
-+(NSArray *)tfy_readsenderArraydata_plist:(NSString *)plistname{
++(NSArray *)readsenderArraydata_plist:(NSString *)plistname{
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSString *namepist=[NSString stringWithFormat:@"%@.plist",plistname];
     
@@ -3355,16 +3183,16 @@ static CGRect oldframe;
 /**
  *  获取某个view在屏幕上的frame
  */
-+(CGRect)tfy_rectFromSunView:(UIView *)view{
++(CGRect)rectFromSunView:(UIView *)view{
     //查找frame
-    UIView *vcView = [self tfy_rootViewFromSubView:view];
+    UIView *vcView = [self rootViewFromSubView:view];
     UIView *superView = view.superview;
     CGRect viewRect = view.frame;
     CGRect viewRectFromWindow = [superView convertRect:viewRect toView:vcView];
     return viewRectFromWindow;
 }
 
-+(UIView *)tfy_rootViewFromSubView:(UIView *)view
++(UIView *)rootViewFromSubView:(UIView *)view
 {
     UIViewController *vc = nil;
     UIResponder *next = view.nextResponder;
@@ -3391,7 +3219,7 @@ static CGRect oldframe;
 /**
  *  横屏截图长度 --- 获取主图片数据所返回的总图片长度 vertical 横屏 1 竖屏 0
  */
-+ (void)tfy_WKWebViewScroll:(WKWebView *)webView vertical:(NSInteger)vertical CaptureCompletionHandler:(void(^)(UIImage *capturedImage))completionHandler{
++ (void)WKWebViewScroll:(WKWebView *)webView vertical:(NSInteger)vertical CaptureCompletionHandler:(void(^)(UIImage *capturedImage))completionHandler{
     // 制作了一个UIView的副本
     UIView *snapShotView = [webView snapshotViewAfterScreenUpdates:YES];
     
@@ -3411,7 +3239,7 @@ static CGRect oldframe;
     UIGraphicsBeginImageContextWithOptions(webView.scrollView.contentSize, YES, [UIScreen mainScreen].scale);
     
     // 滚动截图
-    [self tfy_ZTContentScroll:webView PageDraw:0 maxIndex:(int)maxIndex vertical:vertical drawCallback:^{
+    [self ZTContentScroll:webView PageDraw:0 maxIndex:(int)maxIndex vertical:vertical drawCallback:^{
         UIImage *capturedImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
@@ -3425,7 +3253,7 @@ static CGRect oldframe;
 }
 
 // 滚动截图
-+(void)tfy_ZTContentScroll:(WKWebView *)webView PageDraw:(int)index maxIndex:(int)maxIndex vertical:(NSInteger)vertical drawCallback:(void(^)(void))drawCallback{
++(void)ZTContentScroll:(WKWebView *)webView PageDraw:(int)index maxIndex:(int)maxIndex vertical:(NSInteger)vertical drawCallback:(void(^)(void))drawCallback{
     CGRect splitFrame;
     if (vertical==1) {
         // 这里是横屏所以修改了获取方法，如果是竖屏可以改成高度 改变偏移量
@@ -3442,7 +3270,7 @@ static CGRect oldframe;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [webView drawViewHierarchyInRect:splitFrame afterScreenUpdates:YES];
         if(index < maxIndex){
-            [self tfy_ZTContentScroll:webView PageDraw: index + 1 maxIndex:maxIndex vertical:vertical drawCallback:drawCallback];
+            [self ZTContentScroll:webView PageDraw: index + 1 maxIndex:maxIndex vertical:vertical drawCallback:drawCallback];
         }else{
             drawCallback();
         }
@@ -3455,7 +3283,7 @@ static CGRect oldframe;
 /**
  *  截取图片会带哦
  */
-- (void )tfy_screenSnapshot:(void(^)(UIImage *snapShotImage))finishBlock{
+- (void )screenSnapshot:(void(^)(UIImage *snapShotImage))finishBlock{
     if (!finishBlock)return;
     
     UIImage *snapshotImage = nil;
@@ -3484,19 +3312,21 @@ static const char _bundle = 0;
 
 @implementation BundleEx
 
-- (NSString *)tfy_localizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName {
+- (NSString *)localizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName {
     NSBundle *bundle = objc_getAssociatedObject(self, &_bundle);
     return bundle ? [bundle localizedStringForKey:key value:value table:tableName] : [super localizedStringForKey:key value:value table:tableName];
 }
 
 @end
+
 @implementation NSBundle (Utils_Chain)
 
-+ (void)tfy_setLanguage:(NSString *)language {
++ (void)setLanguage:(NSString *)language {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         object_setClass([NSBundle mainBundle], [BundleEx class]);
     });
     objc_setAssociatedObject([NSBundle mainBundle], &_bundle, language ? [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:language ofType:@"lproj"]] : nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
+
 @end

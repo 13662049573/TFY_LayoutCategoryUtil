@@ -322,6 +322,19 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)tfy_transformToPinyinFirstLetter;
 
 - (NSData *)tfy_utf8Data;
+/**
+ *  拼接http://或者https://
+ */
++ (NSString *)tfy_getCompleteWebsite:(NSString *)urlStr;
+/**
+ * 根据长度返回字符串
+ */
++ (NSString *)tfy_getStringWithRange:(NSRange)range;
+/**
+ * 传入时间 2020-04-09 返回 星座
+ */
++ (NSString *)tfy_getXingzuo:(NSDate *)in_date;
+
 @end
 
 NS_ASSUME_NONNULL_END

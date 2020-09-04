@@ -984,6 +984,166 @@
     NSString *string = self;
     return [string dataUsingEncoding:NSUTF8StringEncoding];
 }
+/**
+ *  拼接http://或者https://
+ */
++ (NSString *)tfy_getCompleteWebsite:(NSString *)urlStr{
+    NSString *returnUrlStr = nil;
+    NSString *scheme = nil;
+    
+    assert(urlStr != nil);
+    
+    urlStr = [urlStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if ( (urlStr != nil) && (urlStr.length != 0) ) {
+        NSRange  urlRange = [urlStr rangeOfString:@"://"];
+        if (urlRange.location == NSNotFound) {
+            returnUrlStr = [NSString stringWithFormat:@"http://%@", urlStr];
+        } else {
+            scheme = [urlStr substringWithRange:NSMakeRange(0, urlRange.location)];
+            assert(scheme != nil);
+            
+            if ( ([scheme compare:@"http"  options:NSCaseInsensitiveSearch] == NSOrderedSame)
+                || ([scheme compare:@"https" options:NSCaseInsensitiveSearch] == NSOrderedSame) ) {
+                returnUrlStr = urlStr;
+            } else {
+                //不支持的URL方案
+            }
+        }
+    }
+    return returnUrlStr;
+}
+
++ (NSString *)tfy_getStringWithRange:(NSRange)range
+{
+    NSMutableString *string = [NSMutableString string];
+    for (int i = 0; i < range.length ; i++) {
+        [string appendString:@" "];
+    }
+    return string;
+}
+/**
+ * 传入时间 2020-04-09 返回 星座
+ */
++(NSString *)tfy_getXingzuo:(NSDate *)in_date{
+    //计算星座
+    NSString *retStr=@"";
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM"];
+    int i_month=0;
+    NSString *theMonth = [dateFormat stringFromDate:in_date];
+    if([[theMonth substringToIndex:0] isEqualToString:@"0"]){
+        i_month = [[theMonth substringFromIndex:1] intValue];
+    }else{
+        i_month = [theMonth intValue];
+    }
+    [dateFormat setDateFormat:@"dd"];
+    int i_day=0;
+    NSString *theDay = [dateFormat stringFromDate:in_date];
+    if([[theDay substringToIndex:0] isEqualToString:@"0"]){
+        i_day = [[theDay substringFromIndex:1] intValue];
+    }else{
+        i_day = [theDay intValue];
+    }
+    switch (i_month) {
+        case 1:
+            if(i_day>=20 && i_day<=31){
+                retStr=@"水瓶座";
+            }
+            if(i_day>=1 && i_day<=19){
+                retStr=@"摩羯座";
+            }
+            break;
+        case 2:
+            if(i_day>=1 && i_day<=18){
+                retStr=@"水瓶座";
+            }
+            if(i_day>=19 && i_day<=31){
+                retStr=@"双鱼座";
+            }
+            break;
+        case 3:
+            if(i_day>=1 && i_day<=20){
+                retStr=@"双鱼座";
+            }
+            if(i_day>=21 && i_day<=31){
+                retStr=@"白羊座";
+            }
+            break;
+        case 4:
+            if(i_day>=1 && i_day<=19){
+                retStr=@"白羊座";
+            }
+            if(i_day>=20 && i_day<=31){
+                retStr=@"金牛座";
+            }
+            break;
+        case 5:
+            if(i_day>=1 && i_day<=20){
+                retStr=@"金牛座";
+            }
+            if(i_day>=21 && i_day<=31){
+                retStr=@"双子座";
+            }
+            break;
+        case 6:
+            if(i_day>=1 && i_day<=21){
+                retStr=@"双子座";
+            }
+            if(i_day>=22 && i_day<=31){
+                retStr=@"巨蟹座";
+            }
+            break;
+        case 7:
+            if(i_day>=1 && i_day<=22){
+                retStr=@"巨蟹座";
+            }
+            if(i_day>=23 && i_day<=31){
+                retStr=@"狮子座";
+            }
+            break;
+        case 8:
+            if(i_day>=1 && i_day<=22){
+                retStr=@"狮子座";
+            }
+            if(i_day>=23 && i_day<=31){
+                retStr=@"处女座";
+            }
+            break;
+        case 9:
+            if(i_day>=1 && i_day<=22){
+                retStr=@"处女座";
+            }
+            if(i_day>=23 && i_day<=31){
+                retStr=@"天秤座";
+            }
+            break;
+        case 10:
+            if(i_day>=1 && i_day<=23){
+                retStr=@"天秤座";
+            }
+            if(i_day>=24 && i_day<=31){
+                retStr=@"天蝎座";
+            }
+            break;
+        case 11:
+            if(i_day>=1 && i_day<=21){
+                retStr=@"天蝎座";
+            }
+            if(i_day>=22 && i_day<=31){
+                retStr=@"射手座";
+            }
+            break;
+        case 12:
+            if(i_day>=1 && i_day<=21){
+                retStr=@"射手座";
+            }
+            if(i_day>=21 && i_day<=31){
+                retStr=@"摩羯座";
+            }
+            break;
+    }
+    return retStr;
+}
 
 
 @end

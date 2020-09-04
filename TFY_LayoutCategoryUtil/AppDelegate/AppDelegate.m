@@ -19,12 +19,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-     if (![TFY_ScenePackageTools defaultPackage].isSceneApp) {
+     if (!TFY_Scene.isSceneApp) {
            self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
            self.window.backgroundColor = [UIColor whiteColor];
            [self.window makeKeyAndVisible];
      }
-    [[TFY_ScenePackageTools defaultPackage] addBeforeWindowEvent:^(TFY_ScenePackageTools * _Nonnull application) {
+    [TFY_Scene addBeforeWindowEvent:^(TFY_ScenePackageTools * _Nonnull application) {
        if ([GuideViewController isFirstRun]) {
            [UIApplication tfy_window].rootViewController = [[GuideViewController alloc] init];
            [[UIApplication tfy_window].rootViewController addViewDidDisappearBlock:^(UIViewController * _Nonnull vc, BOOL animated) {

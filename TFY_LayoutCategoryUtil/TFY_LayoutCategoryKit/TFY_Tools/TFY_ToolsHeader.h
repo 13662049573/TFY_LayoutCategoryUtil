@@ -9,7 +9,7 @@
 #ifndef TFY_ToolsHeader_h
 #define TFY_ToolsHeader_h
 
-#import "TFY_CommonUtils.h"
+#import "TFY_Utils.h"
 #import "TFY_HandlerVideo.h"
 #import "UIWindow+TFY_Tools.h"
 
