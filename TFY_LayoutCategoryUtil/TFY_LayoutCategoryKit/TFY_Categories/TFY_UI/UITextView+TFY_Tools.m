@@ -141,17 +141,28 @@ CG_INLINE void TextView_ReplaceMethod(Class _class, SEL _originSelector, SEL _ne
             // 解决粘贴过多之后，撤销粘贴 崩溃问题 —— 不会出现弹框
             [self.undoManager removeAllActions];
         }
-        self.tfy_textNumLabel.text = [NSString stringWithFormat:@"%ld/%ld", self.text.length, self.tfy_limitNum];
+        self.tfy_textNumLabel.text = [NSString stringWithFormat:@"%lu/%ld", (unsigned long)self.text.length, (long)self.tfy_limitNum];
     } else {
         self.tfy_textNumLabel.hidden = self.hasText;
     }
 }
 
 - (void)updateLabel{
+    if (self.text.length>0) {
+        [self.tfy_placeholderLabel removeFromSuperview];
+    }
+    if (self.tfy_limitNum==0) {
+        [self.tfy_textNumLabel removeFromSuperview];
+    }
     //显示label
     [self insertSubview:self.tfy_placeholderLabel atIndex:0];
-    [self insertSubview:self.tfy_textNumLabel atIndex:0];
     
+    NSArray *subsArr = self.subviews;
+    for (UIView *view in subsArr) {
+        if ([view isKindOfClass:NSClassFromString(@"_UIScrollViewScrollIndicator")]) {
+            [self insertSubview:self.tfy_textNumLabel aboveSubview:view];
+        }
+    }
     CGFloat lineFragmentPadding =  self.textContainer.lineFragmentPadding;  //边距
     UIEdgeInsets contentInset = self.textContainerInset;
     //设置label frame
@@ -161,9 +172,12 @@ CG_INLINE void TextView_ReplaceMethod(Class _class, SEL _originSelector, SEL _ne
     CGFloat labelH = [self.tfy_placeholderLabel sizeThatFits:CGSizeMake(labelW, MAXFLOAT)].height;
     self.tfy_placeholderLabel.frame = CGRectMake(labelX, labelY, labelW, labelH);
     
-    CGFloat labelnumberH = CGRectGetHeight(self.bounds) - contentInset.bottom - 10;
-    CGFloat labelnumberW = CGRectGetWidth(self.bounds) - contentInset.right;
-    self.tfy_textNumLabel.frame = CGRectMake(labelX, labelnumberH, labelnumberW-labelX-5, 15);
+    CGFloat textH = [self sizeThatFits:CGSizeMake(labelW, MAXFLOAT)].height;
+    CGFloat labelnumberH = CGRectGetHeight(self.bounds) - contentInset.bottom-10;
+    if (textH >= labelnumberH && self.tfy_limitNum > 0) {
+        self.scrollEnabled = NO;
+    }
+    self.tfy_textNumLabel.frame = CGRectMake(labelX, labelnumberH, labelW-labelX, 15);
 }
 
 @end
