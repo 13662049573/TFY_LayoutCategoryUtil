@@ -121,6 +121,8 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     self.myblock = ^(NSString *name, NSString *name2) {
         NSLog(@"block-----%@---%@",name,name2);
     };
+    
+    
 }
 
 - (void)btnClick:(UIButton *)btn {
