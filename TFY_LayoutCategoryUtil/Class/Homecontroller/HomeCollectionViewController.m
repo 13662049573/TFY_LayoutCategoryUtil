@@ -96,30 +96,28 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     .allowsEditingTextAttributes(YES)
     .font([UIFont systemFontOfSize:15 weight:UIFontWeightBold])
     .textColor(UIColor.redColor)
-    .contentInsets(UIEdgeInsetsMake(10, 10, 10, 10))
+    .contentInsets(UIEdgeInsetsMake(-50, 10, 10, 10))
     .backgroundColor(UIColor.orangeColor)
     .cornerRadius(10)
     .addToSuperView(self.view)
-        .assignTo(^(__kindof UIView * _Nonnull view) {
+    .assignTo(^(__kindof UIView * _Nonnull view) {
             self.textfiled = view;
-        })
-        .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
-            make.left.equalTo(self.titleLabel);
-            make.right.equalTo(self.titleLabel);
-            make.top.equalTo(self.titleLabel.mas_bottom).offset(20);
-            make.height.mas_equalTo(50);
-        });
+    })
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+        make.left.equalTo(self.titleLabel);
+        make.right.equalTo(self.titleLabel);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(20);
+        make.height.mas_equalTo(100);
+    });
     
-        UIViewModelSet().backgroundColor(TFY_ColorHexString(@"4e5f6g")).clipRadius(CornerClipTypeBothTop, 10).addToSuperView(self.view)
-        .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
-               make.left.equalTo(self.titleLabel);
-               make.right.equalTo(self.titleLabel);
-               make.top.equalTo(self.textfiled.mas_bottom).offset(20);
-               make.height.mas_equalTo(80);
-        });
-    
-    
-    
+    UIViewModelSet().backgroundColor(TFY_ColorHexString(@"4e5f6g")).clipRadius(CornerClipTypeBothTop, 10).addToSuperView(self.view)
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+           make.left.equalTo(self.titleLabel);
+           make.right.equalTo(self.titleLabel);
+           make.top.equalTo(self.textfiled.mas_bottom).offset(20);
+           make.height.mas_equalTo(80);
+    });
+
     self.myblock = ^(NSString *name, NSString *name2) {
         NSLog(@"block-----%@---%@",name,name2);
     };

@@ -12,9 +12,8 @@
 @interface TFY_ChainBaseModel (){
     Class _modelClass;
 }
-@property (nonatomic, strong) NSMutableArray * allOjects;
-
-@property (nonatomic, strong) NSMutableArray * effectiveObjects;
+TFY_PROPERTY_STRONG NSMutableArray * allOjects;
+TFY_PROPERTY_STRONG NSMutableArray * effectiveObjects;
 @end
 
 @implementation TFY_ChainBaseModel

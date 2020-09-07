@@ -36,10 +36,10 @@ CG_INLINE void Field_ReplaceMethod(Class _class, SEL _originSelector, SEL _newSe
 
 + (void)load {
     static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{//
+    dispatch_once(&onceToken, ^{
         Field_ReplaceMethod([self class], @selector(textRectForBounds:), @selector(tfy_textRectForBounds:));
         Field_ReplaceMethod([self class], @selector(sizeThatFits:), @selector(tfy_sizeThatFits:));
-//        Field_ReplaceMethod([self class], @selector(placeholderRectForBounds:), @selector(tfy_placeholderRectForBounds:));
+        Field_ReplaceMethod([self class], @selector(drawTextInRect:), @selector(tfy_drawTextInRect:));
         Field_ReplaceMethod([self class], @selector(editingRectForBounds:), @selector(tfy_editingRectForBounds:));
     });
 }
@@ -49,16 +49,15 @@ CG_INLINE void Field_ReplaceMethod(Class _class, SEL _originSelector, SEL _newSe
     [self tfy_textRectForBounds:UIEdgeInsetsInsetRect(rect, insets)];
 }
 //重写来重置占位符区域
-- (void)tfy_placeholderRectForBounds:(CGRect)rect {
+- (void)tfy_drawTextInRect:(CGRect)rect {
     UIEdgeInsets insets = self.tfy_contentInsets;
-    [self tfy_placeholderRectForBounds:UIEdgeInsetsInsetRect(rect, insets)];
+    [self tfy_drawTextInRect:UIEdgeInsetsInsetRect(rect, insets)];
 }
 //重写来重置编辑区域（光标）
 - (void)tfy_editingRectForBounds:(CGRect)rect {
     UIEdgeInsets insets = self.tfy_contentInsets;
     [self tfy_editingRectForBounds:UIEdgeInsetsInsetRect(rect, insets)];
 }
-
 
 
 - (CGSize)tfy_sizeThatFits:(CGSize)size {

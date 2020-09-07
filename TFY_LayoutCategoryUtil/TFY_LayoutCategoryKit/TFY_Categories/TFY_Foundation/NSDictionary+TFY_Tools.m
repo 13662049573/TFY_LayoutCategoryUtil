@@ -241,7 +241,7 @@ return def;
     return value;
 }
 @end
-@implementation NSMutableDictionary (SSDKCategory)
+@implementation NSMutableDictionary (TFY_Category)
 
 + (NSMutableDictionary *)tfy_dictionaryWithPlistData:(NSData *)plist {
     if (!plist) return nil;

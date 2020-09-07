@@ -76,7 +76,7 @@
 
 @end
 
-@implementation NSMutableArray (SSDKCategory)
+@implementation NSMutableArray (TFY_Tools)
 
 + (NSMutableArray *)tfy_arrayWithPlistData:(NSData *)plist {
     if (!plist) return nil;

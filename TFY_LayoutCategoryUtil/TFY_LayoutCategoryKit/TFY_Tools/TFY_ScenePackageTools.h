@@ -8,6 +8,8 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+#define TFY_Scene [TFY_ScenePackageTools defaultPackage]
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TFY_ScenePackageTools : NSObject
