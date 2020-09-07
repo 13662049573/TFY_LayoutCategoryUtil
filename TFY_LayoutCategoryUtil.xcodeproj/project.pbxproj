@@ -14,6 +14,7 @@
 		3654164224FF360100CC0024 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164124FF360100CC0024 /* NavigationController.m */; };
 		3654164524FF364A00CC0024 /* PolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164424FF364A00CC0024 /* PolicyViewController.m */; };
 		3654164824FF369C00CC0024 /* PolicyWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164724FF369C00CC0024 /* PolicyWebViewController.m */; };
+		367EC247250603FC004BAE5C /* TFY_Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EC246250603FC004BAE5C /* TFY_Scene.m */; };
 		36867DB024EBA0B000A761BC /* UIDevice+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36867DAC24EBA0AF00A761BC /* UIDevice+TFY_Tools.m */; };
 		36867DB424EBA19700A761BC /* UIControl+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36867DB324EBA19600A761BC /* UIControl+TFY_Tools.m */; };
 		36867DB724EBA1DB00A761BC /* UIFont+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36867DB624EBA1DA00A761BC /* UIFont+TFY_Tools.m */; };
@@ -38,7 +39,6 @@
 		56558391243196E100020D3C /* TFY_LayoutCategoryUtilUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 56558390243196E100020D3C /* TFY_LayoutCategoryUtilUITests.m */; };
 		565583A8243197BB00020D3C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 565583A1243197BB00020D3C /* SceneDelegate.m */; };
 		565583A9243197BB00020D3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 565583A2243197BB00020D3C /* AppDelegate.m */; };
-		565583C224319E7A00020D3C /* TFY_ScenePackageTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 565583C124319E7A00020D3C /* TFY_ScenePackageTools.m */; };
 		565583C62431AE2E00020D3C /* NSArray+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 565583C52431AE2E00020D3C /* NSArray+TFY_Tools.m */; };
 		565583CC2431AF4700020D3C /* NSObject+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 565583CA2431AF4700020D3C /* NSObject+TFY_Tools.m */; };
 		565583D22431AFB700020D3C /* NSNumber+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 565583D12431AFB700020D3C /* NSNumber+TFY_Tools.m */; };
@@ -147,6 +147,8 @@
 		3654164424FF364A00CC0024 /* PolicyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PolicyViewController.m; sourceTree = "<group>"; };
 		3654164624FF369C00CC0024 /* PolicyWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PolicyWebViewController.h; sourceTree = "<group>"; };
 		3654164724FF369C00CC0024 /* PolicyWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PolicyWebViewController.m; sourceTree = "<group>"; };
+		367EC245250603FC004BAE5C /* TFY_Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Scene.h; sourceTree = "<group>"; };
+		367EC246250603FC004BAE5C /* TFY_Scene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Scene.m; sourceTree = "<group>"; };
 		36867DAC24EBA0AF00A761BC /* UIDevice+TFY_Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+TFY_Tools.m"; sourceTree = "<group>"; };
 		36867DAD24EBA0AF00A761BC /* UIDevice+TFY_Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+TFY_Tools.h"; sourceTree = "<group>"; };
 		36867DB224EBA19600A761BC /* UIControl+TFY_Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+TFY_Tools.h"; sourceTree = "<group>"; };
@@ -200,8 +202,6 @@
 		565583AC243197F600020D3C /* TFY_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_PrefixHeader.pch; sourceTree = "<group>"; };
 		565583B52431993900020D3C /* TFY_LayoutCategoryHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_LayoutCategoryHeader.h; sourceTree = "<group>"; };
 		565583B62431998600020D3C /* TFY_CategoriesHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CategoriesHeader.h; sourceTree = "<group>"; };
-		565583C024319E7A00020D3C /* TFY_ScenePackageTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_ScenePackageTools.h; sourceTree = "<group>"; };
-		565583C124319E7A00020D3C /* TFY_ScenePackageTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_ScenePackageTools.m; sourceTree = "<group>"; };
 		565583C42431AE2E00020D3C /* NSArray+TFY_Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+TFY_Tools.h"; sourceTree = "<group>"; };
 		565583C52431AE2E00020D3C /* NSArray+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+TFY_Tools.m"; sourceTree = "<group>"; };
 		565583CA2431AF4700020D3C /* NSObject+TFY_Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+TFY_Tools.m"; sourceTree = "<group>"; };
@@ -743,10 +743,10 @@
 				36867DCA24EBE25400A761BC /* UIWindow+TFY_Tools.m */,
 				36867DC624EBE1D100A761BC /* UIApplication+TFY_Tools.h */,
 				36867DC724EBE1D200A761BC /* UIApplication+TFY_Tools.m */,
-				565583C024319E7A00020D3C /* TFY_ScenePackageTools.h */,
-				565583C124319E7A00020D3C /* TFY_ScenePackageTools.m */,
 				360312BF2501E24B00EFCA27 /* TFY_Utils.h */,
 				360312C02501E24B00EFCA27 /* TFY_Utils.m */,
+				367EC245250603FC004BAE5C /* TFY_Scene.h */,
+				367EC246250603FC004BAE5C /* TFY_Scene.m */,
 			);
 			path = TFY_Tools;
 			sourceTree = "<group>";
@@ -994,6 +994,7 @@
 				36C334A124ED26CE00DA6FB2 /* NSData+TFY_Data.m in Sources */,
 				565584A02431D28200020D3C /* TFY_BaseLayerChainModel.m in Sources */,
 				565584822431CE5300020D3C /* TFY_SliderViewChainModel.m in Sources */,
+				367EC247250603FC004BAE5C /* TFY_Scene.m in Sources */,
 				565584202431C37200020D3C /* TFY_PanGestureChainModel.m in Sources */,
 				565584002431BA8700020D3C /* UIViewController+TFY_Tools.m in Sources */,
 				565583CC2431AF4700020D3C /* NSObject+TFY_Tools.m in Sources */,
@@ -1022,7 +1023,6 @@
 				36867DB024EBA0B000A761BC /* UIDevice+TFY_Tools.m in Sources */,
 				36C334AD24ED2D1E00DA6FB2 /* TFY_HandlerVideo.m in Sources */,
 				565584672431CB3600020D3C /* TFY_CollectionViewChainModel.m in Sources */,
-				565583C224319E7A00020D3C /* TFY_ScenePackageTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -41,7 +41,7 @@ return objc_getAssociatedObject(self, @selector(_setter_:)); \
 @implementation UIApplication (TFY_Tools)
 
 + (id)tfy_currentScene{
-    return [TFY_ScenePackageTools defaultPackage].currentScene;
+    return [TFY_Scene defaultPackage].currentScene;
 }
 
 + (id)tfy_currentSceneDelegate{
@@ -52,16 +52,16 @@ return objc_getAssociatedObject(self, @selector(_setter_:)); \
 }
 
 + (BOOL)tfy_isSceneApp{
-    return [TFY_ScenePackageTools defaultPackage].isSceneApp;
+    return [TFY_Scene defaultPackage].isSceneApp;
 }
 
 + (CGRect)tfy_statusBarFrame{
-    return [TFY_ScenePackageTools defaultPackage].statusBarFrame;
+    return [TFY_Scene defaultPackage].statusBarFrame;
 }
 
 + (UIWindow *)tfy_currentWindow{
     id wi = nil;
-    for (UIWindow *window in [TFY_ScenePackageTools defaultPackage].windows) {
+    for (UIWindow *window in [TFY_Scene defaultPackage].windows) {
         if (window.hidden == NO) {
             wi = window;
             break;
@@ -71,11 +71,11 @@ return objc_getAssociatedObject(self, @selector(_setter_:)); \
 }
 
 + (UIWindow *)tfy_window{
-    return [TFY_ScenePackageTools defaultPackage].window;
+    return [TFY_Scene defaultPackage].window;
 }
 
 + (UIWindow *)tfy_currentKeyWindow{
-    return [TFY_ScenePackageTools defaultPackage].keyWindow;
+    return [TFY_Scene defaultPackage].keyWindow;
 }
 
 + (id)delegate{
@@ -121,7 +121,7 @@ return objc_getAssociatedObject(self, @selector(_setter_:)); \
 }
 
 + (UIWindow *)tfy_keyWindow{
-    return [TFY_ScenePackageTools defaultPackage].keyWindow;
+    return [TFY_Scene defaultPackage].keyWindow;
 }
 
 @end

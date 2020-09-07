@@ -2399,7 +2399,7 @@ const char* jailbreak_tool_pathes[] = {
     // 65-90 A-Z  97-122 a-z
     while (index < length) {
         int asciiCode = [string characterAtIndex:index];
-        NSLog(@"%d,%lu",asciiCode,substrLength);
+        NSLog(@"%d,%lu",asciiCode,(unsigned long)substrLength);
         if(!(asciiCode >= 65 && asciiCode <= 90) && !(asciiCode >= 97 && asciiCode <= 122) ){
             if(index >= length - 1){
                 return  NO;

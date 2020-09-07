@@ -1,12 +1,12 @@
 //
-//  TFY_ScenePackageTools.m
+//  TFY_Scene.m
 //  TFY_LayoutCategoryUtil
 //
-//  Created by tiandengyou on 2020/3/30.
+//  Created by 田风有 on 2020/9/7.
 //  Copyright © 2020 田风有. All rights reserved.
 //
 
-#import "TFY_ScenePackageTools.h"
+#import "TFY_Scene.h"
 #import <objc/message.h>
 
 typedef enum : NSUInteger {
@@ -16,8 +16,8 @@ typedef enum : NSUInteger {
     ScenePackageSceneHookStatusDone
 } ScenePackageSceneHookStatus;
 
-@interface TFY_ScenePackageTools ()
 
+@interface TFY_Scene ()
 @property (nonatomic, assign) BOOL isSceneApp;
 
 @property (nonatomic, assign) BOOL isLoadFirstWindow;
@@ -33,17 +33,15 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) ScenePackageSceneHookStatus hookSceneStatus;
 
 @property (nonatomic, weak) UIWindow *currentClickWindow;
-
 @end
 
-
-@implementation TFY_ScenePackageTools
+@implementation TFY_Scene
 
 + (instancetype)defaultPackage{
-    static TFY_ScenePackageTools *package = nil;
+    static TFY_Scene *package = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        package = [TFY_ScenePackageTools new];
+        package = [TFY_Scene new];
     });
     return package;
 }
@@ -261,7 +259,7 @@ typedef enum : NSUInteger {
     }else{
         if (!_isLoadFirstWindow && isLoadFirstWindow) {
             @synchronized (self.events) {
-                for (void (^ block)(TFY_ScenePackageTools * _Nonnull) in self.events) {
+                for (void (^ block)(TFY_Scene * _Nonnull) in self.events) {
                     block(self);
                 }
                 [self.events removeAllObjects];
@@ -271,7 +269,7 @@ typedef enum : NSUInteger {
     }
 }
 
-- (void)addBeforeWindowEvent:(void (^)(TFY_ScenePackageTools * _Nonnull))event{
+- (void)addBeforeWindowEvent:(void (^)(TFY_Scene * _Nonnull))event{
     if (_isLoadFirstWindow) {
         event(self);
     }else{
@@ -290,7 +288,7 @@ typedef enum : NSUInteger {
     id newImpBlock = ^ (__unsafe_unretained id object,CGPoint obj1,id obj2){
         UIView * obj;
         if ((IMP)oldImp != _objc_msgForward) {
-            [[TFY_ScenePackageTools defaultPackage] clickUpdateWindow:object];
+            [[TFY_Scene defaultPackage] clickUpdateWindow:object];
             if (oldImp == NULL) {
                 struct objc_super supperInfo = {
                     .receiver = object,
@@ -325,7 +323,7 @@ typedef enum : NSUInteger {
             }else{
                 obj = oldImp(object,swizzleSelector,obj1,obj2);
             }
-            [[TFY_ScenePackageTools defaultPackage] setScene:obj];
+            [[TFY_Scene defaultPackage] setScene:obj];
         }
         return obj;
         
@@ -353,7 +351,7 @@ typedef enum : NSUInteger {
     __block void (* oldImp) (__unsafe_unretained id, SEL,id) = NULL;
     id newImpBlock = ^ (__unsafe_unretained id object, id obj1){
         if ((IMP)oldImp != _objc_msgForward) {
-            [[TFY_ScenePackageTools defaultPackage] setSceneDelegate:obj1];
+            [[TFY_Scene defaultPackage] setSceneDelegate:obj1];
             if (oldImp == NULL) {
                 struct objc_super supperInfo = {
                     .receiver = object,
@@ -406,7 +404,7 @@ typedef enum : NSUInteger {
                 oldImp(object,swizzleSelector,obj1,obj2,obj3);
             }
         }
-        [[TFY_ScenePackageTools defaultPackage] setIsLoadFirstWindow:YES];
+        [[TFY_Scene defaultPackage] setIsLoadFirstWindow:YES];
     };
     
     oldImp = (__typeof__ (oldImp))[self methodImpSet:newImpBlock class:swizzleClass selector:swizzleSelector];
@@ -444,7 +442,7 @@ typedef enum : NSUInteger {
     if (!swizzleSelector) return;
     __block void (* oldImp) (__unsafe_unretained id, SEL,id) = NULL;
     id newImpBlock = ^ (__unsafe_unretained id object, id obj1){
-        [[TFY_ScenePackageTools defaultPackage] _checkApplicationIsSceneApp:obj1];
+        [[TFY_Scene defaultPackage] _checkApplicationIsSceneApp:obj1];
         if ((IMP)oldImp != _objc_msgForward) {
             if (oldImp == NULL) {
                 struct objc_super supperInfo = {
@@ -471,8 +469,8 @@ typedef enum : NSUInteger {
 __attribute__((constructor)) static void ScenePackageExcImp(){
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [[TFY_ScenePackageTools defaultPackage] methodSwizzledScene];
-        [[TFY_ScenePackageTools defaultPackage] methodSwizzledApplication];
+        [[TFY_Scene defaultPackage] methodSwizzledScene];
+        [[TFY_Scene defaultPackage] methodSwizzledApplication];
     });
 }
 
@@ -523,7 +521,7 @@ static void * kScenePackageReturnNavigationControllerKey = &kScenePackageReturnN
     BOOL dismissAnimated = [self __AssociatedViewControllerboolValue:kScenePackageShowDismissKey default:showStyle == ControllerShowStylePush];
     NSTimeInterval time = [objc_getAssociatedObject(self, kScenePackageShowDismissTimeKey) doubleValue];
     UIWindow *currentWindow = ({
-        NSArray *windows = [TFY_ScenePackageTools defaultPackage].windows;
+        NSArray *windows = [TFY_Scene defaultPackage].windows;
         UIWindow *highWindow = windows.firstObject;
         for (UIWindow * window  in windows) {
             if (window.windowLevel > highWindow.windowLevel) {
@@ -533,9 +531,9 @@ static void * kScenePackageReturnNavigationControllerKey = &kScenePackageReturnN
         highWindow;
     });
     [currentWindow endEditing:YES];
-    UIWindow *window = [[UIWindow alloc] initWithFrame:[TFY_ScenePackageTools defaultPackage].window.frame];
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[TFY_Scene defaultPackage].window.frame];
     window.windowLevel = currentWindow.windowLevel+1;
-    [[TFY_ScenePackageTools defaultPackage] showWindow:window];
+    [[TFY_Scene defaultPackage] showWindow:window];
     ScenePackageRootViewController *root = [[ScenePackageRootViewController alloc] init];
     [root.tfy_once(YES) addViewDidLoadBlock:^(UIViewController * _Nonnull vc) {
         if (vc.navigationController) {
@@ -555,7 +553,7 @@ static void * kScenePackageReturnNavigationControllerKey = &kScenePackageReturnN
     [window makeKeyWindow];
     window.backgroundColor = [UIColor clearColor];
     
-    [[TFY_ScenePackageTools defaultPackage].alertWindows addObject:window];
+    [[TFY_Scene defaultPackage].alertWindows addObject:window];
     if (showStyle == ControllerShowStylePush) {
         id isBarHidden = objc_getAssociatedObject(self, kScenePackageShowNavigationBarKey);
         BOOL defaultNavigationBarHidden = YES;
@@ -604,7 +602,7 @@ static void * kScenePackageReturnNavigationControllerKey = &kScenePackageReturnN
         __strong typeof(weakWindow) strongWindow = weakWindow;
         if (!strongWindow) return;
         [strongWindow resignKeyWindow];
-        [[TFY_ScenePackageTools defaultPackage].alertWindows removeObject:strongWindow];
+        [[TFY_Scene defaultPackage].alertWindows removeObject:strongWindow];
         [strongWindow removeFromSuperview];
         strongWindow.hidden = YES;
     }];
@@ -612,7 +610,7 @@ static void * kScenePackageReturnNavigationControllerKey = &kScenePackageReturnN
 
 - (void)___showInRootController{
     
-    UIViewController *viewController = ([TFY_ScenePackageTools defaultPackage].keyWindow?:[TFY_ScenePackageTools defaultPackage].window).rootViewController;
+    UIViewController *viewController = ([TFY_Scene defaultPackage].keyWindow?:[TFY_Scene defaultPackage].window).rootViewController;
     UIViewController *vc = [self __getTopViewController:viewController];
     if (vc) {
         NSInteger showStyle = [objc_getAssociatedObject(self, kScenePackageShowStyleKey) integerValue];

@@ -147,7 +147,7 @@ TFY_PROPERTY_NSArray(contents);
 - (void)enterToMainViewController
 {
    
-    TFY_Scene.window.rootViewController = [[MainViewController alloc] init];
+    TFY_ScenePackage.window.rootViewController = [[MainViewController alloc] init];
     
     CATransition *animation = [CATransition animation];
     
@@ -161,9 +161,9 @@ TFY_PROPERTY_NSArray(contents);
     
     animation.fillMode = kCAFillModeForwards;
     
-    [TFY_Scene.window.layer addAnimation:animation forKey:nil];
+    [TFY_ScenePackage.window.layer addAnimation:animation forKey:nil];
     
-    [TFY_Scene.window makeKeyAndVisible];
+    [TFY_ScenePackage.window makeKeyAndVisible];
 }
 
 #pragma mark - scrollview delegate

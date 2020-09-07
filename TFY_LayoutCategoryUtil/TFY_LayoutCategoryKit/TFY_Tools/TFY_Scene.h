@@ -1,18 +1,19 @@
 //
-//  TFY_ScenePackageTools.h
+//  TFY_Scene.h
 //  TFY_LayoutCategoryUtil
 //
-//  Created by tiandengyou on 2020/3/30.
+//  Created by 田风有 on 2020/9/7.
 //  Copyright © 2020 田风有. All rights reserved.
 //
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 
-#define TFY_Scene [TFY_ScenePackageTools defaultPackage]
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+#define TFY_ScenePackage [TFY_Scene defaultPackage]
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TFY_ScenePackageTools : NSObject
+@interface TFY_Scene : NSObject
 
 + (instancetype)defaultPackage;
 
@@ -51,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * 在window第一次加载后进行事件处理，可以保证block执行时必定加载过window
  */
-- (void)addBeforeWindowEvent:(void (^) (TFY_ScenePackageTools *application))event;
+- (void)addBeforeWindowEvent:(void (^) (TFY_Scene *application))event;
 
 @end
 
