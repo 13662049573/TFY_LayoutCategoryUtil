@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithGesture:(UIGestureRecognizer *)gesture modelClass:(Class)modelClass;
 
-@property (nonatomic, strong, readonly) __kindof UIGestureRecognizer * gesture;
+TFY_PROPERTY_STRONG_READONLY __kindof UIGestureRecognizer * gesture;
 
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ delegate) (id<UIGestureRecognizerDelegate> delegate);
 

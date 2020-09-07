@@ -29,7 +29,7 @@ TFY_PROPERTY_OBJECT_STRONG(UILabel, effectDate);
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+    self.view.backgroundColor = [UIColor redColor];
     [self setupUI];
     [self loadData];
     
@@ -124,7 +124,7 @@ TFY_PROPERTY_OBJECT_STRONG(UILabel, effectDate);
     .font(Font(PingFangReguler, 14))
     .addToSuperView(self.contentView)
     .delegate(self)
-    .editable(NO)
+    .editable(NO).contentInset(UIEdgeInsetsMake(0, 0, 0, 0))
     .assignTo(^(__kindof UIView * _Nonnull view) {
         self.contentTextView = view;
     })
@@ -178,7 +178,7 @@ TFY_PROPERTY_OBJECT_STRONG(UILabel, effectDate);
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction{
     PolicyWebViewController *vc = [PolicyWebViewController new];
-    vc.title = @"《MobTech隐私政策》";
+    vc.title = @"《隐私政策》";
     vc.extraInfo[@"url"] = URL;
     vc.showAnimated(YES).push();
     return NO;

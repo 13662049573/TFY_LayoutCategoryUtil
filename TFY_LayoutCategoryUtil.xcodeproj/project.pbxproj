@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360118A425007ECA00449922 /* UITextView+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 360118A325007ECA00449922 /* UITextView+TFY_Tools.m */; };
+		360312C12501E24B00EFCA27 /* TFY_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 360312C02501E24B00EFCA27 /* TFY_Utils.m */; };
 		3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163B24FF336D00CC0024 /* CommonViewController.m */; };
 		3654163F24FF345000CC0024 /* CommonNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163E24FF345000CC0024 /* CommonNavigationBar.m */; };
 		3654164224FF360100CC0024 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164124FF360100CC0024 /* NavigationController.m */; };
@@ -27,7 +29,6 @@
 		36C334A024ED26CE00DA6FB2 /* NSDate+TFY_Date.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C3349D24ED26CE00DA6FB2 /* NSDate+TFY_Date.m */; };
 		36C334A124ED26CE00DA6FB2 /* NSData+TFY_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C3349F24ED26CE00DA6FB2 /* NSData+TFY_Data.m */; };
 		36C334A724ED284500DA6FB2 /* NSString+TFY_String.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C334A524ED284400DA6FB2 /* NSString+TFY_String.m */; };
-		36C334AC24ED2D1E00DA6FB2 /* TFY_CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C334A924ED2D1E00DA6FB2 /* TFY_CommonUtils.m */; };
 		36C334AD24ED2D1E00DA6FB2 /* TFY_HandlerVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C334AA24ED2D1E00DA6FB2 /* TFY_HandlerVideo.m */; };
 		36CBAD1424EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CBAD1324EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m */; };
 		56558376243196E000020D3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56558375243196E000020D3C /* Assets.xcassets */; };
@@ -132,6 +133,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		360118A225007ECA00449922 /* UITextView+TFY_Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextView+TFY_Tools.h"; sourceTree = "<group>"; };
+		360118A325007ECA00449922 /* UITextView+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextView+TFY_Tools.m"; sourceTree = "<group>"; };
+		360312BF2501E24B00EFCA27 /* TFY_Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Utils.h; sourceTree = "<group>"; };
+		360312C02501E24B00EFCA27 /* TFY_Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Utils.m; sourceTree = "<group>"; };
 		3654163A24FF336D00CC0024 /* CommonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonViewController.h; sourceTree = "<group>"; };
 		3654163B24FF336D00CC0024 /* CommonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonViewController.m; sourceTree = "<group>"; };
 		3654163D24FF345000CC0024 /* CommonNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonNavigationBar.h; sourceTree = "<group>"; };
@@ -173,9 +178,7 @@
 		36C334A524ED284400DA6FB2 /* NSString+TFY_String.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TFY_String.m"; sourceTree = "<group>"; };
 		36C334A624ED284400DA6FB2 /* NSString+TFY_String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TFY_String.h"; sourceTree = "<group>"; };
 		36C334A824ED2D1D00DA6FB2 /* TFY_HandlerVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_HandlerVideo.h; sourceTree = "<group>"; };
-		36C334A924ED2D1E00DA6FB2 /* TFY_CommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_CommonUtils.m; sourceTree = "<group>"; };
 		36C334AA24ED2D1E00DA6FB2 /* TFY_HandlerVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_HandlerVideo.m; sourceTree = "<group>"; };
-		36C334AB24ED2D1E00DA6FB2 /* TFY_CommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_CommonUtils.h; sourceTree = "<group>"; };
 		36C334AE24ED2D4D00DA6FB2 /* TFY_ToolsHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_ToolsHeader.h; sourceTree = "<group>"; };
 		36CBAD1224EFCE5C00FD1D8F /* UIAlertController+TFY_Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+TFY_Chain.h"; sourceTree = "<group>"; };
 		36CBAD1324EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+TFY_Chain.m"; sourceTree = "<group>"; };
@@ -562,6 +565,8 @@
 				36BA238424EE487F00CE8275 /* UITableViewCell+TFY_Chain.m */,
 				565583FE2431BA8700020D3C /* UIViewController+TFY_Tools.h */,
 				565583FF2431BA8700020D3C /* UIViewController+TFY_Tools.m */,
+				360118A225007ECA00449922 /* UITextView+TFY_Tools.h */,
+				360118A325007ECA00449922 /* UITextView+TFY_Tools.m */,
 			);
 			path = TFY_UI;
 			sourceTree = "<group>";
@@ -732,8 +737,6 @@
 			isa = PBXGroup;
 			children = (
 				36C334AE24ED2D4D00DA6FB2 /* TFY_ToolsHeader.h */,
-				36C334AB24ED2D1E00DA6FB2 /* TFY_CommonUtils.h */,
-				36C334A924ED2D1E00DA6FB2 /* TFY_CommonUtils.m */,
 				36C334A824ED2D1D00DA6FB2 /* TFY_HandlerVideo.h */,
 				36C334AA24ED2D1E00DA6FB2 /* TFY_HandlerVideo.m */,
 				36867DC924EBE25400A761BC /* UIWindow+TFY_Tools.h */,
@@ -742,6 +745,8 @@
 				36867DC724EBE1D200A761BC /* UIApplication+TFY_Tools.m */,
 				565583C024319E7A00020D3C /* TFY_ScenePackageTools.h */,
 				565583C124319E7A00020D3C /* TFY_ScenePackageTools.m */,
+				360312BF2501E24B00EFCA27 /* TFY_Utils.h */,
+				360312C02501E24B00EFCA27 /* TFY_Utils.m */,
 			);
 			path = TFY_Tools;
 			sourceTree = "<group>";
@@ -925,8 +930,8 @@
 				565584562431C7DB00020D3C /* MASViewConstraint.m in Sources */,
 				565583E12431B3E200020D3C /* UIColor+TFY_Tools.m in Sources */,
 				565583F02431B78600020D3C /* UIImage+TFY_Tools.m in Sources */,
-				36C334AC24ED2D1E00DA6FB2 /* TFY_CommonUtils.m in Sources */,
 				565583A8243197BB00020D3C /* SceneDelegate.m in Sources */,
+				360312C12501E24B00EFCA27 /* TFY_Utils.m in Sources */,
 				565584172431BE9C00020D3C /* TFY_BaseViewChainModel.m in Sources */,
 				36867DBF24EBA2F600A761BC /* UITextField+TFY_Tools.m in Sources */,
 				565584762431CD0E00020D3C /* TFY_PickerViewChainModel.m in Sources */,
@@ -943,6 +948,7 @@
 				565584732431CCB300020D3C /* TFY_LabelChainModel.m in Sources */,
 				36CBAD1424EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m in Sources */,
 				36C334A724ED284500DA6FB2 /* NSString+TFY_String.m in Sources */,
+				360118A425007ECA00449922 /* UITextView+TFY_Tools.m in Sources */,
 				3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */,
 				36867DBA24EBA26400A761BC /* UIScreen+TFY_Tools.m in Sources */,
 				565584C32431DCE600020D3C /* GuideViewController.m in Sources */,

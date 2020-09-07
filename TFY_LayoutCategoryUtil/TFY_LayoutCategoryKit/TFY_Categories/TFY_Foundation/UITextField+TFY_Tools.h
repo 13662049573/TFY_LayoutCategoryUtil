@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**首行缩进 必须在文本输入之后赋值*/
 @property (nonatomic , assign)CGFloat tfy_firstLineHeadIndent;
 
-/**修改label内容距 `top` `left` `bottom` `right` 边距*/
+/**修改label内容距 `top` `left` `bottom` `right` 边距  只有在真机的情况下使用，*/
 @property (nonatomic, assign) UIEdgeInsets tfy_contentInsets;
 
 @end

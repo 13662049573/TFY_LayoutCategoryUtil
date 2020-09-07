@@ -9,6 +9,8 @@
 #import "TFY_ChainDefine.h"
 
 NS_ASSUME_NONNULL_BEGIN
+//__covariant - 协变性，子类型可以强转到父类型（里氏替换原则）
+//__contravariant - 逆变性，父类型可以强转到子类型
 
 @interface TFY_ChainBaseModel<__covariant  ObjectType> : NSObject
 
@@ -16,9 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)new NS_UNAVAILABLE;
 
-@property (nonatomic, strong, readonly) NSMutableArray *allOjects;
+TFY_PROPERTY_STRONG_READONLY NSMutableArray *allOjects;
 
-@property (nonatomic, strong, readonly) NSMutableArray * effectiveObjects;
+TFY_PROPERTY_STRONG_READONLY NSMutableArray * effectiveObjects;
 
 //添加的数量，包括原来的创建对象的数量
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ multiple) (NSInteger count);

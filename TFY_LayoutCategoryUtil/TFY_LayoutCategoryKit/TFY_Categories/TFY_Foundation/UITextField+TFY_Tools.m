@@ -37,10 +37,14 @@ CG_INLINE void Field_ReplaceMethod(Class _class, SEL _originSelector, SEL _newSe
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Field_ReplaceMethod([self class], @selector(textRectForBounds:), @selector(tfy_textRectForBounds:));
-        Field_ReplaceMethod([self class], @selector(sizeThatFits:), @selector(tfy_sizeThatFits:));
-        Field_ReplaceMethod([self class], @selector(drawTextInRect:), @selector(tfy_drawTextInRect:));
-        Field_ReplaceMethod([self class], @selector(editingRectForBounds:), @selector(tfy_editingRectForBounds:));
+        if (TARGET_IPHONE_SIMULATOR) {
+            //模拟器不执行
+        }else{
+            Field_ReplaceMethod([self class], @selector(textRectForBounds:), @selector(tfy_textRectForBounds:));
+            Field_ReplaceMethod([self class], @selector(sizeThatFits:), @selector(tfy_sizeThatFits:));
+            Field_ReplaceMethod([self class], @selector(drawTextInRect:), @selector(tfy_drawTextInRect:));
+            Field_ReplaceMethod([self class], @selector(editingRectForBounds:), @selector(tfy_editingRectForBounds:));
+        }
     });
 }
 //重写来重置文字显示区域

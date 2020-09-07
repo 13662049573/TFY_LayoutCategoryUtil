@@ -22,7 +22,7 @@ typedef void(^TFY_AssignLayerLoad)(__kindof CALayer *layer);
 
 - (instancetype)initWithLayer:(CALayer *)layer modelClass:(Class)modelClass;
 
-@property (nonatomic, strong, readonly) __kindof CALayer * layer;
+TFY_PROPERTY_STRONG_READONLY __kindof CALayer * layer;
 
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ bounds) (CGRect bounds);
 TFY_PROPERTY_CHAIN_READONLY ObjectType (^ position) (CGPoint position);
