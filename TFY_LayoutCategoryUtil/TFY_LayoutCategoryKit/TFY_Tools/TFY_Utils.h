@@ -43,21 +43,6 @@ typedef enum : NSInteger {
 } Temperature;
 
 @interface TFY_Utils : NSObject
-#pragma mark------------------------------------------gcd定时器方法---------------------------------------
-
-/**初始化计时器*/
-- (instancetype)initWithInterval:(NSTimeInterval)interval repeats:(BOOL)repeats queue:(dispatch_queue_t)queue block:(void (^)(void))block;
-
-/**启动*/
-- (void)start;
-/**暂停*/
-- (void)pause;
-
-/**继续*/
-- (void)resume;
-
-/**销毁*/
-- (void)cancel;
 
 #pragma mark------------------------------------------手机获取网络监听方法---------------------------------------
 /** v用于检查给定主机名的可访问性。*/

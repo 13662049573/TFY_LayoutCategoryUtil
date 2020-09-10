@@ -9,7 +9,8 @@
 #ifndef TFY_PrefixHeader_pch
 #define TFY_PrefixHeader_pch
 
-#import "TFY_LayoutCategoryHeader.h"
+#import "TFY_LayoutCategoryKit.h"
+
 #import "Masonry.h"
 
 #endif /* TFY_PrefixHeader_pch */

@@ -12,5 +12,6 @@
 #import "TFY_Utils.h"
 #import "TFY_HandlerVideo.h"
 #import "UIWindow+TFY_Tools.h"
+#import "TFY_Timer.h"
 
 #endif /* TFY_ToolsHeader_h */

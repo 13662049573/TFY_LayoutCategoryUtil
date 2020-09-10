@@ -32,6 +32,7 @@
 		36C334A724ED284500DA6FB2 /* NSString+TFY_String.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C334A524ED284400DA6FB2 /* NSString+TFY_String.m */; };
 		36C334AD24ED2D1E00DA6FB2 /* TFY_HandlerVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C334AA24ED2D1E00DA6FB2 /* TFY_HandlerVideo.m */; };
 		36CBAD1424EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CBAD1324EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m */; };
+		36EE1103250A18CF00D24B3C /* TFY_Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EE1102250A18CF00D24B3C /* TFY_Timer.m */; };
 		56558376243196E000020D3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56558375243196E000020D3C /* Assets.xcassets */; };
 		56558379243196E000020D3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56558377243196E000020D3C /* LaunchScreen.storyboard */; };
 		5655837C243196E000020D3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5655837B243196E000020D3C /* main.m */; };
@@ -184,6 +185,9 @@
 		36C334AE24ED2D4D00DA6FB2 /* TFY_ToolsHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_ToolsHeader.h; sourceTree = "<group>"; };
 		36CBAD1224EFCE5C00FD1D8F /* UIAlertController+TFY_Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+TFY_Chain.h"; sourceTree = "<group>"; };
 		36CBAD1324EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+TFY_Chain.m"; sourceTree = "<group>"; };
+		36EE1100250A17DE00D24B3C /* TFY_LayoutCategoryKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_LayoutCategoryKit.h; sourceTree = "<group>"; };
+		36EE1101250A18CF00D24B3C /* TFY_Timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Timer.h; sourceTree = "<group>"; };
+		36EE1102250A18CF00D24B3C /* TFY_Timer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Timer.m; sourceTree = "<group>"; };
 		56558366243196E000020D3C /* TFY_LayoutCategoryUtil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TFY_LayoutCategoryUtil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56558375243196E000020D3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56558378243196E000020D3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -200,7 +204,6 @@
 		565583A2243197BB00020D3C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		565583A3243197BB00020D3C /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		565583AC243197F600020D3C /* TFY_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_PrefixHeader.pch; sourceTree = "<group>"; };
-		565583B52431993900020D3C /* TFY_LayoutCategoryHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_LayoutCategoryHeader.h; sourceTree = "<group>"; };
 		565583B62431998600020D3C /* TFY_CategoriesHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_CategoriesHeader.h; sourceTree = "<group>"; };
 		565583C42431AE2E00020D3C /* NSArray+TFY_Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+TFY_Tools.h"; sourceTree = "<group>"; };
 		565583C52431AE2E00020D3C /* NSArray+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+TFY_Tools.m"; sourceTree = "<group>"; };
@@ -475,7 +478,7 @@
 		5655839E243197BB00020D3C /* TFY_LayoutCategoryKit */ = {
 			isa = PBXGroup;
 			children = (
-				565583B52431993900020D3C /* TFY_LayoutCategoryHeader.h */,
+				36EE1100250A17DE00D24B3C /* TFY_LayoutCategoryKit.h */,
 				565583AD2431990A00020D3C /* TFY_Categories */,
 				565583B02431990A00020D3C /* TFY_Chain */,
 				565583B42431990A00020D3C /* TFY_Tools */,
@@ -747,6 +750,8 @@
 				360312C02501E24B00EFCA27 /* TFY_Utils.m */,
 				367EC245250603FC004BAE5C /* TFY_Scene.h */,
 				367EC246250603FC004BAE5C /* TFY_Scene.m */,
+				36EE1101250A18CF00D24B3C /* TFY_Timer.h */,
+				36EE1102250A18CF00D24B3C /* TFY_Timer.m */,
 			);
 			path = TFY_Tools;
 			sourceTree = "<group>";
@@ -926,6 +931,7 @@
 				5655844E2431C7DB00020D3C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				5655837C243196E000020D3C /* main.m in Sources */,
 				565583F72431B9D000020D3C /* UIScrollView+TFY_Tools.m in Sources */,
+				36EE1103250A18CF00D24B3C /* TFY_Timer.m in Sources */,
 				565584502431C7DB00020D3C /* MASCompositeConstraint.m in Sources */,
 				565584562431C7DB00020D3C /* MASViewConstraint.m in Sources */,
 				565583E12431B3E200020D3C /* UIColor+TFY_Tools.m in Sources */,
