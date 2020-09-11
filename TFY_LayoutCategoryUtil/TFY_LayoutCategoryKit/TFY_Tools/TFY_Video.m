@@ -1,35 +1,34 @@
 //
-//  TFY_HandlerVideo.m
-//  TFY_Category
+//  TFY_Video.m
+//  TFY_LayoutCategoryUtil
 //
-//  Created by 田风有 on 2019/7/12.
-//  Copyright © 2019 恋机科技. All rights reserved.
+//  Created by 田风有 on 2020/9/11.
+//  Copyright © 2020 田风有. All rights reserved.
 //
 
-#import "TFY_HandlerVideo.h"
+#import "TFY_Video.h"
 #import <AVFoundation/AVFoundation.h>
 
-static TFY_HandlerVideo *instance = nil;
+static TFY_Video *instance = nil;
 
-@interface TFY_HandlerVideo (){
+@interface TFY_Video (){
     int32_t  _fps;
 }
 @end
-
-@implementation TFY_HandlerVideo
+@implementation TFY_Video
 
 + (instancetype)sharedInstance {
     if (!instance) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            instance = [TFY_HandlerVideo new];
+            instance = [TFY_Video new];
         });
     }
     return instance;
 }
 
 - (instancetype)copyWithZone:(struct _NSZone *)zone {
-    return [TFY_HandlerVideo sharedInstance];
+    return [TFY_Video sharedInstance];
 }
 
 
@@ -76,12 +75,6 @@ static TFY_HandlerVideo *instance = nil;
                                                      assetWriterInputPixelBufferAdaptorWithAssetWriterInput:writerInput sourcePixelBufferAttributes:sourcePixelBufferAttributesDictionary];
     NSParameterAssert(writerInput);
     NSParameterAssert([videoWriter canAddInput:writerInput]);
-    
-    if ([videoWriter canAddInput:writerInput]) {
-        //        printf("can add\n");
-    } else {
-        //        printf("can't add\n");
-    }
     
     [videoWriter addInput:writerInput];
     
@@ -166,12 +159,6 @@ static TFY_HandlerVideo *instance = nil;
                                                      assetWriterInputPixelBufferAdaptorWithAssetWriterInput:writerInput sourcePixelBufferAttributes:sourcePixelBufferAttributesDictionary];
     NSParameterAssert(writerInput);
     NSParameterAssert([videoWriter canAddInput:writerInput]);
-    
-    if ([videoWriter canAddInput:writerInput]) {
-        //        printf("can add\n");
-    } else {
-        //        printf("can't add\n");
-    }
     
     [videoWriter addInput:writerInput];
     

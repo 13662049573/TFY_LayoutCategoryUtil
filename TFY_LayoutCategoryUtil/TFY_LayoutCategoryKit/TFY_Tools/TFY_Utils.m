@@ -579,7 +579,7 @@ const char* jailbreak_tool_pathes[] = {
     [self setLanguage:languageCode];
 }
 
-- (UIWindow*)lastWindow {
++(UIWindow*)lastWindow {
     NSEnumerator  *frontToBackWindows = [UIApplication.sharedApplication.windows reverseObjectEnumerator];
     for (UIWindow *window in frontToBackWindows) {
         BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;

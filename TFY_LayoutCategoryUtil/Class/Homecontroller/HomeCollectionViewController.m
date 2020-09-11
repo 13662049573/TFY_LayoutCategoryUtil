@@ -68,27 +68,43 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
         make.size.mas_equalTo(CGSizeMake(80, 80));
     });
     
-        UIButtonModelSet().backgroundColor(UIColor.orangeColor).text(@"这是一个按钮", UIControlStateNormal).font([UIFont systemFontOfSize:15 weight:UIFontWeightBold]).assignTo(^(__kindof UIView * _Nonnull view) {
+    UIButtonModelSet()
+    .backgroundColor(UIColor.orangeColor)
+    .text(@"这是一个按钮", UIControlStateNormal)
+    .font([UIFont systemFontOfSize:15 weight:UIFontWeightBold])
+    .tapSpaceTime(2)//限制点击时间
+    .buttonTapTime(^(NSUInteger time, BOOL * _Nonnull stop, UIButton * _Nonnull button) {//获取点击多少次
+        NSLog(@"time----------%lu",(unsigned long)time);
+    })
+    .assignTo(^(__kindof UIView * _Nonnull view) {//返回对象
             self.confirmButton = view;
-        }).addTarget(self, @selector(btnClick:), UIControlEventTouchUpInside)
-        .addToSuperView(self.view)
-        .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+    })
+    .addTarget(self, @selector(btnClick:), UIControlEventTouchUpInside)
+    .addToSuperView(self.view)
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
             make.left.equalTo(self.view).offset(20);
             make.top.equalTo(self.view).offset(200);
             make.right.equalTo(self.view).offset(-20);
             make.height.mas_equalTo(50);
-        });
+    });
     
-        UILabelModelSet().text(@"这是一个Label").textColor(UIColor.redColor).backgroundColor(UIColor.yellowColor).cornerRadius(10).font([UIFont systemFontOfSize:14 weight:UIFontWeightHeavy]).numberOfLines(0).textAlignment(NSTextAlignmentCenter)
-        .addToSuperView(self.view)
-        .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+    UILabelModelSet()
+    .text(@"这是一个Label")
+    .textColor(UIColor.redColor)
+    .backgroundColor(UIColor.yellowColor)
+    .cornerRadius(10).font([UIFont systemFontOfSize:14 weight:UIFontWeightHeavy])
+    .numberOfLines(0)
+    .textAlignment(NSTextAlignmentCenter)
+    .addToSuperView(self.view)
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
             make.left.equalTo(self.view).offset(40);
             make.right.equalTo(self.view).offset(-40);
             make.top.equalTo(self.confirmButton.mas_bottom).offset(30);
             make.height.mas_equalTo(self.confirmButton);
-        }).assignTo(^(__kindof UIView * _Nonnull view) {
+    })
+    .assignTo(^(__kindof UIView * _Nonnull view) {
             self.titleLabel = view;
-        });
+    });
     
         UITextFieldModelSet()
     .placeholder(@"这是一个输入框")
@@ -110,19 +126,16 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
         make.height.mas_equalTo(100);
     });
     
-    UIViewModelSet().backgroundColor(TFY_ColorHexString(@"4e5f6g")).clipRadius(CornerClipTypeBothTop, 10).addToSuperView(self.view)
+    UIViewModelSet()
+    .backgroundColor(TFY_ColorHexString(@"4e5f6g"))
+    .clipRadius(CornerClipTypeBothTop, 10)
+    .addToSuperView(self.view)
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
            make.left.equalTo(self.titleLabel);
            make.right.equalTo(self.titleLabel);
            make.top.equalTo(self.textfiled.mas_bottom).offset(20);
            make.height.mas_equalTo(80);
     });
-
-    self.myblock = ^(NSString *name, NSString *name2) {
-        NSLog(@"block-----%@---%@",name,name2);
-    };
-    
-    
 }
 
 - (void)btnClick:(UIButton *)btn {
@@ -132,7 +145,6 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     } else {
         self.confirmButton.backgroundColor = UIColor.yellowColor;
     }
-    self.myblock(@"222", @"33333");
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

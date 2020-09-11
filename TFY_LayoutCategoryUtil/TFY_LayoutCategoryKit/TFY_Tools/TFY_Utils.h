@@ -12,35 +12,33 @@
 
 static NSString * _Nonnull const AppLanguage = @"appLanguage";
 
-#define Localized(key, comment)  [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:AppLanguage]] ofType:@"lproj"]] localizedStringForKey:(key) value:@"" table:comment]
+#define TFY_Localized(key, comment)  [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:AppLanguage]] ofType:@"lproj"]] localizedStringForKey:(key) value:@"" table:comment]
 
 NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark*******************************************判断获取网络数据****************************************
 
-typedef enum : NSInteger {
+typedef NS_ENUM(NSUInteger, NetworkStatus) {
     NotReachable = 0,
     ReachableViaWiFi,
     ReachableViaWWAN
-} NetworkStatus;
+};
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, SSOperatorsType) {
     SSOperatorsTypeChinaTietong,//中国铁通
     SSOperatorsTypeTelecom,//中国电信
     SSOperatorsTypeChinaUnicom,//中国联通
     SSOperatorsTypeChinaMobile,//中国移动
     SSOperatorsTypeUnknown,//未知
-} SSOperatorsType;
-
+};
 
 extern NSString *kReachabilityChangedNotification;
 
 #pragma mark****************************************手机权限授权方法开始****************************************
-
-typedef enum : NSInteger {
+typedef NS_ENUM(NSUInteger, Temperature) {
     Celsius = 0,
     Fahrenheit,
-} Temperature;
+};
 
 @interface TFY_Utils : NSObject
 
@@ -82,8 +80,6 @@ typedef enum : NSInteger {
 
 /***设置为系统语言*/
 - (void)systemLanguage;
-/**将视图添加最上层的--Window--*/
-- (UIWindow*)lastWindow;
 
 #pragma mark****************************************字符串方法***************************************
 
@@ -408,6 +404,9 @@ typedef enum : NSInteger {
 
 /***   保存模型id*/
 +(void)saveValueInUD:(id)value forKey:(NSString *)key;
+
+/**将视图添加最上层的--Window--*/
++(UIWindow *)lastWindow;
 
 /***  获取保存的id*/
 +(id)getValueInUDWithKey:(NSString *)key;

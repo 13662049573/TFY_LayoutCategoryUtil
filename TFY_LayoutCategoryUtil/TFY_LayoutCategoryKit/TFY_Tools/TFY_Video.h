@@ -1,9 +1,9 @@
 //
-//  TFY_HandlerVideo.h
-//  TFY_Category
+//  TFY_Video.h
+//  TFY_LayoutCategoryUtil
 //
-//  Created by 田风有 on 2019/7/12.
-//  Copyright © 2019 恋机科技. All rights reserved.
+//  Created by 田风有 on 2020/9/11.
+//  Copyright © 2020 田风有. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -16,15 +16,16 @@ typedef void(^CompCompletedBlock)(BOOL success);
 typedef void(^CompFinalCompletedBlock)(BOOL success, NSString * _Nonnull errorMsg);
 typedef void(^CompProgressBlcok)(CGFloat progress);
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, VideoSpeedType) {
     VideoSpeedTypeNormal,
     VideoSpeedTypeFast,
     VideoSpeedTypeSlow
-} VideoSpeedType;
+};
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TFY_HandlerVideo : NSObject
+@interface TFY_Video : NSObject
+
 + (instancetype)sharedInstance;
 
 /**
@@ -53,7 +54,6 @@ NS_ASSUME_NONNULL_BEGIN
  * 设置视频导出速率 speedType 速率类型 inputVideoPath 视频源路径 videoFullPath 导出路径 completedBlock 完成回调
  */
 - (void)setVideoSpeed:(VideoSpeedType)speedType inputVideoPath:(NSString *)inputVideoPath outputVideoFullPath:(NSString *)videoFullPath completedBlock:(CompFinalCompletedBlock)completedBlock;
-
 @end
 
 NS_ASSUME_NONNULL_END
