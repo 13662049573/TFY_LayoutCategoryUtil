@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_LayoutCategoryKit"
 
-  spec.version      = "1.6.0"
+  spec.version      = "1.6.2"
 
   spec.summary      = "全新链式的界面初始化和界面跳转，布局基于Masonry"
 
@@ -70,7 +70,7 @@ Pod::Spec.new do |spec|
 
   spec.frameworks    = "Foundation","UIKit"
 
-  spec.xcconfig      = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/AvailabilityMacros" }
+  # spec.xcconfig      = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/AvailabilityMacros" }
 
   spec.requires_arc  = true
 
