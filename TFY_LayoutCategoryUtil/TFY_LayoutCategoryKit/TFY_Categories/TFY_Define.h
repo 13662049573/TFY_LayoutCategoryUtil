@@ -207,6 +207,30 @@ CG_INLINE CGFloat kNavigationBarHeight() {
     return bar.isHidden?0:bar.height + kStatusBarHeight();
 }
 
+//获取最适合的控制器
+CG_INLINE UIViewController *getTheLatestViewController(UIViewController *vc) {
+    if (vc.presentedViewController == nil) {return vc;}
+    return getTheLatestViewController(vc.presentedViewController);
+}
+
+CG_INLINE UIWindow *LastWindow() {
+    NSEnumerator  *frontToBackWindows = [[TFY_Scene defaultPackage].windows reverseObjectEnumerator];
+    for (UIWindow *window in frontToBackWindows) {
+        BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
+        BOOL windowIsVisible = !window.hidden && window.alpha>0;
+        BOOL windowLevelSupported = (window.windowLevel >= UIWindowLevelNormal && window.windowLevel <= UIWindowLevelNormal);
+        BOOL windowKeyWindow = window.isKeyWindow;
+        if (windowOnMainScreen && windowIsVisible && windowLevelSupported && windowKeyWindow) {return window;}
+    }
+    return [UIApplication tfy_keyWindow];
+}
+
+//最上层容器
+CG_INLINE UIViewController *RootpresentMenuView() {
+    UIViewController *rootVC = getTheLatestViewController(LastWindow().rootViewController);
+    return rootVC;
+}
+
 CG_INLINE void TFY_Method_exchangeImp(Class _class, SEL _originSelector, SEL _newSelector) {
     Method oriMethod = class_getInstanceMethod(_class, _originSelector);
     Method newMethod = class_getInstanceMethod(_class, _newSelector);

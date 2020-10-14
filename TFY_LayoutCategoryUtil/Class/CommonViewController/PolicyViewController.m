@@ -9,6 +9,7 @@
 #import "PolicyViewController.h"
 #import "PolicyWebViewController.h"
 @interface PolicyViewController ()<UITextViewDelegate>
+
 TFY_PROPERTY_OBJECT_STRONG(UIView, contentView);
 
 TFY_PROPERTY_OBJECT_STRONG(UIButton, cancelButton);
