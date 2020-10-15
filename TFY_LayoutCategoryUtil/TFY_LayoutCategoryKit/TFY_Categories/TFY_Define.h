@@ -208,12 +208,12 @@ CG_INLINE CGFloat kNavigationBarHeight() {
 }
 
 //获取最适合的控制器
-CG_INLINE UIViewController *getTheLatestViewController(UIViewController *vc) {
+CG_INLINE UIViewController *TFY_getTheLatestViewController(UIViewController *vc) {
     if (vc.presentedViewController == nil) {return vc;}
-    return getTheLatestViewController(vc.presentedViewController);
+    return TFY_getTheLatestViewController(vc.presentedViewController);
 }
 
-CG_INLINE UIWindow *LastWindow() {
+CG_INLINE UIWindow *TFY_LastWindow() {
     NSEnumerator  *frontToBackWindows = [[TFY_Scene defaultPackage].windows reverseObjectEnumerator];
     for (UIWindow *window in frontToBackWindows) {
         BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
@@ -226,8 +226,8 @@ CG_INLINE UIWindow *LastWindow() {
 }
 
 //最上层容器
-CG_INLINE UIViewController *RootpresentMenuView() {
-    UIViewController *rootVC = getTheLatestViewController(LastWindow().rootViewController);
+CG_INLINE UIViewController *TFY_RootpresentMenuView() {
+    UIViewController *rootVC = TFY_getTheLatestViewController(TFY_LastWindow().rootViewController);
     return rootVC;
 }
 
