@@ -231,6 +231,26 @@ CG_INLINE UIViewController *TFY_RootpresentMenuView() {
     return rootVC;
 }
 
+//跳转指定控制器
+CG_INLINE void TFY_PopToViewController(UIViewController *vc) {
+    for(UIViewController * tempvc in [UIApplication currentTopViewController].navigationController.childViewControllers){
+       if([tempvc isKindOfClass:vc.class]){
+          [[UIApplication currentTopViewController].navigationController popToViewController:tempvc animated:true];
+       }
+    }
+}
+
+//返回更控制器
+CG_INLINE void TFY_DismissViewController(UIViewController *vc){
+    UIViewController * tempvc = vc.presentingViewController;
+    while (tempvc.presentingViewController) {
+        tempvc = tempvc.presentingViewController;
+        if([tempvc isKindOfClass:[UIViewController class]]){break;}
+    }
+    [tempvc dismissViewControllerAnimated:true completion:nil];
+}
+
+//方法和类交互
 CG_INLINE void TFY_Method_exchangeImp(Class _class, SEL _originSelector, SEL _newSelector) {
     Method oriMethod = class_getInstanceMethod(_class, _originSelector);
     Method newMethod = class_getInstanceMethod(_class, _newSelector);
