@@ -31,6 +31,12 @@
 		36C334A124ED26CE00DA6FB2 /* NSData+TFY_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C3349F24ED26CE00DA6FB2 /* NSData+TFY_Data.m */; };
 		36C334A724ED284500DA6FB2 /* NSString+TFY_String.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C334A524ED284400DA6FB2 /* NSString+TFY_String.m */; };
 		36CBAD1424EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CBAD1324EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m */; };
+		36CE97A0254FAA590065B366 /* TFY_iOS13DarkMode_MonitorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CE979F254FAA590065B366 /* TFY_iOS13DarkMode_MonitorView.m */; };
+		36CE97A6254FAB510065B366 /* UIView+TFY_iOS13DarkMode_MonitorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CE97A5254FAB510065B366 /* UIView+TFY_iOS13DarkMode_MonitorView.m */; };
+		36CE97AC254FACC00065B366 /* TFY_iOS13DarkModeDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CE97AB254FACC00065B366 /* TFY_iOS13DarkModeDefine.m */; };
+		36CE97B2254FB1F40065B366 /* CALayer+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CE97B1254FB1F40065B366 /* CALayer+TFY_Tools.m */; };
+		36CE97B8254FB98C0065B366 /* UIColor+iOS13DarkMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CE97B7254FB98C0065B366 /* UIColor+iOS13DarkMode.m */; };
+		36CE97BE254FBB830065B366 /* UIImage+iOS13DarkMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CE97BD254FBB830065B366 /* UIImage+iOS13DarkMode.m */; };
 		36E77AF3250B75FE00D503E8 /* TFY_Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E77AF2250B75FE00D503E8 /* TFY_Video.m */; };
 		36EE1103250A18CF00D24B3C /* TFY_Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EE1102250A18CF00D24B3C /* TFY_Timer.m */; };
 		56558376243196E000020D3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56558375243196E000020D3C /* Assets.xcassets */; };
@@ -183,6 +189,18 @@
 		36C334AE24ED2D4D00DA6FB2 /* TFY_ToolsHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_ToolsHeader.h; sourceTree = "<group>"; };
 		36CBAD1224EFCE5C00FD1D8F /* UIAlertController+TFY_Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+TFY_Chain.h"; sourceTree = "<group>"; };
 		36CBAD1324EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+TFY_Chain.m"; sourceTree = "<group>"; };
+		36CE979E254FAA590065B366 /* TFY_iOS13DarkMode_MonitorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_iOS13DarkMode_MonitorView.h; sourceTree = "<group>"; };
+		36CE979F254FAA590065B366 /* TFY_iOS13DarkMode_MonitorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_iOS13DarkMode_MonitorView.m; sourceTree = "<group>"; };
+		36CE97A4254FAB510065B366 /* UIView+TFY_iOS13DarkMode_MonitorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+TFY_iOS13DarkMode_MonitorView.h"; sourceTree = "<group>"; };
+		36CE97A5254FAB510065B366 /* UIView+TFY_iOS13DarkMode_MonitorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+TFY_iOS13DarkMode_MonitorView.m"; sourceTree = "<group>"; };
+		36CE97AA254FACC00065B366 /* TFY_iOS13DarkModeDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_iOS13DarkModeDefine.h; sourceTree = "<group>"; };
+		36CE97AB254FACC00065B366 /* TFY_iOS13DarkModeDefine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_iOS13DarkModeDefine.m; sourceTree = "<group>"; };
+		36CE97B0254FB1F40065B366 /* CALayer+TFY_Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+TFY_Tools.h"; sourceTree = "<group>"; };
+		36CE97B1254FB1F40065B366 /* CALayer+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+TFY_Tools.m"; sourceTree = "<group>"; };
+		36CE97B6254FB98C0065B366 /* UIColor+iOS13DarkMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+iOS13DarkMode.h"; sourceTree = "<group>"; };
+		36CE97B7254FB98C0065B366 /* UIColor+iOS13DarkMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+iOS13DarkMode.m"; sourceTree = "<group>"; };
+		36CE97BC254FBB830065B366 /* UIImage+iOS13DarkMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+iOS13DarkMode.h"; sourceTree = "<group>"; };
+		36CE97BD254FBB830065B366 /* UIImage+iOS13DarkMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+iOS13DarkMode.m"; sourceTree = "<group>"; };
 		36E77AF1250B75FE00D503E8 /* TFY_Video.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Video.h; sourceTree = "<group>"; };
 		36E77AF2250B75FE00D503E8 /* TFY_Video.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Video.m; sourceTree = "<group>"; };
 		36EE1100250A17DE00D24B3C /* TFY_LayoutCategoryKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_LayoutCategoryKit.h; sourceTree = "<group>"; };
@@ -570,6 +588,18 @@
 				565583FF2431BA8700020D3C /* UIViewController+TFY_Tools.m */,
 				360118A225007ECA00449922 /* UITextView+TFY_Tools.h */,
 				360118A325007ECA00449922 /* UITextView+TFY_Tools.m */,
+				36CE979E254FAA590065B366 /* TFY_iOS13DarkMode_MonitorView.h */,
+				36CE979F254FAA590065B366 /* TFY_iOS13DarkMode_MonitorView.m */,
+				36CE97A4254FAB510065B366 /* UIView+TFY_iOS13DarkMode_MonitorView.h */,
+				36CE97A5254FAB510065B366 /* UIView+TFY_iOS13DarkMode_MonitorView.m */,
+				36CE97AA254FACC00065B366 /* TFY_iOS13DarkModeDefine.h */,
+				36CE97AB254FACC00065B366 /* TFY_iOS13DarkModeDefine.m */,
+				36CE97B0254FB1F40065B366 /* CALayer+TFY_Tools.h */,
+				36CE97B1254FB1F40065B366 /* CALayer+TFY_Tools.m */,
+				36CE97B6254FB98C0065B366 /* UIColor+iOS13DarkMode.h */,
+				36CE97B7254FB98C0065B366 /* UIColor+iOS13DarkMode.m */,
+				36CE97BC254FBB830065B366 /* UIImage+iOS13DarkMode.h */,
+				36CE97BD254FBB830065B366 /* UIImage+iOS13DarkMode.m */,
 			);
 			path = TFY_UI;
 			sourceTree = "<group>";
@@ -931,6 +961,7 @@
 				5655844E2431C7DB00020D3C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				5655837C243196E000020D3C /* main.m in Sources */,
 				565583F72431B9D000020D3C /* UIScrollView+TFY_Tools.m in Sources */,
+				36CE97B2254FB1F40065B366 /* CALayer+TFY_Tools.m in Sources */,
 				36EE1103250A18CF00D24B3C /* TFY_Timer.m in Sources */,
 				565584502431C7DB00020D3C /* MASCompositeConstraint.m in Sources */,
 				565584562431C7DB00020D3C /* MASViewConstraint.m in Sources */,
@@ -949,6 +980,7 @@
 				5655846A2431CBAE00020D3C /* TFY_ControlChainModel.m in Sources */,
 				565584DF2431E48200020D3C /* HomeCollectionViewController.m in Sources */,
 				565584542431C7DB00020D3C /* View+MASAdditions.m in Sources */,
+				36CE97B8254FB98C0065B366 /* UIColor+iOS13DarkMode.m in Sources */,
 				565584702431CC6B00020D3C /* TFY_ImageViewChainModel.m in Sources */,
 				565583ED2431B71300020D3C /* UIGestureRecognizer+TFY_Tools.m in Sources */,
 				565584852431CEFA00020D3C /* TFY_SwitchChainModel.m in Sources */,
@@ -968,6 +1000,7 @@
 				565584E22431E49600020D3C /* PersonalTableViewController.m in Sources */,
 				5655842C2431C4DC00020D3C /* TFY_TapGestureChainModel.m in Sources */,
 				565584062431BAFA00020D3C /* NSAttributedString+TFY_Tools.m in Sources */,
+				36CE97A0254FAA590065B366 /* TFY_iOS13DarkMode_MonitorView.m in Sources */,
 				565584112431BD2100020D3C /* TFY_ChainBaseModel.m in Sources */,
 				565584572431C7DB00020D3C /* MASViewAttribute.m in Sources */,
 				565584C92431DEEE00020D3C /* PolicyManager.m in Sources */,
@@ -990,6 +1023,7 @@
 				565584B92431D53B00020D3C /* TFY_TiledLayerChainModel.m in Sources */,
 				5655848E2431D01A00020D3C /* TFY_TextFieldChainModel.m in Sources */,
 				36867DB424EBA19700A761BC /* UIControl+TFY_Tools.m in Sources */,
+				36CE97A6254FAB510065B366 /* UIView+TFY_iOS13DarkMode_MonitorView.m in Sources */,
 				3654164524FF364A00CC0024 /* PolicyViewController.m in Sources */,
 				565584AD2431D42D00020D3C /* TFY_ReplicatorLayerChainModel.m in Sources */,
 				565584512431C7DB00020D3C /* MASConstraintMaker.m in Sources */,
@@ -1007,6 +1041,7 @@
 				565583CC2431AF4700020D3C /* NSObject+TFY_Tools.m in Sources */,
 				36C3349824ED24EE00DA6FB2 /* WKWebView+TFY_Extension.m in Sources */,
 				565584882431CF4400020D3C /* TFY_TableViewCellChainModel.m in Sources */,
+				36CE97BE254FBB830065B366 /* UIImage+iOS13DarkMode.m in Sources */,
 				565583C62431AE2E00020D3C /* NSArray+TFY_Tools.m in Sources */,
 				5655845D2431C86F00020D3C /* TFY_BaseViewChainModel+Masonry.m in Sources */,
 				5655844F2431C7DB00020D3C /* ViewController+MASAdditions.m in Sources */,
@@ -1029,6 +1064,7 @@
 				565584AA2431D3F200020D3C /* TFY_LayerChainModel.m in Sources */,
 				36867DB024EBA0B000A761BC /* UIDevice+TFY_Tools.m in Sources */,
 				565584672431CB3600020D3C /* TFY_CollectionViewChainModel.m in Sources */,
+				36CE97AC254FACC00065B366 /* TFY_iOS13DarkModeDefine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
