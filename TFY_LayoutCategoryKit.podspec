@@ -50,6 +50,7 @@ Pod::Spec.new do |spec|
       ss.subspec 'TFY_CALayer' do |s|
         s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Chain/TFY_CALayer/**/*.{h,m}"
         s.dependency "TFY_LayoutCategoryKit/TFY_Chain/TFY_ChainBase"
+        s.dependency "TFY_LayoutCategoryKit/TFY_Categories/TFY_UI"
       end
 
       ss.subspec 'TFY_UIGesture' do |s|
