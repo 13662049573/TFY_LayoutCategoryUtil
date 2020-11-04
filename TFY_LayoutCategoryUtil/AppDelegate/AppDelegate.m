@@ -34,25 +34,8 @@
            [UIApplication tfy_window].rootViewController = [[MainViewController alloc] init];
            [[PolicyManager defaultManager] show];
        }
-       [self setupNavigationBar];
     }];
     return YES;
-}
-
-
-- (void)setupNavigationBar
-{
-    UINavigationBar * navigationBar = [UINavigationBar appearance];
-    // 设置返回样式图片
-    UIImage *image = [[UIImage imageNamed:@"fh"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    navigationBar.backIndicatorImage = image;
-    navigationBar.backIndicatorTransitionMaskImage = image;
-    
-    // 设置标题属性
-    [navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName :TFY_ColorRGB(255, 255, 255), NSFontAttributeName : Font(PingFangSemibold, 18)}];
-    // 设置bar颜色
-    
-    [navigationBar setBarTintColor:TFY_ColorRGB(50, 102, 255)];
 }
 
 @end

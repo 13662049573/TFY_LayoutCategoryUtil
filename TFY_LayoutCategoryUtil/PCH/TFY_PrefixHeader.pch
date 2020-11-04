@@ -9,8 +9,13 @@
 #ifndef TFY_PrefixHeader_pch
 #define TFY_PrefixHeader_pch
 
+#import <monetary.h>
+#import <TFY_Navigation.h>
+#import <TFY_AutoLayout.h>
+#import <TFY_TabBarKit.h>
+
 #import "TFY_LayoutCategoryKit.h"
 
-#import "Masonry.h"
+
 
 #endif /* TFY_PrefixHeader_pch */

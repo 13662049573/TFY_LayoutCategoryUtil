@@ -268,17 +268,6 @@ const char* jailbreak_tool_pathes[] = {
                     netconnType = @"未知";
                 }
             }];
-        } else {
-            NSString *accessString = teleInfo.currentRadioAccessTechnology;
-            if ([typeStrings4G containsObject:accessString]) {
-                netconnType = @"4G";
-            } else if ([typeStrings3G containsObject:accessString]) {
-                netconnType = @"3G";
-            } else if ([typeStrings2G containsObject:accessString]) {
-                netconnType = @"2G";
-            } else {
-                netconnType = @"未知";
-            }
         }
     }
     else {
@@ -298,11 +287,6 @@ const char* jailbreak_tool_pathes[] = {
                 result = YES;
             }
         }];
-    } else {
-        CTCarrier *obj = netIInfo.subscriberCellularProvider;
-        if (obj.isoCountryCode.length) {
-            result = YES;
-        }
     }
     return result;
 }
@@ -330,38 +314,6 @@ const char* jailbreak_tool_pathes[] = {
                 return SSOperatorsTypeUnknown;
             }
         }
-    }
-    CTCarrier *carrier = [telephonyInfo subscriberCellularProvider];
-    NSString *currentCountryCode = [carrier mobileCountryCode];
-    NSString *mobileNetWorkCode = [carrier mobileNetworkCode];
-    
-    if (![currentCountryCode isEqualToString:@"460"]) {
-        return SSOperatorsTypeUnknown;
-    }
-    if ([mobileNetWorkCode isEqualToString:@"00"] ||
-        [mobileNetWorkCode isEqualToString:@"02"] ||
-        [mobileNetWorkCode isEqualToString:@"07"]) {
-        // 中国移动
-        return SSOperatorsTypeChinaMobile;
-    }
-    
-    if ([mobileNetWorkCode isEqualToString:@"01"] ||
-        [mobileNetWorkCode isEqualToString:@"06"] ||
-        [mobileNetWorkCode isEqualToString:@"09"]) {
-        // 中国联通
-        return SSOperatorsTypeChinaUnicom;
-    }
-    
-    if ([mobileNetWorkCode isEqualToString:@"03"] ||
-        [mobileNetWorkCode isEqualToString:@"05"] ||
-        [mobileNetWorkCode isEqualToString:@"11"]) {
-        // 中国电信
-        return SSOperatorsTypeTelecom;
-    }
-    
-    if ([mobileNetWorkCode isEqualToString:@"20"]) {
-        // 中国铁通
-        return SSOperatorsTypeChinaTietong;
     }
     return SSOperatorsTypeUnknown;
 }
@@ -2707,12 +2659,10 @@ const char* jailbreak_tool_pathes[] = {
 /**
  *   归档
  */
-+ (void)keyedArchiverObject:(id)object ForKey:(NSString *)key ToFile:(NSString *)path{
-    NSMutableData *md=[NSMutableData data];
-    NSKeyedArchiver *arch=[[NSKeyedArchiver alloc]initForWritingWithMutableData:md];
-    [arch encodeObject:object forKey:key];
-    [arch finishEncoding];
-    [md writeToFile:path atomically:YES];
++ (void)keyedArchiverObject:(id)object ToFile:(NSString *)path{
+    NSError * error;
+    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:object requiringSecureCoding:YES error:&error];
+    [data writeToFile:path atomically:YES];
 }
 static CGRect oldframe;
 /**
@@ -2754,18 +2704,16 @@ static CGRect oldframe;
 /**
  *  反归档
  */
-+(NSArray *)keyedUnArchiverForKey:(NSString *)key FromFile:(NSString *)path{
++(id)keyedUnArchiverForKey:(id)object FromFile:(NSString *)path{
     NSError *error=nil;
-    NSData *data=[NSData dataWithContentsOfFile:path];
-    NSArray *arr;
-    if (@available(iOS 11.0, *)) {
-        NSKeyedUnarchiver *unArch=[[NSKeyedUnarchiver alloc] initForReadingFromData:data error:&error];
-        arr = [unArch decodeObjectForKey:key];
+    NSData * unData = [NSData dataWithContentsOfFile:path];
+    id unarch;
+    if (@available(iOS 14.0, *)) {
+        unarch = [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClass:object fromData:unData error:&error];
     } else {
-        NSKeyedUnarchiver *unArch=[[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-        arr = [unArch decodeObjectForKey:key];
+        unarch = [NSKeyedUnarchiver unarchivedObjectOfClass:object fromData:unData error:&error];
     }
-    return arr;
+    return unarch;
 }
 
 /**

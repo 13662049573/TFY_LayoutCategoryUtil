@@ -1,0 +1,54 @@
+PODS:
+  - Masonry (1.1.0)
+  - TFY_AutoLayout (2.6.2):
+    - TFY_AutoLayout/IOS_Layout (= 2.6.2)
+    - TFY_AutoLayout/MAC_Layout (= 2.6.2)
+    - TFY_AutoLayout/Util (= 2.6.2)
+  - TFY_AutoLayout/IOS_Layout (2.6.2):
+    - TFY_AutoLayout/Util
+  - TFY_AutoLayout/MAC_Layout (2.6.2):
+    - TFY_AutoLayout/Util
+  - TFY_AutoLayout/Util (2.6.2)
+  - TFY_Navigation (2.6.4):
+    - TFY_Navigation/TFY_NavControoler (= 2.6.4)
+    - TFY_Navigation/TFY_PageController (= 2.6.4)
+  - TFY_Navigation/TFY_NavControoler (2.6.4):
+    - TFY_Navigation/TFY_NavControoler/TFY_Category (= 2.6.4)
+    - TFY_Navigation/TFY_NavControoler/TFY_Configure (= 2.6.4)
+    - TFY_Navigation/TFY_NavControoler/TFY_NavBasVcKit (= 2.6.4)
+    - TFY_Navigation/TFY_NavControoler/TFY_NavigationKit (= 2.6.4)
+  - TFY_Navigation/TFY_NavControoler/TFY_Category (2.6.4):
+    - TFY_Navigation/TFY_NavControoler/TFY_Configure
+  - TFY_Navigation/TFY_NavControoler/TFY_Configure (2.6.4)
+  - TFY_Navigation/TFY_NavControoler/TFY_NavBasVcKit (2.6.4):
+    - TFY_Navigation/TFY_NavControoler/TFY_Category
+    - TFY_Navigation/TFY_NavControoler/TFY_Configure
+  - TFY_Navigation/TFY_NavControoler/TFY_NavigationKit (2.6.4):
+    - TFY_Navigation/TFY_NavControoler/TFY_Configure
+  - TFY_Navigation/TFY_PageController (2.6.4)
+  - TFY_TabBarKit (1.1.2):
+    - TFY_TabBarKit/TFY_SystemTabBar (= 1.1.2)
+  - TFY_TabBarKit/TFY_SystemTabBar (1.1.2)
+
+DEPENDENCIES:
+  - Masonry
+  - TFY_AutoLayout
+  - TFY_Navigation
+  - TFY_TabBarKit
+
+SPEC REPOS:
+  trunk:
+    - Masonry
+    - TFY_AutoLayout
+    - TFY_Navigation
+    - TFY_TabBarKit
+
+SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  TFY_AutoLayout: 03085c3744020215142df50ee24e9629eb967779
+  TFY_Navigation: 9d9bf5a9ced9d7be01a8b99d63066b12731351cb
+  TFY_TabBarKit: 03da94084ad16fa462aba0b4591d984b516085c1
+
+PODFILE CHECKSUM: 4a1d909a441e636114a528e63aed471be30b4fb3
+
+COCOAPODS: 1.10.0

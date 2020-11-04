@@ -6,11 +6,11 @@
 //  Copyright © 2020 田风有. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "TfySY_TabBarController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MainViewController : UITabBarController
+@interface MainViewController : TfySY_TabBarController
 
 @end
 

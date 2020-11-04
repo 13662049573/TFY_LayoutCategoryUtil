@@ -1,0 +1,6 @@
+framework module Pods_TFY_LayoutCategoryUtilTests {
+  umbrella header "Pods-TFY_LayoutCategoryUtilTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

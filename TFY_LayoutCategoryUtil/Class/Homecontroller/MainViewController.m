@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 #import "HomeCollectionViewController.h"
 #import "PersonalTableViewController.h"
-@interface MainViewController ()
+@interface MainViewController ()<TfySY_TabBarDelegate>
 
 @end
 
@@ -17,65 +17,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor yellowColor];
-    
+    // 添加子VC
     [self addChildViewControllers];
+
 }
 
-/**
- 添加所有子控制器
- */
-- (void)addChildViewControllers
-{
-    // 首页
-    HomeCollectionViewController *homeCtr = [[HomeCollectionViewController alloc] init];
+- (void)addChildViewControllers{
+    // 创建选项卡的数据 想怎么写看自己，这块我就写笨点了
+    NSArray <NSDictionary *>*VCArray =
+    @[@{@"vc":[HomeCollectionViewController new],@"normalImg":@"home",@"selectImg":@"home2",@"itemTitle":@"首页"},
+      @{@"vc":[PersonalTableViewController new],@"normalImg":@"wd_1",@"selectImg":@"wd_2",@"itemTitle":@"我的"}];
+    NSMutableArray *tabBarConfs = @[].mutableCopy;
+    NSMutableArray *tabBarVCs = @[].mutableCopy;
+    [VCArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        TfySY_TabBarConfigModel *model = [TfySY_TabBarConfigModel new];
+        model.itemTitle = [obj objectForKey:@"itemTitle"];
+        model.selectImageName = [obj objectForKey:@"selectImg"];
+        model.normalImageName = [obj objectForKey:@"normalImg"];
+        model.selectColor = [UIColor orangeColor];
+        UIViewController *vc = [obj objectForKey:@"vc"];
+        TFY_NavigationController *nav = [[TFY_NavigationController alloc] initWithRootViewController:vc];
+        [tabBarVCs addObject:nav];
+        [tabBarConfs addObject:model];
+    }];
+    self.ControllerArray = tabBarVCs;
+    self.tfySY_TabBar = [[TfySY_TabBar alloc] initWithTabBarConfig:tabBarConfs];
+    self.tfySY_TabBar.delegate = self;
+    [self.tabBar addSubview:self.tfySY_TabBar];
     
-    [self addChildViewController:homeCtr navTitle:@"首页" tabTitle:@"首页" imageName:@"sy"];
-    
-    // 个人中心
-    PersonalTableViewController *personCtr = [[PersonalTableViewController alloc] init];
-    
-    [self addChildViewController:personCtr navTitle:@"个人中心" tabTitle:@"我的" imageName:@"wd"];
 }
-
-/**
- 添加一个子控制器
- 
- @param childController 子控制器
- @param navTitle 导航栏标题
- @param tabTitle tabBar标题
- @param imageName tabBar图片名称
- */
-- (void)addChildViewController:(UIViewController *)childController
-                      navTitle:(NSString *)navTitle
-                      tabTitle:(NSString *)tabTitle
-                     imageName:(NSString *)imageName
-{
-    childController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-    childController.navigationItem.title = navTitle;
-    childController.tabBarItem.title = tabTitle;
-    
-    childController.tabBarItem.image = [[UIImage imageNamed:[imageName stringByAppendingString:@"_2"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    childController.tabBarItem.selectedImage = [[UIImage imageNamed:[imageName stringByAppendingString:@"_1"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-    [childController.tabBarItem setTitleTextAttributes:@{
-                                                         NSForegroundColorAttributeName : [UIColor colorWithRed:157/255.0 green:164/255.0 blue:184/255.0 alpha:1.0],
-                                                         NSFontAttributeName : Font(PingFangSemibold,11)
-                                                         }
-                                              forState:UIControlStateNormal];
-    [childController.tabBarItem setTitleTextAttributes:@{
-                                                         NSForegroundColorAttributeName : [UIColor colorWithRed:50/255.0 green:102/255.0 blue:255/255.0 alpha:1.0],
-                                                         NSFontAttributeName : Font(PingFangSemibold, 11)
-                                                         }
-                                              forState:UIControlStateSelected];
-    
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:childController];
-    
-    [self addChildViewController:nav];
+// 9.实现代理，如下：
+- (void)TfySY_TabBar:(TfySY_TabBar *)tabbar selectIndex:(NSInteger)index{
+    [self setSelectedIndex:index];
 }
-
-
 @end
