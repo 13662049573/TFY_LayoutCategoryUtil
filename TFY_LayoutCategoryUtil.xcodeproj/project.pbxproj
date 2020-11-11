@@ -10,6 +10,8 @@
 		1A66C157D8E866FDD1C3A714 /* Pods_TFY_LayoutCategoryUtil_TFY_LayoutCategoryUtilUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39B598542D85D793988CF46 /* Pods_TFY_LayoutCategoryUtil_TFY_LayoutCategoryUtilUITests.framework */; };
 		360118A425007ECA00449922 /* UITextView+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 360118A325007ECA00449922 /* UITextView+TFY_Tools.m */; };
 		360312C12501E24B00EFCA27 /* TFY_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 360312C02501E24B00EFCA27 /* TFY_Utils.m */; };
+		361D7DDE255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D7DDD255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m */; };
+		361D7DE4255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D7DE3255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m */; };
 		3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163B24FF336D00CC0024 /* CommonViewController.m */; };
 		3654163F24FF345000CC0024 /* CommonNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163E24FF345000CC0024 /* CommonNavigationBar.m */; };
 		3654164224FF360100CC0024 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164124FF360100CC0024 /* NavigationController.m */; };
@@ -140,6 +142,10 @@
 		360118A325007ECA00449922 /* UITextView+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextView+TFY_Tools.m"; sourceTree = "<group>"; };
 		360312BF2501E24B00EFCA27 /* TFY_Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Utils.h; sourceTree = "<group>"; };
 		360312C02501E24B00EFCA27 /* TFY_Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Utils.m; sourceTree = "<group>"; };
+		361D7DDC255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+TFY_Tools.h"; sourceTree = "<group>"; };
+		361D7DDD255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+TFY_Tools.m"; sourceTree = "<group>"; };
+		361D7DE2255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableParagraphStyle+TFY_Chain.h"; sourceTree = "<group>"; };
+		361D7DE3255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableParagraphStyle+TFY_Chain.m"; sourceTree = "<group>"; };
 		3654163A24FF336D00CC0024 /* CommonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonViewController.h; sourceTree = "<group>"; };
 		3654163B24FF336D00CC0024 /* CommonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonViewController.m; sourceTree = "<group>"; };
 		3654163D24FF345000CC0024 /* CommonNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonNavigationBar.h; sourceTree = "<group>"; };
@@ -636,6 +642,10 @@
 				565584082431BB3100020D3C /* NSFileManager+TFY_Tools.m */,
 				5655840A2431BB7600020D3C /* NSTimer+TFY_Tools.h */,
 				5655840B2431BB7600020D3C /* NSTimer+TFY_Tools.m */,
+				361D7DDC255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.h */,
+				361D7DDD255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m */,
+				361D7DE2255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.h */,
+				361D7DE3255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m */,
 			);
 			path = TFY_Foundation;
 			sourceTree = "<group>";
@@ -1035,6 +1045,7 @@
 				36CE97B2254FB1F40065B366 /* CALayer+TFY_Tools.m in Sources */,
 				36EE1103250A18CF00D24B3C /* TFY_Timer.m in Sources */,
 				565583E12431B3E200020D3C /* UIColor+TFY_Tools.m in Sources */,
+				361D7DE4255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m in Sources */,
 				565583F02431B78600020D3C /* UIImage+TFY_Tools.m in Sources */,
 				565583A8243197BB00020D3C /* SceneDelegate.m in Sources */,
 				360312C12501E24B00EFCA27 /* TFY_Utils.m in Sources */,
@@ -1048,6 +1059,7 @@
 				36867DCB24EBE25400A761BC /* UIWindow+TFY_Tools.m in Sources */,
 				5655846A2431CBAE00020D3C /* TFY_ControlChainModel.m in Sources */,
 				565584DF2431E48200020D3C /* HomeCollectionViewController.m in Sources */,
+				361D7DDE255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m in Sources */,
 				36CE97B8254FB98C0065B366 /* UIColor+iOS13DarkMode.m in Sources */,
 				565584702431CC6B00020D3C /* TFY_ImageViewChainModel.m in Sources */,
 				565583ED2431B71300020D3C /* UIGestureRecognizer+TFY_Tools.m in Sources */,

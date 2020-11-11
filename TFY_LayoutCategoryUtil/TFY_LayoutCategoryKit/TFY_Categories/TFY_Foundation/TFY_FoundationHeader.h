@@ -25,5 +25,8 @@
 #import "NSData+TFY_Data.h"
 #import "NSDate+TFY_Date.h"
 #import "UIAlertController+TFY_Chain.h"
+#import "NSMutableAttributedString+TFY_Tools.h"
+#import "NSMutableParagraphStyle+TFY_Chain.h"
+
 
 #endif /* TFY_FoundationHeader_h */
