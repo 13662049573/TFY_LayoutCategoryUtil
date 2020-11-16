@@ -22,7 +22,7 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = TFY_ColorHexString(@"ffffff");
-    
+
     UIButtonModelSet()
     .multiple(3)
     .part_first()
@@ -136,6 +136,7 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
            make.top.equalTo(self.textfiled.mas_bottom).offset(20);
            make.height.mas_equalTo(80);
     });
+    
 }
 
 - (void)btnClick:(UIButton *)btn {
