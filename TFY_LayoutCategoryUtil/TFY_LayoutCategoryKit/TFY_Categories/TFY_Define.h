@@ -164,6 +164,9 @@ static class *sharedInstance_; \
 
 #define TFY_STRONG  __strong typeof(weakSelf)self = weakSelf;
 
+/** weak对象 */
+#define TFY_Weak(o) __weak typeof(o) weak_##o = o;
+
 #pragma mark-------------------------------------------内联函数---------------------------------------------
 
 /** 发送通知 */
