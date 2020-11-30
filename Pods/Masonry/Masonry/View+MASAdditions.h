@@ -84,7 +84,7 @@
  *
  *  @return Array of created MASConstraints
  */
-- (NSArray *)mas_makeConstraints:(void(^)(MASConstraintMaker *make))block;
+- (NSArray *)mas_makeConstraints:(void(NS_NOESCAPE ^)(MASConstraintMaker *make))block;
 
 /**
  *  Creates a MASConstraintMaker with the callee view.
@@ -95,7 +95,7 @@
  *
  *  @return Array of created/updated MASConstraints
  */
-- (NSArray *)mas_updateConstraints:(void(^)(MASConstraintMaker *make))block;
+- (NSArray *)mas_updateConstraints:(void(NS_NOESCAPE ^)(MASConstraintMaker *make))block;
 
 /**
  *  Creates a MASConstraintMaker with the callee view.
@@ -106,6 +106,6 @@
  *
  *  @return Array of created/updated MASConstraints
  */
-- (NSArray *)mas_remakeConstraints:(void(^)(MASConstraintMaker *make))block;
+- (NSArray *)mas_remakeConstraints:(void(NS_NOESCAPE ^)(MASConstraintMaker *make))block;
 
 @end

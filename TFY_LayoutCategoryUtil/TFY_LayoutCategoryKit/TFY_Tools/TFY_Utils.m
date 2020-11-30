@@ -164,16 +164,26 @@ const char* jailbreak_tool_pathes[] = {
 
 - (NetworkStatus)networkStatusForFlags:(SCNetworkReachabilityFlags)flags{
     PrintReachabilityFlags(flags, "networkStatusForFlags");
-    if ((flags & kSCNetworkReachabilityFlagsReachable) == 0){return NotReachable;}
+    if ((flags & kSCNetworkReachabilityFlagsReachable) == 0)
+    {
+        return NotReachable;
+    }
     NetworkStatus returnValue = NotReachable;
-    if ((flags & kSCNetworkReachabilityFlagsConnectionRequired) == 0) {returnValue = ReachableViaWiFi;}
+    
+    if ((flags & kSCNetworkReachabilityFlagsConnectionRequired) == 0)
+    {
+        returnValue = ReachableViaWiFi;
+    }
     if ((((flags & kSCNetworkReachabilityFlagsConnectionOnDemand ) != 0) ||
-         (flags & kSCNetworkReachabilityFlagsConnectionOnTraffic) != 0)) {
-        if ((flags & kSCNetworkReachabilityFlagsInterventionRequired) == 0) {
+         (flags & kSCNetworkReachabilityFlagsConnectionOnTraffic) != 0))
+    {
+        
+        if ((flags & kSCNetworkReachabilityFlagsInterventionRequired) == 0)
+        {
             returnValue = ReachableViaWiFi;
         }
     }
-    if ((flags & kSCNetworkReachabilityFlagsIsWWAN) == kSCNetworkReachabilityFlagsIsWWAN) {
+    if ((flags & kSCNetworkReachabilityFlagsIsWWAN) == kSCNetworkReachabilityFlagsIsWWAN){
         returnValue = ReachableViaWWAN;
     }
     return returnValue;
@@ -226,13 +236,11 @@ const char* jailbreak_tool_pathes[] = {
 //针对蜂窝网络判断是3G或者4G
 +(NSString *)getNetType{
     __block NSString *netconnType = nil;
-    NSArray *typeStrings2G = @[
-            CTRadioAccessTechnologyEdge,
+    NSArray *typeStrings2G = @[CTRadioAccessTechnologyEdge,
             CTRadioAccessTechnologyGPRS,
             CTRadioAccessTechnologyCDMA1x];
       
-     NSArray *typeStrings3G = @[
-            CTRadioAccessTechnologyHSDPA,
+     NSArray *typeStrings3G = @[CTRadioAccessTechnologyHSDPA,
             CTRadioAccessTechnologyWCDMA,
             CTRadioAccessTechnologyHSUPA,
             CTRadioAccessTechnologyCDMAEVDORev0,
@@ -240,29 +248,30 @@ const char* jailbreak_tool_pathes[] = {
             CTRadioAccessTechnologyCDMAEVDORevB,
             CTRadioAccessTechnologyeHRPD];
       
-    NSArray *typeStrings4G = @[CTRadioAccessTechnologyLTE];
-    NSArray *typeStrings5G;
-    if (@available(iOS 14.0, *)) {
-        typeStrings5G = @[CTRadioAccessTechnologyNRNSA,
-                          CTRadioAccessTechnologyNR];
-    }
-    CTTelephonyNetworkInfo *teleInfo= [[CTTelephonyNetworkInfo alloc] init];
-    if (@available(iOS 12.0, *)) {
-        NSDictionary<NSString *, NSString *> *currentStatus = teleInfo.serviceCurrentRadioAccessTechnology;
-        if (currentStatus.allKeys.count==0) {netconnType = @"未知";}
-        [currentStatus enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
-            if ([typeStrings4G containsObject:obj]) {
-                netconnType = @"4G";
-            } else if ([typeStrings3G containsObject:obj]) {
-                netconnType = @"3G";
-            } else if ([typeStrings2G containsObject:obj]) {
-                netconnType = @"2G";
-            } else if ([typeStrings5G containsObject:obj]) {
-                netconnType = @"5G";
-            } else {
+     NSArray *typeStrings4G = @[CTRadioAccessTechnologyLTE];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        CTTelephonyNetworkInfo *teleInfo= [[CTTelephonyNetworkInfo alloc] init];
+        if (@available(iOS 12.0, *)) {
+            NSDictionary<NSString *, NSString *> *currentStatus = teleInfo.serviceCurrentRadioAccessTechnology;
+            if (currentStatus.allKeys.count==0) {
                 netconnType = @"未知";
             }
-        }];
+            [currentStatus enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+                if ([typeStrings4G containsObject:obj]) {
+                    netconnType = @"4G";
+                } else if ([typeStrings3G containsObject:obj]) {
+                    netconnType = @"3G";
+                } else if ([typeStrings2G containsObject:obj]) {
+                    netconnType = @"2G";
+                } else {
+                    netconnType = @"未知";
+                }
+            }];
+        }
+    }
+    else {
+       netconnType = @"未知";
     }
     return netconnType;
 }
