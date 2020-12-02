@@ -41,6 +41,10 @@
 		36CE97B8254FB98C0065B366 /* UIColor+iOS13DarkMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CE97B7254FB98C0065B366 /* UIColor+iOS13DarkMode.m */; };
 		36CE97BE254FBB830065B366 /* UIImage+iOS13DarkMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CE97BD254FBB830065B366 /* UIImage+iOS13DarkMode.m */; };
 		36E77AF3250B75FE00D503E8 /* TFY_Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E77AF2250B75FE00D503E8 /* TFY_Video.m */; };
+		36EBD9262577399B00C70D20 /* TFY_BadgeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBD9252577399B00C70D20 /* TFY_BadgeControl.m */; };
+		36EBD92C25773AFA00C70D20 /* UIView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBD92B25773AFA00C70D20 /* UIView+Badge.m */; };
+		36EBD93225773D8600C70D20 /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBD93125773D8600C70D20 /* UIBarButtonItem+Badge.m */; };
+		36EBD93825773E8900C70D20 /* UITabBarItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBD93725773E8900C70D20 /* UITabBarItem+Badge.m */; };
 		36EE1103250A18CF00D24B3C /* TFY_Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EE1102250A18CF00D24B3C /* TFY_Timer.m */; };
 		56558376243196E000020D3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56558375243196E000020D3C /* Assets.xcassets */; };
 		56558379243196E000020D3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56558377243196E000020D3C /* LaunchScreen.storyboard */; };
@@ -205,6 +209,15 @@
 		36CE97BD254FBB830065B366 /* UIImage+iOS13DarkMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+iOS13DarkMode.m"; sourceTree = "<group>"; };
 		36E77AF1250B75FE00D503E8 /* TFY_Video.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Video.h; sourceTree = "<group>"; };
 		36E77AF2250B75FE00D503E8 /* TFY_Video.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Video.m; sourceTree = "<group>"; };
+		36EBD9232577393B00C70D20 /* TFY_BadgeViewHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_BadgeViewHeader.h; sourceTree = "<group>"; };
+		36EBD9242577399B00C70D20 /* TFY_BadgeControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_BadgeControl.h; sourceTree = "<group>"; };
+		36EBD9252577399B00C70D20 /* TFY_BadgeControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_BadgeControl.m; sourceTree = "<group>"; };
+		36EBD92A25773AFA00C70D20 /* UIView+Badge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Badge.h"; sourceTree = "<group>"; };
+		36EBD92B25773AFA00C70D20 /* UIView+Badge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Badge.m"; sourceTree = "<group>"; };
+		36EBD93025773D8600C70D20 /* UIBarButtonItem+Badge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Badge.h"; sourceTree = "<group>"; };
+		36EBD93125773D8600C70D20 /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
+		36EBD93625773E8900C70D20 /* UITabBarItem+Badge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITabBarItem+Badge.h"; sourceTree = "<group>"; };
+		36EBD93725773E8900C70D20 /* UITabBarItem+Badge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITabBarItem+Badge.m"; sourceTree = "<group>"; };
 		36EE1100250A17DE00D24B3C /* TFY_LayoutCategoryKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_LayoutCategoryKit.h; sourceTree = "<group>"; };
 		36EE1101250A18CF00D24B3C /* TFY_Timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Timer.h; sourceTree = "<group>"; };
 		36EE1102250A18CF00D24B3C /* TFY_Timer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Timer.m; sourceTree = "<group>"; };
@@ -440,6 +453,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		36EBD922257738CE00C70D20 /* TFY_BadgeView */ = {
+			isa = PBXGroup;
+			children = (
+				36EBD9232577393B00C70D20 /* TFY_BadgeViewHeader.h */,
+				36EBD9242577399B00C70D20 /* TFY_BadgeControl.h */,
+				36EBD9252577399B00C70D20 /* TFY_BadgeControl.m */,
+				36EBD92A25773AFA00C70D20 /* UIView+Badge.h */,
+				36EBD92B25773AFA00C70D20 /* UIView+Badge.m */,
+				36EBD93025773D8600C70D20 /* UIBarButtonItem+Badge.h */,
+				36EBD93125773D8600C70D20 /* UIBarButtonItem+Badge.m */,
+				36EBD93625773E8900C70D20 /* UITabBarItem+Badge.h */,
+				36EBD93725773E8900C70D20 /* UITabBarItem+Badge.m */,
+			);
+			path = TFY_BadgeView;
+			sourceTree = "<group>";
+		};
 		5655835D243196E000020D3C = {
 			isa = PBXGroup;
 			children = (
@@ -556,6 +585,7 @@
 			children = (
 				565583B62431998600020D3C /* TFY_CategoriesHeader.h */,
 				565583F12431B89B00020D3C /* TFY_Define.h */,
+				36EBD922257738CE00C70D20 /* TFY_BadgeView */,
 				565583AE2431990A00020D3C /* TFY_UI */,
 				565583AF2431990A00020D3C /* TFY_Foundation */,
 			);
@@ -1115,6 +1145,7 @@
 				565584202431C37200020D3C /* TFY_PanGestureChainModel.m in Sources */,
 				565584002431BA8700020D3C /* UIViewController+TFY_Tools.m in Sources */,
 				565583CC2431AF4700020D3C /* NSObject+TFY_Tools.m in Sources */,
+				36EBD9262577399B00C70D20 /* TFY_BadgeControl.m in Sources */,
 				36C3349824ED24EE00DA6FB2 /* WKWebView+TFY_Extension.m in Sources */,
 				565584882431CF4400020D3C /* TFY_TableViewCellChainModel.m in Sources */,
 				36CE97BE254FBB830065B366 /* UIImage+iOS13DarkMode.m in Sources */,
@@ -1123,8 +1154,10 @@
 				565584BC2431D57500020D3C /* TFY_TransFormLayerChainModel.m in Sources */,
 				565584232431C3DE00020D3C /* TFY_PinchGestureChainModel.m in Sources */,
 				565584942431D0E400020D3C /* TFY_ViewChainModel.m in Sources */,
+				36EBD92C25773AFA00C70D20 /* UIView+Badge.m in Sources */,
 				36C334A024ED26CE00DA6FB2 /* NSDate+TFY_Date.m in Sources */,
 				5655847C2431CDB800020D3C /* TFY_ScrollViewChainModel.m in Sources */,
+				36EBD93825773E8900C70D20 /* UITabBarItem+Badge.m in Sources */,
 				36867DB724EBA1DB00A761BC /* UIFont+TFY_Tools.m in Sources */,
 				565584602431C91300020D3C /* TFY_ActivityIndicatorViewModel.m in Sources */,
 				36BA238724EE488000CE8275 /* UITableViewCell+TFY_Chain.m in Sources */,
@@ -1134,6 +1167,7 @@
 				565584A42431D35B00020D3C /* TFY_EmiiterLayerChainModel.m in Sources */,
 				565584B02431D46E00020D3C /* TFY_ScrollLayerChainModel.m in Sources */,
 				5655847F2431CDFC00020D3C /* TFY_SegmentedControlChainModel.m in Sources */,
+				36EBD93225773D8600C70D20 /* UIBarButtonItem+Badge.m in Sources */,
 				5655841D2431C0B700020D3C /* TFY_LongPressGestureChainModel.m in Sources */,
 				565584AA2431D3F200020D3C /* TFY_LayerChainModel.m in Sources */,
 				36867DB024EBA0B000A761BC /* UIDevice+TFY_Tools.m in Sources */,
