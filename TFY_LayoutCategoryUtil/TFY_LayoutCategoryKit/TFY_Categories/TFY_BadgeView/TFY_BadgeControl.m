@@ -34,7 +34,7 @@
 - (void)setupSubviews
 {
     self.layer.masksToBounds = YES;
-    self.layer.cornerRadius = 9.0;
+    self.layer.cornerRadius = 7.0;
     self.backgroundColor = UIColor.redColor;
     self.flexMode = BadgeViewFlexModeTail;
     

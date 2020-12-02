@@ -18,11 +18,11 @@ typedef NS_ENUM(NSUInteger, BadgeViewFlexMode);
 
 @required
 
-@property (nonatomic, strong, readonly) TFY_BadgeControl *badgeView;
+@property (nonatomic, strong, readonly) TFY_BadgeControl * _Nonnull badgeView;
 /**
  添加带文本内容的Badge, 默认右上角, 红色, 18pts
  */
-- (void)tfy_addBadgeWithText:(NSString *)text;
+- (void)tfy_addBadgeWithText:(NSString * _Nonnull)text;
 /**
  添加带数字的Badge, 默认右上角,红色,18pts
  */
@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, BadgeViewFlexMode);
 /**
  添加带颜色的小圆点, 默认右上角, 红色, 8pts
  */
-- (void)tfy_addDotWithColor:(UIColor *)color;
+- (void)tfy_addDotWithColor:(UIColor * _Nonnull)color;
 /**
  设置Badge的高度,因为Badge宽度是动态可变的,通过改变Badge高度,其宽度也按比例变化,方便布局
  (注意: 此方法需要将Badge添加到控件上后再调用!!!)
