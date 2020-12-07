@@ -23,6 +23,13 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     [super viewDidLoad];
     self.view.backgroundColor = TFY_ColorHexString(@"ffffff");
 
+    self.navigationItem.leftBarButtonItem = tfy_barbtnItem().tfy_titleItem(@"添加标签",15,[UIColor redColor],self,@selector(timeimageClick));
+    TFY_QueueStartAfterTime(0.5)
+    [self.navigationItem.leftBarButtonItem tfy_addBadgeWithText:@"4"];
+    TFY_queueEnd
+    
+    self.navigationItem.rightBarButtonItem = tfy_barbtnItem().tfy_titleItem(@"减少标签",15,[UIColor redColor],self,@selector(timeimageClick2));
+    
     UIButtonModelSet()
     .multiple(3)
     .part_first()
@@ -104,6 +111,8 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     })
     .assignTo(^(__kindof UIView * _Nonnull view) {
             self.titleLabel = view;
+        [self.titleLabel tfy_addBadgeWithText:@"3333"];
+        [self.titleLabel tfy_setBadgeFlexMode:BadgeViewFlexModeMiddle];
     });
     
         UITextFieldModelSet()
@@ -131,11 +140,21 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     .clipRadius(CornerClipTypeBothTop, 10)
     .addToSuperView(self.view)
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
-           make.left.equalTo(self.titleLabel);
-           make.right.equalTo(self.titleLabel);
-           make.top.equalTo(self.textfiled.mas_bottom).offset(20);
-           make.height.mas_equalTo(80);
+       make.left.equalTo(self.titleLabel);
+       make.right.equalTo(self.titleLabel);
+       make.top.equalTo(self.textfiled.mas_bottom).offset(20);
+       make.height.mas_equalTo(80);
     });
+    
+    TfySY_TabBarController *tabBarVC = (TfySY_TabBarController *)self.tabBarController;
+    TfySY_TabBarItem *item = tabBarVC.tfySY_TabBar.currentSelectItem; // 因为已经到这个页面，说明就是当前的选项卡item
+    // 设置徽标位置
+    TfySY_TabBarConfigModel *itemModel = item.itemModel;
+    itemModel.itemBadgeStyle = TfySY_TabBarItemBadgeStyleTopCenter; // 因为是item强引用model，所以两个model的指针相同，可以直接设置
+    
+    item.badgeLabel.badgeWidth = 15;  // 宽度
+    item.badgeLabel.badgeHeight = 15;  // 高度
+    item.badge = @"7";
     
 }
 
@@ -150,6 +169,14 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.textfiled resignFirstResponder];
+}
+
+- (void)timeimageClick {
+    [self.navigationItem.leftBarButtonItem tfy_increase];
+}
+
+- (void)timeimageClick2 {
+    [self.navigationItem.leftBarButtonItem tfy_decrease];
 }
 
 @end
