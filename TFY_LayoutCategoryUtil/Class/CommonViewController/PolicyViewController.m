@@ -30,7 +30,7 @@ TFY_PROPERTY_OBJECT_STRONG(UILabel, effectDate);
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor tfy_colorWithHexString:@"000000" alpha:0.8];
     [self setupUI];
     [self loadData];
     
