@@ -35,7 +35,7 @@ static NSString *const kBadgeView = @"kBadgeView";
     }
 }
 
-- (BOOL)emptyWithString:(NSString *)string{
+- (BOOL)emptyWithString:(NSString *)string {
     if (string.length == 0 || [string isEqualToString:@""] || string == nil || string == NULL || [string isEqual:[NSNull null]] || [string isEqualToString:@" "] || [string isEqualToString:@"(null)"] || [string isEqualToString:@"<null>"]) {
         return YES;
     }
