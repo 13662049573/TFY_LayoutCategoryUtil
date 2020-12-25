@@ -46,13 +46,25 @@
 #define TFY_semaphoreEnd  });
 
 
+/**
+*  完美解决Xcode NSLog打印不全的宏
+*/
 #ifdef DEBUG
 
-#define NSLog(FORMAT, ...) fprintf(stderr, "\n\n******(class)%s(begin)******\n(SEL)%s\n(line)%d\n(data)%s\n******(class)%s(end)******\n\n", [[[NSString stringWithUTF8String: __FILE__] lastPathComponent] UTF8String], __FUNCTION__, __LINE__, [[NSString stringWithFormat: FORMAT, ## __VA_ARGS__] UTF8String], [[[NSString stringWithUTF8String: __FILE__] lastPathComponent] UTF8String])
+#define NSLog(FORMAT, ...) {\
+     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];\
+     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];\
+     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];\
+     NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];\
+     [dateFormatter setTimeZone:timeZone];\
+     [dateFormatter setDateFormat:@"HH:mm:ss.SSSSSSZ"];\
+     NSString *str = [dateFormatter stringFromDate:[NSDate date]];\
+     fprintf(stderr,"打印结果:--->时间：%s【文件：%s--->行：%d】函数：%s\n%s\n",[str UTF8String],[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__,__PRETTY_FUNCTION__,[[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);\
+}
 
 #else
 
-#define NSLog(FORMAT, ...) nil
+   # define NSLog(...);
 
 #endif
 
