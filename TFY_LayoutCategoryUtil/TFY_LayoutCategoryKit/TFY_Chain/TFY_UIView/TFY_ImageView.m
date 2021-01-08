@@ -737,6 +737,7 @@ static NSHashTable *allAnimatedImagesWeak;
 + (instancetype)animatedImageWithGIFData:(NSData *)data
 {
     TFY_AnimatedImage *animatedImage = [[TFY_AnimatedImage alloc] initWithAnimatedGIFData:data];
+    animatedImage.loopCount = 0;
     return animatedImage;
 }
 

@@ -51,7 +51,7 @@ extern const NSTimeInterval kAnimatedImageDelayTimeIntervalMinimum;
 /**
  0表示无限期地重复动画
  */
-@property (nonatomic, assign, readonly) NSUInteger loopCount;
+@property (nonatomic, assign) NSUInteger loopCount;
 /**
  类型NSTimeInterval框在NSNumber ' s中
  */
