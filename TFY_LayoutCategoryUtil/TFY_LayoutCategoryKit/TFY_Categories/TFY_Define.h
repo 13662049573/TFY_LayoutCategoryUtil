@@ -51,20 +51,11 @@
 */
 #ifdef DEBUG
 
-#define NSLog(FORMAT, ...) {\
-     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];\
-     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];\
-     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];\
-     NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];\
-     [dateFormatter setTimeZone:timeZone];\
-     [dateFormatter setDateFormat:@"HH:mm:ss.SSSSSSZ"];\
-     NSString *str = [dateFormatter stringFromDate:[NSDate date]];\
-     fprintf(stderr,"打印结果:--->时间：%s【文件：%s--->行：%d】函数：%s\n%s\n",[str UTF8String],[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__,__PRETTY_FUNCTION__,[[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);\
-}
+#define NSLog(format, ...) printf("class: <%p %s:(%d) > method: %s \n%s\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] )
 
 #else
 
-   # define NSLog(...);
+#define NSLog(format, ...)
 
 #endif
 

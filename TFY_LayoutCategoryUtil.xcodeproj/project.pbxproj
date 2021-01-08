@@ -12,6 +12,7 @@
 		360312C12501E24B00EFCA27 /* TFY_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 360312C02501E24B00EFCA27 /* TFY_Utils.m */; };
 		361D7DDE255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D7DDD255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m */; };
 		361D7DE4255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D7DE3255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m */; };
+		361E3C1425A7EBE3003A822F /* TFY_ImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361E3C1325A7EBE3003A822F /* TFY_ImageView.m */; };
 		3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163B24FF336D00CC0024 /* CommonViewController.m */; };
 		3654163F24FF345000CC0024 /* CommonNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163E24FF345000CC0024 /* CommonNavigationBar.m */; };
 		3654164224FF360100CC0024 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164124FF360100CC0024 /* NavigationController.m */; };
@@ -151,6 +152,8 @@
 		361D7DDD255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+TFY_Tools.m"; sourceTree = "<group>"; };
 		361D7DE2255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableParagraphStyle+TFY_Chain.h"; sourceTree = "<group>"; };
 		361D7DE3255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableParagraphStyle+TFY_Chain.m"; sourceTree = "<group>"; };
+		361E3C1225A7EBE3003A822F /* TFY_ImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_ImageView.h; sourceTree = "<group>"; };
+		361E3C1325A7EBE3003A822F /* TFY_ImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_ImageView.m; sourceTree = "<group>"; };
 		3654163A24FF336D00CC0024 /* CommonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonViewController.h; sourceTree = "<group>"; };
 		3654163B24FF336D00CC0024 /* CommonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonViewController.m; sourceTree = "<group>"; };
 		3654163D24FF345000CC0024 /* CommonNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonNavigationBar.h; sourceTree = "<group>"; };
@@ -781,6 +784,8 @@
 				565584962431D12E00020D3C /* TFY_VisualEffectViewChainModel.m */,
 				565584982431D17C00020D3C /* TFY_WebViewChainModel.h */,
 				565584992431D17C00020D3C /* TFY_WebViewChainModel.m */,
+				361E3C1225A7EBE3003A822F /* TFY_ImageView.h */,
+				361E3C1325A7EBE3003A822F /* TFY_ImageView.m */,
 			);
 			path = TFY_UIView;
 			sourceTree = "<group>";
@@ -1076,6 +1081,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5655837C243196E000020D3C /* main.m in Sources */,
+				361E3C1425A7EBE3003A822F /* TFY_ImageView.m in Sources */,
 				565583F72431B9D000020D3C /* UIScrollView+TFY_Tools.m in Sources */,
 				36CE97B2254FB1F40065B366 /* CALayer+TFY_Tools.m in Sources */,
 				36EE1103250A18CF00D24B3C /* TFY_Timer.m in Sources */,

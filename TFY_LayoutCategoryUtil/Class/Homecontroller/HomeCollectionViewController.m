@@ -146,6 +146,7 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
        make.height.mas_equalTo(80);
     });
     
+    
     TfySY_TabBarController *tabBarVC = (TfySY_TabBarController *)self.tabBarController;
     TfySY_TabBarItem *item = tabBarVC.tfySY_TabBar.currentSelectItem; // 因为已经到这个页面，说明就是当前的选项卡item
     // 设置徽标位置
