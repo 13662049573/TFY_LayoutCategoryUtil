@@ -11,7 +11,7 @@
 
 @interface TFY_BadgeControl ()
 @property (nonatomic, strong) UILabel *textLabel;
-@property (nonatomic, strong) TFY_ImageView *imageView;
+@property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIColor *badgeViewColor;
 @property (nonatomic, strong) NSLayoutConstraint *badgeViewHeightConstraint;
 @end
@@ -118,10 +118,10 @@
     return _textLabel;
 }
 
-- (TFY_ImageView *)imageView
+- (UIImageView *)imageView
 {
     if (!_imageView) {
-        _imageView = [[TFY_ImageView alloc] init];
+        _imageView = [[UIImageView alloc] init];
     }
     return _imageView;
 }
