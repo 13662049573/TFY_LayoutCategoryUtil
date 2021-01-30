@@ -74,9 +74,9 @@ Pod::Spec.new do |spec|
 
   spec.frameworks    = "Foundation","UIKit"
 
-  spec.pod_target_xcconfig = {"ENABLE_STRICT_OBJC_MSGSEND" => "NO", 'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) COCOAPODS=1 NDEBUG=1 _DEBUG_TAG_'}
+  # spec.pod_target_xcconfig = {"ENABLE_STRICT_OBJC_MSGSEND" => "NO", 'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) COCOAPODS=1 NDEBUG=1 _DEBUG_TAG_'}
 
-  # spec.pod_target_xcconfig = {"ENABLE_STRICT_OBJC_MSGSEND" => "NO" }
+  spec.pod_target_xcconfig = {"ENABLE_STRICT_OBJC_MSGSEND" => "NO" }
 
   spec.requires_arc  = true
 
