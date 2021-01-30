@@ -221,14 +221,13 @@ typedef NS_ENUM(NSInteger, EdgeAnimationDirection) {
 
 //防止手势被覆盖
 - (void)tfy_addGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {
-
     if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
         UIPanGestureRecognizer *pan = objc_getAssociatedObject(self, (__bridge const void *)(PanGestureKey));
         if (pan && pan!= gestureRecognizer) {
             return;
         }
     }
-    objc_msgSend(self, NSSelectorFromString(@"tfy_addGestureRecognizer:"),gestureRecognizer);
+    ((void(*)(id,SEL, id))objc_msgSend)(self,NSSelectorFromString(@"tfy_addGestureRecognizer:"), gestureRecognizer);
 }
 
 #pragma mark animation
