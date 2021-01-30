@@ -19,6 +19,7 @@
 		3654164524FF364A00CC0024 /* PolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164424FF364A00CC0024 /* PolicyViewController.m */; };
 		3654164824FF369C00CC0024 /* PolicyWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164724FF369C00CC0024 /* PolicyWebViewController.m */; };
 		3654E29925C4EF820042826D /* AntmeuenTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654E29825C4EF820042826D /* AntmeuenTwoController.m */; };
+		3654E2F125C544220042826D /* UIView+EdgeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654E2F025C544220042826D /* UIView+EdgeAnimation.m */; };
 		36564D542586307800167927 /* UIBezierPath+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36564D532586307800167927 /* UIBezierPath+TFY_Tools.m */; };
 		36588F3925C3E8C0008AECDD /* TFY_ShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36588F3825C3E8C0008AECDD /* TFY_ShadowView.m */; };
 		367EC247250603FC004BAE5C /* TFY_Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EC246250603FC004BAE5C /* TFY_Scene.m */; };
@@ -168,6 +169,8 @@
 		3654164724FF369C00CC0024 /* PolicyWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PolicyWebViewController.m; sourceTree = "<group>"; };
 		3654E29725C4EF820042826D /* AntmeuenTwoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AntmeuenTwoController.h; sourceTree = "<group>"; };
 		3654E29825C4EF820042826D /* AntmeuenTwoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AntmeuenTwoController.m; sourceTree = "<group>"; };
+		3654E2EF25C544220042826D /* UIView+EdgeAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+EdgeAnimation.h"; sourceTree = "<group>"; };
+		3654E2F025C544220042826D /* UIView+EdgeAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+EdgeAnimation.m"; sourceTree = "<group>"; };
 		36564D522586307800167927 /* UIBezierPath+TFY_Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+TFY_Tools.h"; sourceTree = "<group>"; };
 		36564D532586307800167927 /* UIBezierPath+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+TFY_Tools.m"; sourceTree = "<group>"; };
 		36588F3725C3E8C0008AECDD /* TFY_ShadowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_ShadowView.h; sourceTree = "<group>"; };
@@ -646,6 +649,8 @@
 				36CE97B7254FB98C0065B366 /* UIColor+iOS13DarkMode.m */,
 				36CE97BC254FBB830065B366 /* UIImage+iOS13DarkMode.h */,
 				36CE97BD254FBB830065B366 /* UIImage+iOS13DarkMode.m */,
+				3654E2EF25C544220042826D /* UIView+EdgeAnimation.h */,
+				3654E2F025C544220042826D /* UIView+EdgeAnimation.m */,
 			);
 			path = TFY_UI;
 			sourceTree = "<group>";
@@ -1132,6 +1137,7 @@
 				565584E22431E49600020D3C /* PersonalTableViewController.m in Sources */,
 				5655842C2431C4DC00020D3C /* TFY_TapGestureChainModel.m in Sources */,
 				565584062431BAFA00020D3C /* NSAttributedString+TFY_Tools.m in Sources */,
+				3654E2F125C544220042826D /* UIView+EdgeAnimation.m in Sources */,
 				36CE97A0254FAA590065B366 /* TFY_iOS13DarkMode_MonitorView.m in Sources */,
 				565584112431BD2100020D3C /* TFY_ChainBaseModel.m in Sources */,
 				565584C92431DEEE00020D3C /* PolicyManager.m in Sources */,
@@ -1364,6 +1370,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_TEAM = QH95759TSS;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TFY_LayoutCategoryUtil/PCH/TFY_PrefixHeader.pch;
@@ -1389,6 +1396,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_TEAM = QH95759TSS;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TFY_LayoutCategoryUtil/PCH/TFY_PrefixHeader.pch;

@@ -16,8 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     scroll.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    scroll.tfy_edgeFillColor = UIColor.orangeColor;
+    [scroll tfy_addEdgeEffect];
     [self.view addSubview:scroll];
     
     /// 圆角 + 阴影
@@ -106,6 +109,8 @@
     
     CGFloat h = v6.frame.origin.y + 200 < self.view.bounds.size.height ? self.view.bounds.size.height+1 : v6.frame.origin.y + 200;
     scroll.contentSize = CGSizeMake(self.view.bounds.size.width, h);
+    
+    
 }
 
 /*
