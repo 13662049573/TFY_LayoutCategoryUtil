@@ -24,7 +24,7 @@
     [self.view addSubview:scroll];
     
     /// 圆角 + 阴影
-    TFY_ShadowView *v1 = [[TFY_ShadowView alloc] initWithFrame:CGRectMake(50, 100, 100, 100)];
+    TFY_ShadowView *v1 = [[TFY_ShadowView alloc] initWithFrame:CGRectMake(50, 20, 100, 100)];
     v1.backgroundColor = [UIColor whiteColor];
     [v1 shaodw];
     [v1 cornerRadius:10];
@@ -38,7 +38,7 @@
     [scroll addSubview:v1];
     
     /// 单个圆角 + 阴影
-    TFY_ShadowView *v2 = [[TFY_ShadowView alloc] initWithFrame:CGRectMake(200, 100, 100, 100)];
+    TFY_ShadowView *v2 = [[TFY_ShadowView alloc] initWithFrame:CGRectMake(200, 20, 100, 100)];
     v2.backgroundColor = [UIColor whiteColor];
     [v2 shaodwRadius:10 shadowColor:[UIColor colorWithWhite:0 alpha:0.5] shadowOffset:CGSizeMake(0, 0) byShadowSide:(ShadowSideAllSides)];
     [v2 cornerRadius:10 byRoundingCorners:(UIRectCornerTopLeft)];
@@ -52,7 +52,7 @@
     [scroll addSubview:v2];
     
     /// 上下阴影 + 单个圆角
-    TFY_ShadowView *v3 = [[TFY_ShadowView alloc] initWithFrame:CGRectMake(50, 250, 100, 100)];
+    TFY_ShadowView *v3 = [[TFY_ShadowView alloc] initWithFrame:CGRectMake(50, 160, 100, 100)];
     v3.backgroundColor = [UIColor whiteColor];
     [v3 verticalShaodwRadius:10 shadowColor:[UIColor colorWithWhite:0 alpha:0.5] shadowOffset:CGSizeZero];
     [v3 cornerRadius:10 byRoundingCorners:(UIRectCornerTopRight)];
@@ -66,7 +66,7 @@
     [scroll addSubview:v3];
     
     /// 单边阴影 + 单个圆角
-    TFY_ShadowView *v4 = [[TFY_ShadowView alloc] initWithFrame:CGRectMake(200, 250, 100, 100)];
+    TFY_ShadowView *v4 = [[TFY_ShadowView alloc] initWithFrame:CGRectMake(200, 160, 100, 100)];
     v4.backgroundColor = [UIColor whiteColor];
     [v4 shaodwRadius:10 shadowColor:[UIColor colorWithWhite:0 alpha:0.5] shadowOffset:CGSizeMake(0, 0) byShadowSide:(ShadowSideRight)];
     [v4 cornerRadius:10 byRoundingCorners:(UIRectCornerBottomLeft)];
@@ -80,7 +80,7 @@
     [scroll addSubview:v4];
     
     /// 上边阴影 + 上边圆角
-    TFY_ShadowView *v5 = [[TFY_ShadowView alloc] initWithFrame:CGRectMake(50, 400, 100, 100)];
+    TFY_ShadowView *v5 = [[TFY_ShadowView alloc] initWithFrame:CGRectMake(50, 300, 100, 100)];
     v5.backgroundColor = [UIColor whiteColor];
     [v5 shaodwRadius:10 shadowColor:[UIColor colorWithWhite:0 alpha:0.5] shadowOffset:CGSizeMake(0, 0) byShadowSide:(ShadowSideTop)];
     [v5 cornerRadius:10 byRoundingCorners:(UIRectCornerTopLeft|UIRectCornerTopRight)];
@@ -94,7 +94,7 @@
     [scroll addSubview:v5];
     
     /// 下边阴影 + 下边圆角
-    TFY_ShadowView *v6 = [[TFY_ShadowView alloc] initWithFrame:CGRectMake(200, 400, 100, 100)];
+    TFY_ShadowView *v6 = [[TFY_ShadowView alloc] initWithFrame:CGRectMake(200, 300, 100, 100)];
     v6.backgroundColor = [UIColor whiteColor];
     [v6 shaodwRadius:10 shadowColor:[UIColor colorWithWhite:0 alpha:0.5] shadowOffset:CGSizeMake(0, 0) byShadowSide:(ShadowSideBottom)];
     [v6 cornerRadius:10 byRoundingCorners:(UIRectCornerBottomLeft|UIRectCornerBottomRight)];
@@ -111,16 +111,29 @@
     scroll.contentSize = CGSizeMake(self.view.bounds.size.width, h);
     
     
+    CGFloat kViewHeight = 200;
+    UIView *showView = [[UIView alloc] initWithFrame:(CGRectMake(0, self.view.frame.size.height-kViewHeight, self.view.frame.size.width, kViewHeight))];
+    showView.backgroundColor = UIColor.clearColor;
+    [self.view addSubview:showView];
+    
+    CGFloat kRadian = -35;
+    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+    [bezierPath moveToPoint: CGPointMake(0, kRadian)];
+    [bezierPath addQuadCurveToPoint:CGPointMake(self.view.frame.size.width, kRadian) controlPoint:CGPointMake(self.view.frame.size.width/2, -kRadian)];
+    [bezierPath addLineToPoint: CGPointMake(self.view.frame.size.width, showView.frame.size.height)];
+    [bezierPath addLineToPoint: CGPointMake(0, showView.frame.size.height)];
+    
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.path = bezierPath.CGPath;
+    layer.strokeColor = UIColor.clearColor.CGColor;
+    layer.fillColor = UIColor.whiteColor.CGColor;
+    layer.cornerRadius = 3.0;
+    layer.masksToBounds = NO;
+    layer.shadowOffset = CGSizeMake(-5, -5); //(0,0)时是四周都有阴影
+    layer.shadowColor = [UIColor grayColor].CGColor;
+    layer.shadowOpacity = 0.1;
+    [showView.layer addSublayer:layer];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
