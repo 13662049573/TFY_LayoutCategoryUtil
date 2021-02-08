@@ -177,6 +177,7 @@
 		36588F3825C3E8C0008AECDD /* TFY_ShadowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_ShadowView.m; sourceTree = "<group>"; };
 		367EC245250603FC004BAE5C /* TFY_Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Scene.h; sourceTree = "<group>"; };
 		367EC246250603FC004BAE5C /* TFY_Scene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Scene.m; sourceTree = "<group>"; };
+		36836BC425D108F0004DDD38 /* TFY_Inlinefunction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Inlinefunction.h; sourceTree = "<group>"; };
 		36867DAC24EBA0AF00A761BC /* UIDevice+TFY_Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+TFY_Tools.m"; sourceTree = "<group>"; };
 		36867DAD24EBA0AF00A761BC /* UIDevice+TFY_Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+TFY_Tools.h"; sourceTree = "<group>"; };
 		36867DB224EBA19600A761BC /* UIControl+TFY_Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+TFY_Tools.h"; sourceTree = "<group>"; };
@@ -602,6 +603,7 @@
 			children = (
 				565583B62431998600020D3C /* TFY_CategoriesHeader.h */,
 				565583F12431B89B00020D3C /* TFY_Define.h */,
+				36836BC425D108F0004DDD38 /* TFY_Inlinefunction.h */,
 				36EBD922257738CE00C70D20 /* TFY_BadgeView */,
 				565583AE2431990A00020D3C /* TFY_UI */,
 				565583AF2431990A00020D3C /* TFY_Foundation */,
