@@ -24,9 +24,10 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     self.view.backgroundColor = TFY_ColorHexString(@"ffffff");
 
     self.navigationItem.leftBarButtonItem = tfy_barbtnItem().tfy_titleItem(@"添加标签",15,[UIColor redColor],self,@selector(timeimageClick));
-    TFY_QueueStartAfterTime(0.5)
-    [self.navigationItem.leftBarButtonItem tfy_addBadgeWithText:@"4"];
-    TFY_queueEnd
+  
+    TFY_GCD_QUEUE_TIME(0.5, ^{
+        [self.navigationItem.leftBarButtonItem tfy_addBadgeWithText:@"4"];
+    });
     
     self.navigationItem.rightBarButtonItem = tfy_barbtnItem().tfy_titleItem(@"减少标签",15,[UIColor redColor],self,@selector(timeimageClick2));
     

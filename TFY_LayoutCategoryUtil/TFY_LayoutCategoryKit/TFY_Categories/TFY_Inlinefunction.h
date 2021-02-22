@@ -24,6 +24,21 @@ NS_INLINE void TFY_GCD_QUEUE_ASYNC(dispatch_block_t _Nonnull block) {
     }
 }
 
+NS_INLINE void TFY_GCD_QUEUE_TIME(NSInteger time,dispatch_block_t _Nonnull block) {
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);//并发队列-延迟执行
+    if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(queue)) == 0) {
+        dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC));
+        dispatch_after(when, queue, ^{
+            block();
+        });
+    } else {
+        dispatch_queue_t queuetime = dispatch_get_main_queue();//主队列--延迟执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), queuetime, ^{
+            block();
+        });
+    }
+}
+
 NS_INLINE void TFY_GCD_QUEUE_MAIN(dispatch_block_t _Nonnull block) {
     dispatch_queue_t queue = dispatch_get_main_queue();
     if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(queue)) == 0) {
