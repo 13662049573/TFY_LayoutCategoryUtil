@@ -298,7 +298,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)tfy_getMonthAfterMonth:(NSInteger)Month;
 
 ///当前时间戳
-+ (NSInteger)tfy_getNowTimestamp;
++ (NSInteger)tfy_getNowTimestampFormatter:(NSString *)format;
 
 ///将字符串转成NSDate类型
 + (NSDate *)tfy_dateFromString:(NSString *)dateString;

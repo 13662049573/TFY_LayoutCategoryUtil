@@ -1059,4 +1059,18 @@
     NSDate *localeDate = [inputDate dateByAddingTimeInterval:interval];
     return localeDate;
 }
+
++ (NSInteger)tfy_getNowTimestampFormatter:(NSString *)format {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:format];
+    //设置时区,这个对于时间的处理有时很重要
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
+    [formatter setTimeZone:timeZone];
+    NSDate *datenow = [NSDate date];//现在时间
+    //时间转时间戳的方法:
+    NSInteger timeSp = [[NSNumber numberWithDouble:[datenow timeIntervalSince1970]] integerValue];
+    return timeSp;
+}
 @end
