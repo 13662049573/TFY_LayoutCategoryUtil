@@ -14,7 +14,7 @@
 #pragma mark-------------------------------------------内联函数---------------------------------------------
 
 /***线程****/
-
+///异步
 NS_INLINE void TFY_GCD_QUEUE_ASYNC(dispatch_block_t _Nonnull block) {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(queue)) == 0) {
@@ -23,7 +23,7 @@ NS_INLINE void TFY_GCD_QUEUE_ASYNC(dispatch_block_t _Nonnull block) {
         dispatch_async(queue, block);
     }
 }
-
+///延迟加载
 NS_INLINE void TFY_GCD_QUEUE_TIME(NSInteger time,dispatch_block_t _Nonnull block) {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);//并发队列-延迟执行
     if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(queue)) == 0) {
@@ -38,7 +38,7 @@ NS_INLINE void TFY_GCD_QUEUE_TIME(NSInteger time,dispatch_block_t _Nonnull block
         });
     }
 }
-
+///主线程
 NS_INLINE void TFY_GCD_QUEUE_MAIN(dispatch_block_t _Nonnull block) {
     dispatch_queue_t queue = dispatch_get_main_queue();
     if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(queue)) == 0) {
