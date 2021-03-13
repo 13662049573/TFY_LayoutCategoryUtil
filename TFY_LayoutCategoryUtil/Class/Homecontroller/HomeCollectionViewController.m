@@ -37,13 +37,11 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     .text(@"第一个", UIControlStateNormal).textColor(UIColor.redColor, UIControlStateNormal)
     .backgroundColor(UIColor.yellowColor)
     .cornerRadius(40)
-//    .image(TFY_ImageNamed(@"login_phone"), UIControlStateNormal)
     .assignToObjects(^(NSArray * _Nonnull objs) {
 //        self.phoneBtn = objs[0];
 //        self.weixinBtn = objs[1];
 //        self.qqBtn = objs[2];
     })
-//    .addTarget(self, @selector(phoneClick:), UIControlEventTouchUpInside)
     .makeTag(1)
     .addToSuperView(self.view)
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
@@ -53,11 +51,9 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     })
     .part_sencond()
     .text(@"第二个", UIControlStateNormal).textColor(UIColor.redColor, UIControlStateNormal)
-//    .image(TFY_ImageNamed(@"login_weixin"),UIControlStateNormal)
     .makeTag(2)
     .addToSuperView(self.view)
     .backgroundColor(UIColor.purpleColor)
-//    .addTarget(self, @selector(phoneClick:), UIControlEventTouchUpInside)
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
         make.centerX.equalTo(self.view).offset(0);
         make.top.equalTo(self.view).offset(100);
@@ -65,10 +61,8 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     })
     .part_third()
     .text(@"第三个", UIControlStateNormal).textColor(UIColor.redColor, UIControlStateNormal)
-//    .addTarget(self, @selector(phoneClick:), UIControlEventTouchUpInside)
     .makeTag(3)
     .backgroundColor(UIColor.blueColor)
-//    .image(TFY_ImageNamed(@"login_qq"),UIControlStateNormal)
     .addToSuperView(self.view)
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
         make.right.equalTo(self.view).offset(-68);
@@ -116,13 +110,13 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
         [self.titleLabel tfy_setBadgeFlexMode:BadgeViewFlexModeMiddle];
     });
     
-        UITextFieldModelSet()
+     UITextFieldModelSet()
     .placeholder(@"这是一个输入框")
     .placeholderColor(UIColor.whiteColor)
     .allowsEditingTextAttributes(YES)
     .font([UIFont systemFontOfSize:15 weight:UIFontWeightBold])
     .textColor(UIColor.redColor)
-    .contentInsets(UIEdgeInsetsMake(-50, 10, 10, 10))
+    .contentInsets(UIEdgeInsetsMake(0, 10, 10, 10))
     .backgroundColor(UIColor.orangeColor)
     .cornerRadius(10)
     .addToSuperView(self.view)
@@ -133,7 +127,7 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
         make.left.equalTo(self.titleLabel);
         make.right.equalTo(self.titleLabel);
         make.top.equalTo(self.titleLabel.mas_bottom).offset(20);
-        make.height.mas_equalTo(100);
+        make.height.mas_equalTo(50);
     });
     
     UIViewModelSet()
