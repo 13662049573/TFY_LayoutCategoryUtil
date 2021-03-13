@@ -10,8 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#define EmptyDataSetDeprecated(instead) DEPRECATED_MSG_ATTRIBUTE(" Use " # instead " instead")
-
 @protocol EmptyDataSetSource;
 @protocol EmptyDataSetDelegate;
 /**
@@ -20,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface UIScrollView (TFY_Tools)
 
-- (void)adJustedContentIOS11;
+- (void)tfy_adJustedContentIOS11;
 /**
  * 头部缩放视图图片
  */
@@ -45,21 +43,21 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  空数据集数据源。
  */
-@property (nonatomic, weak) id <EmptyDataSetSource> emptyDataSetSource;
+@property (nonatomic, weak) id <EmptyDataSetSource> tfy_emptyDataSetSource;
 /**
  空数据集委托。
  */
-@property (nonatomic, weak) id <EmptyDataSetDelegate> emptyDataSetDelegate;
+@property (nonatomic, weak) id <EmptyDataSetDelegate> tfy_emptyDataSetDelegate;
 /**
  如果任何空数据集是可见的，则是。
  */
-@property (nonatomic, readonly, getter = isEmptyDataSetVisible) BOOL emptyDataSetVisible;
+@property (nonatomic, readonly, getter = tfy_isEmptyDataSetVisible) BOOL tfy_emptyDataSetVisible;
 
 /**
  重新加载空数据集内容接收器。
  调用这个方法来强制刷新所有数据。调用-reloadData与此类似，但这只强制重新加载空数据集，而不是整个表视图或集合视图。
  */
-- (void)reloadEmptyDataSet;
+- (void)tfy_reloadEmptyDataSet;
 
 @end
 
@@ -107,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  返回：图像动画
  */
-- (CAAnimation *) imageAnimationForEmptyDataSet:(UIScrollView *) scrollView;
+- (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *) scrollView;
 
 /**
  请求数据源提供用于指定按钮状态的标题。
@@ -163,7 +161,6 @@ NS_ASSUME_NONNULL_BEGIN
  一个通知委托的scrollView子类对象。
  返回：垂直和水平对齐的偏移量。
  */
-- (CGPoint)offsetForEmptyDataSet:(UIScrollView *)scrollView EmptyDataSetDeprecated(-verticalOffsetForEmptyDataSet:);
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView;
 
 /**
@@ -234,22 +231,6 @@ NS_ASSUME_NONNULL_BEGIN
  返回： YES如果空数据集被允许动画
  */
 - (BOOL)emptyDataSetShouldAnimateImageView:(UIScrollView *)scrollView;
-
-/**
- 告诉委托空数据集视图已被选中。
- 使用这个方法可以重新定义textfield或searchBar的firstresponder。
-
- 一个通知委托的scrollView子类。
- */
-- (void)emptyDataSetDidTapView:(UIScrollView *)scrollView EmptyDataSetDeprecated(-emptyDataSet:didTapView:);
-
-/**
- 告诉委托操作按钮被点击了。
-
- 一个通知委托的scrollView子类。
- */
-- (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView EmptyDataSetDeprecated(-emptyDataSet:didTapButton:);
-
 /**
  告诉委托空数据集视图已被选中。
  使用这个方法可以重新定义textfield或searchBar的firstresponder。

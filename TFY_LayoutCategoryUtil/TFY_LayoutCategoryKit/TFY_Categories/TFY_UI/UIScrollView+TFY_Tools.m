@@ -124,7 +124,7 @@ static CGFloat const oriImageH = 200;
 
 @implementation UIScrollView (TFY_Tools)
 
-- (void)adJustedContentIOS11{
+- (void)tfy_adJustedContentIOS11{
     if (@available(iOS 11.0, *)) {
         [self setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
     }
@@ -333,19 +333,19 @@ static CGFloat const oriImageH = 200;
 
 #pragma mark - Getters (Public)
 
-- (id<EmptyDataSetSource>)emptyDataSetSource
+- (id<EmptyDataSetSource>)tfy_emptyDataSetSource
 {
     WeakObjectContainer *container = objc_getAssociatedObject(self, kEmptyDataSetSource);
     return container.weakObject;
 }
 
-- (id<EmptyDataSetDelegate>)emptyDataSetDelegate
+- (id<EmptyDataSetDelegate>)tfy_emptyDataSetDelegate
 {
     WeakObjectContainer *container = objc_getAssociatedObject(self, kEmptyDataSetDelegate);
     return container.weakObject;
 }
 
-- (BOOL)isEmptyDataSetVisible
+- (BOOL)tfy_isEmptyDataSetVisible
 {
     UIView *view = objc_getAssociatedObject(self, kEmptyDataSetView);
     return view ? !view.hidden : NO;
@@ -354,7 +354,7 @@ static CGFloat const oriImageH = 200;
 
 #pragma mark - Getters (Private)
 
-- (EmptyDataSetView *)emptyDataSetView
+- (EmptyDataSetView *)tfy_emptyDataSetView
 {
     EmptyDataSetView *view = objc_getAssociatedObject(self, kEmptyDataSetView);
     if (!view)
@@ -372,7 +372,7 @@ static CGFloat const oriImageH = 200;
 
 - (BOOL)tfy_canDisplay
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource conformsToProtocol:@protocol(EmptyDataSetSource)]) {
+    if (self.tfy_emptyDataSetSource && [self.tfy_emptyDataSetSource conformsToProtocol:@protocol(EmptyDataSetSource)]) {
         if ([self isKindOfClass:[UITableView class]] || [self isKindOfClass:[UICollectionView class]] || [self isKindOfClass:[UIScrollView class]]) {
             return YES;
         }
@@ -434,8 +434,8 @@ static CGFloat const oriImageH = 200;
 
 - (NSAttributedString *)tfy_titleLabelString
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(titleForEmptyDataSet:)]) {
-        NSAttributedString *string = [self.emptyDataSetSource titleForEmptyDataSet:self];
+    if (self.tfy_emptyDataSetSource && [self.tfy_emptyDataSetSource respondsToSelector:@selector(titleForEmptyDataSet:)]) {
+        NSAttributedString *string = [self.tfy_emptyDataSetSource titleForEmptyDataSet:self];
         if (string) NSAssert([string isKindOfClass:[NSAttributedString class]], @"You must return a valid NSAttributedString object for -titleForEmptyDataSet:");
         return string;
     }
@@ -444,8 +444,8 @@ static CGFloat const oriImageH = 200;
 
 - (NSAttributedString *)tfy_detailLabelString
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(descriptionForEmptyDataSet:)]) {
-        NSAttributedString *string = [self.emptyDataSetSource descriptionForEmptyDataSet:self];
+    if (self.tfy_emptyDataSetSource && [self.tfy_emptyDataSetSource respondsToSelector:@selector(descriptionForEmptyDataSet:)]) {
+        NSAttributedString *string = [self.tfy_emptyDataSetSource descriptionForEmptyDataSet:self];
         if (string) NSAssert([string isKindOfClass:[NSAttributedString class]], @"You must return a valid NSAttributedString object for -descriptionForEmptyDataSet:");
         return string;
     }
@@ -454,8 +454,8 @@ static CGFloat const oriImageH = 200;
 
 - (UIImage *)tfy_image
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(imageForEmptyDataSet:)]) {
-        UIImage *image = [self.emptyDataSetSource imageForEmptyDataSet:self];
+    if (self.tfy_emptyDataSetSource && [self.tfy_emptyDataSetSource respondsToSelector:@selector(imageForEmptyDataSet:)]) {
+        UIImage *image = [self.tfy_emptyDataSetSource imageForEmptyDataSet:self];
         if (image) NSAssert([image isKindOfClass:[UIImage class]], @"You must return a valid UIImage object for -imageForEmptyDataSet:");
         return image;
     }
@@ -464,8 +464,8 @@ static CGFloat const oriImageH = 200;
 
 - (CAAnimation *)tfy_imageAnimation
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(imageAnimationForEmptyDataSet:)]) {
-        CAAnimation *imageAnimation = [self.emptyDataSetSource imageAnimationForEmptyDataSet:self];
+    if (self.tfy_emptyDataSetSource && [self.tfy_emptyDataSetSource respondsToSelector:@selector(imageAnimationForEmptyDataSet:)]) {
+        CAAnimation *imageAnimation = [self.tfy_emptyDataSetSource imageAnimationForEmptyDataSet:self];
         if (imageAnimation) NSAssert([imageAnimation isKindOfClass:[CAAnimation class]], @"You must return a valid CAAnimation object for -imageAnimationForEmptyDataSet:");
         return imageAnimation;
     }
@@ -474,8 +474,8 @@ static CGFloat const oriImageH = 200;
 
 - (UIColor *)tfy_imageTintColor
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(imageTintColorForEmptyDataSet:)]) {
-        UIColor *color = [self.emptyDataSetSource imageTintColorForEmptyDataSet:self];
+    if (self.tfy_emptyDataSetSource && [self.tfy_emptyDataSetSource respondsToSelector:@selector(imageTintColorForEmptyDataSet:)]) {
+        UIColor *color = [self.tfy_emptyDataSetSource imageTintColorForEmptyDataSet:self];
         if (color) NSAssert([color isKindOfClass:[UIColor class]], @"You must return a valid UIColor object for -imageTintColorForEmptyDataSet:");
         return color;
     }
@@ -484,8 +484,8 @@ static CGFloat const oriImageH = 200;
 
 - (NSAttributedString *)tfy_buttonTitleForState:(UIControlState)state
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(buttonTitleForEmptyDataSet:forState:)]) {
-        NSAttributedString *string = [self.emptyDataSetSource buttonTitleForEmptyDataSet:self forState:state];
+    if (self.tfy_emptyDataSetSource && [self.tfy_emptyDataSetSource respondsToSelector:@selector(buttonTitleForEmptyDataSet:forState:)]) {
+        NSAttributedString *string = [self.tfy_emptyDataSetSource buttonTitleForEmptyDataSet:self forState:state];
         if (string) NSAssert([string isKindOfClass:[NSAttributedString class]], @"You must return a valid NSAttributedString object for -buttonTitleForEmptyDataSet:forState:");
         return string;
     }
@@ -494,8 +494,8 @@ static CGFloat const oriImageH = 200;
 
 - (UIImage *)tfy_buttonImageForState:(UIControlState)state
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(buttonImageForEmptyDataSet:forState:)]) {
-        UIImage *image = [self.emptyDataSetSource buttonImageForEmptyDataSet:self forState:state];
+    if (self.tfy_emptyDataSetSource && [self.tfy_emptyDataSetSource respondsToSelector:@selector(buttonImageForEmptyDataSet:forState:)]) {
+        UIImage *image = [self.tfy_emptyDataSetSource buttonImageForEmptyDataSet:self forState:state];
         if (image) NSAssert([image isKindOfClass:[UIImage class]], @"You must return a valid UIImage object for -buttonImageForEmptyDataSet:forState:");
         return image;
     }
@@ -504,8 +504,8 @@ static CGFloat const oriImageH = 200;
 
 - (UIImage *)tfy_buttonBackgroundImageForState:(UIControlState)state
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(buttonBackgroundImageForEmptyDataSet:forState:)]) {
-        UIImage *image = [self.emptyDataSetSource buttonBackgroundImageForEmptyDataSet:self forState:state];
+    if (self.tfy_emptyDataSetSource && [self.tfy_emptyDataSetSource respondsToSelector:@selector(buttonBackgroundImageForEmptyDataSet:forState:)]) {
+        UIImage *image = [self.tfy_emptyDataSetSource buttonBackgroundImageForEmptyDataSet:self forState:state];
         if (image) NSAssert([image isKindOfClass:[UIImage class]], @"You must return a valid UIImage object for -buttonBackgroundImageForEmptyDataSet:forState:");
         return image;
     }
@@ -514,8 +514,8 @@ static CGFloat const oriImageH = 200;
 
 - (UIColor *)tfy_dataSetBackgroundColor
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(backgroundColorForEmptyDataSet:)]) {
-        UIColor *color = [self.emptyDataSetSource backgroundColorForEmptyDataSet:self];
+    if (self.tfy_emptyDataSetSource && [self.tfy_emptyDataSetSource respondsToSelector:@selector(backgroundColorForEmptyDataSet:)]) {
+        UIColor *color = [self.tfy_emptyDataSetSource backgroundColorForEmptyDataSet:self];
         if (color) NSAssert([color isKindOfClass:[UIColor class]], @"You must return a valid UIColor object for -backgroundColorForEmptyDataSet:");
         return color;
     }
@@ -524,8 +524,8 @@ static CGFloat const oriImageH = 200;
 
 - (UIView *)tfy_customView
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(customViewForEmptyDataSet:)]) {
-        UIView *view = [self.emptyDataSetSource customViewForEmptyDataSet:self];
+    if (self.tfy_emptyDataSetSource && [self.tfy_emptyDataSetSource respondsToSelector:@selector(customViewForEmptyDataSet:)]) {
+        UIView *view = [self.tfy_emptyDataSetSource customViewForEmptyDataSet:self];
         if (view) NSAssert([view isKindOfClass:[UIView class]], @"You must return a valid UIView object for -customViewForEmptyDataSet:");
         return view;
     }
@@ -536,16 +536,16 @@ static CGFloat const oriImageH = 200;
 {
     CGFloat offset = 0.0;
     
-    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(verticalOffsetForEmptyDataSet:)]) {
-        offset = [self.emptyDataSetSource verticalOffsetForEmptyDataSet:self];
+    if (self.tfy_emptyDataSetSource && [self.tfy_emptyDataSetSource respondsToSelector:@selector(verticalOffsetForEmptyDataSet:)]) {
+        offset = [self.tfy_emptyDataSetSource verticalOffsetForEmptyDataSet:self];
     }
     return offset;
 }
 
 - (CGFloat)tfy_verticalSpace
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(spaceHeightForEmptyDataSet:)]) {
-        return [self.emptyDataSetSource spaceHeightForEmptyDataSet:self];
+    if (self.tfy_emptyDataSetSource && [self.tfy_emptyDataSetSource respondsToSelector:@selector(spaceHeightForEmptyDataSet:)]) {
+        return [self.tfy_emptyDataSetSource spaceHeightForEmptyDataSet:self];
     }
     return 0.0;
 }
@@ -554,116 +554,104 @@ static CGFloat const oriImageH = 200;
 #pragma mark - Delegate Getters & Events (Private)
 
 - (BOOL)tfy_shouldFadeIn {
-    if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetShouldFadeIn:)]) {
-        return [self.emptyDataSetDelegate emptyDataSetShouldFadeIn:self];
+    if (self.tfy_emptyDataSetDelegate && [self.tfy_emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetShouldFadeIn:)]) {
+        return [self.tfy_emptyDataSetDelegate emptyDataSetShouldFadeIn:self];
     }
     return YES;
 }
 
 - (BOOL)tfy_shouldDisplay
 {
-    if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetShouldDisplay:)]) {
-        return [self.emptyDataSetDelegate emptyDataSetShouldDisplay:self];
+    if (self.tfy_emptyDataSetDelegate && [self.tfy_emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetShouldDisplay:)]) {
+        return [self.tfy_emptyDataSetDelegate emptyDataSetShouldDisplay:self];
     }
     return YES;
 }
 
 - (BOOL)tfy_shouldBeForcedToDisplay
 {
-    if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetShouldBeForcedToDisplay:)]) {
-        return [self.emptyDataSetDelegate emptyDataSetShouldBeForcedToDisplay:self];
+    if (self.tfy_emptyDataSetDelegate && [self.tfy_emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetShouldBeForcedToDisplay:)]) {
+        return [self.tfy_emptyDataSetDelegate emptyDataSetShouldBeForcedToDisplay:self];
     }
     return NO;
 }
 
 - (BOOL)tfy_isTouchAllowed
 {
-    if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetShouldAllowTouch:)]) {
-        return [self.emptyDataSetDelegate emptyDataSetShouldAllowTouch:self];
+    if (self.tfy_emptyDataSetDelegate && [self.tfy_emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetShouldAllowTouch:)]) {
+        return [self.tfy_emptyDataSetDelegate emptyDataSetShouldAllowTouch:self];
     }
     return YES;
 }
 
 - (BOOL)tfy_isScrollAllowed
 {
-    if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetShouldAllowScroll:)]) {
-        return [self.emptyDataSetDelegate emptyDataSetShouldAllowScroll:self];
+    if (self.tfy_emptyDataSetDelegate && [self.tfy_emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetShouldAllowScroll:)]) {
+        return [self.tfy_emptyDataSetDelegate emptyDataSetShouldAllowScroll:self];
     }
     return NO;
 }
 
 - (BOOL)tfy_isImageViewAnimateAllowed
 {
-    if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetShouldAnimateImageView:)]) {
-        return [self.emptyDataSetDelegate emptyDataSetShouldAnimateImageView:self];
+    if (self.tfy_emptyDataSetDelegate && [self.tfy_emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetShouldAnimateImageView:)]) {
+        return [self.tfy_emptyDataSetDelegate emptyDataSetShouldAnimateImageView:self];
     }
     return NO;
 }
 
 - (void)tfy_willAppear
 {
-    if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetWillAppear:)]) {
-        [self.emptyDataSetDelegate emptyDataSetWillAppear:self];
+    if (self.tfy_emptyDataSetDelegate && [self.tfy_emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetWillAppear:)]) {
+        [self.tfy_emptyDataSetDelegate emptyDataSetWillAppear:self];
     }
 }
 
 - (void)tfy_didAppear
 {
-    if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetDidAppear:)]) {
-        [self.emptyDataSetDelegate emptyDataSetDidAppear:self];
+    if (self.tfy_emptyDataSetDelegate && [self.tfy_emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetDidAppear:)]) {
+        [self.tfy_emptyDataSetDelegate emptyDataSetDidAppear:self];
     }
 }
 
 - (void)tfy_willDisappear
 {
-    if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetWillDisappear:)]) {
-        [self.emptyDataSetDelegate emptyDataSetWillDisappear:self];
+    if (self.tfy_emptyDataSetDelegate && [self.tfy_emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetWillDisappear:)]) {
+        [self.tfy_emptyDataSetDelegate emptyDataSetWillDisappear:self];
     }
 }
 
 - (void)tfy_didDisappear
 {
-    if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetDidDisappear:)]) {
-        [self.emptyDataSetDelegate emptyDataSetDidDisappear:self];
+    if (self.tfy_emptyDataSetDelegate && [self.tfy_emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetDidDisappear:)]) {
+        [self.tfy_emptyDataSetDelegate emptyDataSetDidDisappear:self];
     }
 }
 
 - (void)tfy_didTapContentView:(id)sender
 {
-    if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSet:didTapView:)]) {
-        [self.emptyDataSetDelegate emptyDataSet:self didTapView:sender];
+    if (self.tfy_emptyDataSetDelegate && [self.tfy_emptyDataSetDelegate respondsToSelector:@selector(emptyDataSet:didTapView:)]) {
+        [self.tfy_emptyDataSetDelegate emptyDataSet:self didTapView:sender];
     }
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    else if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetDidTapView:)]) {
-        [self.emptyDataSetDelegate emptyDataSetDidTapView:self];
-    }
-#pragma clang diagnostic pop
 }
 
 - (void)tfy_didTapDataButton:(id)sender
 {
-    if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSet:didTapButton:)]) {
-        [self.emptyDataSetDelegate emptyDataSet:self didTapButton:sender];
+    if (self.tfy_emptyDataSetDelegate && [self.tfy_emptyDataSetDelegate respondsToSelector:@selector(emptyDataSet:didTapButton:)]) {
+        [self.tfy_emptyDataSetDelegate emptyDataSet:self didTapButton:sender];
     }
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    else if (self.emptyDataSetDelegate && [self.emptyDataSetDelegate respondsToSelector:@selector(emptyDataSetDidTapButton:)]) {
-        [self.emptyDataSetDelegate emptyDataSetDidTapButton:self];
-    }
-#pragma clang diagnostic pop
 }
 
 
 #pragma mark - Setters (Public)
 
-- (void)setEmptyDataSetSource:(id<EmptyDataSetSource>)datasource
+- (void)setTfy_emptyDataSetSource:(id<EmptyDataSetSource>)tfy_emptyDataSetSource
 {
-    if (!datasource || ![self tfy_canDisplay]) {
+    if (!tfy_emptyDataSetSource || ![self tfy_canDisplay]) {
         [self tfy_invalidate];
     }
     
-    objc_setAssociatedObject(self, kEmptyDataSetSource, [[WeakObjectContainer alloc] initWithWeakObject:datasource], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, kEmptyDataSetSource, [[WeakObjectContainer alloc] initWithWeakObject:tfy_emptyDataSetSource], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     // 我们添加了sizzling方法来将-tfy_reloadData实现注入到本机-reloadData实现中
     [self swizzleIfPossible:@selector(reloadData)];
@@ -674,12 +662,12 @@ static CGFloat const oriImageH = 200;
     }
 }
 
-- (void)setEmptyDataSetDelegate:(id<EmptyDataSetDelegate>)delegate
+- (void)setTfy_emptyDataSetDelegate:(id<EmptyDataSetDelegate>)tfy_emptyDataSetDelegate
 {
-    if (!delegate) {
+    if (!tfy_emptyDataSetDelegate) {
         [self tfy_invalidate];
     }
-    objc_setAssociatedObject(self, kEmptyDataSetDelegate, [[WeakObjectContainer alloc] initWithWeakObject:delegate], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, kEmptyDataSetDelegate, [[WeakObjectContainer alloc] initWithWeakObject:tfy_emptyDataSetDelegate], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 
@@ -689,15 +677,6 @@ static CGFloat const oriImageH = 200;
 {
     objc_setAssociatedObject(self, kEmptyDataSetView, view, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-
-
-#pragma mark - Reload APIs (Public)
-
-- (void)reloadEmptyDataSet
-{
-    [self tfy_reloadEmptyDataSet];
-}
-
 
 #pragma mark - Reload APIs (Private)
 
@@ -821,7 +800,7 @@ static CGFloat const oriImageH = 200;
         // 通知空数据集视图已出现
         [self tfy_didAppear];
     }
-    else if (self.isEmptyDataSetVisible) {
+    else if (self.tfy_isEmptyDataSetVisible) {
         [self tfy_invalidate];
     }
 }
@@ -953,8 +932,8 @@ Class tfy_baseClassToSwizzleForTarget(id target)
         return YES;
     }
     // 如果可用，请遵从emptyDataSetDelegate的实现
-    if ( (self.emptyDataSetDelegate != (id)self) && [self.emptyDataSetDelegate respondsToSelector:@selector(gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:)]) {
-        return [(id)self.emptyDataSetDelegate gestureRecognizer:gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:otherGestureRecognizer];
+    if ( (self.tfy_emptyDataSetDelegate != (id)self) && [self.tfy_emptyDataSetDelegate respondsToSelector:@selector(gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:)]) {
+        return [(id)self.tfy_emptyDataSetDelegate gestureRecognizer:gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:otherGestureRecognizer];
     }
     
     return NO;
