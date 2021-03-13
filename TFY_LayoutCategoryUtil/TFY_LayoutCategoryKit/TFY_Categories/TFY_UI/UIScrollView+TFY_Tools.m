@@ -354,7 +354,7 @@ static CGFloat const oriImageH = 200;
 
 #pragma mark - Getters (Private)
 
-- (EmptyDataSetView *)tfy_emptyDataSetView
+- (EmptyDataSetView *)emptyDataSetView
 {
     EmptyDataSetView *view = objc_getAssociatedObject(self, kEmptyDataSetView);
     if (!view)
