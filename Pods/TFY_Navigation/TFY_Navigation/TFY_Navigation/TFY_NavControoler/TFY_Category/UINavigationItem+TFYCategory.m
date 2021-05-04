@@ -121,13 +121,13 @@
             // bug fixed：这里要用NSObject.class 不能用self，不然会导致crash
             // 具体可看 注意系统库的坑之load函数调用多次 http://satanwoo.github.io/2017/11/02/load-twice/
             [oriSels enumerateKeysAndObjectsUsingBlock:^(NSString *cls, NSString *oriSel, BOOL * _Nonnull stop) {
-                tfy_swizzled_method(@"tfy", NSClassFromString(cls), oriSel, NSObject.class);
+                tfy_swizzled_method(@"tfys", NSClassFromString(cls), oriSel, NSObject.class);
             }];
         }
     });
 }
 
-- (void)tfy_layoutSubviews {
+- (void)tfys_layoutSubviews {
     if (TFY_Configure.tfy_disableFixSpace) return;
     if (![self isMemberOfClass:NSClassFromString(@"_UINavigationBarContentView")]) return;
     id layout = [self valueForKey:@"_layout"];
@@ -136,18 +136,18 @@
     IMP imp = [layout methodForSelector:selector];
     void (*func)(id, SEL) = (void *)imp;
     func(layout, selector);
-    [self tfy_layoutSubviews];
+    [self tfys_layoutSubviews];
 }
 
-- (void)tfy__updateMarginConstraints {
+- (void)tfys__updateMarginConstraints {
     if (TFY_Configure.tfy_disableFixSpace) return;
     if (![self isMemberOfClass:NSClassFromString(@"_UINavigationBarContentViewLayout")]) return;
-    [self tfy_adjustLeadingBarConstraints];
-    [self tfy_adjustTrailingBarConstraints];
-    [self tfy__updateMarginConstraints];
+    [self tfys_adjustLeadingBarConstraints];
+    [self tfys_adjustTrailingBarConstraints];
+    [self tfys__updateMarginConstraints];
 }
 
-- (void)tfy_adjustLeadingBarConstraints {
+- (void)tfys_adjustLeadingBarConstraints {
     if (TFY_Configure.tfy_disableFixSpace) return;
     NSArray<NSLayoutConstraint *> *leadingBarConstraints = [self valueForKey:@"_leadingBarConstraints"];
     if (!leadingBarConstraints) return;
@@ -159,7 +159,7 @@
     }
 }
 
-- (void)tfy_adjustTrailingBarConstraints {
+- (void)tfys_adjustTrailingBarConstraints {
     if (TFY_Configure.tfy_disableFixSpace) return;
     NSArray<NSLayoutConstraint *> *trailingBarConstraints = [self valueForKey:@"_trailingBarConstraints"];
     if (!trailingBarConstraints) return;

@@ -1172,4 +1172,43 @@
     return (NSArray *)linesArray;
 }
 
+/**
+ *   一个时间距现在的时间
+ */
++(NSString *)intervalSinceNow:(NSString *)theDate {
+    NSArray *timeArray=[theDate componentsSeparatedByString:@"."];
+    theDate=[timeArray objectAtIndex:0];
+    
+    NSDateFormatter *date=[[NSDateFormatter alloc] init];
+    [date setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSDate * d= [date dateFromString:theDate];
+    
+    NSTimeInterval late=[d timeIntervalSince1970]*1;
+    
+    NSDate* dat = [NSDate date];
+    NSTimeInterval now=[dat timeIntervalSince1970]*1;
+    NSString *timeString=@"";
+    
+    NSTimeInterval cha=late-now;
+    
+    if (cha/3600<1) {
+        timeString = [NSString stringWithFormat:@"%f", cha/60];
+        timeString = [timeString substringToIndex:timeString.length-7];
+        timeString=[NSString stringWithFormat:@"剩余%@分", timeString];
+        
+    }
+    if (cha/3600>1&&cha/86400<1) {
+        timeString = [NSString stringWithFormat:@"%f", cha/3600];
+        timeString = [timeString substringToIndex:timeString.length-7];
+        timeString=[NSString stringWithFormat:@"剩余%@小时", timeString];
+    }
+    if (cha/86400>1)
+    {
+        timeString = [NSString stringWithFormat:@"%f", cha/86400];
+        timeString = [timeString substringToIndex:timeString.length-7];
+        timeString=[NSString stringWithFormat:@"剩余%@天", timeString];
+        
+    }
+    return timeString;
+}
 @end

@@ -10,6 +10,7 @@
 #import "HomeCollectionViewController.h"
 #import "PersonalTableViewController.h"
 #import "AntmeuenTwoController.h"
+#import "EmptyTableViewController.h"
 @interface MainViewController ()<TfySY_TabBarDelegate>
 
 @end
@@ -28,7 +29,8 @@
     NSArray <NSDictionary *>*VCArray =
     @[@{@"vc":[HomeCollectionViewController new],@"normalImg":@"home",@"selectImg":@"home2",@"itemTitle":@"首页"},
       @{@"vc":[PersonalTableViewController new],@"normalImg":@"wd_1",@"selectImg":@"wd_2",@"itemTitle":@"我的"},
-      @{@"vc":[AntmeuenTwoController new],@"normalImg":@"sy_1",@"selectImg":@"sy_2",@"itemTitle":@"展示"}];
+      @{@"vc":[AntmeuenTwoController new],@"normalImg":@"sy_1",@"selectImg":@"sy_2",@"itemTitle":@"展示"},
+      @{@"vc":[EmptyTableViewController new],@"normalImg":@"sy_1",@"selectImg":@"sy_2",@"itemTitle":@"空图"}];
     NSMutableArray *tabBarConfs = @[].mutableCopy;
     NSMutableArray *tabBarVCs = @[].mutableCopy;
     [VCArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
