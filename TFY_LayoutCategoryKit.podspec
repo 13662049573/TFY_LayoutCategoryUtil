@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_LayoutCategoryKit"
 
-  spec.version      = "2.0.0"
+  spec.version      = "2.0.2"
 
   spec.summary      = "全新链式的界面初始化和界面跳转，布局基于Masonry"
 
@@ -76,10 +76,6 @@ Pod::Spec.new do |spec|
   
   spec.xcconfig = {"ENABLE_STRICT_OBJC_MSGSEND" => "NO", 'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) COCOAPODS=1 NDEBUG=1 _DEBUG_TAG_'}
 
-  # spec.pod_target_xcconfig = {"ENABLE_STRICT_OBJC_MSGSEND" => "NO" }
-
   spec.requires_arc  = true
-
-  # spec.dependency "Masonry"
 
 end
