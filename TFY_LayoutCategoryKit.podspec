@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_LayoutCategoryKit"
 
-  spec.version      = "2.0.8"
+  spec.version      = "2.1.0"
 
   spec.summary      = "全新链式的界面初始化和界面跳转，布局基于Masonry"
 
