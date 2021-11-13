@@ -681,6 +681,7 @@ const void *kAssociatedTfy_contentInsets;
     [attributes addAttribute:NSFontAttributeName value:self.font range:NSMakeRange(0, text_str.length)];//字体调整
 
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.alignment = self.textAlignment;
     
     paragraphStyle.lineSpacing = lineSpacing;  // 行间距
     //首行文本缩进
@@ -727,6 +728,7 @@ const void *kAssociatedTfy_contentInsets;
 {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:textLineSpace];
+    [paragraphStyle setAlignment:self.textAlignment];
     [self tfy_changeParagraphStyleWithTextParagraphStyle:paragraphStyle];
 }
 #pragma mark - 段落样式
