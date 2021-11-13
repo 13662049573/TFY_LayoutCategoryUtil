@@ -111,13 +111,33 @@ CG_INLINE UIWindow * _Nonnull TFY_LastWindow() {
     return [UIApplication tfy_keyWindow];
 }
 
-//最上层容器
+/// 最上层容器
 CG_INLINE UIViewController * _Nonnull TFY_RootpresentMenuView() {
     UIViewController *rootVC = TFY_getTheLatestViewController(TFY_LastWindow().rootViewController);
     return rootVC;
 }
 
-//跳转指定控制器
+/// 获取当前控制器
+CG_INLINE UIViewController * _Nonnull TFY_currentViewController() {
+    UIViewController* currentViewController = TFY_LastWindow().rootViewController;
+    BOOL runLoopFind = YES;
+    while (runLoopFind) {
+        if (currentViewController.presentedViewController) {
+            currentViewController = currentViewController.presentedViewController;
+        } else {
+            if ([currentViewController isKindOfClass:[UINavigationController class]]) {
+                currentViewController = ((UINavigationController *)currentViewController).visibleViewController;
+            } else if ([currentViewController isKindOfClass:[UITabBarController class]]) {
+                currentViewController = ((UITabBarController* )currentViewController).selectedViewController;
+            } else {
+                break;
+            }
+        }
+    }
+    return currentViewController;
+}
+
+/// 跳转指定控制器
 CG_INLINE void TFY_PopToViewController(UIViewController * _Nonnull vc) {
     for(UIViewController * tempvc in [UIApplication currentTopViewController].navigationController.childViewControllers){
        if([tempvc isKindOfClass:vc.class]){
@@ -126,7 +146,7 @@ CG_INLINE void TFY_PopToViewController(UIViewController * _Nonnull vc) {
     }
 }
 
-//返回更控制器
+/// 返回更控制器
 CG_INLINE void TFY_DismissViewController(UIViewController * _Nonnull vc){
     UIViewController * tempvc = vc.presentingViewController;
     while (tempvc.presentingViewController) {
@@ -136,7 +156,7 @@ CG_INLINE void TFY_DismissViewController(UIViewController * _Nonnull vc){
     [tempvc dismissViewControllerAnimated:true completion:nil];
 }
 
-//方法和类交互
+/// 方法和类交互
 CG_INLINE void TFY_Method_exchangeImp(Class _Nonnull _class, SEL _Nonnull _originSelector, SEL _Nonnull _newSelector) {
     Method oriMethod = class_getInstanceMethod(_class, _originSelector);
     Method newMethod = class_getInstanceMethod(_class, _newSelector);
