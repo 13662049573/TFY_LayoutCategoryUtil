@@ -2393,6 +2393,23 @@ static CGRect oldframe;
         
     }
 }
+
+/// 隐藏对应的字符串
++ (NSString *)hidePartWithStr:(NSString *)Str holderSingleStr:(NSString *)holderSingleStr location:(NSInteger)location length:(NSInteger)length
+{
+    NSString *hideNumStr = Str;
+    NSString *placeHolderStr=[NSString string];
+    if (![self judgeIsEmptyWithString:Str] && ![self judgeIsEmptyWithString:holderSingleStr])//判断非空
+    {
+        for (int i=0; i<length; i++)
+        {
+            placeHolderStr = [placeHolderStr stringByAppendingString:holderSingleStr];
+        }
+        hideNumStr =[Str stringByReplacingCharactersInRange:NSMakeRange(location, length) withString:placeHolderStr];
+    }
+    return hideNumStr;
+}
+
 // 保存图片
 + (void)saveImage:(UIImage *)image toCollectionWithName:(NSString *)collectionName completionHandler:(nullable void(^)(BOOL success, NSError *__nullable error))completionHandler {
     

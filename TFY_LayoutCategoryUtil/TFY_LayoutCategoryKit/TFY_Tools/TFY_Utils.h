@@ -216,7 +216,8 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 
 /***  根据字节大小返回文件大小字符KB、MB GB*/
 +(NSString *)convertFileSize:(long long)size;
-
+/*** 隐藏对应的字符串*/
++ (NSString *)hidePartWithStr:(NSString *)Str holderSingleStr:(NSString *)holderSingleStr location:(NSInteger)location length:(NSInteger)length;
 /*** 获取当前IP地址*/
 +(nullable NSString*)getCurrentWifiIP;
 
