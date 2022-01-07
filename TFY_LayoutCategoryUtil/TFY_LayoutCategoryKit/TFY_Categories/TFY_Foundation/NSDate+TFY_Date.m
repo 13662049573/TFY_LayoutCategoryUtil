@@ -855,7 +855,7 @@
 + (NSString *)tfy_currentDay {
     NSDateFormatter *formater = [[ NSDateFormatter alloc] init];
     NSDate *date = [NSDate date];
-    [formater setDateFormat:@"yyyy-MM-dd"];
+    [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
     NSString * time = [formater stringFromDate:date];
     return time;
 }
