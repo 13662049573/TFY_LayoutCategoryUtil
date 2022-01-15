@@ -1298,22 +1298,38 @@ const char* jailbreak_tool_pathes[] = {
     }
     return NO;
 }
+
 /**
  *  验证手机号
  */
 +(BOOL)mobilePhoneNumber:(NSString *)mobile{
     BOOL  mobilebool =[self isPureNumber:mobile];
     if (mobilebool==YES) {
-        NSString *patternMobile = @"^1(3[0-9]|4[579]|5[0-35-9]|6[2567]|7[0-35-8]|8[0-9]|9[189])\\d{8}$";
-        
         if ([self judgeIsEmptyWithString:mobile]) {
             return NO;
         } else {
-            return [self regular:patternMobile withString:mobile];
+            return [self valiMobile:mobile];
         }
-    }
-    else{
+    } else {
         return NO;
+    }
+}
+
++ (BOOL)valiMobile:(NSString *)mobile {
+    if (mobile.length != 11) {
+            return NO;
+        } else {
+            BOOL isMatch2 = [self isMobilePperators:mobile];// 移动号段正则表达式
+            
+            BOOL isMatch3 = [self isUnicomPperators:mobile];// 联通号段正则表达式
+            
+            BOOL isMatch4 = [self isTelecomPperators:mobile];// 电信号段正则表达式
+            
+        if (isMatch2 || isMatch3 || isMatch4) {
+            return YES;
+        } else {
+            return NO;
+        }
     }
 }
 /**
@@ -1680,48 +1696,29 @@ const char* jailbreak_tool_pathes[] = {
  */
 + (BOOL)isMobilePperators:(NSString *)string{
     if(string.length != 11) {
-           
            return NO;
        }else {
-           
-           /**
-            * 移动号段正则表达式
-            */
            NSString *CM_NUM = @"(^134[0-8]\\d{7}$)|(^1(3[5-9]|4[7]|5[0-27-9]|6[5]|7[28]|8[2-478]|9[8])\\d{8}$)|(^170[356]\\d{7})";
-           
            return [self isValidateByRegex:CM_NUM Object:string];
        }
 }
+
 /** 验证运营商:联通 */
 + (BOOL)isUnicomPperators:(NSString *)string {
-    
     if(string.length != 11) {
-        
         return NO;
     }else {
-        
-        /**
-         * 联通号段正则表达式
-         */
         NSString *CU_NUM = @"(^1(3[0-2]|4[5]|5[56]|6[67]|7[156]|8[56])\\d{8}$)|(^170[47-9]\\d{7}$)";
-        
         return [self isValidateByRegex:CU_NUM Object:string];
     }
 }
 
 /** 验证运营商:电信 */
 + (BOOL)isTelecomPperators:(NSString *)string {
-    
     if(string.length != 11) {
-        
         return NO;
     }else {
-        
-        /**
-         * 电信号段正则表达式
-         */
-        NSString *CT_NUM = @"(^1(3[3]|4[9]|5[3]|6[2]|7[37]|8[019]|9[19])\\d{8}$)|(^170[0-2]\\d{7}$)";
-        
+        NSString *CT_NUM = @"(^1(3[3]|4[9]|5[3]|6[2]|7[37]|8[019]|9[1-9])\\d{8}$)|(^170[0-2]\\d{7}$)";
         return [self isValidateByRegex:CT_NUM Object:string];
     }
 }
@@ -1735,12 +1732,9 @@ const char* jailbreak_tool_pathes[] = {
 
 //验证正则表达式
 + (BOOL)isValidateByRegex:(NSString *)regex Object:(NSString *)object {
-    
     if(object.length <= 0) {
-        
         return NO;
     }else {
-        
         NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
         return [pre evaluateWithObject:object];
     }
