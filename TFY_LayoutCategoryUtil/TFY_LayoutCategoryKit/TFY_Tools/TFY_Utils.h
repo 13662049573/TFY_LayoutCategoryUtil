@@ -220,6 +220,8 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 + (NSString *)hidePartWithStr:(NSString *)Str holderSingleStr:(NSString *)holderSingleStr location:(NSInteger)location length:(NSInteger)length;
 /*** 获取当前IP地址*/
 +(nullable NSString*)getCurrentWifiIP;
+/// 判断运营商
++ (NSString *)getPhoneNumType:(NSString *)phoneNum;
 
 #pragma mark****************************************判断方法****************************************
 /***  判断字符串是否是纯数字*/

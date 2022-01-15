@@ -1304,7 +1304,7 @@ const char* jailbreak_tool_pathes[] = {
 +(BOOL)mobilePhoneNumber:(NSString *)mobile{
     BOOL  mobilebool =[self isPureNumber:mobile];
     if (mobilebool==YES) {
-        NSString *patternMobile = @"^((13[0-9])|(15[^4,\\D])|(18[0,0-9])|(17[0-9]))|(19[0-9]))\\d{8}$";
+        NSString *patternMobile = @"^1(3[0-9]|4[579]|5[0-35-9]|6[2567]|7[0-35-8]|8[0-9]|9[189])\\d{8}$";
         
         if ([self judgeIsEmptyWithString:mobile]) {
             return NO;
@@ -1327,6 +1327,7 @@ const char* jailbreak_tool_pathes[] = {
         return [self regular:patternFloatNumber withString:number];
     }
 }
+
 /**
  * 判断是不是小数，如1.2这样  符合则为YES，不符合则为NO
  */
@@ -1686,7 +1687,7 @@ const char* jailbreak_tool_pathes[] = {
            /**
             * 移动号段正则表达式
             */
-           NSString *CM_NUM = @"^((13[4-9])|(147)|(15[0-2,7-9])|(178)|(18[2-4,7-8]))\\d{8}|(1705)\\d{7}$";
+           NSString *CM_NUM = @"(^134[0-8]\\d{7}$)|(^1(3[5-9]|4[7]|5[0-27-9]|6[5]|7[28]|8[2-478]|9[8])\\d{8}$)|(^170[356]\\d{7})";
            
            return [self isValidateByRegex:CM_NUM Object:string];
        }
@@ -1702,7 +1703,7 @@ const char* jailbreak_tool_pathes[] = {
         /**
          * 联通号段正则表达式
          */
-        NSString *CU_NUM = @"^((13[0-2])|(145)|(15[5-6])|(176)|(18[5,6]))\\d{8}|(1709)\\d{7}$";
+        NSString *CU_NUM = @"(^1(3[0-2]|4[5]|5[56]|6[67]|7[156]|8[56])\\d{8}$)|(^170[47-9]\\d{7}$)";
         
         return [self isValidateByRegex:CU_NUM Object:string];
     }
@@ -1719,11 +1720,19 @@ const char* jailbreak_tool_pathes[] = {
         /**
          * 电信号段正则表达式
          */
-        NSString *CT_NUM = @"(^1(33|53|77|8[019])\\d{8}$)|(^1700\\d{7}$)";
+        NSString *CT_NUM = @"(^1(3[3]|4[9]|5[3]|6[2]|7[37]|8[019]|9[19])\\d{8}$)|(^170[0-2]\\d{7}$)";
         
         return [self isValidateByRegex:CT_NUM Object:string];
     }
 }
+
+//判断运营商
+
++ (NSString *)getPhoneNumType:(NSString *)phoneNum {
+    return [self isMobilePperators:phoneNum]? @"中国移动": ([self isUnicomPperators:phoneNum]? @"中国联通":([self isTelecomPperators:phoneNum]? @"中国电信": @"未知"));
+
+}
+
 //验证正则表达式
 + (BOOL)isValidateByRegex:(NSString *)regex Object:(NSString *)object {
     
