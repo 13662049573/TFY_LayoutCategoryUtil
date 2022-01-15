@@ -1304,7 +1304,7 @@ const char* jailbreak_tool_pathes[] = {
 +(BOOL)mobilePhoneNumber:(NSString *)mobile{
     BOOL  mobilebool =[self isPureNumber:mobile];
     if (mobilebool==YES) {
-        NSString *patternMobile = @"^((13[0-9])|(15[^4,\\D])|(18[0,0-9])|(17[0-9]))\\d{8}$";
+        NSString *patternMobile = @"^((13[0-9])|(15[^4,\\D])|(18[0,0-9])|(17[0-9]))|(19[0-9]))\\d{8}$";
         
         if ([self judgeIsEmptyWithString:mobile]) {
             return NO;
