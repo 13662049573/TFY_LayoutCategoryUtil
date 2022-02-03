@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
          duration:(NSTimeInterval)duration
          position:(id)position
             title:(NSString *)title
-            image:(UIImage *)image
+            image:(NSString *)image
             style:(TFYToastStyle *)style
        completion:(void(^)(BOOL didTap))completion;
 
@@ -101,7 +101,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (UIView *)tfy_toastViewForMessage:(NSString *)message
                           title:(NSString *)title
-                          image:(UIImage *)image
+                          image:(NSString *)image
                           style:(TFYToastStyle *)style;
 
 /**

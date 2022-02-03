@@ -26,8 +26,7 @@ static PolicyManager * manager = nil;
     return manager;
 }
 
-- (void)show{
-    
+- (void)show {
     id cacheKey = [[NSUserDefaults standardUserDefaults] objectForKey:kPolicyManagerSaveKey];
     if (cacheKey) {
         self.isAllowPolicy = cacheKey;
@@ -36,7 +35,6 @@ static PolicyManager * manager = nil;
     PolicyViewController *vc = [PolicyViewController new];
     vc.policyStaus = ^(BOOL status) {
         self.isAllowPolicy = @(status);
-        
         [[NSUserDefaults standardUserDefaults] setObject:@(status) forKey:kPolicyManagerSaveKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self clear];

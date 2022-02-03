@@ -62,11 +62,11 @@ static const NSString * TFYToastQueueKey             = @"TFYToastQueueKey";
 }
 
 - (void)tfy_makeToast:(NSString *)message duration:(NSTimeInterval)duration position:(id)position style:(TFYToastStyle *)style {
-    UIView *toast = [self tfy_toastViewForMessage:message title:@"" image:nil style:style];
+    UIView *toast = [self tfy_toastViewForMessage:message title:@"" image:@"" style:style];
     [self tfy_showToast:toast duration:duration position:position completion:^(BOOL didTap) {}];
 }
 
-- (void)tfy_makeToast:(NSString *)message duration:(NSTimeInterval)duration position:(id)position title:(NSString *)title image:(UIImage *)image style:(TFYToastStyle *)style completion:(void(^)(BOOL didTap))completion {
+- (void)tfy_makeToast:(NSString *)message duration:(NSTimeInterval)duration position:(id)position title:(NSString *)title image:(NSString *)image style:(TFYToastStyle *)style completion:(void(^)(BOOL didTap))completion {
     UIView *toast = [self tfy_toastViewForMessage:message title:title image:image style:style];
     [self tfy_showToast:toast duration:duration position:position completion:completion];
 }
@@ -201,9 +201,9 @@ static const NSString * TFYToastQueueKey             = @"TFYToastQueueKey";
 
 #pragma mark - View Construction
 
-- (UIView *)tfy_toastViewForMessage:(NSString *)message title:(NSString *)title image:(UIImage *)image style:(TFYToastStyle *)style {
+- (UIView *)tfy_toastViewForMessage:(NSString *)message title:(NSString *)title image:(NSString *)image style:(TFYToastStyle *)style {
     // sanity
-    if ((message == nil && title == nil && image == nil) || ([message isEqualToString:@""] && [title isEqualToString:@""])) return nil;
+    if ([self emptyWithString:message] && [self emptyWithString:title] && [self emptyWithString:image]) return nil;
     
     // default to the shared style
     if (style == nil) {
@@ -228,8 +228,8 @@ static const NSString * TFYToastQueueKey             = @"TFYToastQueueKey";
     
     wrapperView.backgroundColor = style.backgroundColor;
     
-    if(image != nil) {
-        imageView = [[UIImageView alloc] initWithImage:image];
+    if(![self emptyWithString:image]) {
+        imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:image]];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.frame = CGRectMake(style.horizontalPadding, style.verticalPadding, style.imageSize.width, style.imageSize.height);
     }
@@ -243,7 +243,7 @@ static const NSString * TFYToastQueueKey             = @"TFYToastQueueKey";
         imageRect.size.height = imageView.bounds.size.height;
     }
     
-    if (title != nil) {
+    if (![self emptyWithString:title]) {
         titleLabel = [[UILabel alloc] init];
         titleLabel.numberOfLines = style.titleNumberOfLines;
         titleLabel.font = style.titleFont;
@@ -262,7 +262,7 @@ static const NSString * TFYToastQueueKey             = @"TFYToastQueueKey";
         titleLabel.frame = CGRectMake(0.0, 0.0, expectedSizeTitle.width, expectedSizeTitle.height);
     }
     
-    if (message != nil) {
+    if (![self emptyWithString:message]) {
         messageLabel = [[UILabel alloc] init];
         messageLabel.numberOfLines = style.messageNumberOfLines;
         messageLabel.font = style.messageFont;
@@ -322,6 +322,14 @@ static const NSString * TFYToastQueueKey             = @"TFYToastQueueKey";
     }
     
     return wrapperView;
+}
+
+-(BOOL)emptyWithString:(NSString *)string {
+    if (string.length == 0 || [string isEqualToString:@""] || string == nil || string == NULL || [string isEqual:[NSNull null]] || [string isEqualToString:@" "] || [string isEqualToString:@"(null)"] || [string isEqualToString:@"<null>"])
+    {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - Storage

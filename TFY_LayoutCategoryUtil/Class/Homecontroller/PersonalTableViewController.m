@@ -50,11 +50,11 @@
     } else if (indexPath.row == 1) {
         [TFY_Utils makeToast:@"AGK发不发空间啊" duration:3];
     } else if (indexPath.row == 2) {
-        [TFY_Utils makeToastActivity];
+        [TFY_Utils makeToast:@"奥科吉不卡级本科" duration:2 position:self.view.center];
     } else if (indexPath.row == 3) {
-        [TFY_Utils makeToast:@"奥科吉不卡级本科" duration:2 position:CGPointMake(100, 100)];
+        [TFY_Utils makeToast:@"阿克苏减肥不开机按本菲卡不扣分吧看不付款祭敖包福卡榜咖啡吧开不开" duration:2 idposition:TFYToastPositionTop];
     } else if (indexPath.row == 4) {
-        [TFY_Utils makeToast:@"阿克苏减肥不开机按本菲卡不扣分吧看不付款祭敖包福卡榜咖啡吧开不开" duration:2 idposition:self.view];
+        [TFY_Utils makeToastActivity];
     } else if (indexPath.row == 5) {
         [TFY_Utils hideToast];
     } else if (indexPath.row == 6) {
