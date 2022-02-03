@@ -47,6 +47,7 @@
 		36CE97B8254FB98C0065B366 /* UIColor+iOS13DarkMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CE97B7254FB98C0065B366 /* UIColor+iOS13DarkMode.m */; };
 		36CE97BE254FBB830065B366 /* UIImage+iOS13DarkMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CE97BD254FBB830065B366 /* UIImage+iOS13DarkMode.m */; };
 		36DDFB9F25FC64A2004F1740 /* EmptyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DDFB9E25FC64A2004F1740 /* EmptyTableViewController.m */; };
+		36E7646127ABA5D100254089 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E7646027ABA5D100254089 /* UIView+Toast.m */; };
 		36E77AF3250B75FE00D503E8 /* TFY_Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E77AF2250B75FE00D503E8 /* TFY_Video.m */; };
 		36EBD9262577399B00C70D20 /* TFY_BadgeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBD9252577399B00C70D20 /* TFY_BadgeControl.m */; };
 		36EBD92C25773AFA00C70D20 /* UIView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBD92B25773AFA00C70D20 /* UIView+Badge.m */; };
@@ -229,6 +230,8 @@
 		36CE97BD254FBB830065B366 /* UIImage+iOS13DarkMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+iOS13DarkMode.m"; sourceTree = "<group>"; };
 		36DDFB9D25FC64A2004F1740 /* EmptyTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmptyTableViewController.h; sourceTree = "<group>"; };
 		36DDFB9E25FC64A2004F1740 /* EmptyTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmptyTableViewController.m; sourceTree = "<group>"; };
+		36E7645F27ABA5D100254089 /* UIView+Toast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		36E7646027ABA5D100254089 /* UIView+Toast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		36E77AF1250B75FE00D503E8 /* TFY_Video.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Video.h; sourceTree = "<group>"; };
 		36E77AF2250B75FE00D503E8 /* TFY_Video.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Video.m; sourceTree = "<group>"; };
 		36EBD9232577393B00C70D20 /* TFY_BadgeViewHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_BadgeViewHeader.h; sourceTree = "<group>"; };
@@ -847,6 +850,8 @@
 				36867DCA24EBE25400A761BC /* UIWindow+TFY_Tools.m */,
 				36867DC624EBE1D100A761BC /* UIApplication+TFY_Tools.h */,
 				36867DC724EBE1D200A761BC /* UIApplication+TFY_Tools.m */,
+				36E7645F27ABA5D100254089 /* UIView+Toast.h */,
+				36E7646027ABA5D100254089 /* UIView+Toast.m */,
 				360312BF2501E24B00EFCA27 /* TFY_Utils.h */,
 				360312C02501E24B00EFCA27 /* TFY_Utils.m */,
 				367EC245250603FC004BAE5C /* TFY_Scene.h */,
@@ -1182,6 +1187,7 @@
 				565584262431C43800020D3C /* TFY_RotationGestureChainModel.m in Sources */,
 				36C334A124ED26CE00DA6FB2 /* NSData+TFY_Data.m in Sources */,
 				36DDFB9F25FC64A2004F1740 /* EmptyTableViewController.m in Sources */,
+				36E7646127ABA5D100254089 /* UIView+Toast.m in Sources */,
 				565584A02431D28200020D3C /* TFY_BaseLayerChainModel.m in Sources */,
 				565584822431CE5300020D3C /* TFY_SliderViewChainModel.m in Sources */,
 				367EC247250603FC004BAE5C /* TFY_Scene.m in Sources */,

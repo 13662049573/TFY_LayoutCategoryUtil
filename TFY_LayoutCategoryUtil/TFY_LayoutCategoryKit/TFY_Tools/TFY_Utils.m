@@ -9,7 +9,8 @@
 #import "TFY_Utils.h"
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
-
+#import "UIView+Toast.h"
+#import "TFY_Scene.h"
 #pragma 获取网络系统库头文件
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import <SystemConfiguration/SystemConfiguration.h>
@@ -2451,7 +2452,6 @@ static CGRect oldframe;
  */
 +(void)BackstatusBarStyle:(NSInteger)index{
   [UIApplication sharedApplication].statusBarStyle = index==0?(UIStatusBarStyleLightContent):(UIStatusBarStyleDefault);
-    
 }
 
 /**
@@ -2659,6 +2659,44 @@ static CGRect oldframe;
         }
     });
 }
+
+#pragma mark****************************************提示框****************************************
+
++ (void)makeToast:(NSString *)str
+{
+    [TFY_ScenePackage.keyWindow tfy_makeToast:str];
+}
+
++ (void)makeToast:(NSString *)str duration:(NSTimeInterval)duration {
+    [TFY_ScenePackage.keyWindow tfy_makeToast:str duration:duration];
+}
+
++ (void)makeToast:(NSString *)str duration:(NSTimeInterval)duration position:(CGPoint)position
+{
+    [TFY_ScenePackage.keyWindow tfy_makeToast:str duration:duration position:[NSValue valueWithCGPoint:position]];
+}
+
++ (void)makeToast:(NSString *)str duration:(NSTimeInterval)duration idposition:(id)position
+{
+    [TFY_ScenePackage.keyWindow tfy_makeToast:str duration:duration position:position];
+}
+
++ (void)hideToast {
+    [TFY_ScenePackage.keyWindow tfy_hideToast];
+}
+
++ (void)makeToastActivity
+{
+    [TFY_ScenePackage.keyWindow tfy_makeToastActivity:TFYToastPositionCenter];
+}
+
++ (void)hideToastActivity
+{
+    [TFY_ScenePackage.keyWindow tfy_hideToastActivity];
+}
+
+
+
 @end
 
 @implementation UIView (Utils_Chain)

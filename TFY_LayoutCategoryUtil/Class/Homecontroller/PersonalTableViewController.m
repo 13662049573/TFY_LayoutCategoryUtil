@@ -8,9 +8,9 @@
 
 #import "PersonalTableViewController.h"
 
-@interface PersonalTableViewController ()
-TFY_PROPERTY_OBJECT_WEAK(UIButton, *btn);
-TFY_PROPERTY_OBJECT_WEAK(UILabel, *label2);
+@interface PersonalTableViewController ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic , strong)UITableView *tableView;
+@property (nonatomic , copy)NSArray *titleArr;
 @end
 
 @implementation PersonalTableViewController
@@ -19,47 +19,60 @@ TFY_PROPERTY_OBJECT_WEAK(UILabel, *label2);
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    NSURL *URL = [NSURL URLWithString:@"https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif"];
+   self.tableView.makeChain
+    .addToSuperView(self.view)
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+        make.edges.equalTo(self.view).offset(0);
+    });
     
-    TFY_ImageView *imageView = [TFY_ImageView new];
-    imageView.backgroundColor = UIColor.purpleColor;
-    [self.view addSubview:imageView];
-    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view).offset(0);
-        make.size.mas_equalTo(CGSizeMake(TFY_Width_W()/2, TFY_Width_W()/2));
-    }];
-    
-    [self loadAnimatedImageWithURL:URL completion:^(TFY_AnimatedImage *animatedImage) {
-        imageView.animatedImage = animatedImage;
-        imageView.userInteractionEnabled = YES;
-    }];
+    self.titleArr = @[@"提示1",@"提示2",@"提示3",@"提示4",@"提示5",@"提示6",@"提示7"];
 }
 
-- (void)loadAnimatedImageWithURL:(NSURL *const)url completion:(void (^)(TFY_AnimatedImage *animatedImage))completion
-{
-    NSString *const filename = url.lastPathComponent;
-    NSString *const diskPath = [NSHomeDirectory() stringByAppendingPathComponent:filename];
-    
-    NSData * __block animatedImageData = [[NSFileManager defaultManager] contentsAtPath:diskPath];
-    TFY_AnimatedImage * __block animatedImage = [[TFY_AnimatedImage alloc] initWithAnimatedGIFData:animatedImageData];
-    
-    if (animatedImage) {
-        if (completion) {
-            completion(animatedImage);
-        }
-    } else {
-        [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            animatedImageData = data;
-            animatedImage = [[TFY_AnimatedImage alloc] initWithAnimatedGIFData:animatedImageData];
-            if (animatedImage) {
-                if (completion) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completion(animatedImage);
-                    });
-                }
-                [data writeToFile:diskPath atomically:YES];
-            }
-        }] resume];
-    }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.titleArr.count;
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSString *identifier = [NSString stringWithFormat:@"%ld",indexPath.row];
+    
+    UITableViewCell *cell = [UITableViewCell tfy_cellFromCodeWithTableView:tableView identifier:identifier];
+    
+    cell.textLabel.text = self.titleArr[indexPath.row];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 0) {
+        [TFY_Utils makeToast:@"安居客改卡号公开解放军金阿奎改回来"];
+    } else if (indexPath.row == 1) {
+        [TFY_Utils makeToast:@"AGK发不发空间啊" duration:3];
+    } else if (indexPath.row == 2) {
+        [TFY_Utils makeToastActivity];
+    } else if (indexPath.row == 3) {
+        [TFY_Utils makeToast:@"奥科吉不卡级本科" duration:2 position:CGPointMake(100, 100)];
+    } else if (indexPath.row == 4) {
+        [TFY_Utils makeToast:@"阿克苏减肥不开机按本菲卡不扣分吧看不付款祭敖包福卡榜咖啡吧开不开" duration:2 idposition:self.view];
+    } else if (indexPath.row == 5) {
+        [TFY_Utils hideToast];
+    } else if (indexPath.row == 6) {
+        [TFY_Utils hideToastActivity];
+    }
+    
+}
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView.makeChain
+        .delegate(self)
+        .dataSource(self)
+        .backgroundColor(UIColor.whiteColor)
+        .rowHeight(50);
+    }
+    return _tableView;
+}
+
 @end

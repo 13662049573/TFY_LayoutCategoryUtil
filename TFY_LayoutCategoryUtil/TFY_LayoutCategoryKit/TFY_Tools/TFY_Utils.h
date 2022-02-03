@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <WebKit/WKWebView.h>
 
+
 static NSString * _Nonnull const AppLanguage = @"appLanguage";
 
 #define TFY_Localized(key, comment)  [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:AppLanguage]] ofType:@"lproj"]] localizedStringForKey:(key) value:@"" table:comment]
@@ -475,6 +476,17 @@ typedef NS_ENUM(NSUInteger, Temperature) {
  *  横屏截图长度 --- 获取主图片数据所返回的总图片长度 vertical 横屏 1 竖屏 0
  */
 + (void)WKWebViewScroll:(WKWebView *)webView vertical:(NSInteger)vertical CaptureCompletionHandler:(void(^)(UIImage *capturedImage))completionHandler;
+
+#pragma mark****************************************提示框****************************************
+
++ (void)makeToast:(NSString *)str;
++ (void)makeToast:(NSString *)str duration:(NSTimeInterval)duration;
++ (void)makeToast:(NSString *)str duration:(NSTimeInterval)duration position:(CGPoint)position;
++ (void)makeToast:(NSString *)str duration:(NSTimeInterval)duration idposition:(id)position;
++ (void)hideToast;
++ (void)makeToastActivity;
++ (void)hideToastActivity;
+
 @end
 
 @interface UIView (Utils_Chain)
