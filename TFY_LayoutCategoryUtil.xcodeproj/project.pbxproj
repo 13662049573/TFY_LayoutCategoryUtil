@@ -22,6 +22,7 @@
 		3654E2F125C544220042826D /* UIView+EdgeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654E2F025C544220042826D /* UIView+EdgeAnimation.m */; };
 		36564D542586307800167927 /* UIBezierPath+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36564D532586307800167927 /* UIBezierPath+TFY_Tools.m */; };
 		367EC247250603FC004BAE5C /* TFY_Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EC246250603FC004BAE5C /* TFY_Scene.m */; };
+		367EE8C527B6239500977C9B /* UIImage+Addtions.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE8C427B6239500977C9B /* UIImage+Addtions.m */; };
 		36811E09269E8C4800716BC1 /* UIView+Gradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 36811E08269E8C4800716BC1 /* UIView+Gradient.m */; };
 		36845E2A25EE2D1100089611 /* UITableView+CornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = 36845E2925EE2D1100089611 /* UITableView+CornerRadius.m */; };
 		36867DB024EBA0B000A761BC /* UIDevice+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36867DAC24EBA0AF00A761BC /* UIDevice+TFY_Tools.m */; };
@@ -178,6 +179,8 @@
 		36564D532586307800167927 /* UIBezierPath+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+TFY_Tools.m"; sourceTree = "<group>"; };
 		367EC245250603FC004BAE5C /* TFY_Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Scene.h; sourceTree = "<group>"; };
 		367EC246250603FC004BAE5C /* TFY_Scene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Scene.m; sourceTree = "<group>"; };
+		367EE8C327B6239500977C9B /* UIImage+Addtions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Addtions.h"; sourceTree = "<group>"; };
+		367EE8C427B6239500977C9B /* UIImage+Addtions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Addtions.m"; sourceTree = "<group>"; };
 		36811E07269E8C4700716BC1 /* UIView+Gradient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Gradient.h"; sourceTree = "<group>"; };
 		36811E08269E8C4800716BC1 /* UIView+Gradient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Gradient.m"; sourceTree = "<group>"; };
 		36836BC425D108F0004DDD38 /* TFY_Inlinefunction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Inlinefunction.h; sourceTree = "<group>"; };
@@ -630,6 +633,8 @@
 				565583D72431B1FE00020D3C /* UIView+TFY_Tools.m */,
 				565583D92431B2B700020D3C /* UIButton+TFY_Tools.h */,
 				565583DA2431B2B700020D3C /* UIButton+TFY_Tools.m */,
+				367EE8C327B6239500977C9B /* UIImage+Addtions.h */,
+				367EE8C427B6239500977C9B /* UIImage+Addtions.m */,
 				565583DC2431B2DD00020D3C /* UILabel+TFY_Tools.h */,
 				565583DD2431B2DD00020D3C /* UILabel+TFY_Tools.m */,
 				565583DF2431B3E200020D3C /* UIColor+TFY_Tools.h */,
@@ -1207,6 +1212,7 @@
 				36C334A024ED26CE00DA6FB2 /* NSDate+TFY_Date.m in Sources */,
 				5655847C2431CDB800020D3C /* TFY_ScrollViewChainModel.m in Sources */,
 				36EBD93825773E8900C70D20 /* UITabBarItem+Badge.m in Sources */,
+				367EE8C527B6239500977C9B /* UIImage+Addtions.m in Sources */,
 				36867DB724EBA1DB00A761BC /* UIFont+TFY_Tools.m in Sources */,
 				565584602431C91300020D3C /* TFY_ActivityIndicatorViewModel.m in Sources */,
 				36BA238724EE488000CE8275 /* UITableViewCell+TFY_Chain.m in Sources */,
