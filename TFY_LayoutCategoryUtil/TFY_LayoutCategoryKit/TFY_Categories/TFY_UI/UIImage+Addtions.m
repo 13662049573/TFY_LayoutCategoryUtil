@@ -16,8 +16,8 @@
     NSMutableArray *imageArray = [NSMutableArray array];
     
     for (int i = 0; i<URLArray.count;  i++) {
-        NSData * data = [[NSData alloc]initWithContentsOfURL:URLArray[i]];
-        UIImage *image = [[UIImage alloc]initWithData:data];
+        id urlData = URLArray[i];
+        UIImage *image = [self tfy_groupIconWithURL:urlData];
         [imageArray addObject:image];
     }
     
@@ -51,12 +51,8 @@
 
     if (array.count == 1) {
         id obj = array.firstObject;
-        UIImage *image;
-        if ([obj isKindOfClass:[NSString class]]) {
-            image = [UIImage imageNamed:(NSString *)obj];
-        } else if ([obj isKindOfClass:[UIImage class]]){
-            image = (UIImage *)obj;
-        }
+        UIImage *image = [self tfy_groupIconWithURL:obj];
+        
         CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
         [image drawInRect:rect];
     }
@@ -68,15 +64,8 @@
             if (count > rects.count-1) {
                 break;
             }
-            UIImage *image;
-            if ([obj isKindOfClass:[NSString class]]) {
-                image = [UIImage imageNamed:(NSString *)obj];
-            } else if ([obj isKindOfClass:[UIImage class]]){
-                image = (UIImage *)obj;
-            } else {
-                NSLog(@"%s Unrecognizable class type", __FUNCTION__);
-                break;
-            }
+            UIImage *image = [self tfy_groupIconWithURL:obj];
+            
             CGRect rect = CGRectFromString([rects objectAtIndex:count]);
             [image drawInRect:rect];
             count++;
@@ -85,6 +74,24 @@
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
+}
+
++ (UIImage *)tfy_groupIconWithURL:(id)urlData {
+    NSData * data = nil;
+    if ([urlData isKindOfClass:NSData.class]) {
+        data = urlData;
+    } else if ([urlData isKindOfClass:NSString.class]) {
+        NSString *url = urlData;
+        if ([url hasPrefix:@"http"] || [url hasPrefix:@"https"]) {
+            data = [[NSData alloc] initWithContentsOfURL:urlData];
+        } else {
+            data = [[NSData alloc] initWithContentsOfFile:urlData];
+        }
+    } else if ([urlData isKindOfClass:UIImage.class]) {
+        data = UIImagePNGRepresentation(urlData);
+    }
+    UIImage *image = [[UIImage alloc]initWithData:data];
+    return image;
 }
 
 + (NSArray *)tfy_eachRectInGroupWithCount:(NSInteger)count {
