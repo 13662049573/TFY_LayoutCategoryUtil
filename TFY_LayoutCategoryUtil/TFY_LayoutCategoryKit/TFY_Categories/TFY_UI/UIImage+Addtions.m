@@ -50,10 +50,13 @@
     }
 
     if (array.count == 1) {
+        NSMutableArray *rectsArray = NSMutableArray.array;
+        [self tfy_getRects:rectsArray padding:0 width:100 count:1];
+
         id obj = array.firstObject;
         UIImage *image = [self tfy_groupIconWithURL:obj];
         
-        CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+        CGRect rect = CGRectFromString([rectsArray objectAtIndex:0]);
         [image drawInRect:rect];
     }
     if (array.count >= 2) {
@@ -86,6 +89,9 @@
             data = [[NSData alloc] initWithContentsOfURL:urlData];
         } else {
             data = [[NSData alloc] initWithContentsOfFile:urlData];
+            if (data == nil) {
+                data = UIImagePNGRepresentation([UIImage imageNamed:urlData]);
+            }
         }
     } else if ([urlData isKindOfClass:UIImage.class]) {
         data = UIImagePNGRepresentation(urlData);
@@ -207,5 +213,6 @@
         [array addObject:NSStringFromCGRect(rect)];
     }
 }
+
 
 @end
