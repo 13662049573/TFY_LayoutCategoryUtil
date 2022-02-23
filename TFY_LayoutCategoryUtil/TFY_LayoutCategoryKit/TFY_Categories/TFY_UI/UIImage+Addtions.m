@@ -105,7 +105,7 @@
     NSArray *rects = nil;
     
     CGFloat sizeValue = 100;
-    CGFloat padding = 8;
+    CGFloat padding = 2;
     
     CGFloat eachWidth = (sizeValue - padding*3) / 2;
     
@@ -130,7 +130,7 @@
     NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:count];
     
     CGFloat sizeValue = 100;
-    CGFloat padding = 10;
+    CGFloat padding = 2;
     
     CGFloat eachWidth;
     
