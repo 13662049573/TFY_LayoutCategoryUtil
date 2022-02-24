@@ -9,19 +9,17 @@
 
 @implementation UIImage (Addtions)
 
-+ (UIImage *)tfy_groupIconWithURLArray:(NSArray *)URLArray bgColor:(UIColor *)bgColor;
-{
++ (UIImage *)tfy_groupIconWithURLArray:(NSArray *)URLArray bgColor:(UIColor *)bgColor {
     UIImageView *imageView = [[UIImageView alloc] init];
     
     NSMutableArray *imageArray = [NSMutableArray array];
-    
     for (int i = 0; i<URLArray.count;  i++) {
         id urlData = URLArray[i];
         UIImage *image = [self tfy_groupIconWithURL:urlData];
         [imageArray addObject:image];
     }
     
-    imageView.image = [UIImage tfy_groupIconWith:imageArray bgColor:[UIColor groupTableViewBackgroundColor]];
+    imageView.image = [UIImage tfy_groupIconWith:imageArray bgColor:bgColor];
     
     return imageView.image;
 }
