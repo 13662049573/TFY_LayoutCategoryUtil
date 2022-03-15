@@ -2054,13 +2054,39 @@ const char* jailbreak_tool_pathes[] = {
     [ud setInteger:value forKey:key];
     [ud synchronize];
 }
+
+/**
+ *  存储当前CGFloat
+ */
++(void)saveFloatValueInUD:(CGFloat)value forKey:(NSString *)key {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setFloat:value forKey:key];
+    [ud synchronize];
+}
+
+/**
+ *  存储当前double
+ */
++(void)saveDoubleValueInUD:(double)value forKey:(NSString *)key {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setDouble:value forKey:key];
+    [ud synchronize];
+}
+
+/**
+ *  存储当前Double
+ */
++(void)saveUrlValueInUD:(NSURL*)value forKey:(NSString *)key {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setURL:value forKey:key];
+    [ud synchronize];
+}
+
 /**
  *   保存模型id
  */
 +(void)saveValueInUD:(id)value forKey:(NSString *)key{
-    if(!value){
-        return;
-    }
+    if(!value){return;}
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setObject:value forKey:key];
     [ud synchronize];
@@ -2093,6 +2119,31 @@ const char* jailbreak_tool_pathes[] = {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     return [ud integerForKey:key];
 }
+
+/**
+ *  获取保存的CGFloat
+ */
++ (CGFloat)getFloatValueInUDWithKey:(NSString *)key {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    return [ud floatForKey:key];
+}
+
+/**
+ *  获取保存的double
+ */
++ (double)getdoubleValueInUDWithKey:(NSString *)key {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    return [ud doubleForKey:key];
+}
+
+/**
+ *  获取保存的NSURL
+ */
++ (NSURL*)getURLValueInUDWithKey:(NSString *)key {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    return [ud URLForKey:key];
+}
+
 /**
  *  获取保存的NSDictionary
  */

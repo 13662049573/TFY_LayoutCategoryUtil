@@ -371,6 +371,15 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 /***  存储当前NSInteger*/
 +(void)saveIntValueInUD:(NSInteger)value forKey:(NSString *)key;
 
+/**存储当前CGFloat*/
++(void)saveFloatValueInUD:(CGFloat)value forKey:(NSString *)key;
+
+/**存储当前Double*/
++(void)saveDoubleValueInUD:(CGFloat)value forKey:(NSString *)key;
+
+/**存储当前Double*/
++(void)saveUrlValueInUD:(NSURL*)value forKey:(NSString *)key;
+
 /***   保存模型id*/
 +(void)saveValueInUD:(id)value forKey:(NSString *)key;
 
@@ -388,6 +397,15 @@ typedef NS_ENUM(NSUInteger, Temperature) {
 
 /***  获取保存的NSInteger*/
 +(NSInteger )getIntValueInUDWithKey:(NSString *)key;
+
+/**获取保存的CGFloat*/
++ (CGFloat)getFloatValueInUDWithKey:(NSString *)key;
+
+/**获取保存的double*/
++ (double)getdoubleValueInUDWithKey:(NSString *)key;
+
+/**获取保存的NSURL*/
++ (NSURL*)getURLValueInUDWithKey:(NSString *)key;
 
 /***  获取保存的NSDictionary*/
 +(NSDictionary *)getDicValueInUDWithKey:(NSString *)key;
