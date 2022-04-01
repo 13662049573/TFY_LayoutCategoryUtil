@@ -38,23 +38,23 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TFY_TextAttachment (Rendering)
 
 // 范围在属性，渲染后将有值
-@property (nonatomic, assign, readonly) NSRange tfy_range;
+@property (nonatomic, assign, readonly) NSRange range;
 // 附加渲染位置，渲染后将有值
-@property (nonatomic, assign, readonly) CGPoint tfy_position;
+@property (nonatomic, assign, readonly) CGPoint position;
 
 /**
  如果有视图或层，设置框架
  */
-- (void)tfy_setFrame:(CGRect)frame;
-- (void)tfy_addToSuperView:(UIView *)superView;
-- (void)tfy_removeFromSuperView:(UIView *)superView;
+- (void)setFrame:(CGRect)frame;
+- (void)addToSuperView:(UIView *)superView;
+- (void)removeFromSuperView:(UIView *)superView;
 
 @end
 
 
-@interface NSAttributedString (TFY_TextAttachment)
+@interface NSAttributedString (TextAttachment)
 
-- (NSArray<TFY_TextAttachment *> *__nullable)tfy_attachmentViews;
+- (NSArray<TFY_TextAttachment *> *__nullable)attachmentViews;
 
 @end
 

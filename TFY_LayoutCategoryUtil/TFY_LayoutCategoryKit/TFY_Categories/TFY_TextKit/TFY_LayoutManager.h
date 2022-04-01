@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class TFY_LayoutManager;
-@protocol TFY_LayoutManagerEditRender<NSObject>
+@protocol LayoutManagerEditRender<NSObject>
 
 // 绘制给定符号范围中的符号，该符号范围必须完全位于单个文本容器中。
 - (void)layoutManager:(TFY_LayoutManager *_Nonnull)layoutManager drawGlyphsForGlyphRange:(NSRange)glyphsToShow atPoint:(CGPoint)origin;
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TFY_LayoutManager : NSLayoutManager
 
-@property (nonatomic, weak) id<TFY_LayoutManagerEditRender> render;
+@property (nonatomic, weak) id<LayoutManagerEditRender> render;
 
 @property (nonatomic, assign) CGFloat highlightBackgroudRadius;
 @property (nonatomic, assign) UIEdgeInsets highlightBackgroudInset;

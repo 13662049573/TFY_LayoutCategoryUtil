@@ -481,7 +481,7 @@ typedef NS_ENUM(NSUInteger, LabelTouchedState) {
             NSSet *attachmentSet = textRender.attachmentViewSet;
             for (TFY_TextAttachment *attachment in attachments) {
                 if (!attachmentSet || ![attachmentSet containsObject:attachment]) {
-                    [attachment tfy_removeFromSuperView:self];
+                    [attachment removeFromSuperView:self];
                 }
             }
         }
@@ -514,7 +514,7 @@ typedef NS_ENUM(NSUInteger, LabelTouchedState) {
         if (!finished || !attachments) {
             if (attachments) {
                 for (TFY_TextAttachment *attachment in attachments) {
-                    [attachment tfy_removeFromSuperView:self];
+                    [attachment removeFromSuperView:self];
                 }
             }
             return ;
@@ -522,20 +522,20 @@ typedef NS_ENUM(NSUInteger, LabelTouchedState) {
         NSRange visibleRange = textRender.visibleCharacterRangeOnRender;
         NSRange truncatedRange = textRender.truncatedCharacterRangeOnRender;
         for (TFY_TextAttachment *attachment in attachments) {
-            if (NSLocationInRange(attachment.tfy_range.location, visibleRange) && (truncatedRange.length == 0 || !NSLocationInRange(attachment.tfy_range.location, truncatedRange))) {
-                if (textRender.maximumNumberOfLines > 0 && attachment.tfy_range.location != 0 && CGPointEqualToPoint(attachment.tfy_position, CGPointZero)) {
-                    [attachment tfy_removeFromSuperView:self];
+            if (NSLocationInRange(attachment.range.location, visibleRange) && (truncatedRange.length == 0 || !NSLocationInRange(attachment.range.location, truncatedRange))) {
+                if (textRender.maximumNumberOfLines > 0 && attachment.range.location != 0 && CGPointEqualToPoint(attachment.position, CGPointZero)) {
+                    [attachment removeFromSuperView:self];
                 }else {
-                    CGRect rect = {attachment.tfy_position,attachment.size};
-                    if (NSMaxRange(attachment.tfy_range) == NSMaxRange(visibleRange) && CGRectGetMaxX(rect) - CGRectGetWidth(self.frame) > 1) {
-                        [attachment tfy_removeFromSuperView:self];
+                    CGRect rect = {attachment.position,attachment.size};
+                    if (NSMaxRange(attachment.range) == NSMaxRange(visibleRange) && CGRectGetMaxX(rect) - CGRectGetWidth(self.frame) > 1) {
+                        [attachment removeFromSuperView:self];
                     }else {
-                        [attachment tfy_addToSuperView:self];
-                        [attachment tfy_setFrame:rect];
+                        [attachment addToSuperView:self];
+                        attachment.frame = rect;
                     }
                 }
             }else {
-                [attachment tfy_removeFromSuperView:self];
+                [attachment removeFromSuperView:self];
             }
         }
         _attachments = attachments;

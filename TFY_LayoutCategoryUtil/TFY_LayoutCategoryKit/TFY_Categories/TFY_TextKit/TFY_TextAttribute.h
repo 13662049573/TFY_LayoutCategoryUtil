@@ -59,9 +59,6 @@ NS_ASSUME_NONNULL_BEGIN
 // shadow
 @property (nonatomic, strong, nullable) NSShadow *shadow;
 
-- (instancetype)init;
-- (instancetype)initWithAttributes:(nullable NSDictionary *)attributes;
-
 @end
 
 @interface TFY_TextHighlight : TFY_TextAttribute

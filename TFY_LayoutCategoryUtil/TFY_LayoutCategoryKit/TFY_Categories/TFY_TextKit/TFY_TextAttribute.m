@@ -44,7 +44,7 @@ NSString *const TFY_TextHighlightAttributeName = @"TFY_TextHighlightAttribute";
 @implementation TFY_TextAttribute
 
 - (instancetype)init {
-    if (self = [self initWithAttributes:nil]) {
+    if (self=[self initWithAttributes:nil]) {
     }
     return self;
 }

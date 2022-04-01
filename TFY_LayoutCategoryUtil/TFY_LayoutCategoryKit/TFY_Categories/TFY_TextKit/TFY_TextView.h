@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @class TFY_GrowingTextView;
-@protocol GrowingTextViewDelegate <NSObject>
+@protocol GrowingTextDelegate <NSObject>
 
 // 文本高度确实发生了变化
 - (void)growingTextView:(TFY_GrowingTextView *)growingTextView didChangeTextHeight:(CGFloat)textHeight;
@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 // 增长高度文本视图
 @interface TFY_GrowingTextView : TFY_TextView
 
-@property (nonatomic, weak) id<GrowingTextViewDelegate> growingTextDelegate;
+@property (nonatomic, weak) id<GrowingTextDelegate> growingTextDelegate;
 
 // 占位符
 @property (nonatomic, weak, readonly) UILabel *placeHolderLabel;

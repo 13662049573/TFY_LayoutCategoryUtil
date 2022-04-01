@@ -92,7 +92,7 @@
 - (void)setTextStorage:(NSTextStorage *)textStorage {
     _textStorage = textStorage;
     if (_onlySetTextStorageWillGetAttachViews && !_editable) {
-        self.attachmentViews = textStorage.tfy_attachmentViews;
+        self.attachmentViews = textStorage.attachmentViews;
     }
     self.textStorageOnRender = _editable ?  textStorage : [textStorage tfy_deepCopy];
 }
@@ -173,16 +173,16 @@
     }
 }
 
-- (void)setAttachmentViews:(NSArray *)attachmentViews {
+- (void)setAttachmentViews:(NSArray<TFY_TextAttachment *> * _Nullable)attachmentViews {
     _attachmentViews = attachmentViews;
     _attachmentViewSet = attachmentViews ? [NSSet setWithArray:attachmentViews] : nil;
 }
 
-- (NSArray *)attachmentViews {
+- (NSArray<TFY_TextAttachment *> *)attachmentViews {
     if (_onlySetTextStorageWillGetAttachViews && !_editable) {
         return _attachmentViews;
     }
-    _attachmentViews = [_textStorage tfy_attachmentViews];
+    _attachmentViews = [_textStorage attachmentViews];
     return _attachmentViews;
 }
 
@@ -190,7 +190,7 @@
     if (_onlySetTextStorageWillGetAttachViews && !_editable) {
         return _attachmentViewSet;
     }
-    NSArray *attachmentViews = [_textStorage tfy_attachmentViews];
+    NSArray *attachmentViews = [_textStorage attachmentViews];
     _attachmentViewSet = attachmentViews ? [NSSet setWithArray:attachmentViews] : nil;
     return _attachmentViewSet;
 }

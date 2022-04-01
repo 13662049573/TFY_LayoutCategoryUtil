@@ -15,9 +15,9 @@ static dispatch_queue_t asyncDisplayQueue() {
     dispatch_once(&onceToken, ^{
         if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
             dispatch_queue_attr_t attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_CONCURRENT, QOS_CLASS_USER_INITIATED, 0);
-            displayQueue = dispatch_queue_create("com.yeBlueColor.textkit.render", attr);
+            displayQueue = dispatch_queue_create("com.BlueColor.textkit.render", attr);
         }else {
-            displayQueue = dispatch_queue_create("com.yeBlueColor.textkit.render", DISPATCH_QUEUE_CONCURRENT);
+            displayQueue = dispatch_queue_create("com.BlueColor.textkit.render", DISPATCH_QUEUE_CONCURRENT);
             dispatch_set_target_queue(displayQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0));
         }
     });

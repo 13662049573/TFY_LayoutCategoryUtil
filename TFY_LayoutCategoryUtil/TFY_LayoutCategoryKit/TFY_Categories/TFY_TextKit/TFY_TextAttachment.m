@@ -14,8 +14,8 @@
 #define AssertMainThread() NSAssert(0 != pthread_main_np(), @"This method must be called on the main thread!")
 
 @interface TFY_TextAttachment ()
-@property (nonatomic, assign) NSRange tfy_range;
-@property (nonatomic, assign) CGPoint tfy_position;
+@property (nonatomic, assign) NSRange range;
+@property (nonatomic, assign) CGPoint position;
 @end
 
 @implementation TFY_TextAttachment
@@ -53,7 +53,7 @@
 #pragma mark - NSTextAttachmentContainer
 
 - (nullable UIImage *)imageForBounds:(CGRect)imageBounds textContainer:(nullable NSTextContainer *)textContainer characterIndex:(NSUInteger)charIndex {
-    _tfy_position = CGPointMake(imageBounds.origin.x, imageBounds.origin.y - _size.height);
+    _position = CGPointMake(imageBounds.origin.x, imageBounds.origin.y - _size.height);
     return self.image;
 }
 
@@ -79,18 +79,16 @@
     return CGRectMake(0, -offset, _size.width, _size.height);
 }
 
-
 @end
-
 
 @implementation TFY_TextAttachment (Rendering)
 
-- (void)tfy_setFrame:(CGRect)frame {
+- (void)setFrame:(CGRect)frame {
     _view.frame = frame;
     _layer.frame = frame;
 }
 
-- (void)tfy_addToSuperView:(UIView *)superView {
+- (void)addToSuperView:(UIView *)superView {
     AssertMainThread();
     if (_view) {
         [superView addSubview:_view];
@@ -99,7 +97,7 @@
     }
 }
 
-- (void)tfy_removeFromSuperView:(UIView *)superView {
+- (void)removeFromSuperView:(UIView *)superView {
     AssertMainThread();
     if (_view.superview == superView) {
         [_view removeFromSuperview];
@@ -111,13 +109,13 @@
 
 @end
 
-@implementation NSAttributedString (TFY_TextAttachment)
+@implementation NSAttributedString (TextAttachment)
 
-- (NSArray *)tfy_attachmentViews {
+- (NSArray<TFY_TextAttachment *> *)attachmentViews {
     NSMutableArray *array = [NSMutableArray array];
     [self enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, self.length) options:kNilOptions usingBlock:^(TFY_TextAttachment *value, NSRange subRange, BOOL *stop) {
         if (value && [value isKindOfClass:[TFY_TextAttachment class]] && (value.view || value.layer)) {
-            ((TFY_TextAttachment *)value).tfy_range = subRange;
+            ((TFY_TextAttachment *)value).range = subRange;
             [array addObject:value];
         }
     }];
