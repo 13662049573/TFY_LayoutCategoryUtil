@@ -9,6 +9,8 @@
 #import "TFY_TextLabel.h"
 #import "TFY_AsyncLayer.h"
 #import <pthread.h>
+#import "NSMutableAttributedString+TFY_Tools.h"
+#import "NSAttributedString+TFY_Tools.h"
 
 #define AssertMainThread() NSAssert(0 != pthread_main_np(), @"This method must be called on the main thread!")
 
