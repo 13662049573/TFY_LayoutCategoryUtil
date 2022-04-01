@@ -7,7 +7,8 @@
 //
 
 #import "TFY_TextAttribute.h"
-#import "TFY_FoundationHeader.h"
+#import "NSMutableAttributedString+TFY_Tools.h"
+#import "NSAttributedString+TFY_Tools.h"
 
 NSString *const TFY_TextAttributeName = @"TFY_TextAttribute";
 NSString *const TFY_TextHighlightAttributeName = @"TFY_TextHighlightAttribute";

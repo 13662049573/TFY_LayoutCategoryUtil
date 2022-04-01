@@ -8,6 +8,7 @@
 
 #import "TFY_TextView.h"
 #import "NSMutableAttributedString+TFY_Tools.h"
+#import "NSAttributedString+TFY_Tools.h"
 
 typedef NS_ENUM(NSUInteger, TextViewTouchedState) {
     TextViewTouchedStateNone,

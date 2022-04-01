@@ -7,7 +7,8 @@
 //
 
 #import "TFY_TextAttachment.h"
-#import "TFY_FoundationHeader.h"
+#import "NSMutableAttributedString+TFY_Tools.h"
+#import "NSAttributedString+TFY_Tools.h"
 #import <pthread.h>
 
 #define AssertMainThread() NSAssert(0 != pthread_main_np(), @"This method must be called on the main thread!")
