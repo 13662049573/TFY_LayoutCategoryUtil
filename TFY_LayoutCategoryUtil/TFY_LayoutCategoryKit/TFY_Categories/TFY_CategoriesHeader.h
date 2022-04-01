@@ -19,5 +19,7 @@
 #import "TFY_BadgeViewHeader.h"
 //内联函数
 #import "TFY_Inlinefunction.h"
+// 自定义输入框
+#import "TFY_TextKit.h"
 
 #endif /* TFY_CategoriesHeader_h */
