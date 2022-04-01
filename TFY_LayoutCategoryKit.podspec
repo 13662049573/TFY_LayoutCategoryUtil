@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_LayoutCategoryKit"
 
-  spec.version      = "2.4.8"
+  spec.version      = "2.5.0"
 
   spec.summary      = "全新链式的界面初始化和界面跳转，布局基于Masonry"
 
@@ -36,6 +36,10 @@ Pod::Spec.new do |spec|
 
       ss.subspec 'TFY_Foundation' do |s|
         s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_Foundation/**/*.{h,m}"
+      end
+
+      ss.subspec 'TFY_BadgeView' do |s|
+        s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_BadgeView/**/*.{h,m}"
       end
 
       ss.subspec 'TFY_TextKit' do |s|
