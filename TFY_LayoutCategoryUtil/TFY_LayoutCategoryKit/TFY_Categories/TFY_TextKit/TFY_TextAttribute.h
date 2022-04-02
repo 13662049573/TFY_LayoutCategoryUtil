@@ -19,6 +19,8 @@ UIKIT_EXTERN NSString * _Nonnull const TFY_TextHighlightAttributeName;
 
 - (TFY_TextHighlight *__nullable)textHighlightAtIndex:(NSUInteger)index effectiveRange:(nullable NSRangePointer)range;
 
+- (NSString *_Nonnull)plainTextForRange:(NSRange)range;
+
 @end
 
 
@@ -32,7 +34,10 @@ UIKIT_EXTERN NSString * _Nonnull const TFY_TextHighlightAttributeName;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TFY_TextAttribute : NSObject
+@interface TFY_TextAttribute : NSObject<NSCoding, NSCopying>
+
++ (instancetype)stringWithString:(nullable NSString *)string;
+@property (nullable, nonatomic, copy) NSString *string;
 
 @property (nonatomic, strong , readonly) NSString *attributeName;
 @property (nonatomic, copy, nullable) NSDictionary<NSString *, id> *attributes;

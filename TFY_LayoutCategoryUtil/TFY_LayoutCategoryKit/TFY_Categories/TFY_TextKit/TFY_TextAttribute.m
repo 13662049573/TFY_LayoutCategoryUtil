@@ -23,6 +23,22 @@ NSString *const TFY_TextHighlightAttributeName = @"TFY_TextHighlightAttribute";
     return [self tfy_attribute:TFY_TextHighlightAttributeName atIndex:index longestEffectiveRange:range];
 }
 
+- (NSString *)plainTextForRange:(NSRange)range {
+    if (range.location == NSNotFound ||range.length == NSNotFound) return nil;
+    NSMutableString *result = [NSMutableString string];
+    if (range.length == 0) return result;
+    NSString *string = self.string;
+    [self enumerateAttribute:TFY_TextAttributeName inRange:range options:kNilOptions usingBlock:^(id value, NSRange range, BOOL *stop) {
+        TFY_TextAttribute *backed = value;
+        if (backed && backed.string) {
+            [result appendString:backed.string];
+        } else {
+            [result appendString:[string substringWithRange:range]];
+        }
+    }];
+    return result;
+}
+
 @end
 
 @implementation NSMutableAttributedString (TFY_TextAttribute)
@@ -54,6 +70,28 @@ NSString *const TFY_TextHighlightAttributeName = @"TFY_TextHighlightAttribute";
         _attributes = attributes ? [[NSMutableDictionary alloc]initWithDictionary:attributes] : [NSMutableDictionary dictionary];
     }
     return self;
+}
+
++ (instancetype)stringWithString:(NSString *)string {
+    TFY_TextAttribute *one = [self new];
+    one.string = string;
+    return one;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.string forKey:@"string"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    _string = [aDecoder decodeObjectForKey:@"string"];
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    typeof(self) one = [self.class new];
+    one.string = self.string;
+    return one;
 }
 
 #pragma mark - getter && setter

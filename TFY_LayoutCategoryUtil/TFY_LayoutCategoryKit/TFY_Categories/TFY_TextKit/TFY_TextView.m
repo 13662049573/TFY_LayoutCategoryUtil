@@ -32,7 +32,6 @@ typedef NS_ENUM(NSUInteger, TextViewTouchedState) {
 @property (nonatomic, strong) TFY_TextRender *textRender;
 
 @property (nonatomic, strong) NSArray *attachments;
-@property (nonatomic , assign)NSInteger isCountBool;
 @property (nonatomic, assign) NSRange highlightRange;
 @property (nonatomic, strong) TFY_TextHighlight *textHighlight;
 
@@ -144,34 +143,31 @@ typedef NS_ENUM(NSUInteger, TextViewTouchedState) {
 }
 
 - (void)addAttachmentViews {
-    if (self.isCountBool < 2) {
-        self.isCountBool++;
-        NSArray *attachments = _textRender.attachmentViews;
-        if (!_attachments && !attachments) {
-            return;
-        }
-        NSSet *attachmentSet = [NSSet setWithArray:attachments];
-        for (TFY_TextAttachment *attachment in _attachments) {
-            if (!attachmentSet || ![attachmentSet containsObject:attachment]) {
-                [attachment removeFromSuperView:self];
-            }
-        }
-        NSRange visibleRange = [_textRender visibleCharacterRange];
-        for (TFY_TextAttachment *attachment in attachments) {
-            if (NSLocationInRange(attachment.range.location, visibleRange)) {
-                if (attachment.range.location != 0 && CGPointEqualToPoint(attachment.position, CGPointZero)) {
-                    [attachment removeFromSuperView:self];
-                }else {
-                    CGRect rect = {attachment.position,attachment.size};
-                    [attachment addToSuperView:self];
-                    attachment.frame = rect;
-                }
-            }else {
-                [attachment removeFromSuperView:self];
-            }
-        }
-        _attachments = attachments;
+    NSArray *attachments = _textRender.attachmentViews;
+    if (!_attachments && !attachments) {
+        return;
     }
+    NSSet *attachmentSet = [NSSet setWithArray:attachments];
+    for (TFY_TextAttachment *attachment in _attachments) {
+        if (!attachmentSet || ![attachmentSet containsObject:attachment]) {
+            [attachment removeFromSuperView:self];
+        }
+    }
+    NSRange visibleRange = [_textRender visibleCharacterRange];
+    for (TFY_TextAttachment *attachment in attachments) {
+        if (NSLocationInRange(attachment.range.location, visibleRange)) {
+            if (attachment.range.location != 0 && CGPointEqualToPoint(attachment.position, CGPointZero)) {
+                [attachment removeFromSuperView:self];
+            }else {
+                CGRect rect = {attachment.position,attachment.size};
+                [attachment addToSuperView:self];
+                attachment.frame = rect;
+            }
+        }else {
+            [attachment removeFromSuperView:self];
+        }
+    }
+    _attachments = attachments;
 }
 
 - (void)textAtrributedDidChange {}
