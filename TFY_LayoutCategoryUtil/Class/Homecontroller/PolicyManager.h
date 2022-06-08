@@ -20,4 +20,9 @@ TFY_PROPERTY_STRONG_READONLY NSNumber * isAllowPolicy;
 - (void)clearCache;
 @end
 
+@interface SectionItem : NSObject
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, copy) NSArray *items;
+@end
+
 NS_ASSUME_NONNULL_END

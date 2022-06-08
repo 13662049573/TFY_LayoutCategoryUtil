@@ -22,7 +22,9 @@
     UIBarButtonItem *editItem = [[UIBarButtonItem alloc]initWithTitle:@"是否编辑:NO" style:UIBarButtonItemStylePlain target:self action:@selector(barItemEditAction:)];
     self.navigationItem.rightBarButtonItems = @[editItem,doneItem];
     
-    [self addTextView];
+//    TFY_GCD_QUEUE_TIME(2, ^{
+//        [self addTextView];
+//    });
 }
 
 

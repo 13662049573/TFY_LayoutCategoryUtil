@@ -7,7 +7,7 @@
 //
 
 #import "AntmeuenTwoController.h"
-
+#import "IndexViewController.h"
 @interface AntmeuenTwoController ()
 
 @end
@@ -17,35 +17,101 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-    scroll.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    scroll.tfy_edgeFillColor = UIColor.orangeColor;
-    [scroll tfy_addEdgeEffect];
-    [self.view addSubview:scroll];
-    
-    CGFloat kViewHeight = 200;
-    UIView *showView = [[UIView alloc] initWithFrame:(CGRectMake(0, self.view.frame.size.height-kViewHeight, self.view.frame.size.width, kViewHeight))];
-    showView.backgroundColor = UIColor.clearColor;
-    [self.view addSubview:showView];
-    
-    CGFloat kRadian = -35;
-    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    [bezierPath moveToPoint: CGPointMake(0, kRadian)];
-    [bezierPath addQuadCurveToPoint:CGPointMake(self.view.frame.size.width, kRadian) controlPoint:CGPointMake(self.view.frame.size.width/2, -kRadian)];
-    [bezierPath addLineToPoint: CGPointMake(self.view.frame.size.width, showView.frame.size.height)];
-    [bezierPath addLineToPoint: CGPointMake(0, showView.frame.size.height)];
-    
-    CAShapeLayer *layer = [CAShapeLayer layer];
-    layer.path = bezierPath.CGPath;
-    layer.strokeColor = UIColor.clearColor.CGColor;
-    layer.fillColor = UIColor.whiteColor.CGColor;
-    layer.cornerRadius = 3.0;
-    layer.masksToBounds = NO;
-    layer.shadowOffset = CGSizeMake(-5, -5); //(0,0)时是四周都有阴影
-    layer.shadowColor = [UIColor grayColor].CGColor;
-    layer.shadowOpacity = 0.1;
-    [showView.layer addSublayer:layer];
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.title = @"选择索引类型";
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIViewController *viewController;
+    switch (indexPath.row) {
+        case 0:
+        {
+            IndexViewController *indexViewController = [IndexViewController new];
+            indexViewController.ignoreSections = NO;
+            indexViewController.hasSearch = YES;
+            viewController = indexViewController;
+        }
+            break;
+            
+        case 1:
+        {
+            IndexViewController *indexViewController = [IndexViewController new];
+            indexViewController.ignoreSections = YES;
+            indexViewController.hasSearch = YES;
+            viewController = indexViewController;
+        }
+            break;
+            
+        case 2:
+        {
+            IndexViewController *indexViewController = [IndexViewController new];
+            indexViewController.ignoreSections = NO;
+            viewController = indexViewController;
+        }
+            break;
+            
+        case 3:
+        {
+            IndexViewController *indexViewController = [IndexViewController new];
+            indexViewController.ignoreSections = YES;
+            viewController = indexViewController;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    switch (indexPath.row) {
+        case 0:
+        {
+            cell.textLabel.text = @"不忽略sections";
+            cell.detailTextLabel.text = @"有搜索";
+        }
+            break;
+            
+        case 1:
+        {
+            cell.textLabel.text = @"忽略三个sections";
+            cell.detailTextLabel.text = @"有搜索";
+        }
+            break;
+            
+        case 2:
+        {
+            cell.textLabel.text = @"不忽略sections";
+            cell.detailTextLabel.text = @"无搜索";
+        }
+            break;
+            
+        case 3:
+        {
+            cell.textLabel.text = @"忽略三个sections";
+            cell.detailTextLabel.text = @"无搜索";
+        }
+            break;
+            
+        default:
+            break;
+    }
+    return cell;
+}
 
 @end

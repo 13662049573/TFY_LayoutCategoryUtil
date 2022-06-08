@@ -21,5 +21,7 @@
 #import "TFY_Inlinefunction.h"
 // 自定义输入框
 #import "TFY_TextKit.h"
+// 索引
+#import "UITableView+IndexView.h"
 
 #endif /* TFY_CategoriesHeader_h */

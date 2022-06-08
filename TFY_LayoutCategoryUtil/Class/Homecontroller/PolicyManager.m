@@ -55,3 +55,7 @@ static PolicyManager * manager = nil;
 }
 
 @end
+
+@implementation SectionItem
+
+@end

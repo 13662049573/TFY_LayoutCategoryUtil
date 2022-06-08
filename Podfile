@@ -3,6 +3,7 @@ platform :ios, '10.0'
 target 'TFY_LayoutCategoryUtil' do
   use_frameworks!
   pod 'Masonry'
+  pod 'YYModel'
   pod 'TFY_Navigation'
   pod 'TFY_AutoLayout'
   pod 'TFY_TabBarKit'
