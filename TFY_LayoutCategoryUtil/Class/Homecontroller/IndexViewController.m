@@ -115,6 +115,8 @@
         }
         
         TFY_IndexViewConfiguration *configuration = [TFY_IndexViewConfiguration configuration];
+        configuration.indicatorBackgroundColor = UIColor.redColor;
+        configuration.indexItemSelectedBackgroundColor = UIColor.blueColor;
         _tableView.tfy_indexViewConfiguration = configuration;
         _tableView.tfy_translucentForTableViewInNavigationBar = self.translucent;
     }

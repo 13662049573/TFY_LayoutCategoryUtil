@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C43303815513A194BCE00D3B09CF51D6"
-               BuildableName = "Pods_TFY_LayoutCategoryUtilTests.framework"
-               BlueprintName = "Pods-TFY_LayoutCategoryUtilTests"
+               BlueprintIdentifier = "84B44807A12996D487A4A591A481D6A0"
+               BuildableName = "YYModel.framework"
+               BlueprintName = "YYModel"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
