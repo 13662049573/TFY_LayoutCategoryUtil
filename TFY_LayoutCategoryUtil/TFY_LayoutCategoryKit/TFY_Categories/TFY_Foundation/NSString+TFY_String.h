@@ -397,6 +397,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSArray *)tfy_timestampToStandardtimes;
 
+/// double 类型转化为一位小数字符串
++ (NSString *)keeponedecimalplaceDoubleOne:(double)value;
+/// double 类型转化为二位小数字符串
++ (NSString *)keeponedecimalplaceDoubleTwo:(double)value;
+/// CGFloat 类型转化为一位小数字符串
++ (NSString *)keeponedecimalplaceFloatOne:(CGFloat)value;
+/// CGFloat 类型转化为二位小数字符串
++ (NSString *)keeponedecimalplaceFloatTwo:(CGFloat)value;
+
 @end
 
 NS_ASSUME_NONNULL_END

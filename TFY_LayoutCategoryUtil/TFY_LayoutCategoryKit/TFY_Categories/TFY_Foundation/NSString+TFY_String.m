@@ -1354,4 +1354,45 @@
     return [standardTime componentsSeparatedByString:@" "];
 }
 
+/// double 类型转化为一位小数字符串
++ (NSString *)keeponedecimalplaceDoubleOne:(double)value {
+    NSNumber *number = [NSNumber numberWithDouble:value];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setPositiveFormat:@"###0.0"];
+    formatter.maximumFractionDigits = 1;
+    formatter.roundingMode = NSNumberFormatterRoundDown;
+    return [formatter stringFromNumber:number];
+}
+
+/// double 类型转化为二位小数字符串
++ (NSString *)keeponedecimalplaceDoubleTwo:(double)value {
+    NSNumber *number = [NSNumber numberWithDouble:value];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setPositiveFormat:@"###0.00"];
+    formatter.maximumFractionDigits = 2;
+    formatter.roundingMode = NSNumberFormatterRoundDown;
+    return [formatter stringFromNumber:number];
+}
+
+/// CGFloat 类型转化为一位小数字符串
++ (NSString *)keeponedecimalplaceFloatOne:(CGFloat)value {
+    NSNumber *number = [NSNumber numberWithFloat:value];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setPositiveFormat:@"###0.0"];
+    formatter.maximumFractionDigits = 1;
+    formatter.roundingMode = NSNumberFormatterRoundDown;
+    return [formatter stringFromNumber:number];
+}
+
+/// CGFloat 类型转化为二位小数字符串
++ (NSString *)keeponedecimalplaceFloatTwo:(CGFloat)value {
+    NSNumber *number = [NSNumber numberWithFloat:value];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setPositiveFormat:@"###0.00"];
+    formatter.maximumFractionDigits = 2;
+    formatter.roundingMode = NSNumberFormatterRoundDown;
+    return [formatter stringFromNumber:number];
+}
+
+
 @end
