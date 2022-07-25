@@ -84,11 +84,11 @@
     } else if ([urlData isKindOfClass:NSString.class]) {
         NSString *url = urlData;
         if ([url hasPrefix:@"http"] || [url hasPrefix:@"https"]) {
-            data = [[NSData alloc] initWithContentsOfURL:urlData];
+            data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
         } else {
-            data = [[NSData alloc] initWithContentsOfFile:urlData];
+            data = [[NSData alloc] initWithContentsOfFile:url];
             if (data == nil) {
-                data = UIImagePNGRepresentation([UIImage imageNamed:urlData]);
+                data = UIImagePNGRepresentation([UIImage imageNamed:url]);
             }
         }
     } else if ([urlData isKindOfClass:UIImage.class]) {
