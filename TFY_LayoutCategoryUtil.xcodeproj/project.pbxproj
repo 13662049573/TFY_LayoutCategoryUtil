@@ -13,6 +13,7 @@
 		361D7DDE255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D7DDD255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m */; };
 		361D7DE4255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D7DE3255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m */; };
 		361E3C1425A7EBE3003A822F /* TFY_ImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361E3C1325A7EBE3003A822F /* TFY_ImageView.m */; };
+		362541F528A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 362541F428A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m */; };
 		3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163B24FF336D00CC0024 /* CommonViewController.m */; };
 		3654163F24FF345000CC0024 /* CommonNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163E24FF345000CC0024 /* CommonNavigationBar.m */; };
 		3654164224FF360100CC0024 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164124FF360100CC0024 /* NavigationController.m */; };
@@ -178,6 +179,8 @@
 		361D7DE3255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableParagraphStyle+TFY_Chain.m"; sourceTree = "<group>"; };
 		361E3C1225A7EBE3003A822F /* TFY_ImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_ImageView.h; sourceTree = "<group>"; };
 		361E3C1325A7EBE3003A822F /* TFY_ImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_ImageView.m; sourceTree = "<group>"; };
+		362541F328A1FE9F003CD751 /* CLLocationManager+TFY_Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CLLocationManager+TFY_Tools.h"; sourceTree = "<group>"; };
+		362541F428A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CLLocationManager+TFY_Tools.m"; sourceTree = "<group>"; };
 		3654163A24FF336D00CC0024 /* CommonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonViewController.h; sourceTree = "<group>"; };
 		3654163B24FF336D00CC0024 /* CommonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonViewController.m; sourceTree = "<group>"; };
 		3654163D24FF345000CC0024 /* CommonNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonNavigationBar.h; sourceTree = "<group>"; };
@@ -820,6 +823,8 @@
 				361D7DE3255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m */,
 				36564D522586307800167927 /* UIBezierPath+TFY_Tools.h */,
 				36564D532586307800167927 /* UIBezierPath+TFY_Tools.m */,
+				362541F328A1FE9F003CD751 /* CLLocationManager+TFY_Tools.h */,
+				362541F428A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m */,
 			);
 			path = TFY_Foundation;
 			sourceTree = "<group>";
@@ -1293,6 +1298,7 @@
 				565584B92431D53B00020D3C /* TFY_TiledLayerChainModel.m in Sources */,
 				36D8D89327F67ED500C6B400 /* TFY_TextParse.m in Sources */,
 				5655848E2431D01A00020D3C /* TFY_TextFieldChainModel.m in Sources */,
+				362541F528A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m in Sources */,
 				36867DB424EBA19700A761BC /* UIControl+TFY_Tools.m in Sources */,
 				36CE97A6254FAB510065B366 /* UIView+TFY_iOS13DarkMode_MonitorView.m in Sources */,
 				3654164524FF364A00CC0024 /* PolicyViewController.m in Sources */,
@@ -1513,7 +1519,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.0;
-				DEVELOPMENT_TEAM = S69DB59T5L;
+				DEVELOPMENT_TEAM = W27SB687KJ;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1539,7 +1545,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.0;
-				DEVELOPMENT_TEAM = S69DB59T5L;
+				DEVELOPMENT_TEAM = W27SB687KJ;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
