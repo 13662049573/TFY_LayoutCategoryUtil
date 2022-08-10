@@ -14,7 +14,8 @@ TFY_PROPERTY_OBJECT_STRONG(UILabel, titleLabel);
 TFY_PROPERTY_OBJECT_STRONG(UITextField, textfiled);
 TFY_PROPERTY_NSString(name);
 TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
-
+@property(nonatomic , strong)UILabel *nameLabel,*titleLabel2,*weddingLabel,*pericLabel,*refundLabel;
+@property(nonatomic , strong)UIView *backView;
 @end
 
 @implementation HomeCollectionViewController
@@ -130,7 +131,7 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
         make.height.mas_equalTo(50);
     });
     
-    UIViewModelSet()
+    self.backView.makeChain
     .backgroundColor(TFY_ColorHexString(@"4e5f6g"))
     .clipRadius(CornerClipTypeBothTop, 10)
     .addToSuperView(self.view)
@@ -141,6 +142,75 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
        make.height.mas_equalTo(80);
     });
     
+    self.nameLabel.makeChain
+    .font([UIFont systemFontOfSize:10 weight:UIFontWeightBold])
+    .text(@"0")
+    .textAlignment(NSTextAlignmentCenter)
+    .cornerRadius(10)
+    .masksToBounds(YES)
+    .textColor(UIColor.whiteColor)
+    .backgroundColor(UIColor.redColor)
+    .addToSuperView(self.backView)
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+        make.left.equalTo(self.backView).offset(50);
+        make.centerY.equalTo(self.backView).offset(0);
+        make.size.mas_equalTo(CGSizeMake(20, 20));
+    });
+
+    self.refundLabel.makeChain
+    .font([UIFont systemFontOfSize:10 weight:UIFontWeightBold])
+    .text(@":")
+    .textAlignment(NSTextAlignmentCenter)
+    .textColor(UIColor.redColor)
+    .addToSuperView(self.backView)
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+        make.left.equalTo(self.nameLabel.mas_right).offset(0);
+        make.centerY.equalTo(self.nameLabel.mas_centerY).offset(0);
+        make.size.mas_equalTo(CGSizeMake(10, 20));
+    });
+
+    self.titleLabel2.makeChain
+    .font([UIFont systemFontOfSize:10 weight:UIFontWeightBold])
+    .text(@"0")
+    .cornerRadius(10)
+    .textColor(UIColor.whiteColor)
+    .backgroundColor(UIColor.redColor)
+    .masksToBounds(YES)
+    .textAlignment(NSTextAlignmentCenter)
+    .addToSuperView(self.backView)
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+        make.left.equalTo(self.refundLabel.mas_right).offset(0);
+        make.centerY.equalTo(self.refundLabel.mas_centerY).offset(0);
+        make.size.mas_equalTo(CGSizeMake(20, 20));
+    });
+
+    self.weddingLabel.makeChain
+    .font([UIFont systemFontOfSize:10 weight:UIFontWeightBold])
+    .text(@":")
+    .textAlignment(NSTextAlignmentCenter)
+    .textColor(UIColor.redColor)
+    .addToSuperView(self.backView)
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+        make.left.equalTo(self.titleLabel2.mas_right).offset(0);
+        make.centerY.equalTo(self.titleLabel2.mas_centerY).offset(0);
+        make.size.mas_equalTo(CGSizeMake(10, 20));
+    });
+
+    self.pericLabel.makeChain
+    .font([UIFont systemFontOfSize:10 weight:UIFontWeightBold])
+    .text(@"0")
+    .cornerRadius(10)
+    .textColor(UIColor.whiteColor)
+    .backgroundColor(UIColor.redColor)
+    .masksToBounds(YES)
+    .textAlignment(NSTextAlignmentCenter)
+    .addToSuperView(self.backView)
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+        make.left.equalTo(self.weddingLabel.mas_right).offset(0);
+        make.centerY.equalTo(self.weddingLabel.mas_centerY).offset(0);
+        make.size.mas_equalTo(CGSizeMake(20, 20));
+    });
+
     
     TfySY_TabBarController *tabBarVC = (TfySY_TabBarController *)self.tabBarController;
     TfySY_TabBarItem *item = tabBarVC.tfySY_TabBar.currentSelectItem; // 因为已经到这个页面，说明就是当前的选项卡item
@@ -152,6 +222,13 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     item.badgeLabel.badgeHeight = 15;  // 高度
     item.badge = @"7";
     
+    NSDate *fineDate = [NSDate.date tfy_dateByAddingHours:3];
+    TFY_Weak(self);
+    [TFY_Timer countDownWithStratDate:NSDate.date finishDate:fineDate completeBlock:^(NSInteger day, NSInteger hour, NSInteger minute, NSInteger second) {
+        weak_self.nameLabel.text = [NSString stringWithFormat:@"%02ld",hour];
+        weak_self.titleLabel2.text = [NSString stringWithFormat:@"%02ld",minute];
+        weak_self.pericLabel.text = [NSString stringWithFormat:@"%02ld",second];
+    }];
 }
 
 - (void)btnClick:(UIButton *)btn {
@@ -173,6 +250,63 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
 
 - (void)timeimageClick2 {
     [self.navigationItem.leftBarButtonItem tfy_decrease];
+}
+
+- (UIView *)backView {
+    if (!_backView) {
+        _backView = UIView.new;
+    }
+    return _backView;
+}
+
+- (UILabel *)nameLabel {
+    if (!_nameLabel) {
+        _nameLabel = UILabelSet();
+        _nameLabel.makeChain
+        .textColor(TFY_ColorHexString(@"000000"))
+        .textAlignment(NSTextAlignmentLeft);
+    }
+    return _nameLabel;
+}
+
+- (UILabel *)titleLabel2 {
+    if (!_titleLabel2) {
+        _titleLabel2 = UILabelSet();
+        _titleLabel2.makeChain
+            .textColor(TFY_ColorHexString(@"000000"))
+            .textAlignment(NSTextAlignmentLeft);
+    }
+    return _titleLabel2;
+}
+
+- (UILabel *)weddingLabel {
+    if (!_weddingLabel) {
+        _weddingLabel = UILabelSet();
+        _weddingLabel.makeChain
+            .textColor(TFY_ColorHexString(@"000000"))
+            .textAlignment(NSTextAlignmentLeft);
+    }
+    return _weddingLabel;
+}
+
+- (UILabel *)pericLabel {
+    if (!_pericLabel) {
+        _pericLabel = UILabelSet();
+        _pericLabel.makeChain
+            .textColor(TFY_ColorHexString(@"000000"))
+            .textAlignment(NSTextAlignmentLeft);
+    }
+    return _pericLabel;
+}
+
+- (UILabel *)refundLabel {
+    if (!_refundLabel) {
+        _refundLabel = UILabelSet();
+        _refundLabel.makeChain
+        .textColor(TFY_ColorHexString(@"000000"))
+        .textAlignment(NSTextAlignmentLeft);
+    }
+    return _refundLabel;
 }
 
 @end
