@@ -139,5 +139,13 @@
     }
 }
 
+//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+//    return UIInterfaceOrientationMaskLandscapeRight;
+//}
+//
+//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+//    return UIInterfaceOrientationLandscapeRight;
+//}
+
 @end
 

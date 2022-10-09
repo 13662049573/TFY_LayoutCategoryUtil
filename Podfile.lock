@@ -9,26 +9,12 @@ PODS:
   - TFY_AutoLayout/MAC_Layout (2.6.4):
     - TFY_AutoLayout/Util
   - TFY_AutoLayout/Util (2.6.4)
-  - TFY_Navigation (2.6.4):
-    - TFY_Navigation/TFY_NavControoler (= 2.6.4)
-    - TFY_Navigation/TFY_PageController (= 2.6.4)
-  - TFY_Navigation/TFY_NavControoler (2.6.4):
-    - TFY_Navigation/TFY_NavControoler/TFY_Category (= 2.6.4)
-    - TFY_Navigation/TFY_NavControoler/TFY_Configure (= 2.6.4)
-    - TFY_Navigation/TFY_NavControoler/TFY_NavBasVcKit (= 2.6.4)
-    - TFY_Navigation/TFY_NavControoler/TFY_NavigationKit (= 2.6.4)
-  - TFY_Navigation/TFY_NavControoler/TFY_Category (2.6.4):
-    - TFY_Navigation/TFY_NavControoler/TFY_Configure
-  - TFY_Navigation/TFY_NavControoler/TFY_Configure (2.6.4)
-  - TFY_Navigation/TFY_NavControoler/TFY_NavBasVcKit (2.6.4):
-    - TFY_Navigation/TFY_NavControoler/TFY_Category
-    - TFY_Navigation/TFY_NavControoler/TFY_Configure
-  - TFY_Navigation/TFY_NavControoler/TFY_NavigationKit (2.6.4):
-    - TFY_Navigation/TFY_NavControoler/TFY_Configure
-  - TFY_Navigation/TFY_PageController (2.6.4)
-  - TFY_TabBarKit (1.1.2):
-    - TFY_TabBarKit/TFY_SystemTabBar (= 1.1.2)
-  - TFY_TabBarKit/TFY_SystemTabBar (1.1.2)
+  - TFY_Navigation (2.9.2):
+    - TFY_Navigation/TFY_NavControoler (= 2.9.2)
+  - TFY_Navigation/TFY_NavControoler (2.9.2)
+  - TFY_TabBarKit (1.1.6):
+    - TFY_TabBarKit/TFY_SystemTabBar (= 1.1.6)
+  - TFY_TabBarKit/TFY_SystemTabBar (1.1.6)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
@@ -49,10 +35,10 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   TFY_AutoLayout: 51019bdcdb78b9a145bd0ed351d23be93379dc0b
-  TFY_Navigation: 9d9bf5a9ced9d7be01a8b99d63066b12731351cb
-  TFY_TabBarKit: 03da94084ad16fa462aba0b4591d984b516085c1
+  TFY_Navigation: 12be3a08483565e1548d93a3212c05427db61470
+  TFY_TabBarKit: 2a96e8283d76da957d17d4c473b21e8b5a005805
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: aeecfb35dc00c791dce2118cc3a75eb0a1505175
+PODFILE CHECKSUM: 173730cbf9c3843dd1828feb9679b5a79c03e369
 
 COCOAPODS: 1.11.3

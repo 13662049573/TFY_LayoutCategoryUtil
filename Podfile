@@ -1,5 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
+
+platform :ios, '12.0'
 
 target 'TFY_LayoutCategoryUtil' do
   use_frameworks!

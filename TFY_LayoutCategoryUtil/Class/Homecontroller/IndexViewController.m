@@ -26,7 +26,11 @@
     
     self.translucent = YES;
     
-    [self.view addSubview:self.tableView];
+    self.tableView.makeChain
+    .addToSuperView(self.view)
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+        make.edges.equalTo(self.view).offset(0);
+    });
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSString *plistName = self.ignoreSections ? @"IgnoreSectionsIndexes" : @"Indexes";
@@ -123,5 +127,12 @@
     return _tableView;
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscapeLeft;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationLandscapeLeft;
+}
 
 @end

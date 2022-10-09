@@ -57,4 +57,5 @@
 - (void)TfySY_TabBar:(TfySY_TabBar *)tabbar selectIndex:(NSInteger)index{
     [self setSelectedIndex:index];
 }
+
 @end

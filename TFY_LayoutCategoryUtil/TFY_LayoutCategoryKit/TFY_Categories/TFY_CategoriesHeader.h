@@ -23,5 +23,7 @@
 #import "TFY_TextKit.h"
 // 索引
 #import "UITableView+IndexView.h"
+// 屏幕旋转
+#import "TFYExtensionRotation.h"
 
 #endif /* TFY_CategoriesHeader_h */
