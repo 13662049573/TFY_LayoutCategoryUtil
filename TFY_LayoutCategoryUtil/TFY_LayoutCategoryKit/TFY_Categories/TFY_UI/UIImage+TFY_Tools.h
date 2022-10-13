@@ -383,7 +383,7 @@ CG_INLINE CGFloat TFY_DegreesToRadians(CGFloat degrees) {
  *  适配深色模式的 Image
  */
 + (UIImage *)tfy_imageWithImageLight:(NSString *)lightImagePath dark:(NSString *)darkImagePath;
-
++ (UIImage *)tfy_imageWithImageLightImg:(UIImage *)lightImage dark:(UIImage *)darkImage;
 /**
  *  修复图片拉伸导致深色模式适配失效的问题
  */

@@ -406,6 +406,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// CGFloat 类型转化为二位小数字符串
 + (NSString *)keeponedecimalplaceFloatTwo:(CGFloat)value;
 
+///  转字符
+- (NSString *)safePathString;
 @end
 
 NS_ASSUME_NONNULL_END

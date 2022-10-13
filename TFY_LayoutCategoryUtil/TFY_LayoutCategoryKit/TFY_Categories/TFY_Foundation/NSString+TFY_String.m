@@ -1394,5 +1394,14 @@
     return [formatter stringFromNumber:number];
 }
 
+- (NSString *)safePathString
+{
+    NSString *homePrefix = [NSHomeDirectory() stringByDeletingLastPathComponent];
+    if ([self hasPrefix:homePrefix]) {
+        return [NSHomeDirectory() stringByAppendingString:[self substringFromIndex:[NSHomeDirectory() length]]];
+    }
+    return self;
+}
+
 
 @end
