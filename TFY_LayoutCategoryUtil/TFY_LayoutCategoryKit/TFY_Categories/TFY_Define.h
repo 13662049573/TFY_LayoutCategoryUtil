@@ -63,6 +63,16 @@ if ([UIScrollView instancesRespondToSelector:NSSelectorFromString(@"setContentIn
 _Pragma("clang diagnostic pop") \
 } while (0)
 
+/// 消息警告
+#define TFY_SuppressPerformSelectorLeakWarning(Stuff) \
+do { \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+Stuff; \
+_Pragma("clang diagnostic pop") \
+} while (0)
+
+
 #pragma mark-------------------------------------------单例---------------------------------------------
 
 /** 单例（声明）.h */
