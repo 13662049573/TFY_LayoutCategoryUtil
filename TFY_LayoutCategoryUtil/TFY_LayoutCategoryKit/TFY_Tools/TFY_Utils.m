@@ -1183,7 +1183,7 @@ const char* jailbreak_tool_pathes[] = {
  *   判断字符串是否为空  @return YES or NO
  */
 +(BOOL)judgeIsEmptyWithString:(NSString *)string{
-    if (![string isKindOfClass:NSString.class] && (string.length == 0 || [string isEqualToString:@""] || string == nil || string == NULL || [string isEqual:[NSNull null]] || [string isEqualToString:@" "] || [string isEqualToString:@"(null)"] || [string isEqualToString:@"<null>"]))
+    if (string.length == 0 || [string isEqualToString:@""] || string == nil || string == NULL || [string isEqual:[NSNull null]] || [string isEqualToString:@" "] || [string isEqualToString:@"(null)"] || [string isEqualToString:@"<null>"])
     {
         return YES;
     }
