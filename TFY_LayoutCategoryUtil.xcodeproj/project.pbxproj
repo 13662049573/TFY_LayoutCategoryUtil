@@ -44,6 +44,7 @@
 		3695B8012904C27D00D8FD7D /* NSAttributedString+Expression.m in Sources */ = {isa = PBXBuildFile; fileRef = 3695B8002904C27D00D8FD7D /* NSAttributedString+Expression.m */; };
 		3695B8042904C3C400D8FD7D /* NSString+Expression.m in Sources */ = {isa = PBXBuildFile; fileRef = 3695B8032904C3C400D8FD7D /* NSString+Expression.m */; };
 		3695B8072904C4A900D8FD7D /* TFY_Label.m in Sources */ = {isa = PBXBuildFile; fileRef = 3695B8062904C4A900D8FD7D /* TFY_Label.m */; };
+		3695B80A2904D0A500D8FD7D /* TFY_WKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3695B8092904D0A500D8FD7D /* TFY_WKWebView.m */; };
 		36978E7027F6F24C00557EC0 /* TFY_TextblanksField.m in Sources */ = {isa = PBXBuildFile; fileRef = 36978E6F27F6F24C00557EC0 /* TFY_TextblanksField.m */; };
 		36BA238724EE488000CE8275 /* UITableViewCell+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA238424EE487F00CE8275 /* UITableViewCell+TFY_Chain.m */; };
 		36BA238824EE488000CE8275 /* UITableView+TFY_LayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA238524EE488000CE8275 /* UITableView+TFY_LayoutCell.m */; };
@@ -252,6 +253,8 @@
 		3695B8032904C3C400D8FD7D /* NSString+Expression.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Expression.m"; sourceTree = "<group>"; };
 		3695B8052904C4A900D8FD7D /* TFY_Label.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Label.h; sourceTree = "<group>"; };
 		3695B8062904C4A900D8FD7D /* TFY_Label.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Label.m; sourceTree = "<group>"; };
+		3695B8082904D0A500D8FD7D /* TFY_WKWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_WKWebView.h; sourceTree = "<group>"; };
+		3695B8092904D0A500D8FD7D /* TFY_WKWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_WKWebView.m; sourceTree = "<group>"; };
 		36978E6E27F6F24C00557EC0 /* TFY_TextblanksField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_TextblanksField.h; sourceTree = "<group>"; };
 		36978E6F27F6F24C00557EC0 /* TFY_TextblanksField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_TextblanksField.m; sourceTree = "<group>"; };
 		36BA238324EE487F00CE8275 /* UITableViewCell+TFY_Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+TFY_Chain.h"; sourceTree = "<group>"; };
@@ -1034,6 +1037,8 @@
 				36EE1102250A18CF00D24B3C /* TFY_Timer.m */,
 				36E77AF1250B75FE00D503E8 /* TFY_Video.h */,
 				36E77AF2250B75FE00D503E8 /* TFY_Video.m */,
+				3695B8082904D0A500D8FD7D /* TFY_WKWebView.h */,
+				3695B8092904D0A500D8FD7D /* TFY_WKWebView.m */,
 			);
 			path = TFY_Tools;
 			sourceTree = "<group>";
@@ -1423,6 +1428,7 @@
 				36867DB024EBA0B000A761BC /* UIDevice+TFY_Tools.m in Sources */,
 				3695B8072904C4A900D8FD7D /* TFY_Label.m in Sources */,
 				565584672431CB3600020D3C /* TFY_CollectionViewChainModel.m in Sources */,
+				3695B80A2904D0A500D8FD7D /* TFY_WKWebView.m in Sources */,
 				3695B8012904C27D00D8FD7D /* NSAttributedString+Expression.m in Sources */,
 				36CE97AC254FACC00065B366 /* TFY_iOS13DarkModeDefine.m in Sources */,
 			);
