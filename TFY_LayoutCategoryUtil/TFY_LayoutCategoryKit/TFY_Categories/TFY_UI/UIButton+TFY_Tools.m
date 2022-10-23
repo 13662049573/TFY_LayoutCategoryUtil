@@ -126,6 +126,34 @@ CG_INLINE void UI_swizzleButtonIfNeed(Class swizzleClass){
             self.titleEdgeInsets = UIEdgeInsetsMake(0, -(space + imageWidth), 0, (space + imageWidth));
         }
             break;
+        case ButtonImageDirectionLeftImageLeft:
+        {
+            self.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+            self.titleEdgeInsets = UIEdgeInsetsMake(0, space, 0, 0);
+            self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+            break;
+        }
+        case ButtonImageDirectionLeftImageRight:
+        {
+            self.imageEdgeInsets = UIEdgeInsetsMake(0, textWidth + space, 0, 0);
+            self.titleEdgeInsets = UIEdgeInsetsMake(0, -imageWidth, 0, 0);
+            self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+            break;
+        }
+        case ButtonImageDirectionRightImageLeft:
+        {
+            self.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, space);
+            self.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+            self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+            break;
+        }
+        case ButtonImageDirectionRightImageRight:
+        {
+            self.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -textWidth);
+            self.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, imageWidth + space);
+            self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+            break;
+        }
         default:
             break;
     }
