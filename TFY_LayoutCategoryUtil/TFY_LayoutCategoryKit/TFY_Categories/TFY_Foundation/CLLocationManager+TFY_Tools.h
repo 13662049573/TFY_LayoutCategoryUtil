@@ -51,7 +51,7 @@ typedef NS_ENUM(NSUInteger, CLLocationUpdateAuthorizationDescription) {
  错误使用如果更新期间有错误
   stopUpdating设置为YES以便停止位置更新
  */
-typedef void (^LocationManagerUpdateBlock)(CLLocationManager * _Nonnull manager, CLLocation *location, NSError *error, BOOL *stopUpdating);
+typedef void (^LocationManagerUpdateBlock)(CLLocationManager * __nullable manager, CLLocation *__nullable location, NSError *__nullable error, BOOL *stopUpdating);
 
 /**
  Block，用于通知标题的更新
@@ -63,7 +63,7 @@ typedef void (^LocationManagerUpdateBlock)(CLLocationManager * _Nonnull manager,
  error在更新过程中发生错误时使用
  stopUpdating设置为YES以停止标题更新
  */
-typedef void(^HeadingUpdateBlock)(CLLocationManager *manager, CLHeading *heading, NSError *error, BOOL *stopUpdating);
+typedef void(^HeadingUpdateBlock)(CLLocationManager *__nullable manager, CLHeading *__nullable heading, NSError *__nullable error, BOOL *stopUpdating);
 
 /**
  Block，用于通知对授权状态的更改
