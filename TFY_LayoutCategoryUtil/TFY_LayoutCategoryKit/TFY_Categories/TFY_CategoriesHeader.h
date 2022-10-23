@@ -25,5 +25,7 @@
 #import "UITableView+IndexView.h"
 // 屏幕旋转
 #import "TFYExtensionRotation.h"
+// 地址，邮箱，电话号,点击自动识别
+#import "TFY_Label.h"
 
 #endif /* TFY_CategoriesHeader_h */

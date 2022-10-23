@@ -12,6 +12,13 @@
 #import <UIKit/UIKit.h>
 #import <objc/message.h>
 
+#define TFY_WEAK  __weak typeof(self)weakSelf = self;
+
+#define TFY_STRONG  __strong typeof(weakSelf)self = weakSelf;
+
+/** weak对象 */
+#define TFY_Weak(o) __weak typeof(o) weak_##o = o;
+
 /**
 *  完美解决Xcode NSLog打印不全的宏
 */
@@ -45,25 +52,7 @@ UIEdgeInsets safeInsets = UIEdgeInsetsMake(20, 0, 0, 0);\
  safeInsets;\
 })
 
-#define  TFY_adjustsScrollViewInsets_NO(scrollView,vc)\
-do { \
-_Pragma("clang diagnostic push") \
-_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
-if ([UIScrollView instancesRespondToSelector:NSSelectorFromString(@"setContentInsetAdjustmentBehavior:")]) {\
-     NSMethodSignature *signature = [UIScrollView instanceMethodSignatureForSelector:@selector(setContentInsetAdjustmentBehavior:)];\
-     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];\
-     NSInteger argument = 2;\
-     invocation.target = scrollView;\
-     invocation.selector = @selector(setContentInsetAdjustmentBehavior:);\
-     [invocation setArgument:&argument atIndex:2];\
-     [invocation invoke];\
-} else {\
-    vc.automaticallyAdjustsScrollViewInsets = NO;\
-}\
-_Pragma("clang diagnostic pop") \
-} while (0)
-
-/// 消息警告
+/// 消除警告
 #define TFY_SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
 _Pragma("clang diagnostic push") \
@@ -138,13 +127,6 @@ static class *sharedInstance_; \
         #endif
     #endif
 #endif
-
-#define TFY_WEAK  __weak typeof(self)weakSelf = self;
-
-#define TFY_STRONG  __strong typeof(weakSelf)self = weakSelf;
-
-/** weak对象 */
-#define TFY_Weak(o) __weak typeof(o) weak_##o = o;
 
 
 #endif /* TFY_Define_h */
