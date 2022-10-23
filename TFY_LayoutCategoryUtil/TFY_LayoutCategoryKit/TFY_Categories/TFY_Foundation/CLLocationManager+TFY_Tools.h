@@ -9,6 +9,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <objc/runtime.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  用于表示以米为单位的位置精度级别的类型。以米为单位的值越低，
   实际位置更精确。精度值为负值表示位置无效。
@@ -50,7 +51,7 @@ typedef NS_ENUM(NSUInteger, CLLocationUpdateAuthorizationDescription) {
  错误使用如果更新期间有错误
   stopUpdating设置为YES以便停止位置更新
  */
-typedef void (^LocationManagerUpdateBlock)(CLLocationManager * manager, CLLocation *location, NSError *error, BOOL *stopUpdating);
+typedef void (^LocationManagerUpdateBlock)(CLLocationManager * _Nonnull manager, CLLocation *location, NSError *error, BOOL *stopUpdating);
 
 /**
  Block，用于通知标题的更新
@@ -153,9 +154,6 @@ typedef void(^DidVisitBLock)(CLLocationManager *manager, CLVisit *visit) NS_AVAI
  */
 @interface CLLocationManagerBlocks : NSObject <CLLocationManagerDelegate>
 @end
-
-
-NS_ASSUME_NONNULL_BEGIN
 
 @interface CLLocationManager (TFY_Tools)
 /**

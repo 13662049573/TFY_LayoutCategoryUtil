@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class TFY_LabelLayoutManager;
-@interface MLLabel (Override)
+
+@interface TFY_BaseLabel (Override)
 
 @property (nonatomic, strong) NSTextStorage *textStorage;
 @property (nonatomic, strong) TFY_LabelLayoutManager *layoutManager;

@@ -98,7 +98,7 @@ CG_INLINE void UI_swizzleButtonIfNeed(Class swizzleClass){
     textHeight = self.titleLabel.frame.size.height;
     space = space / 2;
     switch (direction) {
-        case ButtonImageDirectionTop:{
+        case ButtonDirectionCenterImageTop:{
             x = textHeight / 2 + space;
             y = textWidth / 2;
             self.imageEdgeInsets = UIEdgeInsetsMake(-x, y, x, - y);
@@ -107,7 +107,7 @@ CG_INLINE void UI_swizzleButtonIfNeed(Class swizzleClass){
             self.titleEdgeInsets = UIEdgeInsetsMake(x, - y, - x, y);
         }
             break;
-        case ButtonImageDirectionBottom:{
+        case ButtonDirectionCenterImageBottom:{
             x = textHeight / 2 + space;
             y = textWidth / 2;
             self.imageEdgeInsets = UIEdgeInsetsMake(x, y, -x, - y);
@@ -116,38 +116,38 @@ CG_INLINE void UI_swizzleButtonIfNeed(Class swizzleClass){
             self.titleEdgeInsets = UIEdgeInsetsMake(-x, - y, x, y);
         }
             break;
-        case ButtonImageDirectionLeft:{
+        case ButtonDirectionCenterImageLeft:{
             self.imageEdgeInsets = UIEdgeInsetsMake(0, -space,0, space);
             self.titleEdgeInsets = UIEdgeInsetsMake(0, space , 0, - space);
         }
             break;
-        case ButtonImageDirectionRight:{
+        case ButtonDirectionCenterImageRight:{
             self.imageEdgeInsets = UIEdgeInsetsMake(0, space + textWidth, 0, - (space + textWidth));
             self.titleEdgeInsets = UIEdgeInsetsMake(0, -(space + imageWidth), 0, (space + imageWidth));
         }
             break;
-        case ButtonImageDirectionLeftImageLeft:
+        case ButtonDirectionLeftImageLeft:
         {
             self.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
             self.titleEdgeInsets = UIEdgeInsetsMake(0, space, 0, 0);
             self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
             break;
         }
-        case ButtonImageDirectionLeftImageRight:
+        case ButtonDirectionLeftImageRight:
         {
             self.imageEdgeInsets = UIEdgeInsetsMake(0, textWidth + space, 0, 0);
             self.titleEdgeInsets = UIEdgeInsetsMake(0, -imageWidth, 0, 0);
             self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
             break;
         }
-        case ButtonImageDirectionRightImageLeft:
+        case ButtonDirectionRightImageLeft:
         {
             self.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, space);
             self.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
             self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
             break;
         }
-        case ButtonImageDirectionRightImageRight:
+        case ButtonDirectionRightImageRight:
         {
             self.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -textWidth);
             self.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, imageWidth + space);
