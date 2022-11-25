@@ -10,6 +10,37 @@
 #define WSelf(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 
 @implementation NSMutableAttributedString (TFY_Tools)
+@dynamic tfy_alignment;
+@dynamic tfy_backgroundColor;
+@dynamic tfy_baseline;
+@dynamic tfy_baseWritingDirection;
+@dynamic tfy_characterLigature;
+@dynamic tfy_characterSpacing;
+@dynamic tfy_color;
+@dynamic tfy_defaultTabInterval;
+@dynamic tfy_expansion;
+@dynamic tfy_firstLineHeadIndent;
+@dynamic tfy_font;
+@dynamic tfy_headIndent;
+@dynamic tfy_hyphenationFactor;
+@dynamic tfy_lineBreakMode;
+@dynamic tfy_lineHeightMultiple;
+@dynamic tfy_lineSpacing;
+@dynamic tfy_lineThroughColor;
+@dynamic tfy_lineThroughStyle;
+@dynamic tfy_link;
+@dynamic tfy_maximumLineHeight;
+@dynamic tfy_minimumLineHeight;
+@dynamic tfy_obliqueness;
+@dynamic tfy_paragraphSpacing;
+@dynamic tfy_paragraphSpacingBefore;
+@dynamic tfy_paragraphStyle;
+@dynamic tfy_shadow;
+@dynamic tfy_strokeColor;
+@dynamic tfy_strokeWidth;
+@dynamic tfy_tailIndent;
+@dynamic tfy_underLineColor;
+@dynamic tfy_underLineStyle;
 
 #define tfy_setParagraphStyleProperty(_property_,_range_) \
 [self enumerateAttribute:NSParagraphStyleAttributeName inRange:_range_ options:kNilOptions usingBlock:^(NSParagraphStyle *value, NSRange subRange, BOOL *stop) {\

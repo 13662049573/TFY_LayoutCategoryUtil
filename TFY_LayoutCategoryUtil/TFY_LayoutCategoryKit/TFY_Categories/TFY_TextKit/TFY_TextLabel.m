@@ -485,8 +485,8 @@ typedef NS_ENUM(NSUInteger, LabelTouchedState) {
                 }
             }
         }
-        _attachments = nil;
-        _textRenderOnDisplay = nil;
+        self->_attachments = nil;
+        self->_textRenderOnDisplay = nil;
     };
     task.displaying = ^(CGContextRef  _Nonnull context, CGSize size, BOOL isAsynchronously, BOOL (^ _Nonnull isCancelled)(void)) {
         if (!textRender) {
@@ -538,7 +538,7 @@ typedef NS_ENUM(NSUInteger, LabelTouchedState) {
                 [attachment removeFromSuperView:self];
             }
         }
-        _attachments = attachments;
+        self->_attachments = attachments;
     };
     return task;
 }
