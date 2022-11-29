@@ -309,6 +309,12 @@ NS_ASSUME_NONNULL_BEGIN
 ///时间戳转时间
 +(NSString *)tfy_timestampSwitchTime:(NSInteger)timestamp andFormatter:(NSString *)format;
 
+/// 根据出生日期返回年龄的方法
++ (int)dateToOld:(NSDate *)bornDate;
+
+/// 根据出生日期返回详细的年龄(精确到天)
++ (NSString *)dateToDetailOld:(NSDate *)bornDate;
+
 @end
 
 NS_ASSUME_NONNULL_END

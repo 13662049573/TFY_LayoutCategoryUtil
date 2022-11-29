@@ -1073,4 +1073,48 @@
     NSInteger timeSp = [[NSNumber numberWithDouble:[datenow timeIntervalSince1970]] integerValue];
     return timeSp;
 }
+
+/// 根据出生日期返回年龄的方法
++ (int)dateToOld:(NSDate *)bornDate {
+    //获得当前系统时间
+    NSDate *currentDate = [NSDate date];
+    //获得当前系统时间与出生日期之间的时间间隔
+    NSTimeInterval time = [currentDate timeIntervalSinceDate:bornDate];
+    //时间间隔以秒作为单位,求年的话除以60*60*24*356
+    int age = ((int)time)/(3600*24*365);
+    return age;
+}
+
+/// 根据出生日期返回详细的年龄(精确到天)
++ (NSString *)dateToDetailOld:(NSDate *)bornDate {
+    //获得当前系统时间
+    NSDate *currentDate = [NSDate date];
+    //创建日历(格里高利历)
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    //设置component的组成部分
+    NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond ;
+    //按照组成部分格式计算出生日期与现在时间的时间间隔
+    NSDateComponents *date = [calendar components:unitFlags fromDate:bornDate toDate:currentDate options:0];
+
+    //判断年龄大小,以确定返回格式
+    if( [date year] > 0)
+    {
+        return [NSString stringWithFormat:(@"%ld岁%ld月%ld天"),(long)[date year],(long)[date month],(long)[date day]];
+        
+    }
+    else if([date month] >0)
+    {
+        return [NSString stringWithFormat:(@"%ld月%ld天"),(long)[date month],(long)[date day]];
+        
+    }
+    else if([date day]>0)
+    {
+        return [NSString stringWithFormat:(@"%ld天"),(long)[date day]];
+        
+    }
+    else {
+        return @"0天";
+    }
+}
+
 @end
