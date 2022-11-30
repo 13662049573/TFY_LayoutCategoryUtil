@@ -282,7 +282,8 @@
     if (self.superview != nil) {
         [self.superview layoutIfNeeded];
     }
-    return self.bounds;
+    CGRect rect = self.bounds;
+    return rect;
 }
 
 -(UIBezierPath *)drawBezierPath {

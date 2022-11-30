@@ -351,6 +351,7 @@
     return obj;
 }
 
+
 #pragma mark-------------------------------------手势点击添加方法---------------------------------
 
 - (id)tfy_addGestureTarget:(id)target action:(SEL)action gestureClass:(Class)class {

@@ -124,7 +124,7 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     });
     
     self.backView.makeChain
-    .backgroundColor(TFY_ColorHexString(@"4e5f6g"))
+    .backgroundColor(UIColor.tfy_randomColor)
     .addToSuperView(self.view)
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
        make.left.equalTo(self.titleLabel);
@@ -132,6 +132,8 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
        make.top.equalTo(self.textfiled.mas_bottom).offset(20);
        make.height.mas_equalTo(80);
     });
+    
+    self.backView.conrnerCorner(UIRectCornerTopLeft|UIRectCornerTopRight).conrnerRadius(8).borderColor(UIColor.redColor).borderWidth(5).showVisual();
     
     self.nameLabel.makeChain
     .font([UIFont systemFontOfSize:10 weight:UIFontWeightBold])
