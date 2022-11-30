@@ -24,8 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat left;
 @property (nonatomic) CGFloat right;
 
-+ (void)tfy_swizzleMethod:(Class)class orgSel:(SEL)originalSelector swizzSel:(SEL)swizzledSelector;
-
 - (void)tfy_removeAllSubViews;
 
 - (UIViewController *)tfy_viewController;

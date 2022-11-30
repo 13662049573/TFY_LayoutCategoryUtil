@@ -13,26 +13,6 @@
 
 @implementation UIView (TFY_Tools)
 
-+ (void)tfy_swizzleMethod:(Class)class orgSel:(SEL)originalSelector swizzSel:(SEL)swizzledSelector {
-    
-    Method originalMethod = class_getInstanceMethod(class, originalSelector);
-    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
-    
-    IMP swizzledImp = method_getImplementation(swizzledMethod);
-    char *swizzledTypes = (char *)method_getTypeEncoding(swizzledMethod);
-    
-    IMP originalImp = method_getImplementation(originalMethod);
-    char *originalTypes = (char *)method_getTypeEncoding(originalMethod);
-    
-    BOOL success = class_addMethod(class, originalSelector, swizzledImp, swizzledTypes);
-    if (success) {
-        class_replaceMethod(class, swizzledSelector, originalImp, originalTypes);
-    }else {
-        // 添加失败，表明已经有这个方法，直接交换
-        method_exchangeImplementations(originalMethod, swizzledMethod);
-    }
-}
-
 - (CGPoint)origin {
     return self.frame.origin;
 }
