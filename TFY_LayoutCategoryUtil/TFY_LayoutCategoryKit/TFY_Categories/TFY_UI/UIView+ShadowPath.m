@@ -41,13 +41,13 @@
 
 #pragma mark - 添加私有属性
 // mark - 圆角 矩形 默认 AllCorners
-- (void)setPrivateConrnerCorner:(UIRectCorner)corner {
+- (void)setPrivateConrnerCorner:(TFYCornerClipType)corner {
     objc_setAssociatedObject(self, kConrnerCorner, [NSNumber numberWithInteger:corner], OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (UIRectCorner)privateConrnerCorner {
+- (TFYCornerClipType)privateConrnerCorner {
     id corner = objc_getAssociatedObject(self, kConrnerCorner);
-    return corner ? [corner integerValue] : UIRectCornerAllCorners;
+    return corner ? [corner integerValue] : TFYCornerClipTypeAll;
 }
 
 // mark - 圆角 半径 默认 0.0
@@ -151,7 +151,7 @@
 
 #pragma mark - 链式属性实现
 - (ConrnerCorner)conrnerCorner {
-    return ^(UIRectCorner corner) {
+    return ^(TFYCornerClipType corner) {
         self.privateConrnerCorner = corner;
         return self;
     };
@@ -237,7 +237,7 @@
         }
         
         // 恢复默认设置
-        self.privateConrnerCorner = UIRectCornerAllCorners;
+        self.privateConrnerCorner = TFYCornerClipTypeAll;
         self.privateConrnerRadius = 0.0;
         self.privateBorderColor   = [UIColor blackColor];
         self.privateBorderWidth   = 0.0;
@@ -291,7 +291,7 @@
         return self.privateBezierPath;
     }
     return [UIBezierPath bezierPathWithRoundedRect:[self drawBounds]
-                                 byRoundingCorners:self.privateConrnerCorner
+                                 byRoundingCorners:(UIRectCorner)self.privateConrnerCorner
                                        cornerRadii:CGSizeMake(self.privateConrnerRadius, self.privateConrnerRadius)];
 }
 

@@ -7,7 +7,34 @@
 
 #import <UIKit/UIKit.h>
 
-typedef UIView *_Nonnull(^ConrnerCorner) (UIRectCorner  corner );
+/*添加边框*/
+typedef NS_OPTIONS(NSUInteger, TFYShadowSide) {
+    TFYShadowSideNone   = 0,
+    TFYShadowSideTop    = 1 << 0,
+    TFYShadowSideLeft   = 1 << 1,
+    TFYShadowSideBottom = 1 << 2,
+    TFYShadowSideRight  = 1 << 3,
+    TFYShadowSideAll    = TFYShadowSideTop | TFYShadowSideLeft | TFYShadowSideBottom | TFYShadowSideRight
+};
+
+/**切圆角*/
+typedef NS_OPTIONS (NSUInteger, TFYCornerClipType) {
+    TFYCornerClipTypeTopLeft     = UIRectCornerTopLeft, // 左上角
+    TFYCornerClipTypeTopRight    = UIRectCornerTopRight, // 右上角
+    TFYCornerClipTypeBottomLeft  = UIRectCornerBottomLeft, // 左下角
+    TFYCornerClipTypeBottomRight = UIRectCornerBottomRight, // 右下角
+    TFYCornerClipTypeAll  = UIRectCornerAllCorners,// 全部四个角
+    // 上面2个角
+    TFYCornerClipTypeBothTop  = TFYCornerClipTypeTopLeft | TFYCornerClipTypeTopRight,
+    // 下面2个角
+    TFYCornerClipTypeBothBottom  = TFYCornerClipTypeBottomLeft | TFYCornerClipTypeBottomRight,
+    // 左侧2个角
+    TFYCornerClipTypeBothLeft  = TFYCornerClipTypeTopLeft | TFYCornerClipTypeBottomLeft,
+    // 右面2个角
+    TFYCornerClipTypeBothRight  = TFYCornerClipTypeTopRight | TFYCornerClipTypeBottomRight
+};
+
+typedef UIView *_Nonnull(^ConrnerCorner) (TFYCornerClipType  corner );
 typedef UIView *_Nonnull (^ConrnerRadius) (CGFloat       radius );
 
 typedef UIView *_Nonnull (^BorderColor  ) (UIColor      * _Nonnull color);
@@ -24,14 +51,6 @@ typedef UIView *_Nonnull (^ViewBounds) (CGRect           rect);
 typedef UIView *_Nonnull (^ShowVisual) (void);
 typedef UIView *_Nonnull (^ClerVisual) (void);
 
-typedef NS_OPTIONS(NSUInteger, TFYShadowSide) {
-    TFYShadowSideNone   = 0,
-    TFYShadowSideTop    = 1 << 0,
-    TFYShadowSideLeft   = 1 << 1,
-    TFYShadowSideBottom = 1 << 2,
-    TFYShadowSideRight  = 1 << 3,
-    TFYShadowSideAll    = TFYShadowSideTop | TFYShadowSideLeft | TFYShadowSideBottom | TFYShadowSideRight
-};
 
 NS_ASSUME_NONNULL_BEGIN
 
