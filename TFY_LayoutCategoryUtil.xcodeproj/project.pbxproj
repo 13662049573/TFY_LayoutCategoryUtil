@@ -77,6 +77,7 @@
 		36EBD93225773D8600C70D20 /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBD93125773D8600C70D20 /* UIBarButtonItem+Badge.m */; };
 		36EBD93825773E8900C70D20 /* UITabBarItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBD93725773E8900C70D20 /* UITabBarItem+Badge.m */; };
 		36EE1103250A18CF00D24B3C /* TFY_Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EE1102250A18CF00D24B3C /* TFY_Timer.m */; };
+		36EF14D92936EA27009ED803 /* UIView+ShadowPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EF14D82936EA27009ED803 /* UIView+ShadowPath.m */; };
 		36FEC82928501D7500B44896 /* TFY_IndexViewConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FEC82828501D7500B44896 /* TFY_IndexViewConfiguration.m */; };
 		36FEC82C28501E6000B44896 /* TFY_IndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FEC82B28501E6000B44896 /* TFY_IndexView.m */; };
 		36FEC82F2850203400B44896 /* UITableView+IndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FEC82E2850203400B44896 /* UITableView+IndexView.m */; };
@@ -324,6 +325,8 @@
 		36EE1100250A17DE00D24B3C /* TFY_LayoutCategoryKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_LayoutCategoryKit.h; sourceTree = "<group>"; };
 		36EE1101250A18CF00D24B3C /* TFY_Timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Timer.h; sourceTree = "<group>"; };
 		36EE1102250A18CF00D24B3C /* TFY_Timer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Timer.m; sourceTree = "<group>"; };
+		36EF14D72936EA27009ED803 /* UIView+ShadowPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ShadowPath.h"; sourceTree = "<group>"; };
+		36EF14D82936EA27009ED803 /* UIView+ShadowPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ShadowPath.m"; sourceTree = "<group>"; };
 		36FEC82728501D7500B44896 /* TFY_IndexViewConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_IndexViewConfiguration.h; sourceTree = "<group>"; };
 		36FEC82828501D7500B44896 /* TFY_IndexViewConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_IndexViewConfiguration.m; sourceTree = "<group>"; };
 		36FEC82A28501E6000B44896 /* TFY_IndexView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_IndexView.h; sourceTree = "<group>"; };
@@ -801,6 +804,8 @@
 				36867DCC24EBEB7200A761BC /* TFY_UIHeader.h */,
 				565583D62431B1FE00020D3C /* UIView+TFY_Tools.h */,
 				565583D72431B1FE00020D3C /* UIView+TFY_Tools.m */,
+				36EF14D72936EA27009ED803 /* UIView+ShadowPath.h */,
+				36EF14D82936EA27009ED803 /* UIView+ShadowPath.m */,
 				565583D92431B2B700020D3C /* UIButton+TFY_Tools.h */,
 				565583DA2431B2B700020D3C /* UIButton+TFY_Tools.m */,
 				367EE8C327B6239500977C9B /* UIImage+Addtions.h */,
@@ -1305,6 +1310,7 @@
 				361D7DE4255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m in Sources */,
 				565583F02431B78600020D3C /* UIImage+TFY_Tools.m in Sources */,
 				565583A8243197BB00020D3C /* SceneDelegate.m in Sources */,
+				36EF14D92936EA27009ED803 /* UIView+ShadowPath.m in Sources */,
 				360312C12501E24B00EFCA27 /* TFY_Utils.m in Sources */,
 				565584172431BE9C00020D3C /* TFY_BaseViewChainModel.m in Sources */,
 				36E77AF3250B75FE00D503E8 /* TFY_Video.m in Sources */,

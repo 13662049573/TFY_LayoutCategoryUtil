@@ -112,17 +112,6 @@ TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(autoresizesSubviews, BOOL)
         return [self.view tfy_convertPointFrom:point :view];
     };
 }
-/**
- * 便捷添加圆角 clipType 圆角类型  radius 圆角角度
- */
-- (id  _Nonnull (^)(CornerClipType, CGFloat))clipRadius{
-    return ^(CornerClipType clipType, CGFloat radius){
-        [self enumerateObjectsUsingBlock:^(UIView * _Nonnull obj) {
-            [obj tfy_clipWithType:clipType radius:radius];
-        }];
-        return self;
-    };
-}
 
 -(id  _Nonnull (^)(UIColor * _Nonnull))ios13BackgroundColor {
     return ^(UIColor *color){

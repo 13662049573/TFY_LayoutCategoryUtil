@@ -28,5 +28,6 @@
 #import "UITableView+CornerRadius.h"
 #import "UIView+Gradient.h"
 #import "UIImage+Addtions.h"
+#import "UIView+ShadowPath.h"
 
 #endif /* TFY_UIHeader_h */

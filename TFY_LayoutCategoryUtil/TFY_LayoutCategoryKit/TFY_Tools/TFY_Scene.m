@@ -191,8 +191,6 @@ typedef enum : NSUInteger {
     return nil;
 }
 
-
-
 - (void)showWindow:(UIWindow *)window{
     if (self.currentScene) {
         SEL sel = sel_registerName("setWindowScene:");

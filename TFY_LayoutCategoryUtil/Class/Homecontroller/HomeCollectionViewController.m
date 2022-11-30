@@ -125,7 +125,6 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     
     self.backView.makeChain
     .backgroundColor(TFY_ColorHexString(@"4e5f6g"))
-    .clipRadius(CornerClipTypeBothTop, 10)
     .addToSuperView(self.view)
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
        make.left.equalTo(self.titleLabel);

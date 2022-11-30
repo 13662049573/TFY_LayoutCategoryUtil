@@ -13,58 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- Provide some data-model method:
- 
- * Convert json to any object, or convert any object to json.
- * Set object properties with a key-value dictionary (like KVC).
- * Implementations of `NSCoding`, `NSCopying`, `-hash` and `-isEqual:`.
- 
- See `YYModel` protocol for custom methods.
- 
- 
- Sample Code:
-    
-     ********************** json convertor *********************
-     @interface YYAuthor : NSObject
-     @property (nonatomic, strong) NSString *name;
-     @property (nonatomic, assign) NSDate *birthday;
-     @end
-     @implementation YYAuthor
-     @end
- 
-     @interface YYBook : NSObject
-     @property (nonatomic, copy) NSString *name;
-     @property (nonatomic, assign) NSUInteger pages;
-     @property (nonatomic, strong) YYAuthor *author;
-     @end
-     @implementation YYBook
-     @end
-    
-     int main() {
-         // create model from json
-         YYBook *book = [YYBook yy_modelWithJSON:@"{\"name\": \"Harry Potter\", \"pages\": 256, \"author\": {\"name\": \"J.K.Rowling\", \"birthday\": \"1965-07-31\" }}"];
- 
-         // convert model to json
-         NSString *json = [book yy_modelToJSONString];
-         // {"author":{"name":"J.K.Rowling","birthday":"1965-07-31T00:00:00+0000"},"name":"Harry Potter","pages":256}
-     }
- 
-     ********************** Coding/Copying/hash/equal *********************
-     @interface YYShadow :NSObject <NSCoding, NSCopying>
-     @property (nonatomic, copy) NSString *name;
-     @property (nonatomic, assign) CGSize size;
-     @end
- 
-     @implementation YYShadow
-     - (void)encodeWithCoder:(NSCoder *)aCoder { [self yy_modelEncodeWithCoder:aCoder]; }
-     - (id)initWithCoder:(NSCoder *)aDecoder { self = [super init]; return [self yy_modelInitWithCoder:aDecoder]; }
-     - (id)copyWithZone:(NSZone *)zone { return [self yy_modelCopy]; }
-     - (NSUInteger)hash { return [self yy_modelHash]; }
-     - (BOOL)isEqual:(id)object { return [self yy_modelIsEqual:object]; }
-     @end
- 
- */
+
 @interface NSObject (YYModel)
 
 /**
