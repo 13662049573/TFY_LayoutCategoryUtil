@@ -12,7 +12,6 @@
 #import <monetary.h>
 #import <YYModel.h>
 #import <TFY_Navigation.h>
-#import <TFY_AutoLayout.h>
 #import <TFY_TabBarKit.h>
 
 #import "TFY_LayoutCategoryKit.h"

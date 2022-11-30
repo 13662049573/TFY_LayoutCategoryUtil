@@ -222,7 +222,7 @@
 }
 
 #pragma mark - convert -
-- (CGPoint)tfy_convertPointTo:(CGPoint)point :(UIView *)view{
+- (CGPoint)tfy_convertPointTo:(CGPoint)point subView:(UIView *)view {
     UIView *myView = self;
     CGPoint endPoint;
     if (!view) {
@@ -232,7 +232,6 @@
             endPoint = [myView convertPoint:point toView:nil];
         }
     }
-    
     UIWindow *from = [myView isKindOfClass:[UIWindow class]] ? (id)myView : myView.window;
     UIWindow *to = [view isKindOfClass:[UIWindow class]] ? (id)view : view.window;
     if ((!from || !to) || (from == to)) return [myView convertPoint:point toView:view];
@@ -241,7 +240,8 @@
     endPoint = [view convertPoint:point fromView:to];
     return endPoint;
 }
-- (CGPoint)tfy_convertPointFrom:(CGPoint)point :(UIView *)view{
+
+- (CGPoint)tfy_convertPointFrom:(CGPoint)point subView:(UIView *)view{
     CGPoint endPoint;
     UIView *myView = self;
     if (!view) {
@@ -260,7 +260,7 @@
     }
     return endPoint;
 }
-- (CGRect)tfy_convertRectTo:(CGRect)rect :(UIView *)view{
+- (CGRect)tfy_convertRectTo:(CGRect)rect subView:(UIView *)view {
     UIView *myView = self;
     CGRect toRect;
     if (!view) {
@@ -270,7 +270,6 @@
             toRect = [myView convertRect:rect toView:nil];
         }
     }
-    
     UIWindow *from = [myView isKindOfClass:[UIWindow class]] ? (id)myView : myView.window;
     UIWindow *to = [view isKindOfClass:[UIWindow class]] ? (id)view : view.window;
     if (!from || !to) return [myView convertRect:rect toView:view];
@@ -280,7 +279,8 @@
     toRect = [view convertRect:rect fromView:to];
     return toRect;
 }
-- (CGRect)tfy_convertRectFrom:(CGRect)rect :(UIView *)view{
+
+- (CGRect)tfy_convertRectFrom:(CGRect)rect subView:(UIView *)view {
     CGRect fromRect;
     UIView *myView = self;
     if (!view) {
@@ -290,7 +290,6 @@
             fromRect = [myView convertRect:rect fromView:nil];
         }
     }
-    
     UIWindow *from = [view isKindOfClass:[UIWindow class]] ? (id)view : view.window;
     UIWindow *to = [myView isKindOfClass:[UIWindow class]] ? (id)myView : myView.window;
     if ((!from || !to) || (from == to)) return [myView convertRect:rect fromView:view];

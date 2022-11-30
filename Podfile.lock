@@ -1,17 +1,8 @@
 PODS:
   - Masonry (1.1.0)
-  - TFY_AutoLayout (2.6.4):
-    - TFY_AutoLayout/IOS_Layout (= 2.6.4)
-    - TFY_AutoLayout/MAC_Layout (= 2.6.4)
-    - TFY_AutoLayout/Util (= 2.6.4)
-  - TFY_AutoLayout/IOS_Layout (2.6.4):
-    - TFY_AutoLayout/Util
-  - TFY_AutoLayout/MAC_Layout (2.6.4):
-    - TFY_AutoLayout/Util
-  - TFY_AutoLayout/Util (2.6.4)
-  - TFY_Navigation (2.9.2):
-    - TFY_Navigation/TFY_NavControoler (= 2.9.2)
-  - TFY_Navigation/TFY_NavControoler (2.9.2)
+  - TFY_Navigation (2.9.4):
+    - TFY_Navigation/TFY_NavControoler (= 2.9.4)
+  - TFY_Navigation/TFY_NavControoler (2.9.4)
   - TFY_TabBarKit (1.1.6):
     - TFY_TabBarKit/TFY_SystemTabBar (= 1.1.6)
   - TFY_TabBarKit/TFY_SystemTabBar (1.1.6)
@@ -19,7 +10,6 @@ PODS:
 
 DEPENDENCIES:
   - Masonry
-  - TFY_AutoLayout
   - TFY_Navigation
   - TFY_TabBarKit
   - YYModel
@@ -27,18 +17,16 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Masonry
-    - TFY_AutoLayout
     - TFY_Navigation
     - TFY_TabBarKit
     - YYModel
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  TFY_AutoLayout: 51019bdcdb78b9a145bd0ed351d23be93379dc0b
-  TFY_Navigation: 12be3a08483565e1548d93a3212c05427db61470
+  TFY_Navigation: a9661e0742dca3086b232596015c5f5748535604
   TFY_TabBarKit: 2a96e8283d76da957d17d4c473b21e8b5a005805
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 173730cbf9c3843dd1828feb9679b5a79c03e369
+PODFILE CHECKSUM: 1d5e48af890ea853aa037df7595251328db9ef75
 
 COCOAPODS: 1.11.3

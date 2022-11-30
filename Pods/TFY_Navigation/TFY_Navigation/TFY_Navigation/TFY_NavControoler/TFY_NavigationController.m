@@ -597,12 +597,15 @@ __attribute((overloadable)) static inline UIViewController *TFYSafeWrapViewContr
 
 - (void)onBack:(id)sender
 {
+    if ([self.uiNaviDelegate respondsToSelector:@selector(navigationControllerDidClickLeftButton:)]) {
+        [self.uiNaviDelegate navigationControllerDidClickLeftButton:self];
+    }
     [self popViewControllerAnimated:YES];
 }
 
 - (void)_commonInit
 {
-    
+    self.interactivePopGestureRecognizer.delegate = self;
 }
 
 - (void)_installsLeftBarButtonItemIfNeededForViewController:(UIViewController *)viewController
@@ -952,6 +955,25 @@ __attribute((overloadable)) static inline UIViewController *TFYSafeWrapViewContr
                         willShowViewController:viewController
                                       animated:animated];
     }
+    
+    /// 监听侧边滑动返回的事件
+    __weak typeof(self) weakSelf = self;
+    if (@available(iOS 10.0, *)) {
+        [viewController.transitionCoordinator notifyWhenInteractionChangesUsingBlock:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf handleSideSlideReturnIfNeeded:context];
+        }];
+    }
+}
+
+- (void)handleSideSlideReturnIfNeeded:(id<UIViewControllerTransitionCoordinatorContext>)context {
+    if (context.isCancelled) {
+        return;
+    }
+    UIViewController *fromVc = [context viewControllerForKey:UITransitionContextFromViewControllerKey];
+    if ([self.uiNaviDelegate respondsToSelector:@selector(navigationControllerDidSideSlideReturn:fromViewController:)]) {
+        [self.uiNaviDelegate navigationControllerDidSideSlideReturn:self fromViewController:fromVc];
+    }
 }
 
 - (void)navigationController:(UINavigationController *)navigationController
@@ -970,7 +992,7 @@ __attribute((overloadable)) static inline UIViewController *TFYSafeWrapViewContr
         self.interactivePopGestureRecognizer.delegate = self;
         self.interactivePopGestureRecognizer.enabled = !isRootVC;
     }
-    
+
     [TFY_NavigationController attemptRotationToDeviceOrientation];
 
     if ([self.tfy_delegate respondsToSelector:@selector(navigationController:didShowViewController:animated:)]) {

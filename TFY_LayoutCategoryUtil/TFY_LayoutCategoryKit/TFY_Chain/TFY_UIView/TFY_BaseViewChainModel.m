@@ -90,26 +90,25 @@ TFY_CATEGORY_CHAIN_VIEW_IMPLEMENTATION(autoresizesSubviews, BOOL)
 
 - (CGRect (^)(CGRect, UIView * _Nonnull))convertRectTo{
     return  ^(CGRect rect, UIView *view){
-        return [self.view tfy_convertRectTo:rect :view];
+        return [self.view tfy_convertRectTo:rect subView:view];
     };
 }
 
-
 - (CGRect (^)(CGRect, UIView * _Nonnull))convertRectFrom{
     return  ^(CGRect rect, UIView *view){
-        return [self.view tfy_convertRectFrom:rect :view];
+        return [self.view tfy_convertRectFrom:rect subView:view];
     };
 }
 
 - (CGPoint (^)(CGPoint, UIView * _Nonnull))convertPointTo{
     return  ^(CGPoint point, UIView *view){
-        return [self.view tfy_convertPointTo:point :view];
+        return [self.view tfy_convertPointTo:point subView:view];
     };
 }
 
 - (CGPoint (^)(CGPoint, UIView * _Nonnull))convertPointFrom{
     return  ^(CGPoint point, UIView *view){
-        return [self.view tfy_convertPointFrom:point :view];
+        return [self.view tfy_convertPointFrom:point subView:view];
     };
 }
 

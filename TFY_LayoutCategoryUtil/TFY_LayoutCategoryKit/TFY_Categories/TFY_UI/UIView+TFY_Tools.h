@@ -40,13 +40,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - convert -
 
-- (CGPoint)tfy_convertPointTo:(CGPoint)point :(UIView *)view;
+- (CGPoint)tfy_convertPointTo:(CGPoint)point subView:(UIView *)view;
 
-- (CGPoint)tfy_convertPointFrom:(CGPoint)point :(UIView *)view;
+- (CGPoint)tfy_convertPointFrom:(CGPoint)point subView:(UIView *)view;
 
-- (CGRect)tfy_convertRectTo:(CGRect)rect :(UIView *)view;
+- (CGRect)tfy_convertRectTo:(CGRect)rect subView:(UIView *)view;
 
-- (CGRect)tfy_convertRectFrom:(CGRect)rect :(UIView *)view;
+- (CGRect)tfy_convertRectFrom:(CGRect)rect subView:(UIView *)view;
 
 #pragma mark - draw -
 - (CAShapeLayer *)tfy_setCornerRadiusAngle:(UIRectCorner)corner cornerSize:(CGSize)size;

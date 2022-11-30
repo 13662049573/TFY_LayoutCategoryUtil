@@ -7,10 +7,7 @@ target 'TFY_LayoutCategoryUtil' do
   pod 'Masonry'
   pod 'YYModel'
   pod 'TFY_Navigation'
-  pod 'TFY_AutoLayout'
   pod 'TFY_TabBarKit'
-
-  # Pods for TFY_LayoutCategoryUtil
 
   target 'TFY_LayoutCategoryUtilTests' do
     inherit! :search_paths
