@@ -89,6 +89,30 @@ NS_ASSUME_NONNULL_BEGIN
         shadowRadius:(CGFloat)shadowRadius
           shadowSide:(TFYShadowSide)shadowSide;
 
+
+/// 切上面两个圆角
+@property(nonatomic , assign)CGFloat cornersTopLeftRight;
+/// 切下面两个圆角
+@property(nonatomic , assign)CGFloat cornersBottomLeftRight;
+/// 切全部圆角
+@property(nonatomic , assign)CGFloat cornersAll;
+/// 切左边两个圆角
+@property(nonatomic , assign)CGFloat cornersLeftTopBottom;
+/// 切右边两个圆角
+@property(nonatomic , assign)CGFloat cornersRightTopBottom;
+
+/// 切上左边圆角
+@property(nonatomic , assign)CGFloat cornersTopLeft;
+/// 切上右边圆角
+@property(nonatomic , assign)CGFloat cornersTopRight;
+/// 切下左圆角
+@property(nonatomic , assign)CGFloat cornersBottomLeft;
+/// 切下右圆角
+@property(nonatomic , assign)CGFloat cornersBottomRight;
+
+/// 阴影
+@property(nonatomic , strong)UIColor *conrnersShowColor;
+
 @end
 
 NS_ASSUME_NONNULL_END

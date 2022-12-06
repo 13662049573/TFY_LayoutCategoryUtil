@@ -438,5 +438,115 @@
     
     self.layer.shadowPath = path.CGPath;
 }
+
+/// 切上面两个圆角
+- (void)setCornersTopLeftRight:(CGFloat)cornersTopLeftRight {
+    objc_setAssociatedObject(self, @selector(cornersTopLeftRight), [NSNumber numberWithFloat:cornersTopLeftRight], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    self.conrnerCorner(TFYCornerClipTypeBothTop).conrnerRadius(cornersTopLeftRight).showVisual();
+}
+
+- (CGFloat)cornersTopLeftRight {
+    NSNumber *number = objc_getAssociatedObject(self, @selector(cornersTopLeftRight));
+    return number.floatValue;
+}
+/// 切下面两个圆角
+- (void)setCornersBottomLeftRight:(CGFloat)cornersBottomLeftRight {
+    objc_setAssociatedObject(self, @selector(cornersBottomLeftRight), [NSNumber numberWithFloat:cornersBottomLeftRight], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    self.conrnerCorner(TFYCornerClipTypeBothBottom).conrnerRadius(cornersBottomLeftRight).showVisual();
+}
+
+- (CGFloat)cornersBottomLeftRight {
+    NSNumber *number = objc_getAssociatedObject(self, @selector(cornersBottomLeftRight));
+    return number.floatValue;
+}
+/// 切全部圆角
+- (void)setCornersAll:(CGFloat)cornersAll {
+    objc_setAssociatedObject(self, @selector(cornersAll), [NSNumber numberWithFloat:cornersAll], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    self.conrnerCorner(TFYCornerClipTypeAll).conrnerRadius(cornersAll).showVisual();
+}
+
+- (CGFloat)cornersAll {
+    NSNumber *number = objc_getAssociatedObject(self, @selector(cornersAll));
+    return number.floatValue;
+}
+/// 切左边两个圆角
+- (void)setCornersLeftTopBottom:(CGFloat)cornersLeftTopBottom {
+    objc_setAssociatedObject(self, @selector(cornersLeftTopBottom), [NSNumber numberWithFloat:cornersLeftTopBottom], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    self.conrnerCorner(TFYCornerClipTypeBothLeft).conrnerRadius(cornersLeftTopBottom).showVisual();
+}
+
+- (CGFloat)cornersLeftTopBottom {
+    NSNumber *number = objc_getAssociatedObject(self, @selector(cornersLeftTopBottom));
+    return number.floatValue;
+}
+/// 切右边两个圆角
+- (void)setCornersRightTopBottom:(CGFloat)cornersRightTopBottom {
+    objc_setAssociatedObject(self, @selector(cornersRightTopBottom), [NSNumber numberWithFloat:cornersRightTopBottom], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    self.conrnerCorner(TFYCornerClipTypeBothRight).conrnerRadius(cornersRightTopBottom).showVisual();
+}
+
+- (CGFloat)cornersRightTopBottom {
+    NSNumber *number = objc_getAssociatedObject(self, @selector(cornersRightTopBottom));
+    return number.floatValue;
+}
+
+/// 切上左边圆角
+- (void)setCornersTopLeft:(CGFloat)cornersTopLeft {
+    objc_setAssociatedObject(self, @selector(cornersTopLeft), [NSNumber numberWithFloat:cornersTopLeft], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    self.conrnerCorner(TFYCornerClipTypeTopLeft).conrnerRadius(cornersTopLeft).showVisual();
+}
+
+- (CGFloat)cornersTopLeft {
+    NSNumber *number = objc_getAssociatedObject(self, @selector(cornersTopLeft));
+    return number.floatValue;
+}
+
+/// 切上右边圆角
+- (void)setCornersTopRight:(CGFloat)cornersTopRight {
+    objc_setAssociatedObject(self, @selector(cornersTopRight), [NSNumber numberWithFloat:cornersTopRight], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    self.conrnerCorner(TFYCornerClipTypeTopRight).conrnerRadius(cornersTopRight).showVisual();
+}
+
+- (CGFloat)cornersTopRight {
+    NSNumber *number = objc_getAssociatedObject(self, @selector(cornersTopRight));
+    return number.floatValue;
+}
+
+/// 切下左圆角
+- (void)setCornersBottomLeft:(CGFloat)cornersBottomLeft {
+    objc_setAssociatedObject(self, @selector(cornersBottomLeft), [NSNumber numberWithFloat:cornersBottomLeft], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    self.conrnerCorner(TFYCornerClipTypeBottomLeft).conrnerRadius(cornersBottomLeft).showVisual();
+}
+
+- (CGFloat)cornersBottomLeft {
+    NSNumber *number = objc_getAssociatedObject(self, @selector(cornersBottomLeft));
+    return number.floatValue;
+}
+
+/// 切下右圆角
+- (void)setCornersBottomRight:(CGFloat)cornersBottomRight {
+    objc_setAssociatedObject(self, @selector(cornersBottomRight), [NSNumber numberWithFloat:cornersBottomRight], OBJC_ASSOCIATION_COPY_NONATOMIC);
+    self.conrnerCorner(TFYCornerClipTypeBottomRight).conrnerRadius(cornersBottomRight).showVisual();
+}
+
+- (CGFloat)cornersBottomRight {
+    NSNumber *number = objc_getAssociatedObject(self, @selector(cornersBottomRight));
+    return number.floatValue;
+}
+
+/// 阴影
+- (void)setConrnersShowColor:(UIColor *)conrnersShowColor {
+    objc_setAssociatedObject(self, @selector(conrnersShowColor),conrnersShowColor, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    self.shadowOpacity(1).shadowColor(conrnersShowColor).shadowRadius(7)
+        .shadowOffset(CGSizeMake(5, 5)).conrnerRadius(8)
+        .conrnerCorner(TFYCornerClipTypeAll)
+        .showVisual();
+}
+
+- (UIColor *)conrnersShowColor {
+    UIColor *color = objc_getAssociatedObject(self, @selector(conrnersShowColor));
+    return color;
+}
+
 @end
 
