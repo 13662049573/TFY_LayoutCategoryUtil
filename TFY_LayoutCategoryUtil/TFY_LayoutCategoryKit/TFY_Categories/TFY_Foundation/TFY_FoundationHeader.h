@@ -29,5 +29,6 @@
 #import "NSMutableParagraphStyle+TFY_Chain.h"
 #import "UIBezierPath+TFY_Tools.h"
 #import "CLLocationManager+TFY_Tools.h"
+#import "NSString+Extend.h"
 
 #endif /* TFY_FoundationHeader_h */

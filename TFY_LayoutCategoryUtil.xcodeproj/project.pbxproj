@@ -16,6 +16,7 @@
 		361D7DE4255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D7DE3255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m */; };
 		361E3C1425A7EBE3003A822F /* TFY_ImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361E3C1325A7EBE3003A822F /* TFY_ImageView.m */; };
 		362541F528A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 362541F428A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m */; };
+		3652767E296F96950065C087 /* NSString+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 3652767D296F96950065C087 /* NSString+Extend.m */; };
 		3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163B24FF336D00CC0024 /* CommonViewController.m */; };
 		3654163F24FF345000CC0024 /* CommonNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163E24FF345000CC0024 /* CommonNavigationBar.m */; };
 		3654164224FF360100CC0024 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654164124FF360100CC0024 /* NavigationController.m */; };
@@ -196,6 +197,8 @@
 		361E3C1325A7EBE3003A822F /* TFY_ImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_ImageView.m; sourceTree = "<group>"; };
 		362541F328A1FE9F003CD751 /* CLLocationManager+TFY_Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CLLocationManager+TFY_Tools.h"; sourceTree = "<group>"; };
 		362541F428A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CLLocationManager+TFY_Tools.m"; sourceTree = "<group>"; };
+		3652767C296F96950065C087 /* NSString+Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Extend.h"; sourceTree = "<group>"; };
+		3652767D296F96950065C087 /* NSString+Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extend.m"; sourceTree = "<group>"; };
 		3654163A24FF336D00CC0024 /* CommonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonViewController.h; sourceTree = "<group>"; };
 		3654163B24FF336D00CC0024 /* CommonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonViewController.m; sourceTree = "<group>"; };
 		3654163D24FF345000CC0024 /* CommonNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonNavigationBar.h; sourceTree = "<group>"; };
@@ -896,6 +899,8 @@
 				36564D532586307800167927 /* UIBezierPath+TFY_Tools.m */,
 				362541F328A1FE9F003CD751 /* CLLocationManager+TFY_Tools.h */,
 				362541F428A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m */,
+				3652767C296F96950065C087 /* NSString+Extend.h */,
+				3652767D296F96950065C087 /* NSString+Extend.m */,
 			);
 			path = TFY_Foundation;
 			sourceTree = "<group>";
@@ -1337,6 +1342,7 @@
 				3695B7F32904BC8500D8FD7D /* TFY_LabelLayoutManager.m in Sources */,
 				36C334A724ED284500DA6FB2 /* NSString+TFY_String.m in Sources */,
 				360118A425007ECA00449922 /* UITextView+TFY_Tools.m in Sources */,
+				3652767E296F96950065C087 /* NSString+Extend.m in Sources */,
 				3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */,
 				36978E7027F6F24C00557EC0 /* TFY_TextblanksField.m in Sources */,
 				36867DBA24EBA26400A761BC /* UIScreen+TFY_Tools.m in Sources */,
