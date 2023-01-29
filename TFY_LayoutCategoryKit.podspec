@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_LayoutCategoryKit"
 
-  spec.version      = "2.7.7"
+  spec.version      = "2.7.8"
 
   spec.summary      = "全新链式的界面初始化和界面跳转，布局基于Masonry"
 
@@ -23,12 +23,21 @@ Pod::Spec.new do |spec|
   spec.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/*.h"
    
    spec.subspec 'TFY_Tools' do |ss|
-     ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/**/*.{h,m}"
+     ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/TFY_ToolsHeader.h"
+
+     ss.subspec 'GCD' do |s|
+      s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/GCD/**/*.{h,m}"
+     end
+
+     ss.subspec 'Utils' do |s|
+      s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/Utils/**/*.{h,m}"
+     end
+
    end
 
    spec.subspec 'TFY_Categories' do |ss|
       ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/*.h"
-      ss.dependency "TFY_LayoutCategoryKit/TFY_Tools"
+      ss.dependency "TFY_LayoutCategoryKit/TFY_Tools/Utils"
       
       ss.subspec 'TFY_CrashSDK' do |s|
         s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_CrashSDK/**/*.{h,m}"
