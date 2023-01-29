@@ -11,9 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIWindow (TFY_Tools)
+
 - (void)tfy_showOnCurrentScene;
 
 - (void)tfy_showOnScene:(id)scene;
+
 @end
 
 NS_ASSUME_NONNULL_END
