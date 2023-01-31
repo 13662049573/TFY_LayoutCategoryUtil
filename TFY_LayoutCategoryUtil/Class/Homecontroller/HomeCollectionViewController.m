@@ -225,12 +225,26 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
 }
 
 - (void)btnClick:(UIButton *)btn {
-    btn.selected = !btn.selected;
-    if (btn.selected) {
-        self.confirmButton.backgroundColor = UIColor.greenColor;
-    } else {
-        self.confirmButton.backgroundColor = UIColor.yellowColor;
-    }
+    [self passwordtologinClick];
+    
+    NSString *str = nil;
+    
+    NSDictionary *dict = @{@"ssss":str};
+}
+
+- (void)passwordtologinClick {
+    TFY_AlertControllerAlertCreate(@"提示", @"是否要注销账户呢？注销会让你在该平台里面所有数据都会清空。不会保留任何数据。")
+    .tfy_addCancelAction(@"greenColor", 0)
+    .tfy_addDefaultAction(@"yellowColor", 1)
+    .tfy_alertMessageAttributeFontWithColor([UIFont systemFontOfSize:14],UIColor.blackColor)
+    .tfy_actionTap(^(NSInteger index, UIAlertAction * _Nonnull action) {
+        if (index==1) {
+            self.confirmButton.backgroundColor = UIColor.yellowColor;
+        } else {
+            self.confirmButton.backgroundColor = UIColor.greenColor;
+        }
+    })
+    .tfy_showFromViewController(self);
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

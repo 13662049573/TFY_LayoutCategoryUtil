@@ -24,7 +24,9 @@
            self.window.backgroundColor = [UIColor whiteColor];
            [self.window makeKeyAndVisible];
      }
+    
     TFYRotateDefault.shared.defaultPreferredStatusBarStyle = UIStatusBarStyleDefault;
+    [TFY_AvoidCrash becomeEffective];
     
     [TFY_ScenePackage addBeforeWindowEvent:^(TFY_Scene * _Nonnull application) {
        if ([GuideViewController isFirstRun]) {

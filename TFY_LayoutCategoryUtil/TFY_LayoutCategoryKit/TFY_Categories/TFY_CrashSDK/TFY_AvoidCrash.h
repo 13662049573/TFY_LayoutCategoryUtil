@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TFY_AvoidCrash : NSObject
 
+/// 开始生效.你可以在AppDelegate的didFinishLaunchingWithOptions方法中调用becomeEffective方法
 + (void)becomeEffective;
 
 + (void)exchangeClassMethod:(Class)anClass method1Sel:(SEL)method1Sel method2Sel:(SEL)method2Sel;

@@ -12,24 +12,26 @@
 @implementation NSMutableArray (avoidCrash)
 
 + (void)tfy_avoidCrashExchangeMethod {
-    Class arrayMClass = NSClassFromString(@"__NSArrayM");
-    
-    //get object from array method exchange
-    //由于继承于NSArray，所以 objectAtIndexedSubscript已经在NSArray中处理过了，无需处理
-    
-    //array set object at index
-    [TFY_AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(setObject:atIndexedSubscript:) method2Sel:@selector(avoidCrashSetObject:atIndexedSubscript:)];
-    
-    //removeObjectAtIndex:
-    [TFY_AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(removeObjectAtIndex:) method2Sel:@selector(avoidCrashRemoveObjectAtIndex:)];
-    
-    //insertObject:atIndex:
-    [TFY_AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(insertObject:atIndex:) method2Sel:@selector(avoidCrashInsertObject:atIndex:)];
-    
-    
-    [TFY_AvoidCrash exchangeInstanceMethod:NSClassFromString(@"__NSArrayM") method1Sel:@selector(objectAtIndex:) method2Sel:@selector(lpm_MavoidCrashObjectsAtIndex:)];
-    [TFY_AvoidCrash exchangeInstanceMethod:NSClassFromString(@"__NSArrayM") method1Sel:@selector(objectsAtIndexes:) method2Sel:@selector(lpm_MavoidCrashObjectsAtIndexes:)];
-    [TFY_AvoidCrash exchangeInstanceMethod:NSClassFromString(@"__NSArrayM") method1Sel:@selector(objectAtIndexedSubscript:) method2Sel:@selector(lpm_MavoidCrashObjectAtIndexedSubscript:)];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        Class arrayMClass = NSClassFromString(@"__NSArrayM");
+        
+        //objectAtIndex:
+        [TFY_AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(objectAtIndex:) method2Sel:@selector(avoidCrashObjectAtIndex:)];
+        
+        //setObject:atIndexedSubscript:
+        [TFY_AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(setObject:atIndexedSubscript:) method2Sel:@selector(avoidCrashSetObject:atIndexedSubscript:)];
+        
+        //removeObjectAtIndex:
+        [TFY_AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(removeObjectAtIndex:) method2Sel:@selector(avoidCrashRemoveObjectAtIndex:)];
+        
+        //insertObject:atIndex:
+        [TFY_AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(insertObject:atIndex:) method2Sel:@selector(avoidCrashInsertObject:atIndex:)];
+        
+        //getObjects:range:
+        [TFY_AvoidCrash exchangeInstanceMethod:arrayMClass method1Sel:@selector(getObjects:range:) method2Sel:@selector(avoidCrashGetObjects:range:)];
+    });
 }
 
 
@@ -88,16 +90,16 @@
 }
 
 
-// __NSArrayM
 //=================================================================
-//                     objectAtIndexedSubscript:
+//                           objectAtIndex:
 //=================================================================
-#pragma mark - objectAtIndexedSubscript:
-- (id)lpm_MavoidCrashObjectAtIndexedSubscript:(NSUInteger)idx {
+#pragma mark - objectAtIndex:
+
+- (id)avoidCrashObjectAtIndex:(NSUInteger)index {
     id object = nil;
     
     @try {
-        object = [self lpm_MavoidCrashObjectAtIndexedSubscript:idx];
+        object = [self avoidCrashObjectAtIndex:index];
     }
     @catch (NSException *exception) {
         NSString *defaultToDo = TFYAvoidCrashDefaultReturnNil;
@@ -106,46 +108,25 @@
     @finally {
         return object;
     }
-    
 }
 
 
 //=================================================================
-//                       objectsAtIndexes:
+//                         getObjects:range:
 //=================================================================
-#pragma mark - objectsAtIndexes:
+#pragma mark - getObjects:range:
 
-- (NSArray *)lpm_MavoidCrashObjectsAtIndexes:(NSIndexSet *)indexes {
+- (void)avoidCrashGetObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range {
     
-    NSArray *returnArray = nil;
     @try {
-        returnArray = [self lpm_MavoidCrashObjectsAtIndexes:indexes];
+        [self avoidCrashGetObjects:objects range:range];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = TFYAvoidCrashDefaultReturnNil;
+        
+        NSString *defaultToDo = TFYAvoidCrashDefaultIgnore;
         [TFY_AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
         
     } @finally {
-        return returnArray;
-    }
-}
-
-
-//=================================================================
-//                       objectsAtIndex:
-//=================================================================
-#pragma mark - objectsAtIndexes:
-
-- (id)lpm_MavoidCrashObjectsAtIndex:(NSInteger)index {
-    
-    id object = nil;
-    @try {
-        object = [self lpm_MavoidCrashObjectsAtIndex:index];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = TFYAvoidCrashDefaultReturnNil;
-        [TFY_AvoidCrash noteErrorWithException:exception defaultToDo:defaultToDo];
         
-    } @finally {
-        return object;
     }
 }
 

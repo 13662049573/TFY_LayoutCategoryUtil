@@ -13,16 +13,20 @@
 
 + (void)tfy_avoidCrashExchangeMethod {
     
-    Class stringClass = NSClassFromString(@"__NSCFString");
-    
-    //replaceCharactersInRange
-    [TFY_AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(replaceCharactersInRange:withString:) method2Sel:@selector(avoidCrashReplaceCharactersInRange:withString:)];
-    
-    //insertString:atIndex:
-    [TFY_AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(insertString:atIndex:) method2Sel:@selector(avoidCrashInsertString:atIndex:)];
-    
-    //deleteCharactersInRange
-    [TFY_AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(deleteCharactersInRange:) method2Sel:@selector(avoidCrashDeleteCharactersInRange:)];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        Class stringClass = NSClassFromString(@"__NSCFString");
+        
+        //replaceCharactersInRange
+        [TFY_AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(replaceCharactersInRange:withString:) method2Sel:@selector(avoidCrashReplaceCharactersInRange:withString:)];
+        
+        //insertString:atIndex:
+        [TFY_AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(insertString:atIndex:) method2Sel:@selector(avoidCrashInsertString:atIndex:)];
+        
+        //deleteCharactersInRange
+        [TFY_AvoidCrash exchangeInstanceMethod:stringClass method1Sel:@selector(deleteCharactersInRange:) method2Sel:@selector(avoidCrashDeleteCharactersInRange:)];
+    });
 }
 
 //=================================================================

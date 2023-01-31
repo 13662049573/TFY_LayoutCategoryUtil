@@ -13,17 +13,18 @@
 
 + (void)tfy_avoidCrashExchangeMethod {
     
-    Class dictionaryM = NSClassFromString(@"__NSDictionaryM");
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class dictionaryM = NSClassFromString(@"__NSDictionaryM");
+        
+        //setObject:forKey:
+        [TFY_AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(setObject:forKey:) method2Sel:@selector(avoidCrashSetObject:forKey:)];
     
-    //setObject:forKey:
-    [TFY_AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(setObject:forKey:) method2Sel:@selector(avoidCrashSetObject:forKey:)];
-    //setObject:forKeyedSubscript:
-    [TFY_AvoidCrash exchangeInstanceMethod:dictionaryM method1Sel:@selector(setObject:forKeyedSubscript:) method2Sel:@selector(avoidCrashSetObject:forKeyedSubscript:)];
-    
-    //removeObjectForKey:
-    Method removeObjectForKey = class_getInstanceMethod(dictionaryM, @selector(removeObjectForKey:));
-    Method avoidCrashRemoveObjectForKey = class_getInstanceMethod(dictionaryM, @selector(avoidCrashRemoveObjectForKey:));
-    method_exchangeImplementations(removeObjectForKey, avoidCrashRemoveObjectForKey);
+        //removeObjectForKey:
+        Method removeObjectForKey = class_getInstanceMethod(dictionaryM, @selector(removeObjectForKey:));
+        Method avoidCrashRemoveObjectForKey = class_getInstanceMethod(dictionaryM, @selector(avoidCrashRemoveObjectForKey:));
+        method_exchangeImplementations(removeObjectForKey, avoidCrashRemoveObjectForKey);
+    });
 }
 
 

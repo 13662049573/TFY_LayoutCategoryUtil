@@ -13,17 +13,21 @@
 
 + (void)tfy_avoidCrashExchangeMethod {
     
-    //setValue:forKey:
-    [TFY_AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(setValue:forKey:) method2Sel:@selector(avoidCrashSetValue:forKey:)];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        //setValue:forKey:
+        [TFY_AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(setValue:forKey:) method2Sel:@selector(avoidCrashSetValue:forKey:)];
+        
+        //setValue:forKeyPath:
+        [TFY_AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(setValue:forKeyPath:) method2Sel:@selector(avoidCrashSetValue:forKeyPath:)];
+        
+        //setValue:forUndefinedKey:
+        [TFY_AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(setValue:forUndefinedKey:) method2Sel:@selector(avoidCrashSetValue:forUndefinedKey:)];
+        
+        //setValuesForKeysWithDictionary:
+        [TFY_AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(setValuesForKeysWithDictionary:) method2Sel:@selector(avoidCrashSetValuesForKeysWithDictionary:)];
+    });
     
-    //setValue:forKeyPath:
-    [TFY_AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(setValue:forKeyPath:) method2Sel:@selector(avoidCrashSetValue:forKeyPath:)];
-
-    //setValue:forUndefinedKey:
-    [TFY_AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(setValue:forUndefinedKey:) method2Sel:@selector(avoidCrashSetValue:forUndefinedKey:)];
-    
-    //setValuesForKeysWithDictionary:
-    [TFY_AvoidCrash exchangeInstanceMethod:[self class] method1Sel:@selector(setValuesForKeysWithDictionary:) method2Sel:@selector(avoidCrashSetValuesForKeysWithDictionary:)];
 }
 
 
