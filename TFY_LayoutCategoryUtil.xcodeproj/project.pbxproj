@@ -42,6 +42,8 @@
 		3688573A298601990023A340 /* TFY_GCDQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 36885739298601990023A340 /* TFY_GCDQueue.m */; };
 		3688573D298602C50023A340 /* TFY_GCDSemaphore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3688573C298602C50023A340 /* TFY_GCDSemaphore.m */; };
 		36885740298603120023A340 /* TFY_GCDTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3688573F298603120023A340 /* TFY_GCDTimer.m */; };
+		36885745298A06830023A340 /* TFY_Reflection.m in Sources */ = {isa = PBXBuildFile; fileRef = 36885744298A06830023A340 /* TFY_Reflection.m */; };
+		36885748298A07610023A340 /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 36885747298A07610023A340 /* Test.m */; };
 		3695B7F02904B9E100D8FD7D /* TFY_BaseLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3695B7EF2904B9E100D8FD7D /* TFY_BaseLabel.m */; };
 		3695B7F32904BC8500D8FD7D /* TFY_LabelLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3695B7F22904BC8500D8FD7D /* TFY_LabelLayoutManager.m */; };
 		3695B7F82904C02100D8FD7D /* TFY_ExpressionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3695B7F72904C02100D8FD7D /* TFY_ExpressionManager.m */; };
@@ -264,6 +266,10 @@
 		3688573C298602C50023A340 /* TFY_GCDSemaphore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_GCDSemaphore.m; sourceTree = "<group>"; };
 		3688573E298603120023A340 /* TFY_GCDTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_GCDTimer.h; sourceTree = "<group>"; };
 		3688573F298603120023A340 /* TFY_GCDTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_GCDTimer.m; sourceTree = "<group>"; };
+		36885743298A06830023A340 /* TFY_Reflection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Reflection.h; sourceTree = "<group>"; };
+		36885744298A06830023A340 /* TFY_Reflection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Reflection.m; sourceTree = "<group>"; };
+		36885746298A07610023A340 /* Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		36885747298A07610023A340 /* Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 		3695B7EE2904B9E100D8FD7D /* TFY_BaseLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_BaseLabel.h; sourceTree = "<group>"; };
 		3695B7EF2904B9E100D8FD7D /* TFY_BaseLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_BaseLabel.m; sourceTree = "<group>"; };
 		3695B7F12904BC8500D8FD7D /* TFY_LabelLayoutManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_LabelLayoutManager.h; sourceTree = "<group>"; };
@@ -644,6 +650,8 @@
 				36E77AF2250B75FE00D503E8 /* TFY_Video.m */,
 				3695B8082904D0A500D8FD7D /* TFY_WKWebView.h */,
 				3695B8092904D0A500D8FD7D /* TFY_WKWebView.m */,
+				36885743298A06830023A340 /* TFY_Reflection.h */,
+				36885744298A06830023A340 /* TFY_Reflection.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -877,6 +885,8 @@
 				36978E6F27F6F24C00557EC0 /* TFY_TextblanksField.m */,
 				36FEC8302850250200B44896 /* IndexViewController.h */,
 				36FEC8312850250200B44896 /* IndexViewController.m */,
+				36885746298A07610023A340 /* Test.h */,
+				36885747298A07610023A340 /* Test.m */,
 			);
 			path = Homecontroller;
 			sourceTree = "<group>";
@@ -1453,6 +1463,7 @@
 				3695B7FE2904C0DE00D8FD7D /* TFY_LabelTextAttachment.m in Sources */,
 				36885740298603120023A340 /* TFY_GCDTimer.m in Sources */,
 				565584A72431D3A600020D3C /* TFY_GradientLayerChainModel.m in Sources */,
+				36885745298A06830023A340 /* TFY_Reflection.m in Sources */,
 				3688573A298601990023A340 /* TFY_GCDQueue.m in Sources */,
 				36D3DC0E27F6C9E900A79848 /* TextViewController.m in Sources */,
 				5655840C2431BB7600020D3C /* NSTimer+TFY_Tools.m in Sources */,
@@ -1513,6 +1524,7 @@
 				565583CC2431AF4700020D3C /* NSObject+TFY_Tools.m in Sources */,
 				36EBD9262577399B00C70D20 /* TFY_BadgeControl.m in Sources */,
 				36C3349824ED24EE00DA6FB2 /* WKWebView+TFY_Extension.m in Sources */,
+				36885748298A07610023A340 /* Test.m in Sources */,
 				565584882431CF4400020D3C /* TFY_TableViewCellChainModel.m in Sources */,
 				36CE97BE254FBB830065B366 /* UIImage+iOS13DarkMode.m in Sources */,
 				565583C62431AE2E00020D3C /* NSArray+TFY_Tools.m in Sources */,
