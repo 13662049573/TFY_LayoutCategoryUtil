@@ -11,6 +11,13 @@
 #import "EmptyTableViewController.h"
 @interface TextViewController ()
 @property (nonatomic, strong) TFY_TextView *textView;
+@property(strong,nonatomic) UIImage *image;
+@property (strong, nonatomic) UIImageView *imageView;
+@property(strong,nonatomic) TFY_GCDTimer *timer;
+
+@property(strong,nonatomic) UIImageView *view1;
+@property(strong,nonatomic) UIImageView *view2;
+@property(strong,nonatomic) UIImageView *view3;
 @end
 
 @implementation TextViewController
@@ -22,9 +29,264 @@
     UIBarButtonItem *editItem = [[UIBarButtonItem alloc]initWithTitle:@"是否编辑:NO" style:UIBarButtonItemStylePlain target:self action:@selector(barItemEditAction:)];
     self.navigationItem.rightBarButtonItems = @[editItem,doneItem];
     
+    UIBarButtonItem *lefteditItem = [[UIBarButtonItem alloc]initWithTitle:@"GCD" style:UIBarButtonItemStylePlain target:self action:@selector(leftbarItemEditAction:)];
+    self.navigationItem.leftBarButtonItem = lefteditItem;
 //    TFY_GCD_QUEUE_TIME(2, ^{
 //        [self addTextView];
 //    });
+}
+
+- (void)yyyyyyy {
+    [TFY_GCDQueue executeInGlobalQueue:^{
+      
+      //处理业务逻辑
+      NSString *url = @"https://tj-data-bak-to-test20221028.oss-cn-hangzhou.aliyuncs.com/uploadFiles/images/avatar/5ccc935c-23b6-4b1d-86a7-60b82863ca5b.png";
+      NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+      NSData *picData = [NSURLConnection sendSynchronousRequest:request
+                                              returningResponse:nil
+                                                          error:nil];
+      NSLog(@"处理业务逻辑");
+      //获取图片；
+      self.image = [UIImage imageWithData:picData];
+      [TFY_GCDQueue executeInMainQueue:^{
+        
+        NSLog(@"更新UI");
+        //更新UI
+        [self.imageView setImage:self.image];
+      }];
+    }];
+      
+      //主线程；
+      [TFY_GCDQueue executeInMainQueue:^{
+        NSLog(@"GCD实现延迟操作");
+      } afterDelaySecs:2.f];
+}
+
+- (void)ggggggggggg {
+    self.view1 = [self setImageViewFrame:CGRectMake(0, 0, 300, 200)];
+    self.view2 = [self setImageViewFrame:CGRectMake(0, 200, 300, 200)];
+    self.view3 = [self setImageViewFrame:CGRectMake(0, 400, 300, 200)];
+    
+    NSString *url01 = @"https://tj-data-bak-to-test20221028.oss-cn-hangzhou.aliyuncs.com/uploadFiles/images/avatar/5ccc935c-23b6-4b1d-86a7-60b82863ca5b.png";
+    NSString *url02 = @"https://tj-data-bak-to-test20221028.oss-cn-hangzhou.aliyuncs.com/uploadFiles/images/avatar/5ccc935c-23b6-4b1d-86a7-60b82863ca5b.png";
+    NSString *url03 = @"https://tj-data-bak-to-test20221028.oss-cn-hangzhou.aliyuncs.com/uploadFiles/images/avatar/5ccc935c-23b6-4b1d-86a7-60b82863ca5b.png";
+
+    TFY_GCDSemaphore *semaphore = [[TFY_GCDSemaphore alloc] init];
+    TFY_GCDSemaphore *semaphore2 = [[TFY_GCDSemaphore alloc] init];
+    
+    //开启三个异步线程；
+    [TFY_GCDQueue executeInGlobalQueue:^{
+      
+      UIImage *image01 = [self accessDataByNetwork:url01];
+      [TFY_GCDQueue executeInMainQueue:^{
+        
+        [UIView animateWithDuration:2.0f
+                         animations:^{
+                           self.view1.image = image01;
+                           [self.view1 setAlpha:1.0f];
+                         } completion:^(BOOL finished) {
+                           //通知第1个信号量；
+                           [semaphore signal];
+                         }];
+      }];
+    }];
+
+    [TFY_GCDQueue executeInGlobalQueue:^{
+      
+      UIImage *image02 = [self accessDataByNetwork:url02];
+      //第1个信号量等待；
+      [semaphore wait];
+      [TFY_GCDQueue executeInMainQueue:^{
+        
+        [UIView animateWithDuration:2.0f
+                         animations:^{
+                           self.view2.image = image02;
+                           [self.view2 setAlpha:1.0f];
+                         } completion:^(BOOL finished) {
+                           //通知第2个信号量；
+                           [semaphore2 signal];
+                         }];
+      }];
+    }];
+    
+    [TFY_GCDQueue executeInGlobalQueue:^{
+      
+      UIImage *image03 = [self accessDataByNetwork:url03];
+      //第2个信号量等待；
+      [semaphore2 wait];
+      [TFY_GCDQueue executeInMainQueue:^{
+        
+        [UIView animateWithDuration:2.0f
+                         animations:^{
+                           self.view3.image = image03;
+                           [self.view3 setAlpha:1.0f];
+                         } completion:^(BOOL finished) {
+                           
+                         }];
+      }];
+    }];
+}
+
+- (void)ffffffffff {
+    //  //创建信号量
+    TFY_GCDSemaphore *semaphore = [[TFY_GCDSemaphore alloc] init];
+      //线程1； - 异步
+      //无法确定这两个线程哪个先执行，因为是异步线程。
+      [TFY_GCDQueue executeInGlobalQueue:^{
+
+        NSLog(@"线程1");
+        //发送信号量；
+        [semaphore signal];
+      }];
+      //线程1； - 异步
+      [TFY_GCDQueue executeInGlobalQueue:^{
+        
+        //等待信号；
+        [semaphore wait];
+        NSLog(@"线程2");
+      }];
+}
+
+- (void)runGCDTimer{
+  //初始化定时器
+  self.timer = [[TFY_GCDTimer alloc] initInQueue:[TFY_GCDQueue mainQueue]];
+  //指定时间间隔以及要执行的事件；
+  [self.timer event:^{
+    //在这里写入需要重复执行的代码；
+    NSLog(@"GCD定时器");
+  } timeIntervalWithSecs:1.f];
+  //运行
+  [self.timer start];
+}
+
+- (void)ssssssss1 {
+    //初始化线程组；
+    TFY_GCDGroup *group = [[TFY_GCDGroup alloc] init];
+    //创建一个线程队列；
+    TFY_GCDQueue *queue = [[TFY_GCDQueue alloc] initConcurrent];
+    //让线程在group中执行；(线程1)
+    [queue execute:^{
+
+      sleep(1);//延迟1s；
+      NSLog(@"线程1执行完毕");
+    } inGroup:group];
+    //让线程在group中执行；（线程2）
+    [queue execute:^{
+
+      sleep(3);//延迟3s；
+      NSLog(@"线程2执行完毕");
+    } inGroup:group];
+    
+    //监听线程组是否执行结束，然后执行线程3；
+    [queue notify:^{
+      NSLog(@"线程3执行完毕");
+    } inGroup:group];
+}
+
+//并发队列；
+- (void)concurrent{
+  //创建出队列；
+    TFY_GCDQueue *queue = [[TFY_GCDQueue alloc] initConcurrent];
+  
+  //执行队列中的线程；
+  [queue execute:^{
+    
+    NSLog(@"1");
+    
+  }];
+  
+  
+  [queue execute:^{
+    
+    NSLog(@"2");
+    
+  }];
+  
+  
+  [queue execute:^{
+    
+    NSLog(@"3");
+    
+  }];
+  
+  
+  [queue execute:^{
+    
+    NSLog(@"4");
+    
+  }];
+  
+  
+  [queue execute:^{
+    
+    NSLog(@"5");
+    
+  }];
+  
+}
+
+
+
+//串行队列；
+- (void)serailQueue{
+
+  //创建出队列；
+    TFY_GCDQueue *queue = [[TFY_GCDQueue alloc] initSerial];
+  
+  //执行队列中的线程；
+  [queue execute:^{
+    
+    NSLog(@"1");
+    
+  }];
+  
+  
+  [queue execute:^{
+    
+    NSLog(@"2");
+    
+  }];
+  
+  
+  [queue execute:^{
+    
+    NSLog(@"3");
+    
+  }];
+  
+  
+  [queue execute:^{
+    
+    NSLog(@"4");
+    
+  }];
+  
+  
+  [queue execute:^{
+    
+    NSLog(@"5");
+    
+  }];
+  
+}
+
+//设置图片大小位置和透明度；alpha = 0表示完全透明；
+- (UIImageView *)setImageViewFrame:(CGRect)frame{
+  
+  UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+  imageView.alpha = 0.f;
+    imageView.backgroundColor = UIColor.redColor;
+  [self.view addSubview:imageView];
+  return imageView;
+}
+
+//进行网络请求；
+- (UIImage *)accessDataByNetwork:(NSString *)string{
+
+  NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:string]];
+  NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+  
+  return [UIImage imageWithData:data];
 }
 
 
@@ -146,6 +408,10 @@
 //- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
 //    return UIInterfaceOrientationLandscapeRight;
 //}
+
+- (void)leftbarItemEditAction:(UIBarButtonItem *)item {
+    [self ggggggggggg];
+}
 
 @end
 

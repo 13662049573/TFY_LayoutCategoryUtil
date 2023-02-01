@@ -46,18 +46,8 @@ static TFY_GCDQueue *backgroundPriorityGlobalQueue;
 }
 
 + (void)initialize {
-    
-    /**
-     Initializes the class before it receives its first message.
-     
-     1. The runtime sends the initialize message to classes in a
-     thread-safe manner.
-     
-     2. initialize is invoked only once per class. If you want to
-     perform independent initialization for the class and for
-     categories of the class, you should implement load methods.
-     */
-    if (self == [TFY_GCDGroup self])  {
+
+    if (self == [TFY_GCDQueue self])  {
         
         mainQueue                     = [TFY_GCDQueue new];
         globalQueue                   = [TFY_GCDQueue new];
@@ -141,53 +131,17 @@ static TFY_GCDQueue *backgroundPriorityGlobalQueue;
 }
 
 - (void)waitExecute:(dispatch_block_t)block {
-    
-    /*
-     As an optimization, this function invokes the block on
-     the current thread when possible.
-     
-     作为一个建议,这个方法尽量在当前线程池中调用.
-     */
-    
+
     NSParameterAssert(block);
     dispatch_sync(self.dispatchQueue, block);
 }
 
 - (void)barrierExecute:(dispatch_block_t)block {
-    
-    /*
-     The queue you specify should be a concurrent queue that you
-     create yourself using the dispatch_queue_create function.
-     If the queue you pass to this function is a serial queue or
-     one of the global concurrent queues, this function behaves
-     like the dispatch_async function.
-     
-     使用的线程池应该是你自己创建的并发线程池.如果你传进来的参数为串行线程池
-     或者是系统的并发线程池中的某一个,这个方法就会被当做一个普通的async操作
-     */
-    
     NSParameterAssert(block);
     dispatch_barrier_async(self.dispatchQueue, block);
 }
 
 - (void)waitBarrierExecute:(dispatch_block_t)block {
-    
-    /*
-     The queue you specify should be a concurrent queue that you
-     create yourself using the dispatch_queue_create function.
-     If the queue you pass to this function is a serial queue or
-     one of the global concurrent queues, this function behaves
-     like the dispatch_sync function.
-     
-     使用的线程池应该是你自己创建的并发线程池.如果你传进来的参数为串行线程池
-     或者是系统的并发线程池中的某一个,这个方法就会被当做一个普通的sync操作
-     
-     As an optimization, this function invokes the barrier block
-     on the current thread when possible.
-     
-     作为一个建议,这个方法尽量在当前线程池中调用.
-     */
-    
     NSParameterAssert(block);
     dispatch_barrier_sync(self.dispatchQueue, block);
 }
