@@ -226,7 +226,7 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
 }
 
 - (void)btnClick:(UIButton *)btn {
-    [self passwordtologinClick];
+//    [self passwordtologinClick];
     
     // 输入参数
     void (^block)(void) = ^(){
@@ -257,14 +257,6 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     [TFY_Reflection performWithTarget:class returnValue:&tempStr selectorStringAndParameter:@"test:p1:p2:p3:p4:p5:p6:p7:p8:p9:p10:p11:p12:p13:p14:p15:", @"带返回值的调用", @"p222", 222, 3.33f, CGSizeMake(5, 5), [NSNull null], nil, YES, 'Y', NULL, value, NSSelectorFromString(@"RTT"), p1, p2, [NSString class], imp];
     NSArray *array = (NSArray *)tempStr;
     NSLog(@"返回值 = %@", array);
-    
-    void(^tempBlock)(void);
-    [TFY_Reflection performWithTarget:class returnValue:&tempBlock selectorStringAndParameter:@"testReturnBlock"];
-    NSLog(@"返回值 = %p", tempBlock);
-    if (tempBlock)
-    {
-        tempBlock();
-    }
     
     int tempInt;
     [TFY_Reflection performWithTarget:class returnValue:&tempInt selectorStringAndParameter:@"testReturnInt"];
@@ -305,6 +297,7 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     YY tempStruct;
     [TFY_Reflection performWithTarget:class returnValue:&tempStruct selectorStringAndParameter:@"testReturnStruct"];
     NSLog(@"返回值 = %d  %f  %ld", tempStruct.i, tempStruct.j, tempStruct.k);
+
 }
 
 - (void)passwordtologinClick {

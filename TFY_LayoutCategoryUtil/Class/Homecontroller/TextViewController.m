@@ -8,7 +8,7 @@
 
 #import "TextViewController.h"
 #import "TFY_TextblanksField.h"
-
+#import "EmptyTableViewController.h"
 @interface TextViewController ()
 @property (nonatomic, strong) TFY_TextView *textView;
 @end
