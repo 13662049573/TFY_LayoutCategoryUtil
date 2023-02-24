@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_LayoutCategoryKit"
 
-  spec.version      = "2.8.0"
+  spec.version      = "2.8.1"
 
   spec.summary      = "全新链式的界面初始化和界面跳转，布局基于Masonry"
 
@@ -39,10 +39,6 @@ Pod::Spec.new do |spec|
       ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/*.h"
       ss.dependency "TFY_LayoutCategoryKit/TFY_Tools/Utils"
       
-      ss.subspec 'TFY_CrashSDK' do |s|
-        s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_CrashSDK/**/*.{h,m}"
-       end
-
       ss.subspec 'TFY_Rotating' do |s|
         s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/TFY_Rotating/**/*.{h,m}"
        end
