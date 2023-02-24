@@ -10,6 +10,7 @@
 #import "GuideViewController.h"
 #import "MainViewController.h"
 #import "PolicyManager.h"
+#import <JJException/JJException.h>
 
 @interface AppDelegate ()
 
@@ -19,6 +20,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
      if (!TFY_ScenePackage.isSceneApp) {
            self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
            self.window.backgroundColor = [UIColor whiteColor];
@@ -26,7 +28,8 @@
      }
     
     TFYRotateDefault.shared.defaultPreferredStatusBarStyle = UIStatusBarStyleDefault;
-    [TFY_AvoidCrash becomeEffective];
+
+   
     
     [TFY_ScenePackage addBeforeWindowEvent:^(TFY_Scene * _Nonnull application) {
        if ([GuideViewController isFirstRun]) {

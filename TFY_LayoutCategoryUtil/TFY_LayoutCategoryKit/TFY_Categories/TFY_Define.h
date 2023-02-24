@@ -12,10 +12,6 @@
 #import <UIKit/UIKit.h>
 #import <objc/message.h>
 
-#define TFY_WEAK  __weak typeof(self)weakSelf = self;
-
-#define TFY_STRONG  __strong typeof(weakSelf)self = weakSelf;
-
 /** weak对象 */
 #define TFY_Weak(o) __weak typeof(o) weak_##o = o;
 

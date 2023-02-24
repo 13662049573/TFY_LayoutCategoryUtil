@@ -103,5 +103,10 @@
     return;
 }
 
+- (void)timeTest
+{
+    NSLog(@"hello");
+    NSLog(@"%@", self);
+}
 
 @end
