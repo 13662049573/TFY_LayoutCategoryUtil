@@ -85,8 +85,8 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     });
     
     UILabelModelSet()
-    .text(@"这是一个Label")
-    .textColor(UIColor.redColor)
+    .text(@"*这是一个Label")
+    .textColor(UIColor.orangeColor)
     .backgroundColor(UIColor.yellowColor)
     .cornerRadius(10).font([UIFont systemFontOfSize:14 weight:UIFontWeightHeavy])
     .numberOfLines(0)
@@ -103,6 +103,8 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
         [self.titleLabel tfy_addBadgeWithText:@"3333"];
         [self.titleLabel tfy_setBadgeFlexMode:BadgeViewFlexModeMiddle];
     });
+    
+    [self.titleLabel tfy_changeColorWithTextColor:UIColor.redColor changeText:@"Label"];
     
      UITextFieldModelSet()
     .placeholder(@"这是一个输入框")

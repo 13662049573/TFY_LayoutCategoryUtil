@@ -37,6 +37,12 @@ typedef struct
 
 - (void)test;
 
+
+@property (nonatomic, copy) NSString *name;
+
+- (void)eat;
+
+- (void)timeTest;
 @end
 
 NS_ASSUME_NONNULL_END

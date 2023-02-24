@@ -20,6 +20,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"选择索引类型";
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    
 }
 
 #pragma mark - UITableViewDelegate
