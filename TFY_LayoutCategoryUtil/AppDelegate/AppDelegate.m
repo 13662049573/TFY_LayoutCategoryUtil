@@ -10,7 +10,6 @@
 #import "GuideViewController.h"
 #import "MainViewController.h"
 #import "PolicyManager.h"
-#import <JJException/JJException.h>
 
 @interface AppDelegate ()
 
@@ -29,8 +28,6 @@
     
     TFYRotateDefault.shared.defaultPreferredStatusBarStyle = UIStatusBarStyleDefault;
 
-   
-    
     [TFY_ScenePackage addBeforeWindowEvent:^(TFY_Scene * _Nonnull application) {
        if ([GuideViewController isFirstRun]) {
            [UIApplication tfy_window].rootViewController = [[GuideViewController alloc] init];
