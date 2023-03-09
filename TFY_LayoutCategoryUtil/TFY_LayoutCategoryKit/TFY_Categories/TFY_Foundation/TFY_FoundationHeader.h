@@ -30,5 +30,6 @@
 #import "UIBezierPath+TFY_Tools.h"
 #import "CLLocationManager+TFY_Tools.h"
 #import "NSString+Extend.h"
+#import "NSDecimalNumber+TFY_Tools.h"
 
 #endif /* TFY_FoundationHeader_h */

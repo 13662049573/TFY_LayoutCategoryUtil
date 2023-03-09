@@ -20,7 +20,7 @@
     for (int i = 0; i < 4; i++)
     {
         UITextField *textfield = [[UITextField alloc] init];
-        textfield.frame = CGRectMake(50, 300 + i * 50, 200, 40);
+        textfield.frame = CGRectMake(50, 0 + i * 50, 200, 40);
         textfield.layer.cornerRadius = 5;
         textfield.layer.borderColor = [UIColor redColor].CGColor;
         textfield.layer.borderWidth = 1;
@@ -30,6 +30,32 @@
         textfield.returnKeyType = i==3?UIReturnKeyDefault:UIReturnKeyNext;
         [self.view addSubview:textfield];
     }
+    NSArray<NSDictionary *> *titleArr = @[
+        @{@"name":@"+自己配餐",@"image":@"catering_2",@"type":@(ButtonDirectionCenterImageTop)},
+        @{@"name":@"+智能配餐",@"image":@"catering_3",@"type":@(ButtonDirectionCenterImageLeft)},
+        @{@"name":@"+运动记录",@"image":@"catering_3",@"type":@(ButtonDirectionCenterImageRight)},
+        @{@"name":@"+运动记录",@"image":@"catering_2",@"type":@(ButtonDirectionCenterImageBottom)},
+        @{@"name":@"+运动记录",@"image":@"catering_2",@"type":@(ButtonDirectionLeftImageLeft)},
+        @{@"name":@"+运动记录",@"image":@"catering_3",@"type":@(ButtonDirectionLeftImageRight)},
+        @{@"name":@"+运动记录",@"image":@"catering_3",@"type":@(ButtonDirectionRightImageLeft)},
+        @{@"name":@"+运动记录",@"image":@"catering_2",@"type":@(ButtonDirectionRightImageRight)}];
+    
+    CGFloat width_w = TFY_Width_W()/3;
+    [titleArr enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIButton *btn = UIButtonSet();
+        NSNumber *number = obj[@"type"];
+        btn.makeChain
+        .frame(CGRectMake(100, 200+idx * 70 ,width_w, 60))
+        .font([UIFont systemFontOfSize:12 weight:UIFontWeightRegular])
+        .text(obj[@"name"], UIControlStateNormal)
+        .image([UIImage imageNamed:obj[@"image"]], UIControlStateNormal)
+        .imageDirection(number.integerValue, 3)
+        .textColor(UIColor.blackColor, UIControlStateNormal)
+        .backgroundColor(UIColor.orangeColor)
+        .makeTag(idx+1)
+        .addToSuperView(self.view);
+    }];
+    
 }
 
 - (void)textFieldDidChangeSelection:(UITextField *)textField {
