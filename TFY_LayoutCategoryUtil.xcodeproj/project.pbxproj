@@ -92,6 +92,7 @@
 		36FEC8322850250200B44896 /* IndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FEC8312850250200B44896 /* IndexViewController.m */; };
 		36FEC8352850260F00B44896 /* IgnoreSectionsIndexes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36FEC8332850260F00B44896 /* IgnoreSectionsIndexes.plist */; };
 		36FEC8362850260F00B44896 /* Indexes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36FEC8342850260F00B44896 /* Indexes.plist */; };
+		36FFD52629CAD753001C76C0 /* TFY_AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FFD52529CAD753001C76C0 /* TFY_AudioPlayer.m */; };
 		56558376243196E000020D3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56558375243196E000020D3C /* Assets.xcassets */; };
 		56558379243196E000020D3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56558377243196E000020D3C /* LaunchScreen.storyboard */; };
 		5655837C243196E000020D3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5655837B243196E000020D3C /* main.m */; };
@@ -361,6 +362,8 @@
 		36FEC8312850250200B44896 /* IndexViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndexViewController.m; sourceTree = "<group>"; };
 		36FEC8332850260F00B44896 /* IgnoreSectionsIndexes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = IgnoreSectionsIndexes.plist; sourceTree = "<group>"; };
 		36FEC8342850260F00B44896 /* Indexes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Indexes.plist; sourceTree = "<group>"; };
+		36FFD52429CAD753001C76C0 /* TFY_AudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_AudioPlayer.h; sourceTree = "<group>"; };
+		36FFD52529CAD753001C76C0 /* TFY_AudioPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_AudioPlayer.m; sourceTree = "<group>"; };
 		56558366243196E000020D3C /* TFY_LayoutCategoryUtil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TFY_LayoutCategoryUtil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56558375243196E000020D3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56558378243196E000020D3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -625,6 +628,8 @@
 				3695B8092904D0A500D8FD7D /* TFY_WKWebView.m */,
 				36885743298A06830023A340 /* TFY_Reflection.h */,
 				36885744298A06830023A340 /* TFY_Reflection.m */,
+				36FFD52429CAD753001C76C0 /* TFY_AudioPlayer.h */,
+				36FFD52529CAD753001C76C0 /* TFY_AudioPlayer.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1419,6 +1424,7 @@
 				565584112431BD2100020D3C /* TFY_ChainBaseModel.m in Sources */,
 				565584C92431DEEE00020D3C /* PolicyManager.m in Sources */,
 				565583A9243197BB00020D3C /* AppDelegate.m in Sources */,
+				36FFD52629CAD753001C76C0 /* TFY_AudioPlayer.m in Sources */,
 				565583DB2431B2B700020D3C /* UIButton+TFY_Tools.m in Sources */,
 				36BA238824EE488000CE8275 /* UITableView+TFY_LayoutCell.m in Sources */,
 				565583DE2431B2DD00020D3C /* UILabel+TFY_Tools.m in Sources */,
