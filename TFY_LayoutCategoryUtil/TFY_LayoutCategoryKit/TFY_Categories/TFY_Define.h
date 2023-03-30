@@ -15,20 +15,6 @@
 /** weak对象 */
 #define TFY_Weak(o) __weak typeof(o) weak_##o = o;
 
-/**
-*  完美解决Xcode NSLog打印不全的宏
-*/
-#ifdef DEBUG
-
-#define NSLog(format, ...) printf("class: <%p %s:(%d) > method: %s \n%s\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] )
-
-#else
-
-#define NSLog(format, ...)
-
-#endif
-
-
 #define TFY_SafeArea(view)\
 ({\
 UIEdgeInsets safeInsets = UIEdgeInsetsMake(20, 0, 0, 0);\
@@ -56,37 +42,6 @@ _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
 Stuff; \
 _Pragma("clang diagnostic pop") \
 } while (0)
-
-
-#pragma mark-------------------------------------------单例---------------------------------------------
-
-/** 单例（声明）.h */
-#define TFY_SingtonInterface + (instancetype)sharedInstance;
-
-/** 单例（实现）.m */
-#define TFY_SingtonImplement(class) \
-\
-static class *sharedInstance_; \
-\
-+ (instancetype)allocWithZone:(struct _NSZone *)zone { \
-    static dispatch_once_t onceToken; \
-    dispatch_once(&onceToken, ^{ \
-        sharedInstance_ = [super allocWithZone:zone]; \
-    }); \
-    return sharedInstance_; \
-} \
-\
-+ (instancetype)sharedInstance { \
-    static dispatch_once_t onceToken; \
-    dispatch_once(&onceToken, ^{ \
-        sharedInstance_ = [[class alloc] init]; \
-    }); \
-    return sharedInstance_; \
-} \
-\
-- (id)copyWithZone:(NSZone *)zone { \
-    return sharedInstance_; \
-}
 
 #pragma mark-------------------------------------------循环引用处理---------------------------------------------
 
