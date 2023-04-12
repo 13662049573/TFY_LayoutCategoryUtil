@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_LayoutCategoryKit"
 
-  spec.version      = "2.8.5"
+  spec.version      = "2.8.6"
 
   spec.summary      = "全新链式的界面初始化和界面跳转，布局基于Masonry"
 
@@ -36,19 +36,8 @@ Pod::Spec.new do |spec|
    end
 
    spec.subspec 'TFY_SnapshotScroll' do |ss|
-    ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_SnapshotScroll/TFY_SnapshotScroll.h"
-    ss.dependency "TFY_LayoutCategoryKit/TFY_Categories"
-
-    ss.subspec 'TFY_SnapScroll' do |s|
-     s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_SnapshotScroll/TFY_SnapScroll/**/*.{h,m}"
-     s.dependency "TFY_LayoutCategoryKit/TFY_SnapshotScroll/TFY_SnapshotAuxiliary"
-    end
-
-    ss.subspec 'TFY_SnapshotAuxiliary' do |s|
-     s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_SnapshotScroll/TFY_SnapshotAuxiliary/**/*.{h,m}"
-    end
-
-  end
+    ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_SnapshotScroll/**/*.{h,m}"
+   end
 
    spec.subspec 'TFY_Categories' do |ss|
       ss.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Categories/*.h"
