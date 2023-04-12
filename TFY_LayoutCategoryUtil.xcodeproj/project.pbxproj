@@ -26,6 +26,14 @@
 		3654E29925C4EF820042826D /* AntmeuenTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654E29825C4EF820042826D /* AntmeuenTwoController.m */; };
 		3654E2F125C544220042826D /* UIView+EdgeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654E2F025C544220042826D /* UIView+EdgeAnimation.m */; };
 		36564D542586307800167927 /* UIBezierPath+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36564D532586307800167927 /* UIBezierPath+TFY_Tools.m */; };
+		365D9ECC29E673A200EF8A1B /* TFY_SnapshotAuxiliaryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 365D9ECB29E673A200EF8A1B /* TFY_SnapshotAuxiliaryCache.m */; };
+		365D9ECF29E674C700EF8A1B /* UIScrollView+SnapshotAuxiliary.m in Sources */ = {isa = PBXBuildFile; fileRef = 365D9ECE29E674C700EF8A1B /* UIScrollView+SnapshotAuxiliary.m */; };
+		365D9ED229E6757100EF8A1B /* WKWebView+SnapshotAuxiliary.m in Sources */ = {isa = PBXBuildFile; fileRef = 365D9ED129E6757100EF8A1B /* WKWebView+SnapshotAuxiliary.m */; };
+		365D9ED629E6760E00EF8A1B /* TFY_SnapshotManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 365D9ED529E6760E00EF8A1B /* TFY_SnapshotManager.m */; };
+		365D9ED929E6767B00EF8A1B /* UIScrollView+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 365D9ED829E6767B00EF8A1B /* UIScrollView+Snapshot.m */; };
+		365D9EDC29E6778D00EF8A1B /* UIView+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 365D9EDB29E6778D00EF8A1B /* UIView+Snapshot.m */; };
+		365D9EDF29E67D8600EF8A1B /* UITextView+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 365D9EDE29E67D8600EF8A1B /* UITextView+Snapshot.m */; };
+		365D9EE229E67EDC00EF8A1B /* WKWebView+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 365D9EE129E67EDC00EF8A1B /* WKWebView+Snapshot.m */; };
 		367EC247250603FC004BAE5C /* TFY_Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EC246250603FC004BAE5C /* TFY_Scene.m */; };
 		367EE8C527B6239500977C9B /* UIImage+Addtions.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE8C427B6239500977C9B /* UIImage+Addtions.m */; };
 		36811E09269E8C4800716BC1 /* UIView+Gradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 36811E08269E8C4800716BC1 /* UIView+Gradient.m */; };
@@ -225,6 +233,23 @@
 		3654E2F025C544220042826D /* UIView+EdgeAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+EdgeAnimation.m"; sourceTree = "<group>"; };
 		36564D522586307800167927 /* UIBezierPath+TFY_Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+TFY_Tools.h"; sourceTree = "<group>"; };
 		36564D532586307800167927 /* UIBezierPath+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+TFY_Tools.m"; sourceTree = "<group>"; };
+		365D9EC829E672A000EF8A1B /* TFY_SnapshotScroll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_SnapshotScroll.h; sourceTree = "<group>"; };
+		365D9ECA29E673A200EF8A1B /* TFY_SnapshotAuxiliaryCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_SnapshotAuxiliaryCache.h; sourceTree = "<group>"; };
+		365D9ECB29E673A200EF8A1B /* TFY_SnapshotAuxiliaryCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_SnapshotAuxiliaryCache.m; sourceTree = "<group>"; };
+		365D9ECD29E674C700EF8A1B /* UIScrollView+SnapshotAuxiliary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SnapshotAuxiliary.h"; sourceTree = "<group>"; };
+		365D9ECE29E674C700EF8A1B /* UIScrollView+SnapshotAuxiliary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SnapshotAuxiliary.m"; sourceTree = "<group>"; };
+		365D9ED029E6757100EF8A1B /* WKWebView+SnapshotAuxiliary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WKWebView+SnapshotAuxiliary.h"; sourceTree = "<group>"; };
+		365D9ED129E6757100EF8A1B /* WKWebView+SnapshotAuxiliary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+SnapshotAuxiliary.m"; sourceTree = "<group>"; };
+		365D9ED429E6760E00EF8A1B /* TFY_SnapshotManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_SnapshotManager.h; sourceTree = "<group>"; };
+		365D9ED529E6760E00EF8A1B /* TFY_SnapshotManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_SnapshotManager.m; sourceTree = "<group>"; };
+		365D9ED729E6767B00EF8A1B /* UIScrollView+Snapshot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Snapshot.h"; sourceTree = "<group>"; };
+		365D9ED829E6767B00EF8A1B /* UIScrollView+Snapshot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Snapshot.m"; sourceTree = "<group>"; };
+		365D9EDA29E6778D00EF8A1B /* UIView+Snapshot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Snapshot.h"; sourceTree = "<group>"; };
+		365D9EDB29E6778D00EF8A1B /* UIView+Snapshot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Snapshot.m"; sourceTree = "<group>"; };
+		365D9EDD29E67D8600EF8A1B /* UITextView+Snapshot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextView+Snapshot.h"; sourceTree = "<group>"; };
+		365D9EDE29E67D8600EF8A1B /* UITextView+Snapshot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Snapshot.m"; sourceTree = "<group>"; };
+		365D9EE029E67EDC00EF8A1B /* WKWebView+Snapshot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WKWebView+Snapshot.h"; sourceTree = "<group>"; };
+		365D9EE129E67EDC00EF8A1B /* WKWebView+Snapshot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+Snapshot.m"; sourceTree = "<group>"; };
 		367EC245250603FC004BAE5C /* TFY_Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Scene.h; sourceTree = "<group>"; };
 		367EC246250603FC004BAE5C /* TFY_Scene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Scene.m; sourceTree = "<group>"; };
 		367EE8C327B6239500977C9B /* UIImage+Addtions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Addtions.h"; sourceTree = "<group>"; };
@@ -595,6 +620,46 @@
 			path = CommonViewController;
 			sourceTree = "<group>";
 		};
+		365D9EC729E6729100EF8A1B /* TFY_SnapshotScroll */ = {
+			isa = PBXGroup;
+			children = (
+				365D9EC829E672A000EF8A1B /* TFY_SnapshotScroll.h */,
+				365D9ED329E675F000EF8A1B /* TFY_SnapScroll */,
+				365D9EC929E6738000EF8A1B /* TFY_SnapshotAuxiliary */,
+			);
+			path = TFY_SnapshotScroll;
+			sourceTree = "<group>";
+		};
+		365D9EC929E6738000EF8A1B /* TFY_SnapshotAuxiliary */ = {
+			isa = PBXGroup;
+			children = (
+				365D9ECA29E673A200EF8A1B /* TFY_SnapshotAuxiliaryCache.h */,
+				365D9ECB29E673A200EF8A1B /* TFY_SnapshotAuxiliaryCache.m */,
+				365D9ECD29E674C700EF8A1B /* UIScrollView+SnapshotAuxiliary.h */,
+				365D9ECE29E674C700EF8A1B /* UIScrollView+SnapshotAuxiliary.m */,
+				365D9ED029E6757100EF8A1B /* WKWebView+SnapshotAuxiliary.h */,
+				365D9ED129E6757100EF8A1B /* WKWebView+SnapshotAuxiliary.m */,
+			);
+			path = TFY_SnapshotAuxiliary;
+			sourceTree = "<group>";
+		};
+		365D9ED329E675F000EF8A1B /* TFY_SnapScroll */ = {
+			isa = PBXGroup;
+			children = (
+				365D9ED429E6760E00EF8A1B /* TFY_SnapshotManager.h */,
+				365D9ED529E6760E00EF8A1B /* TFY_SnapshotManager.m */,
+				365D9ED729E6767B00EF8A1B /* UIScrollView+Snapshot.h */,
+				365D9ED829E6767B00EF8A1B /* UIScrollView+Snapshot.m */,
+				365D9EDA29E6778D00EF8A1B /* UIView+Snapshot.h */,
+				365D9EDB29E6778D00EF8A1B /* UIView+Snapshot.m */,
+				365D9EDD29E67D8600EF8A1B /* UITextView+Snapshot.h */,
+				365D9EDE29E67D8600EF8A1B /* UITextView+Snapshot.m */,
+				365D9EE029E67EDC00EF8A1B /* WKWebView+Snapshot.h */,
+				365D9EE129E67EDC00EF8A1B /* WKWebView+Snapshot.m */,
+			);
+			path = TFY_SnapScroll;
+			sourceTree = "<group>";
+		};
 		36867DC124EBDFFE00A761BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -786,6 +851,7 @@
 			isa = PBXGroup;
 			children = (
 				36EE1100250A17DE00D24B3C /* TFY_LayoutCategoryKit.h */,
+				365D9EC729E6729100EF8A1B /* TFY_SnapshotScroll */,
 				565583AD2431990A00020D3C /* TFY_Categories */,
 				565583B02431990A00020D3C /* TFY_Chain */,
 				565583B42431990A00020D3C /* TFY_Tools */,
@@ -1363,6 +1429,7 @@
 				3695B7F82904C02100D8FD7D /* TFY_ExpressionManager.m in Sources */,
 				5655837C243196E000020D3C /* main.m in Sources */,
 				361E3C1425A7EBE3003A822F /* TFY_ImageView.m in Sources */,
+				365D9ECF29E674C700EF8A1B /* UIScrollView+SnapshotAuxiliary.m in Sources */,
 				565583F72431B9D000020D3C /* UIScrollView+TFY_Tools.m in Sources */,
 				36CE97B2254FB1F40065B366 /* CALayer+TFY_Tools.m in Sources */,
 				36EE1103250A18CF00D24B3C /* TFY_Timer.m in Sources */,
@@ -1437,6 +1504,7 @@
 				565584642431CA5400020D3C /* TFY_ButtonChainModel.m in Sources */,
 				3654164824FF369C00CC0024 /* PolicyWebViewController.m in Sources */,
 				565584292431C48F00020D3C /* TFY_SwipeGestureChainModel.m in Sources */,
+				365D9EDF29E67D8600EF8A1B /* UITextView+Snapshot.m in Sources */,
 				5655849D2431D1F900020D3C /* UIView+TFY_Chain.m in Sources */,
 				5655848B2431CFB700020D3C /* TFY_TableViewChainModel.m in Sources */,
 				565584092431BB3100020D3C /* NSFileManager+TFY_Tools.m in Sources */,
@@ -1450,6 +1518,7 @@
 				36867DB424EBA19700A761BC /* UIControl+TFY_Tools.m in Sources */,
 				36CE97A6254FAB510065B366 /* UIView+TFY_iOS13DarkMode_MonitorView.m in Sources */,
 				3654164524FF364A00CC0024 /* PolicyViewController.m in Sources */,
+				365D9EDC29E6778D00EF8A1B /* UIView+Snapshot.m in Sources */,
 				36495A0229B973CD0046F916 /* NSDecimalNumber+TFY_Tools.m in Sources */,
 				3695B8042904C3C400D8FD7D /* NSString+Expression.m in Sources */,
 				565584AD2431D42D00020D3C /* TFY_ReplicatorLayerChainModel.m in Sources */,
@@ -1468,12 +1537,14 @@
 				36D8D89627F67F6200C6B400 /* TFY_TextAttribute.m in Sources */,
 				367EC247250603FC004BAE5C /* TFY_Scene.m in Sources */,
 				565584202431C37200020D3C /* TFY_PanGestureChainModel.m in Sources */,
+				365D9ED229E6757100EF8A1B /* WKWebView+SnapshotAuxiliary.m in Sources */,
 				565584002431BA8700020D3C /* UIViewController+TFY_Tools.m in Sources */,
 				565583CC2431AF4700020D3C /* NSObject+TFY_Tools.m in Sources */,
 				36EBD9262577399B00C70D20 /* TFY_BadgeControl.m in Sources */,
 				36C3349824ED24EE00DA6FB2 /* WKWebView+TFY_Extension.m in Sources */,
 				36885748298A07610023A340 /* Test.m in Sources */,
 				565584882431CF4400020D3C /* TFY_TableViewCellChainModel.m in Sources */,
+				365D9ED629E6760E00EF8A1B /* TFY_SnapshotManager.m in Sources */,
 				36CE97BE254FBB830065B366 /* UIImage+iOS13DarkMode.m in Sources */,
 				565583C62431AE2E00020D3C /* NSArray+TFY_Tools.m in Sources */,
 				5655845D2431C86F00020D3C /* TFY_BaseViewChainModel+Masonry.m in Sources */,
@@ -1486,6 +1557,7 @@
 				5655847C2431CDB800020D3C /* TFY_ScrollViewChainModel.m in Sources */,
 				36EBD93825773E8900C70D20 /* UITabBarItem+Badge.m in Sources */,
 				367EE8C527B6239500977C9B /* UIImage+Addtions.m in Sources */,
+				365D9ECC29E673A200EF8A1B /* TFY_SnapshotAuxiliaryCache.m in Sources */,
 				36D8D8A227F6849800C6B400 /* TFY_TextLabel.m in Sources */,
 				36867DB724EBA1DB00A761BC /* UIFont+TFY_Tools.m in Sources */,
 				565584602431C91300020D3C /* TFY_ActivityIndicatorViewModel.m in Sources */,
@@ -1496,7 +1568,9 @@
 				565584332431C71500020D3C /* TFY_BaseScrollViewChainModel.m in Sources */,
 				565584A42431D35B00020D3C /* TFY_EmiiterLayerChainModel.m in Sources */,
 				565584B02431D46E00020D3C /* TFY_ScrollLayerChainModel.m in Sources */,
+				365D9ED929E6767B00EF8A1B /* UIScrollView+Snapshot.m in Sources */,
 				5655847F2431CDFC00020D3C /* TFY_SegmentedControlChainModel.m in Sources */,
+				365D9EE229E67EDC00EF8A1B /* WKWebView+Snapshot.m in Sources */,
 				36EBD93225773D8600C70D20 /* UIBarButtonItem+Badge.m in Sources */,
 				36D8D89F27F6824E00C6B400 /* TFY_TextRender.m in Sources */,
 				5655841D2431C0B700020D3C /* TFY_LongPressGestureChainModel.m in Sources */,

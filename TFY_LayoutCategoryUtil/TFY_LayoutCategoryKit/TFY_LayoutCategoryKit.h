@@ -34,5 +34,7 @@ FOUNDATION_EXPORT const unsigned char TFY_LayoutCategoryKitVersionString[];
 #import "TFY_ChainHeader.h"
 /**额外工具*/
 #import "TFY_ToolsHeader.h"
+/**截图工具**/
+#import "TFY_SnapshotScroll.h"
 
 #endif
