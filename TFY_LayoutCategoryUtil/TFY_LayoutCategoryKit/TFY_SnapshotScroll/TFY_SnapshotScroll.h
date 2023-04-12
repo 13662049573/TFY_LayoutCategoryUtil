@@ -9,10 +9,10 @@
 #ifndef TFY_SnapshotScroll_h
 #define TFY_SnapshotScroll_h
 
-#import "UIScrollView+SnapshotAuxiliary.h"
-#import "WKWebView+SnapshotAuxiliary.h"
+#import "UIWindow+Snapshot.h"
 #import "WKWebView+Snapshot.h"
-#import "TFY_SnapshotManager.h"
+#import "UIScrollView+Snapshot.h"
 #import "UIView+Snapshot.h"
+#import "UITableView+Snapshot.h"
 
 #endif /* TFY_SnapshotScroll_h */

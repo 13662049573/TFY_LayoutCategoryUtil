@@ -7,13 +7,11 @@
 //
 
 #import <WebKit/WebKit.h>
-#import "UIScrollView+Snapshot.h"
+#import "TFY_SnapshotKitProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WKWebView (Snapshot)
-
-- (void)screenSnapshotNeedMask:(BOOL)needMask addMaskAfterBlock:(void(^)(void))addMaskAfterBlock finishBlock:(SnapshotFinishBlock)finishBlock;
+@interface WKWebView (Snapshot)<TFY_SnapshotKitProtocol>
 
 @end
 
