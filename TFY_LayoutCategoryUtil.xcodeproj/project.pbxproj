@@ -30,6 +30,7 @@
 		365D9EEF29E68B8A00EF8A1B /* UIView+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 365D9EEE29E68B8A00EF8A1B /* UIView+Snapshot.m */; };
 		365D9EF229E68BE200EF8A1B /* UITableView+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 365D9EF129E68BE200EF8A1B /* UITableView+Snapshot.m */; };
 		365D9EF529E68C2500EF8A1B /* UIWindow+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 365D9EF429E68C2500EF8A1B /* UIWindow+Snapshot.m */; };
+		366F338529FA70C2006E5377 /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 366F338429FA70C2006E5377 /* UITextView+Placeholder.m */; };
 		367EC247250603FC004BAE5C /* TFY_Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EC246250603FC004BAE5C /* TFY_Scene.m */; };
 		367EE8C527B6239500977C9B /* UIImage+Addtions.m in Sources */ = {isa = PBXBuildFile; fileRef = 367EE8C427B6239500977C9B /* UIImage+Addtions.m */; };
 		36811E09269E8C4800716BC1 /* UIView+Gradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 36811E08269E8C4800716BC1 /* UIView+Gradient.m */; };
@@ -242,6 +243,8 @@
 		365D9EF129E68BE200EF8A1B /* UITableView+Snapshot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Snapshot.m"; sourceTree = "<group>"; };
 		365D9EF329E68C2500EF8A1B /* UIWindow+Snapshot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIWindow+Snapshot.h"; sourceTree = "<group>"; };
 		365D9EF429E68C2500EF8A1B /* UIWindow+Snapshot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+Snapshot.m"; sourceTree = "<group>"; };
+		366F338329FA70C2006E5377 /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
+		366F338429FA70C2006E5377 /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		367EC245250603FC004BAE5C /* TFY_Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Scene.h; sourceTree = "<group>"; };
 		367EC246250603FC004BAE5C /* TFY_Scene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Scene.m; sourceTree = "<group>"; };
 		367EE8C327B6239500977C9B /* UIImage+Addtions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Addtions.h"; sourceTree = "<group>"; };
@@ -914,6 +917,8 @@
 				36867DCC24EBEB7200A761BC /* TFY_UIHeader.h */,
 				565583D62431B1FE00020D3C /* UIView+TFY_Tools.h */,
 				565583D72431B1FE00020D3C /* UIView+TFY_Tools.m */,
+				366F338329FA70C2006E5377 /* UITextView+Placeholder.h */,
+				366F338429FA70C2006E5377 /* UITextView+Placeholder.m */,
 				36EF14D72936EA27009ED803 /* UIView+ShadowPath.h */,
 				36EF14D82936EA27009ED803 /* UIView+ShadowPath.m */,
 				565583D92431B2B700020D3C /* UIButton+TFY_Tools.h */,
@@ -1408,6 +1413,7 @@
 				565583F02431B78600020D3C /* UIImage+TFY_Tools.m in Sources */,
 				565583A8243197BB00020D3C /* SceneDelegate.m in Sources */,
 				36EF14D92936EA27009ED803 /* UIView+ShadowPath.m in Sources */,
+				366F338529FA70C2006E5377 /* UITextView+Placeholder.m in Sources */,
 				365D9EE929E68B0000EF8A1B /* WKWebView+Snapshot.m in Sources */,
 				360312C12501E24B00EFCA27 /* TFY_Utils.m in Sources */,
 				565584172431BE9C00020D3C /* TFY_BaseViewChainModel.m in Sources */,
