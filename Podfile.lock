@@ -1,8 +1,8 @@
 PODS:
   - Masonry (1.1.0)
-  - TFY_Navigation (2.9.4):
-    - TFY_Navigation/TFY_NavControoler (= 2.9.4)
-  - TFY_Navigation/TFY_NavControoler (2.9.4)
+  - TFY_Navigation (2.9.5):
+    - TFY_Navigation/TFY_NavControoler (= 2.9.5)
+  - TFY_Navigation/TFY_NavControoler (2.9.5)
   - TFY_TabBarKit (1.1.6):
     - TFY_TabBarKit/TFY_SystemTabBar (= 1.1.6)
   - TFY_TabBarKit/TFY_SystemTabBar (1.1.6)
@@ -23,10 +23,10 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  TFY_Navigation: a9661e0742dca3086b232596015c5f5748535604
+  TFY_Navigation: 268edf3781ccacb1a4b61d0c17a4c5e1e5bbec34
   TFY_TabBarKit: 2a96e8283d76da957d17d4c473b21e8b5a005805
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 78e8dbbee3bf89ce58f6e0f6f7eba195dd53eeb8
+PODFILE CHECKSUM: 7016e7f6d05631bae3533320f0bbe732241ae18a
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.0

@@ -3,12 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A66C157D8E866FDD1C3A714 /* Pods_TFY_LayoutCategoryUtil_TFY_LayoutCategoryUtilUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39B598542D85D793988CF46 /* Pods_TFY_LayoutCategoryUtil_TFY_LayoutCategoryUtilUITests.framework */; };
-		360118A425007ECA00449922 /* UITextView+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 360118A325007ECA00449922 /* UITextView+TFY_Tools.m */; };
 		360312C12501E24B00EFCA27 /* TFY_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 360312C02501E24B00EFCA27 /* TFY_Utils.m */; };
 		3608F8AF28F2465C00E7D023 /* TFYRotatingWizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3608F8AC28F2465C00E7D023 /* TFYRotatingWizzle.m */; };
 		3608F8B028F2465C00E7D023 /* TFYExtensionRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3608F8AE28F2465C00E7D023 /* TFYExtensionRotation.m */; };
@@ -99,6 +97,7 @@
 		36FEC8352850260F00B44896 /* IgnoreSectionsIndexes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36FEC8332850260F00B44896 /* IgnoreSectionsIndexes.plist */; };
 		36FEC8362850260F00B44896 /* Indexes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36FEC8342850260F00B44896 /* Indexes.plist */; };
 		36FFD52629CAD753001C76C0 /* TFY_AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 36FFD52529CAD753001C76C0 /* TFY_AudioPlayer.m */; };
+		373153657D38AAC8AC7D53D4 /* libPods-TFY_LayoutCategoryUtil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD89B0D3BF3DC19A3F69E7A /* libPods-TFY_LayoutCategoryUtil.a */; };
 		56558376243196E000020D3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56558375243196E000020D3C /* Assets.xcassets */; };
 		56558379243196E000020D3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56558377243196E000020D3C /* LaunchScreen.storyboard */; };
 		5655837C243196E000020D3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5655837B243196E000020D3C /* main.m */; };
@@ -170,8 +169,8 @@
 		565584C92431DEEE00020D3C /* PolicyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584C82431DEEE00020D3C /* PolicyManager.m */; };
 		565584DF2431E48200020D3C /* HomeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584DE2431E48200020D3C /* HomeCollectionViewController.m */; };
 		565584E22431E49600020D3C /* PersonalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565584E12431E49600020D3C /* PersonalTableViewController.m */; };
-		5CE195633E037F35413EB7E4 /* Pods_TFY_LayoutCategoryUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59D61D12C3D904738650E730 /* Pods_TFY_LayoutCategoryUtil.framework */; };
-		B4CDAF453E5B495EA337FE2B /* Pods_TFY_LayoutCategoryUtilTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F66F8D3ADD07F2B9B6034156 /* Pods_TFY_LayoutCategoryUtilTests.framework */; };
+		6F45141B8AD2160B89BD9526 /* libPods-TFY_LayoutCategoryUtilTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95F699D30C36642879C52033 /* libPods-TFY_LayoutCategoryUtilTests.a */; };
+		E1460EB129629310CD0A622B /* libPods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4368419246A0258336F5CA3F /* libPods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,8 +194,6 @@
 		01503C10620E3DB3CA768878 /* Pods-TFY_LayoutCategoryUtilTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_LayoutCategoryUtilTests.debug.xcconfig"; path = "Target Support Files/Pods-TFY_LayoutCategoryUtilTests/Pods-TFY_LayoutCategoryUtilTests.debug.xcconfig"; sourceTree = "<group>"; };
 		03889A964663A5E6A6E8EF3A /* Pods-TFY_LayoutCategoryUtil.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_LayoutCategoryUtil.release.xcconfig"; path = "Target Support Files/Pods-TFY_LayoutCategoryUtil/Pods-TFY_LayoutCategoryUtil.release.xcconfig"; sourceTree = "<group>"; };
 		20CD2DC3094927BD4528FB74 /* Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests.release.xcconfig"; path = "Target Support Files/Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests/Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests.release.xcconfig"; sourceTree = "<group>"; };
-		360118A225007ECA00449922 /* UITextView+TFY_Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextView+TFY_Tools.h"; sourceTree = "<group>"; };
-		360118A325007ECA00449922 /* UITextView+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextView+TFY_Tools.m"; sourceTree = "<group>"; };
 		360312BF2501E24B00EFCA27 /* TFY_Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Utils.h; sourceTree = "<group>"; };
 		360312C02501E24B00EFCA27 /* TFY_Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_Utils.m; sourceTree = "<group>"; };
 		3608F8AB28F2465C00E7D023 /* TFYExtensionRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFYExtensionRotation.h; sourceTree = "<group>"; };
@@ -384,6 +381,7 @@
 		36FEC8342850260F00B44896 /* Indexes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Indexes.plist; sourceTree = "<group>"; };
 		36FFD52429CAD753001C76C0 /* TFY_AudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_AudioPlayer.h; sourceTree = "<group>"; };
 		36FFD52529CAD753001C76C0 /* TFY_AudioPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_AudioPlayer.m; sourceTree = "<group>"; };
+		4368419246A0258336F5CA3F /* libPods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56558366243196E000020D3C /* TFY_LayoutCategoryUtil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TFY_LayoutCategoryUtil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56558375243196E000020D3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56558378243196E000020D3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -536,12 +534,11 @@
 		565584DE2431E48200020D3C /* HomeCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCollectionViewController.m; sourceTree = "<group>"; };
 		565584E02431E49600020D3C /* PersonalTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalTableViewController.h; sourceTree = "<group>"; };
 		565584E12431E49600020D3C /* PersonalTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonalTableViewController.m; sourceTree = "<group>"; };
-		59D61D12C3D904738650E730 /* Pods_TFY_LayoutCategoryUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFY_LayoutCategoryUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A2A1C19D184482E0E56EC40 /* Pods-TFY_LayoutCategoryUtil.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_LayoutCategoryUtil.debug.xcconfig"; path = "Target Support Files/Pods-TFY_LayoutCategoryUtil/Pods-TFY_LayoutCategoryUtil.debug.xcconfig"; sourceTree = "<group>"; };
+		95F699D30C36642879C52033 /* libPods-TFY_LayoutCategoryUtilTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TFY_LayoutCategoryUtilTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F682BAABC2F16FEF49104BD /* Pods-TFY_LayoutCategoryUtilTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_LayoutCategoryUtilTests.release.xcconfig"; path = "Target Support Files/Pods-TFY_LayoutCategoryUtilTests/Pods-TFY_LayoutCategoryUtilTests.release.xcconfig"; sourceTree = "<group>"; };
-		E39B598542D85D793988CF46 /* Pods_TFY_LayoutCategoryUtil_TFY_LayoutCategoryUtilUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFY_LayoutCategoryUtil_TFY_LayoutCategoryUtilUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAD89B0D3BF3DC19A3F69E7A /* libPods-TFY_LayoutCategoryUtil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TFY_LayoutCategoryUtil.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB361D7A04202DE62D355C22 /* Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests.debug.xcconfig"; path = "Target Support Files/Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests/Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		F66F8D3ADD07F2B9B6034156 /* Pods_TFY_LayoutCategoryUtilTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TFY_LayoutCategoryUtilTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -551,7 +548,7 @@
 			files = (
 				36867DC324EBDFFF00A761BC /* Foundation.framework in Frameworks */,
 				36867DC524EBE00C00A761BC /* UIKit.framework in Frameworks */,
-				5CE195633E037F35413EB7E4 /* Pods_TFY_LayoutCategoryUtil.framework in Frameworks */,
+				373153657D38AAC8AC7D53D4 /* libPods-TFY_LayoutCategoryUtil.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,7 +556,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4CDAF453E5B495EA337FE2B /* Pods_TFY_LayoutCategoryUtilTests.framework in Frameworks */,
+				6F45141B8AD2160B89BD9526 /* libPods-TFY_LayoutCategoryUtilTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,7 +564,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A66C157D8E866FDD1C3A714 /* Pods_TFY_LayoutCategoryUtil_TFY_LayoutCategoryUtilUITests.framework in Frameworks */,
+				E1460EB129629310CD0A622B /* libPods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,9 +638,9 @@
 			children = (
 				36867DC424EBE00C00A761BC /* UIKit.framework */,
 				36867DC224EBDFFF00A761BC /* Foundation.framework */,
-				59D61D12C3D904738650E730 /* Pods_TFY_LayoutCategoryUtil.framework */,
-				E39B598542D85D793988CF46 /* Pods_TFY_LayoutCategoryUtil_TFY_LayoutCategoryUtilUITests.framework */,
-				F66F8D3ADD07F2B9B6034156 /* Pods_TFY_LayoutCategoryUtilTests.framework */,
+				EAD89B0D3BF3DC19A3F69E7A /* libPods-TFY_LayoutCategoryUtil.a */,
+				4368419246A0258336F5CA3F /* libPods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests.a */,
+				95F699D30C36642879C52033 /* libPods-TFY_LayoutCategoryUtilTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -941,8 +938,6 @@
 				36BA238424EE487F00CE8275 /* UITableViewCell+TFY_Chain.m */,
 				565583FE2431BA8700020D3C /* UIViewController+TFY_Tools.h */,
 				565583FF2431BA8700020D3C /* UIViewController+TFY_Tools.m */,
-				360118A225007ECA00449922 /* UITextView+TFY_Tools.h */,
-				360118A325007ECA00449922 /* UITextView+TFY_Tools.m */,
 				36CE979E254FAA590065B366 /* TFY_iOS13DarkMode_MonitorView.h */,
 				36CE979F254FAA590065B366 /* TFY_iOS13DarkMode_MonitorView.m */,
 				36CE97A4254FAB510065B366 /* UIView+TFY_iOS13DarkMode_MonitorView.h */,
@@ -1173,7 +1168,7 @@
 				56558362243196E000020D3C /* Sources */,
 				56558363243196E000020D3C /* Frameworks */,
 				56558364243196E000020D3C /* Resources */,
-				062B5D828F6A7424C46C05ED /* [CP] Embed Pods Frameworks */,
+				11578F95679F398F656218C4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1211,7 +1206,7 @@
 				56558388243196E100020D3C /* Sources */,
 				56558389243196E100020D3C /* Frameworks */,
 				5655838A243196E100020D3C /* Resources */,
-				984F6984F4DA3EABE3881629 /* [CP] Embed Pods Frameworks */,
+				9AF6E5A712093B982545A090 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1229,7 +1224,8 @@
 		5655835E243196E000020D3C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1200;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "田风有";
 				TargetAttributes = {
 					56558365243196E000020D3C = {
@@ -1294,21 +1290,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		062B5D828F6A7424C46C05ED /* [CP] Embed Pods Frameworks */ = {
+		11578F95679F398F656218C4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TFY_LayoutCategoryUtil/Pods-TFY_LayoutCategoryUtil-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TFY_LayoutCategoryUtil/Pods-TFY_LayoutCategoryUtil-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TFY_LayoutCategoryUtil/Pods-TFY_LayoutCategoryUtil-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TFY_LayoutCategoryUtil/Pods-TFY_LayoutCategoryUtil-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		625326D4343ABE540C47DFFD /* [CP] Check Pods Manifest.lock */ = {
@@ -1377,21 +1371,19 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		984F6984F4DA3EABE3881629 /* [CP] Embed Pods Frameworks */ = {
+		9AF6E5A712093B982545A090 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests/Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests/Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests/Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests/Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1444,7 +1436,6 @@
 				36FEC82F2850203400B44896 /* UITableView+IndexView.m in Sources */,
 				3695B7F32904BC8500D8FD7D /* TFY_LabelLayoutManager.m in Sources */,
 				36C334A724ED284500DA6FB2 /* NSString+TFY_String.m in Sources */,
-				360118A425007ECA00449922 /* UITextView+TFY_Tools.m in Sources */,
 				3652767E296F96950065C087 /* NSString+Extend.m in Sources */,
 				3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */,
 				36978E7027F6F24C00557EC0 /* TFY_TextblanksField.m in Sources */,
@@ -1652,7 +1643,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1705,7 +1696,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

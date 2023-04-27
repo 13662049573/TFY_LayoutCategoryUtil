@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E494DFE11265255B77C741D85F874B51"
-               BuildableName = "Pods_TFY_LayoutCategoryUtil_TFY_LayoutCategoryUtilUITests.framework"
+               BuildableName = "libPods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests.a"
                BlueprintName = "Pods-TFY_LayoutCategoryUtil-TFY_LayoutCategoryUtilUITests"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
