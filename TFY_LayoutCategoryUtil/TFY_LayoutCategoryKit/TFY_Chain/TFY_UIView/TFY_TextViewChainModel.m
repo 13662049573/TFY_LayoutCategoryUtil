@@ -7,6 +7,7 @@
 //
 
 #import "TFY_TextViewChainModel.h"
+#import "UITextView+Placeholder.h"
 
 #define TFY_CATEGORY_CHAIN_TEXT_IMPLEMENTATION(TFY_Method,TFY_ParaType) TFY_CATEGORY_CHAIN_VIEWCLASS_IMPLEMENTATION(TFY_Method,TFY_ParaType, TFY_TextViewChainModel *,UITextView)
 
@@ -38,6 +39,33 @@ TFY_CATEGORY_CHAIN_TEXT_IMPLEMENTATION(returnKeyType, UIReturnKeyType);
 TFY_CATEGORY_CHAIN_TEXT_IMPLEMENTATION(enablesReturnKeyAutomatically, BOOL);
 TFY_CATEGORY_CHAIN_TEXT_IMPLEMENTATION(secureTextEntry, BOOL);
 TFY_CATEGORY_CHAIN_TEXT_IMPLEMENTATION(textContentType, UITextContentType);
+
+- (TFY_TextViewChainModel * _Nonnull (^)(NSString * _Nonnull))placeholder {
+    return ^(NSString *string){
+        [self enumerateObjectsUsingBlock:^(UITextView *textView) {
+            textView.tfy_placeholder = string;
+        }];
+        return self;
+    };
+}
+
+- (TFY_TextViewChainModel * _Nonnull (^)(NSAttributedString * _Nonnull))attributedPlaceholder {
+    return ^(NSAttributedString *attributedPlaceholder){
+        [self enumerateObjectsUsingBlock:^(UITextView *textView) {
+            textView.tfy_attributedPlaceholder = attributedPlaceholder;
+        }];
+        return self;
+    };
+}
+
+- (TFY_TextViewChainModel * _Nonnull (^)(UIColor * _Nonnull))placeholderColor {
+    return ^(UIColor *color){
+        [self enumerateObjectsUsingBlock:^(UITextView *textView) {
+            textView.tfy_placeholderColor = color;
+        }];
+        return self;
+    };
+}
 
 @end
 TFY_CATEGORY_VIEW_IMPLEMENTATION(UITextView, TFY_TextViewChainModel)

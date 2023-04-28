@@ -44,6 +44,10 @@ TFY_PROPERTY_CHAIN_READONLY TFY_TextViewChainModel *(^ enablesReturnKeyAutomatic
 TFY_PROPERTY_CHAIN_READONLY TFY_TextViewChainModel *(^ secureTextEntry)(BOOL);
 TFY_PROPERTY_CHAIN_READONLY TFY_TextViewChainModel *(^ textContentType)(UITextContentType) API_AVAILABLE(ios(10));
 
+TFY_PROPERTY_CHAIN_READONLY TFY_TextViewChainModel *(^ placeholder)(NSString*);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextViewChainModel *(^ attributedPlaceholder)(NSAttributedString*);
+TFY_PROPERTY_CHAIN_READONLY TFY_TextViewChainModel *(^ placeholderColor)(UIColor*);
+
 @end
 
 TFY_CATEGORY_EXINTERFACE(UITextView, TFY_TextViewChainModel)
