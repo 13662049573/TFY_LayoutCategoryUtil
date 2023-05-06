@@ -10,6 +10,7 @@
 		360312C12501E24B00EFCA27 /* TFY_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 360312C02501E24B00EFCA27 /* TFY_Utils.m */; };
 		3608F8AF28F2465C00E7D023 /* TFYRotatingWizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3608F8AC28F2465C00E7D023 /* TFYRotatingWizzle.m */; };
 		3608F8B028F2465C00E7D023 /* TFYExtensionRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3608F8AE28F2465C00E7D023 /* TFYExtensionRotation.m */; };
+		361BB3E72A05DEC2002E39AE /* TFY_AppVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 361BB3E62A05DEC2002E39AE /* TFY_AppVersion.m */; };
 		361D7DDE255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D7DDD255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m */; };
 		361D7DE4255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 361D7DE3255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.m */; };
 		361E3C1425A7EBE3003A822F /* TFY_ImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361E3C1325A7EBE3003A822F /* TFY_ImageView.m */; };
@@ -201,6 +202,8 @@
 		3608F8AC28F2465C00E7D023 /* TFYRotatingWizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFYRotatingWizzle.m; sourceTree = "<group>"; };
 		3608F8AD28F2465C00E7D023 /* TFYRotatingWizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFYRotatingWizzle.h; sourceTree = "<group>"; };
 		3608F8AE28F2465C00E7D023 /* TFYExtensionRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFYExtensionRotation.m; sourceTree = "<group>"; };
+		361BB3E52A05DEC2002E39AE /* TFY_AppVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_AppVersion.h; sourceTree = "<group>"; };
+		361BB3E62A05DEC2002E39AE /* TFY_AppVersion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_AppVersion.m; sourceTree = "<group>"; };
 		361D7DDC255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+TFY_Tools.h"; sourceTree = "<group>"; };
 		361D7DDD255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+TFY_Tools.m"; sourceTree = "<group>"; };
 		361D7DE2255BB21D00D3D0E8 /* NSMutableParagraphStyle+TFY_Chain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableParagraphStyle+TFY_Chain.h"; sourceTree = "<group>"; };
@@ -671,6 +674,8 @@
 				36885744298A06830023A340 /* TFY_Reflection.m */,
 				36FFD52429CAD753001C76C0 /* TFY_AudioPlayer.h */,
 				36FFD52529CAD753001C76C0 /* TFY_AudioPlayer.m */,
+				361BB3E52A05DEC2002E39AE /* TFY_AppVersion.h */,
+				361BB3E62A05DEC2002E39AE /* TFY_AppVersion.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1429,6 +1434,7 @@
 				36867DCB24EBE25400A761BC /* UIWindow+TFY_Tools.m in Sources */,
 				5655846A2431CBAE00020D3C /* TFY_ControlChainModel.m in Sources */,
 				565584DF2431E48200020D3C /* HomeCollectionViewController.m in Sources */,
+				361BB3E72A05DEC2002E39AE /* TFY_AppVersion.m in Sources */,
 				361D7DDE255BB19F00D3D0E8 /* NSMutableAttributedString+TFY_Tools.m in Sources */,
 				36FEC82C28501E6000B44896 /* TFY_IndexView.m in Sources */,
 				36CE97B8254FB98C0065B366 /* UIColor+iOS13DarkMode.m in Sources */,
