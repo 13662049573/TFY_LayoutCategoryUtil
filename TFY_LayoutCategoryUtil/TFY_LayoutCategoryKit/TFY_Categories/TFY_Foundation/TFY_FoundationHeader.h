@@ -31,5 +31,6 @@
 #import "CLLocationManager+TFY_Tools.h"
 #import "NSString+Extend.h"
 #import "NSDecimalNumber+TFY_Tools.h"
+#import "NSNumber+Arithmetic.h"
 
 #endif /* TFY_FoundationHeader_h */

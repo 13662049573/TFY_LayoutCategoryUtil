@@ -16,6 +16,8 @@
 		361E3C1425A7EBE3003A822F /* TFY_ImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361E3C1325A7EBE3003A822F /* TFY_ImageView.m */; };
 		362541F528A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 362541F428A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m */; };
 		36495A0229B973CD0046F916 /* NSDecimalNumber+TFY_Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 36495A0129B973CD0046F916 /* NSDecimalNumber+TFY_Tools.m */; };
+		364AE2632A0CCC5F005E3051 /* NSString+Arithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 364AE2622A0CCC5F005E3051 /* NSString+Arithmetic.m */; };
+		364AE2662A0CCE27005E3051 /* NSNumber+Arithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 364AE2652A0CCE27005E3051 /* NSNumber+Arithmetic.m */; };
 		3652767E296F96950065C087 /* NSString+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 3652767D296F96950065C087 /* NSString+Extend.m */; };
 		3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163B24FF336D00CC0024 /* CommonViewController.m */; };
 		3654163F24FF345000CC0024 /* CommonNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3654163E24FF345000CC0024 /* CommonNavigationBar.m */; };
@@ -214,6 +216,10 @@
 		362541F428A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CLLocationManager+TFY_Tools.m"; sourceTree = "<group>"; };
 		36495A0029B973CD0046F916 /* NSDecimalNumber+TFY_Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDecimalNumber+TFY_Tools.h"; sourceTree = "<group>"; };
 		36495A0129B973CD0046F916 /* NSDecimalNumber+TFY_Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDecimalNumber+TFY_Tools.m"; sourceTree = "<group>"; };
+		364AE2612A0CCC5F005E3051 /* NSString+Arithmetic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Arithmetic.h"; sourceTree = "<group>"; };
+		364AE2622A0CCC5F005E3051 /* NSString+Arithmetic.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Arithmetic.m"; sourceTree = "<group>"; };
+		364AE2642A0CCE27005E3051 /* NSNumber+Arithmetic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Arithmetic.h"; sourceTree = "<group>"; };
+		364AE2652A0CCE27005E3051 /* NSNumber+Arithmetic.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Arithmetic.m"; sourceTree = "<group>"; };
 		3652767C296F96950065C087 /* NSString+Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Extend.h"; sourceTree = "<group>"; };
 		3652767D296F96950065C087 /* NSString+Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extend.m"; sourceTree = "<group>"; };
 		3654163A24FF336D00CC0024 /* CommonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonViewController.h; sourceTree = "<group>"; };
@@ -1018,6 +1024,10 @@
 				362541F428A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m */,
 				3652767C296F96950065C087 /* NSString+Extend.h */,
 				3652767D296F96950065C087 /* NSString+Extend.m */,
+				364AE2612A0CCC5F005E3051 /* NSString+Arithmetic.h */,
+				364AE2622A0CCC5F005E3051 /* NSString+Arithmetic.m */,
+				364AE2642A0CCE27005E3051 /* NSNumber+Arithmetic.h */,
+				364AE2652A0CCE27005E3051 /* NSNumber+Arithmetic.m */,
 			);
 			path = TFY_Foundation;
 			sourceTree = "<group>";
@@ -1442,6 +1452,7 @@
 				3688573D298602C50023A340 /* TFY_GCDSemaphore.m in Sources */,
 				36D8D8A527F685E800C6B400 /* TFY_AsyncLayer.m in Sources */,
 				565583ED2431B71300020D3C /* UIGestureRecognizer+TFY_Tools.m in Sources */,
+				364AE2662A0CCE27005E3051 /* NSNumber+Arithmetic.m in Sources */,
 				565584852431CEFA00020D3C /* TFY_SwitchChainModel.m in Sources */,
 				565584732431CCB300020D3C /* TFY_LabelChainModel.m in Sources */,
 				36CBAD1424EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m in Sources */,
@@ -1500,6 +1511,7 @@
 				36CE97A6254FAB510065B366 /* UIView+TFY_iOS13DarkMode_MonitorView.m in Sources */,
 				3654164524FF364A00CC0024 /* PolicyViewController.m in Sources */,
 				36495A0229B973CD0046F916 /* NSDecimalNumber+TFY_Tools.m in Sources */,
+				364AE2632A0CCC5F005E3051 /* NSString+Arithmetic.m in Sources */,
 				3695B8042904C3C400D8FD7D /* NSString+Expression.m in Sources */,
 				565584AD2431D42D00020D3C /* TFY_ReplicatorLayerChainModel.m in Sources */,
 				365D9EEF29E68B8A00EF8A1B /* UIView+Snapshot.m in Sources */,
