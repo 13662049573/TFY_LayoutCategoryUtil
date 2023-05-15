@@ -63,6 +63,14 @@ typedef NS_ENUM(NSInteger, TagsViewTextFieldAlign) { // Align是相对于最后�
 @property (nonatomic) IBInspectable CGFloat textFieldHeight; // 默认为自动
 @property (nonatomic) TagsViewTextFieldAlign textFieldAlign; // 默认为居中
 
+@property(nonatomic) IBInspectable UIColor *textColor; // 默认蓝色
+@property(nonatomic) IBInspectable UIColor *textselectedColor; // 字体颜色 选择颜色白色
+@property(nonatomic) IBInspectable UIColor *borderColor; // 默认蓝色
+@property(nonatomic) IBInspectable UIColor *backgroundColor; // 默认白色
+@property(nonatomic) IBInspectable UIColor *backgroundselectedColor; // 选中蓝色
+@property (nonatomic) IBInspectable CGFloat cornerRadius; // 默认 6 
+@property (nonatomic) IBInspectable CGFloat borderWidth; // 默认 1 
+
 @property (nonatomic, strong) NSCharacterSet* deliminater; // 默认是[ncharacter set whitespacecharcharacter set]
 
 - (NSInteger)indexForTagAtScrollViewPoint:(CGPoint)point; // 如果没有找到NSNotFound
@@ -74,6 +82,10 @@ typedef NS_ENUM(NSInteger, TagsViewTextFieldAlign) { // Align是相对于最后�
 - (void)moveTagAtIndex:(NSInteger)index toIndex:(NSInteger)newIndex; // 可以动画化
 - (void)removeTagAtIndex:(NSInteger)index;
 - (void)removeAllTags;
+
+/// 特殊文字添加
+- (void)addCustomizeTag:(NSAttributedString *)tag;
+- (void)insertCustomizeTag:(NSAttributedString *)tag atIndex:(NSInteger)index;
 
 - (void)selectTagAtIndex:(NSInteger)index;
 - (void)deselectTagAtIndex:(NSInteger)index;

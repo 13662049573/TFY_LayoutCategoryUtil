@@ -21,7 +21,7 @@ const CGFloat TagsViewAutomaticDimension = -0.0001;
 @end
 
 @interface TFY_TagsView ()
-@property (nonatomic, strong) NSMutableArray<NSString *> *mutableTags;
+@property (nonatomic, strong) NSMutableArray *mutableTags;
 @property (nonatomic, strong) NSMutableArray<UIButton *> *mutableTagButtons;
 @property (nonatomic, strong, readwrite) UIScrollView *scrollView;
 @property (nonatomic, strong) __InputTextField *inputTextField;
@@ -64,25 +64,6 @@ const CGFloat TagsViewAutomaticDimension = -0.0001;
   self.mutableTags = [NSMutableArray new];
   self.mutableTagButtons = [NSMutableArray new];
   //
-  self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-  self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-  self.scrollView.backgroundColor = nil;
-  [self addSubview:self.scrollView];
-  //
-  self.inputTextField = [__InputTextField new];
-  self.inputTextField.tagsView = self;
-  self.inputTextField.tintColor = self.tintColor;
-  self.inputTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-  [self.inputTextField addTarget:self action:@selector(inputTextFieldChanged) forControlEvents:UIControlEventEditingChanged];
-  [self.inputTextField addTarget:self action:@selector(inputTextFieldEditingDidBegin) forControlEvents:UIControlEventEditingDidBegin];
-  [self.inputTextField addTarget:self action:@selector(inputTextFieldEditingDidEnd) forControlEvents:UIControlEventEditingDidEnd];
-  [self.scrollView addSubview:self.inputTextField];
-  //
-  self.becomeFirstResponderButton = [[UIButton alloc] initWithFrame:self.bounds];
-  self.becomeFirstResponderButton.backgroundColor = nil;
-  [self.becomeFirstResponderButton addTarget:self.inputTextField action:@selector(becomeFirstResponder) forControlEvents:UIControlEventTouchUpInside];
-  [self.scrollView addSubview:self.becomeFirstResponderButton];
-  //
   _editable = YES;
   _selectable = YES;
   _allowsMultipleSelection = YES;
@@ -96,6 +77,35 @@ const CGFloat TagsViewAutomaticDimension = -0.0001;
   _textFieldAlign = TagsViewTextFieldAlignCenter;
   _deliminater = [NSCharacterSet whitespaceCharacterSet];
   _scrollsHorizontally = NO;
+    
+    _textColor = UIColor.blueColor;
+    _textselectedColor = UIColor.whiteColor;
+    
+    _borderColor = _textColor;
+    _backgroundColor = _textselectedColor;
+    _backgroundselectedColor = _textColor;
+    
+    _cornerRadius = DEFAULT_BUTTON_CORNER_RADIUS;
+    _borderWidth = DEFAULT_BUTTON_BORDER_WIDTH;
+    
+    self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.scrollView.backgroundColor = nil;
+    [self addSubview:self.scrollView];
+    //
+    self.inputTextField = [__InputTextField new];
+    self.inputTextField.tagsView = self;
+    self.inputTextField.textColor = self.textColor;
+    self.inputTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    [self.inputTextField addTarget:self action:@selector(inputTextFieldChanged) forControlEvents:UIControlEventEditingChanged];
+    [self.inputTextField addTarget:self action:@selector(inputTextFieldEditingDidBegin) forControlEvents:UIControlEventEditingDidBegin];
+    [self.inputTextField addTarget:self action:@selector(inputTextFieldEditingDidEnd) forControlEvents:UIControlEventEditingDidEnd];
+    [self.scrollView addSubview:self.inputTextField];
+    //
+    self.becomeFirstResponderButton = [[UIButton alloc] initWithFrame:self.bounds];
+    self.becomeFirstResponderButton.backgroundColor = nil;
+    [self.becomeFirstResponderButton addTarget:self.inputTextField action:@selector(becomeFirstResponder) forControlEvents:UIControlEventTouchUpInside];
+    [self.scrollView addSubview:self.becomeFirstResponderButton];
 }
 
 #pragma mark Layout
@@ -308,20 +318,46 @@ const CGFloat TagsViewAutomaticDimension = -0.0001;
   }
 }
 
-- (void)setTintColor:(UIColor *)tintColor {
-  if (super.tintColor == tintColor) {
-    return;
-  }
-  super.tintColor = tintColor;
-  self.inputTextField.tintColor = tintColor;
-  for (UIButton *button in self.mutableTagButtons) {
-    if (button.tag == DEFAULT_BUTTON_TAG) {
-      button.tintColor = tintColor;
-      button.layer.borderColor = tintColor.CGColor;
-      button.backgroundColor = button.selected ? tintColor : nil;
-      [button setTitleColor:tintColor forState:UIControlStateNormal];
+- (void)setTextColor:(UIColor *)textColor {
+    if (_textColor != textColor) {
+        _textColor = textColor;
+      [self setNeedsLayout];
     }
-  }
+}
+
+- (void)setTextselectedColor:(UIColor *)textselectedColor {
+    if (_textselectedColor != textselectedColor) {
+        _textselectedColor = textselectedColor;
+      [self setNeedsLayout];
+    }
+}
+
+- (void)setBorderColor:(UIColor *)borderColor {
+    if (_borderColor != borderColor) {
+        _borderColor = borderColor;
+      [self setNeedsLayout];
+    }
+}
+
+- (void)setBorderWidth:(CGFloat)borderWidth {
+    if (_borderWidth != borderWidth) {
+        _borderWidth = borderWidth;
+      [self setNeedsLayout];
+    }
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    if (_backgroundColor != backgroundColor) {
+        _backgroundColor = backgroundColor;
+      [self setNeedsLayout];
+    }
+}
+
+- (void)setBackgroundselectedColor:(UIColor *)backgroundselectedColor {
+    if (_backgroundselectedColor != backgroundselectedColor) {
+        _backgroundselectedColor = backgroundselectedColor;
+      [self setNeedsLayout];
+    }
 }
 
 #pragma mark Public
@@ -363,15 +399,15 @@ const CGFloat TagsViewAutomaticDimension = -0.0001;
       tagButton = [self.delegate tagsView:self buttonForTagAtIndex:index];
     } else {
       tagButton = [UIButton new];
-      tagButton.layer.cornerRadius = DEFAULT_BUTTON_CORNER_RADIUS;
-      tagButton.layer.borderWidth = DEFAULT_BUTTON_BORDER_WIDTH;
-      tagButton.layer.borderColor = self.tintColor.CGColor;
+      tagButton.layer.cornerRadius = self.cornerRadius;
+      tagButton.layer.borderWidth = self.borderWidth;
+      tagButton.layer.borderColor = self.borderColor.CGColor;
       tagButton.titleLabel.font = self.font;
-      tagButton.tintColor = self.tintColor;
       tagButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
       [tagButton setTitle:tag forState:UIControlStateNormal];
-      [tagButton setTitleColor:self.tintColor forState:UIControlStateNormal];
-      [tagButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+      [tagButton setTitleColor:self.textColor forState:UIControlStateNormal];
+      [tagButton setTitleColor:self.textselectedColor forState:UIControlStateSelected];
+      [tagButton setBackgroundColor:self.backgroundColor];
       tagButton.contentEdgeInsets = UIEdgeInsetsMake(DEFAULT_BUTTON_VERTICAL_PADDING, DEFAULT_BUTTON_HORIZONTAL_PADDING, DEFAULT_BUTTON_VERTICAL_PADDING, DEFAULT_BUTTON_HORIZONTAL_PADDING);
       tagButton.tag = DEFAULT_BUTTON_TAG;
     }
@@ -382,6 +418,34 @@ const CGFloat TagsViewAutomaticDimension = -0.0001;
     [self.scrollView addSubview:tagButton];
     [self setNeedsLayout];
   }
+}
+
+- (void)addCustomizeTag:(NSAttributedString *)tag {
+    [self insertCustomizeTag:tag atIndex:self.mutableTags.count];
+}
+
+- (void)insertCustomizeTag:(NSAttributedString *)tag atIndex:(NSInteger)index {
+    if (index >= 0 && index <= self.mutableTags.count) {
+      [self.mutableTags insertObject:tag atIndex:index];
+      UIButton *tagButton;
+      if ([self.delegate respondsToSelector:@selector(tagsView:buttonForTagAtIndex:)]) {
+        tagButton = [self.delegate tagsView:self buttonForTagAtIndex:index];
+      } else {
+        tagButton = [UIButton new];
+        tagButton.layer.cornerRadius = self.cornerRadius;
+        tagButton.layer.borderWidth = self.borderWidth;
+        tagButton.layer.borderColor = self.borderColor.CGColor;
+        [tagButton setAttributedTitle:tag forState:UIControlStateNormal];
+        tagButton.contentEdgeInsets = UIEdgeInsetsMake(DEFAULT_BUTTON_VERTICAL_PADDING, DEFAULT_BUTTON_HORIZONTAL_PADDING, DEFAULT_BUTTON_VERTICAL_PADDING, DEFAULT_BUTTON_HORIZONTAL_PADDING);
+        tagButton.tag = DEFAULT_BUTTON_TAG;
+      }
+      [tagButton sizeToFit];
+      tagButton.exclusiveTouch = YES;
+      [tagButton addTarget:self action:@selector(tagButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+      [self.mutableTagButtons insertObject:tagButton atIndex:index];
+      [self.scrollView addSubview:tagButton];
+      [self setNeedsLayout];
+    }
 }
 
 - (void)moveTagAtIndex:(NSInteger)index toIndex:(NSInteger)newIndex {
@@ -422,7 +486,7 @@ const CGFloat TagsViewAutomaticDimension = -0.0001;
     }
     self.mutableTagButtons[index].selected = YES;
     if (self.mutableTagButtons[index].tag == DEFAULT_BUTTON_TAG) {
-      self.mutableTagButtons[index].backgroundColor = self.tintColor;
+      self.mutableTagButtons[index].backgroundColor = self.backgroundselectedColor;
     }
   }
 }
@@ -431,7 +495,7 @@ const CGFloat TagsViewAutomaticDimension = -0.0001;
   if (index >= 0 && index < self.mutableTagButtons.count) {
     self.mutableTagButtons[index].selected = NO;
     if (self.mutableTagButtons[index].tag == DEFAULT_BUTTON_TAG) {
-      self.mutableTagButtons[index].backgroundColor = nil;
+      self.mutableTagButtons[index].backgroundColor = self.backgroundColor;
     }
   }
 }

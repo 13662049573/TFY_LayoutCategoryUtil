@@ -101,10 +101,14 @@
         _tagsView.selectable = YES;
         _tagsView.allowsMultipleSelection = YES;
         _tagsView.scrollsHorizontally = NO;
-        _tagsView.interitemSpacing = 10;
-        _tagsView.lineSpacing = 10;
-        _tagsView.tagButtonHeight = 40;
-        _tagsView.tintColor = UIColor.redColor;
+//        _tagsView.backgroundselectedColor = UIColor.blackColor;
+//        _tagsView.interitemSpacing = 10;
+//        _tagsView.lineSpacing = 10;
+//        _tagsView.tagButtonHeight = 40;
+//        _tagsView.textColor = UIColor.redColor;
+//        _tagsView.borderColor = UIColor.greenColor;
+//        _tagsView.borderWidth = 1.5;
+//        _tagsView.cornerRadius = 8;
     }
     return _tagsView;
 }
