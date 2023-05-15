@@ -1,5 +1,5 @@
 //
-//  TFY_TagsView.h
+//  TFY_TagsSlideView.h
 //  TFY_LayoutCategoryUtil
 //
 //  Created by 田风有 on 2023/5/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class TFY_TagsView;
+@class TFY_TagsSlideView;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,22 +23,23 @@ typedef NS_ENUM(NSInteger, TagsViewTextFieldAlign) { // Align是相对于最后�
 @protocol TagsViewDelegate <NSObject>
 @optional
 /// 使用默认标签按钮，如果没有实现
-- (UIButton *)tagsView:(TFY_TagsView *)tagsView buttonForTagAtIndex:(NSInteger)index;
+- (UIButton *)tagsView:(TFY_TagsSlideView *)tagsView buttonForTagAtIndex:(NSInteger)index;
 /// 按空格键时调用。返回NO以忽略标记
-- (BOOL)tagsView:(TFY_TagsView *)tagsView shouldAddTagWithText:(NSString *)text;
+- (BOOL)tagsView:(TFY_TagsSlideView *)tagsView shouldAddTagWithText:(NSString *)text;
 /// 按下标签时调用。返回NO以禁止选择标签
-- (BOOL)tagsView:(TFY_TagsView *)tagsView shouldSelectTagAtIndex:(NSInteger)index;
+- (BOOL)tagsView:(TFY_TagsSlideView *)tagsView shouldSelectTagAtIndex:(NSInteger)index;
 /// 按下选定标签时调用。返回NO以禁止取消选择标签
-- (BOOL)tagsView:(TFY_TagsView *)tagsView shouldDeselectTagAtIndex:(NSInteger)index;
+- (BOOL)tagsView:(TFY_TagsSlideView *)tagsView shouldDeselectTagAtIndex:(NSInteger)index;
 /// 当按下'退格'键时调用。返回NO以禁止移除标签
-- (BOOL)tagsView:(TFY_TagsView *)tagsView shouldRemoveTagAtIndex:(NSInteger)index;
+- (BOOL)tagsView:(TFY_TagsSlideView *)tagsView shouldRemoveTagAtIndex:(NSInteger)index;
 /// 当用户添加或删除标记时调用
-- (void)tagsViewDidChange:(TFY_TagsView *)tagsView;
-- (void)tagsViewContentSizeDidChange:(TFY_TagsView *)tagsView;
+- (void)tagsViewDidChange:(TFY_TagsSlideView *)tagsView;
+- (void)tagsViewContentSizeDidChange:(TFY_TagsSlideView *)tagsView;
 
 @end
 
-@interface TFY_TagsView : UIView
+@interface TFY_TagsSlideView : UIView
+
 /// 没有使用scrollView委托
 @property (nonatomic, strong, readonly) UIScrollView *scrollView;
 /// 没有使用文本域委托
@@ -68,8 +69,8 @@ typedef NS_ENUM(NSInteger, TagsViewTextFieldAlign) { // Align是相对于最后�
 @property(nonatomic) IBInspectable UIColor *borderColor; // 默认蓝色
 @property(nonatomic) IBInspectable UIColor *backgroundColor; // 默认白色
 @property(nonatomic) IBInspectable UIColor *backgroundselectedColor; // 选中蓝色
-@property (nonatomic) IBInspectable CGFloat cornerRadius; // 默认 6 
-@property (nonatomic) IBInspectable CGFloat borderWidth; // 默认 1 
+@property (nonatomic) IBInspectable CGFloat cornerRadius; // 默认 6
+@property (nonatomic) IBInspectable CGFloat borderWidth; // 默认 1
 
 @property (nonatomic, strong) NSCharacterSet* deliminater; // 默认是[ncharacter set whitespacecharcharacter set]
 

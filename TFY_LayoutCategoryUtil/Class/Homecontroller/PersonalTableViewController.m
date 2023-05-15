@@ -12,7 +12,7 @@
 @interface PersonalTableViewController ()<SKStoreProductViewControllerDelegate>
 @property(nonatomic , strong)UITextView *textView;
 @property(nonatomic , strong)UIButton *buttom;
-@property(nonatomic , strong)TFY_TagsView *tagsView;
+@property(nonatomic , strong)TFY_TagsSlideView *tagsView;
 @end
 
 @implementation PersonalTableViewController
@@ -94,9 +94,9 @@
     return _buttom;
 }
 
-- (TFY_TagsView *)tagsView {
+- (TFY_TagsSlideView *)tagsView {
     if (!_tagsView) {
-        _tagsView = TFY_TagsView.new;
+        _tagsView = TFY_TagsSlideView.new;
         _tagsView.editable = NO;
         _tagsView.selectable = YES;
         _tagsView.allowsMultipleSelection = YES;

@@ -1,12 +1,12 @@
 //
-//  TFY_TagsView.m
+//  TFY_TagsSlideView.m
 //  TFY_LayoutCategoryUtil
 //
 //  Created by 田风有 on 2023/5/15.
 //  Copyright © 2023 田风有. All rights reserved.
 //
 
-#import "TFY_TagsView.h"
+#import "TFY_TagsSlideView.h"
 
 #define DEFAULT_BUTTON_TAG -9999
 #define DEFAULT_BUTTON_HORIZONTAL_PADDING 6
@@ -17,10 +17,10 @@
 const CGFloat TagsViewAutomaticDimension = -0.0001;
 
 @interface __InputTextField: UITextField
-@property (nonatomic, weak) TFY_TagsView *tagsView;
+@property (nonatomic, weak) TFY_TagsSlideView *tagsView;
 @end
 
-@interface TFY_TagsView ()
+@interface TFY_TagsSlideView ()
 @property (nonatomic, strong) NSMutableArray *mutableTags;
 @property (nonatomic, strong) NSMutableArray<UIButton *> *mutableTagButtons;
 @property (nonatomic, strong, readwrite) UIScrollView *scrollView;
@@ -38,7 +38,7 @@ const CGFloat TagsViewAutomaticDimension = -0.0001;
 }
 @end
 
-@implementation TFY_TagsView
+@implementation TFY_TagsSlideView
 
 #pragma mark Lifecycle
 
