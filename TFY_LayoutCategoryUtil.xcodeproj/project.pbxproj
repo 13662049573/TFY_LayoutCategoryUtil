@@ -62,6 +62,7 @@
 		3695B8072904C4A900D8FD7D /* TFY_Label.m in Sources */ = {isa = PBXBuildFile; fileRef = 3695B8062904C4A900D8FD7D /* TFY_Label.m */; };
 		3695B80A2904D0A500D8FD7D /* TFY_WKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3695B8092904D0A500D8FD7D /* TFY_WKWebView.m */; };
 		36978E7027F6F24C00557EC0 /* TFY_TextblanksField.m in Sources */ = {isa = PBXBuildFile; fileRef = 36978E6F27F6F24C00557EC0 /* TFY_TextblanksField.m */; };
+		36A9AA682A12107C004925C4 /* TFY_TagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A9AA672A12107C004925C4 /* TFY_TagsView.m */; };
 		36BA238724EE488000CE8275 /* UITableViewCell+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA238424EE487F00CE8275 /* UITableViewCell+TFY_Chain.m */; };
 		36BA238824EE488000CE8275 /* UITableView+TFY_LayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA238524EE488000CE8275 /* UITableView+TFY_LayoutCell.m */; };
 		36C3349824ED24EE00DA6FB2 /* WKWebView+TFY_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C3349724ED24ED00DA6FB2 /* WKWebView+TFY_Extension.m */; };
@@ -312,6 +313,8 @@
 		3695B8092904D0A500D8FD7D /* TFY_WKWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_WKWebView.m; sourceTree = "<group>"; };
 		36978E6E27F6F24C00557EC0 /* TFY_TextblanksField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_TextblanksField.h; sourceTree = "<group>"; };
 		36978E6F27F6F24C00557EC0 /* TFY_TextblanksField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_TextblanksField.m; sourceTree = "<group>"; };
+		36A9AA662A12107C004925C4 /* TFY_TagsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_TagsView.h; sourceTree = "<group>"; };
+		36A9AA672A12107C004925C4 /* TFY_TagsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_TagsView.m; sourceTree = "<group>"; };
 		36BA238324EE487F00CE8275 /* UITableViewCell+TFY_Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+TFY_Chain.h"; sourceTree = "<group>"; };
 		36BA238424EE487F00CE8275 /* UITableViewCell+TFY_Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+TFY_Chain.m"; sourceTree = "<group>"; };
 		36BA238524EE488000CE8275 /* UITableView+TFY_LayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+TFY_LayoutCell.m"; sourceTree = "<group>"; };
@@ -682,6 +685,8 @@
 				36FFD52529CAD753001C76C0 /* TFY_AudioPlayer.m */,
 				361BB3E52A05DEC2002E39AE /* TFY_AppVersion.h */,
 				361BB3E62A05DEC2002E39AE /* TFY_AppVersion.m */,
+				36A9AA662A12107C004925C4 /* TFY_TagsView.h */,
+				36A9AA672A12107C004925C4 /* TFY_TagsView.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1464,6 +1469,7 @@
 				36978E7027F6F24C00557EC0 /* TFY_TextblanksField.m in Sources */,
 				36867DBA24EBA26400A761BC /* UIScreen+TFY_Tools.m in Sources */,
 				565584C32431DCE600020D3C /* GuideViewController.m in Sources */,
+				36A9AA682A12107C004925C4 /* TFY_TagsView.m in Sources */,
 				3654164224FF360100CC0024 /* NavigationController.m in Sources */,
 				36845E2A25EE2D1100089611 /* UITableView+CornerRadius.m in Sources */,
 				565584B62431D4F600020D3C /* TFY_TextLayerChainModel.m in Sources */,

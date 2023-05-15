@@ -18,6 +18,7 @@
 #import "TFY_Reflection.h"
 #import "TFY_AudioPlayer.h"
 #import "TFY_AppVersion.h"
+#import "TFY_TagsView.h"
 
 #import "TFY_GCDTimer.h"
 #import "TFY_GCDSemaphore.h"
