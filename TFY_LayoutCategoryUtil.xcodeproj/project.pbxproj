@@ -64,7 +64,13 @@
 		36978E7027F6F24C00557EC0 /* TFY_TextblanksField.m in Sources */ = {isa = PBXBuildFile; fileRef = 36978E6F27F6F24C00557EC0 /* TFY_TextblanksField.m */; };
 		36BA238724EE488000CE8275 /* UITableViewCell+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA238424EE487F00CE8275 /* UITableViewCell+TFY_Chain.m */; };
 		36BA238824EE488000CE8275 /* UITableView+TFY_LayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA238524EE488000CE8275 /* UITableView+TFY_LayoutCell.m */; };
-		36BE1D5A2A122D610028C5B8 /* TFY_TagsSlideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BE1D592A122D610028C5B8 /* TFY_TagsSlideView.m */; };
+		36BE1D5E2A130DC50028C5B8 /* TFY_TextTagStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BE1D5D2A130DC50028C5B8 /* TFY_TextTagStyle.m */; };
+		36BE1D612A130FFA0028C5B8 /* TFY_TextTagContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BE1D602A130FFA0028C5B8 /* TFY_TextTagContent.m */; };
+		36BE1D642A13105B0028C5B8 /* TFY_TextTagStringContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BE1D632A13105B0028C5B8 /* TFY_TextTagStringContent.m */; };
+		36BE1D672A1310B80028C5B8 /* TFY_TextTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BE1D662A1310B80028C5B8 /* TFY_TextTag.m */; };
+		36BE1D6A2A1312A90028C5B8 /* TFY_TextTagAttributedStringContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BE1D692A1312A90028C5B8 /* TFY_TextTagAttributedStringContent.m */; };
+		36BE1D6D2A1313060028C5B8 /* TFY_TagCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BE1D6C2A1313060028C5B8 /* TFY_TagCollectionView.m */; };
+		36BE1D702A1314A10028C5B8 /* TFY_TextTagCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BE1D6F2A1314A10028C5B8 /* TFY_TextTagCollectionView.m */; };
 		36C3349824ED24EE00DA6FB2 /* WKWebView+TFY_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C3349724ED24ED00DA6FB2 /* WKWebView+TFY_Extension.m */; };
 		36C334A024ED26CE00DA6FB2 /* NSDate+TFY_Date.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C3349D24ED26CE00DA6FB2 /* NSDate+TFY_Date.m */; };
 		36C334A124ED26CE00DA6FB2 /* NSData+TFY_Data.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C3349F24ED26CE00DA6FB2 /* NSData+TFY_Data.m */; };
@@ -317,8 +323,21 @@
 		36BA238424EE487F00CE8275 /* UITableViewCell+TFY_Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+TFY_Chain.m"; sourceTree = "<group>"; };
 		36BA238524EE488000CE8275 /* UITableView+TFY_LayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+TFY_LayoutCell.m"; sourceTree = "<group>"; };
 		36BA238624EE488000CE8275 /* UITableView+TFY_LayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+TFY_LayoutCell.h"; sourceTree = "<group>"; };
-		36BE1D582A122D610028C5B8 /* TFY_TagsSlideView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_TagsSlideView.h; sourceTree = "<group>"; };
-		36BE1D592A122D610028C5B8 /* TFY_TagsSlideView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_TagsSlideView.m; sourceTree = "<group>"; };
+		36BE1D5C2A130DC50028C5B8 /* TFY_TextTagStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_TextTagStyle.h; sourceTree = "<group>"; };
+		36BE1D5D2A130DC50028C5B8 /* TFY_TextTagStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_TextTagStyle.m; sourceTree = "<group>"; };
+		36BE1D5F2A130FFA0028C5B8 /* TFY_TextTagContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_TextTagContent.h; sourceTree = "<group>"; };
+		36BE1D602A130FFA0028C5B8 /* TFY_TextTagContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_TextTagContent.m; sourceTree = "<group>"; };
+		36BE1D622A13105B0028C5B8 /* TFY_TextTagStringContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_TextTagStringContent.h; sourceTree = "<group>"; };
+		36BE1D632A13105B0028C5B8 /* TFY_TextTagStringContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_TextTagStringContent.m; sourceTree = "<group>"; };
+		36BE1D652A1310B80028C5B8 /* TFY_TextTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_TextTag.h; sourceTree = "<group>"; };
+		36BE1D662A1310B80028C5B8 /* TFY_TextTag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_TextTag.m; sourceTree = "<group>"; };
+		36BE1D682A1312A90028C5B8 /* TFY_TextTagAttributedStringContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_TextTagAttributedStringContent.h; sourceTree = "<group>"; };
+		36BE1D692A1312A90028C5B8 /* TFY_TextTagAttributedStringContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_TextTagAttributedStringContent.m; sourceTree = "<group>"; };
+		36BE1D6B2A1313060028C5B8 /* TFY_TagCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_TagCollectionView.h; sourceTree = "<group>"; };
+		36BE1D6C2A1313060028C5B8 /* TFY_TagCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_TagCollectionView.m; sourceTree = "<group>"; };
+		36BE1D6E2A1314A10028C5B8 /* TFY_TextTagCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_TextTagCollectionView.h; sourceTree = "<group>"; };
+		36BE1D6F2A1314A10028C5B8 /* TFY_TextTagCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_TextTagCollectionView.m; sourceTree = "<group>"; };
+		36BE1D712A1317230028C5B8 /* TFY_TagHerder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_TagHerder.h; sourceTree = "<group>"; };
 		36C3349624ED24ED00DA6FB2 /* WKWebView+TFY_Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+TFY_Extension.h"; sourceTree = "<group>"; };
 		36C3349724ED24ED00DA6FB2 /* WKWebView+TFY_Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+TFY_Extension.m"; sourceTree = "<group>"; };
 		36C3349C24ED26CD00DA6FB2 /* NSDate+TFY_Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TFY_Date.h"; sourceTree = "<group>"; };
@@ -685,8 +704,6 @@
 				36FFD52529CAD753001C76C0 /* TFY_AudioPlayer.m */,
 				361BB3E52A05DEC2002E39AE /* TFY_AppVersion.h */,
 				361BB3E62A05DEC2002E39AE /* TFY_AppVersion.m */,
-				36BE1D582A122D610028C5B8 /* TFY_TagsSlideView.h */,
-				36BE1D592A122D610028C5B8 /* TFY_TagsSlideView.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -726,6 +743,28 @@
 				3695B8062904C4A900D8FD7D /* TFY_Label.m */,
 			);
 			path = TFY_LabelKit;
+			sourceTree = "<group>";
+		};
+		36BE1D5B2A130D880028C5B8 /* TFY_TagCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				36BE1D5C2A130DC50028C5B8 /* TFY_TextTagStyle.h */,
+				36BE1D5D2A130DC50028C5B8 /* TFY_TextTagStyle.m */,
+				36BE1D5F2A130FFA0028C5B8 /* TFY_TextTagContent.h */,
+				36BE1D602A130FFA0028C5B8 /* TFY_TextTagContent.m */,
+				36BE1D622A13105B0028C5B8 /* TFY_TextTagStringContent.h */,
+				36BE1D632A13105B0028C5B8 /* TFY_TextTagStringContent.m */,
+				36BE1D652A1310B80028C5B8 /* TFY_TextTag.h */,
+				36BE1D662A1310B80028C5B8 /* TFY_TextTag.m */,
+				36BE1D682A1312A90028C5B8 /* TFY_TextTagAttributedStringContent.h */,
+				36BE1D692A1312A90028C5B8 /* TFY_TextTagAttributedStringContent.m */,
+				36BE1D6B2A1313060028C5B8 /* TFY_TagCollectionView.h */,
+				36BE1D6C2A1313060028C5B8 /* TFY_TagCollectionView.m */,
+				36BE1D6E2A1314A10028C5B8 /* TFY_TextTagCollectionView.h */,
+				36BE1D6F2A1314A10028C5B8 /* TFY_TextTagCollectionView.m */,
+				36BE1D712A1317230028C5B8 /* TFY_TagHerder.h */,
+			);
+			path = TFY_TagCollectionView;
 			sourceTree = "<group>";
 		};
 		36D8D88C27F67BF600C6B400 /* TFY_TextKit */ = {
@@ -916,6 +955,7 @@
 				565583B62431998600020D3C /* TFY_CategoriesHeader.h */,
 				565583F12431B89B00020D3C /* TFY_Define.h */,
 				36836BC425D108F0004DDD38 /* TFY_Inlinefunction.h */,
+				36BE1D5B2A130D880028C5B8 /* TFY_TagCollectionView */,
 				3695B7EA2904B92000D8FD7D /* TFY_LabelKit */,
 				3608F8AA28F2463D00E7D023 /* TFY_Rotating */,
 				36FEC82628501D4400B44896 /* TFY_IndexView */,
@@ -1441,10 +1481,12 @@
 				36867DBF24EBA2F600A761BC /* UITextField+TFY_Tools.m in Sources */,
 				3608F8AF28F2465C00E7D023 /* TFYRotatingWizzle.m in Sources */,
 				565584762431CD0E00020D3C /* TFY_PickerViewChainModel.m in Sources */,
+				36BE1D6D2A1313060028C5B8 /* TFY_TagCollectionView.m in Sources */,
 				565584302431C68C00020D3C /* TFY_BaseControlChainModel.m in Sources */,
 				36FEC82928501D7500B44896 /* TFY_IndexViewConfiguration.m in Sources */,
 				565584BF2431D5CB00020D3C /* CALayer+TFY_Chain.m in Sources */,
 				565584912431D07700020D3C /* TFY_TextViewChainModel.m in Sources */,
+				36BE1D642A13105B0028C5B8 /* TFY_TextTagStringContent.m in Sources */,
 				36885737298600FC0023A340 /* TFY_GCDGroup.m in Sources */,
 				36867DCB24EBE25400A761BC /* UIWindow+TFY_Tools.m in Sources */,
 				5655846A2431CBAE00020D3C /* TFY_ControlChainModel.m in Sources */,
@@ -1458,14 +1500,16 @@
 				36D8D8A527F685E800C6B400 /* TFY_AsyncLayer.m in Sources */,
 				565583ED2431B71300020D3C /* UIGestureRecognizer+TFY_Tools.m in Sources */,
 				364AE2662A0CCE27005E3051 /* NSNumber+Arithmetic.m in Sources */,
+				36BE1D6A2A1312A90028C5B8 /* TFY_TextTagAttributedStringContent.m in Sources */,
 				565584852431CEFA00020D3C /* TFY_SwitchChainModel.m in Sources */,
-				36BE1D5A2A122D610028C5B8 /* TFY_TagsSlideView.m in Sources */,
 				565584732431CCB300020D3C /* TFY_LabelChainModel.m in Sources */,
 				36CBAD1424EFCE5D00FD1D8F /* UIAlertController+TFY_Chain.m in Sources */,
+				36BE1D672A1310B80028C5B8 /* TFY_TextTag.m in Sources */,
 				36FEC82F2850203400B44896 /* UITableView+IndexView.m in Sources */,
 				3695B7F32904BC8500D8FD7D /* TFY_LabelLayoutManager.m in Sources */,
 				36C334A724ED284500DA6FB2 /* NSString+TFY_String.m in Sources */,
 				3652767E296F96950065C087 /* NSString+Extend.m in Sources */,
+				36BE1D702A1314A10028C5B8 /* TFY_TextTagCollectionView.m in Sources */,
 				3654163C24FF336D00CC0024 /* CommonViewController.m in Sources */,
 				36978E7027F6F24C00557EC0 /* TFY_TextblanksField.m in Sources */,
 				36867DBA24EBA26400A761BC /* UIScreen+TFY_Tools.m in Sources */,
@@ -1479,6 +1523,7 @@
 				365D9EF529E68C2500EF8A1B /* UIWindow+Snapshot.m in Sources */,
 				565584A72431D3A600020D3C /* TFY_GradientLayerChainModel.m in Sources */,
 				36885745298A06830023A340 /* TFY_Reflection.m in Sources */,
+				36BE1D612A130FFA0028C5B8 /* TFY_TextTagContent.m in Sources */,
 				3688573A298601990023A340 /* TFY_GCDQueue.m in Sources */,
 				36D3DC0E27F6C9E900A79848 /* TextViewController.m in Sources */,
 				5655840C2431BB7600020D3C /* NSTimer+TFY_Tools.m in Sources */,
@@ -1531,6 +1576,7 @@
 				36C334A124ED26CE00DA6FB2 /* NSData+TFY_Data.m in Sources */,
 				36DDFB9F25FC64A2004F1740 /* EmptyTableViewController.m in Sources */,
 				36E7646127ABA5D100254089 /* UIView+Toast.m in Sources */,
+				36BE1D5E2A130DC50028C5B8 /* TFY_TextTagStyle.m in Sources */,
 				565584A02431D28200020D3C /* TFY_BaseLayerChainModel.m in Sources */,
 				565584822431CE5300020D3C /* TFY_SliderViewChainModel.m in Sources */,
 				36D8D89627F67F6200C6B400 /* TFY_TextAttribute.m in Sources */,

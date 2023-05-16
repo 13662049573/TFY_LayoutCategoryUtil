@@ -9,10 +9,10 @@
 #import "PersonalTableViewController.h"
 #import <StoreKit/StoreKit.h>
 
-@interface PersonalTableViewController ()<SKStoreProductViewControllerDelegate>
+@interface PersonalTableViewController ()<SKStoreProductViewControllerDelegate,TextTagCollectionViewDelegate>
 @property(nonatomic , strong)UITextView *textView;
 @property(nonatomic , strong)UIButton *buttom;
-@property(nonatomic , strong)TFY_TagsSlideView *tagsView;
+@property (strong, nonatomic)TFY_TextTagCollectionView *tagsView;
 @end
 
 @implementation PersonalTableViewController
@@ -50,21 +50,102 @@
         make.left.equalTo(self.view).offset(20);
         make.right.equalTo(self.view).offset(-20);
         make.top.equalTo(self.buttom.mas_bottom).offset(30);
-        make.height.mas_equalTo(200);
+        make.bottom.equalTo(self.view).offset(-TFY_kBottomBarHeight());
     });
+
+    NSArray *tags = @[@"AutoLayout", @"dynamically", @"calculates", @"the", @"size", @"and", @"position",
+                      @"of", @"all", @"the", @"views", @"in", @"your", @"view", @"hierarchy", @"based",
+                      @"on", @"constraints", @"placed", @"on", @"those", @"views",
+                      @"AutoLayout", @"dynamically", @"calculates", @"the", @"size", @"and", @"position",
+                      @"of", @"all", @"the", @"views", @"in", @"your", @"view", @"hierarchy", @"based",
+                      @"on", @"constraints", @"placed", @"on", @"those", @"views",
+                      @"AutoLayout", @"dynamically", @"calculates", @"the", @"size", @"and", @"position",
+                      @"of", @"all", @"the", @"views", @"in", @"your", @"view", @"hierarchy", @"based",
+                      @"on", @"constraints", @"placed", @"on", @"those", @"views",
+                      @"AutoLayout", @"dynamically", @"calculates", @"the", @"size", @"and", @"position",
+                      @"of", @"all", @"the", @"views", @"in", @"your", @"view", @"hierarchy", @"based",
+                      @"on", @"constraints", @"placed", @"on", @"those", @"views",
+                      @"AutoLayout", @"dynamically", @"calculates", @"the", @"size", @"and", @"position",
+                      @"of", @"all", @"the", @"views", @"in", @"your", @"view", @"hierarchy", @"based",
+                      @"on", @"constraints", @"placed", @"on", @"those", @"views",
+                      @"AutoLayout", @"dynamically", @"calculates", @"the", @"size", @"and", @"position",
+                      @"of", @"all", @"the", @"views", @"in", @"your", @"view", @"hierarchy", @"based",
+                      @"on", @"constraints", @"placed", @"on", @"those", @"views",
+                      @"AutoLayout", @"dynamically", @"calculates", @"the", @"size", @"and", @"position",
+                      @"of", @"all", @"the", @"views", @"in", @"your", @"view", @"hierarchy", @"based",
+                      @"on", @"constraints", @"placed", @"on", @"those", @"views",
+                      @"AutoLayout", @"dynamically", @"calculates", @"the", @"size", @"and", @"position",
+                      @"of", @"all", @"the", @"views", @"in", @"your", @"view", @"hierarchy", @"based",
+                      @"on", @"constraints", @"placed", @"on", @"those", @"views",
+                      @"AutoLayout", @"dynamically", @"calculates", @"the", @"size", @"and", @"position",
+                      @"of", @"all", @"the", @"views", @"in", @"your", @"view", @"hierarchy", @"based",
+                      @"on", @"constraints", @"placed", @"on", @"those", @"views",
+                      @"AutoLayout", @"dynamically", @"calculates", @"the", @"size", @"and", @"position",
+                      @"of", @"all", @"the", @"views", @"in", @"your", @"view", @"hierarchy", @"based",
+                      @"on", @"constraints", @"placed", @"on", @"those", @"views"];
     
-    [self generateTagsTapped];
+    
+    NSUInteger location = 0;
+    NSUInteger length = 8;
+    
+    [self.class addBatchTagsWithStrings:tags
+                                  range:NSMakeRange(location, length)
+                              toTagView:_tagsView
+                        backgroundColor:[UIColor colorWithRed:0.24 green:0.72 blue:0.94 alpha:1.00]
+                             attachment:@{@"key": @"1"}];
+    
+    location += length;
+    [self.class addBatchTagsWithStrings:tags
+                                  range:NSMakeRange(location, length)
+                              toTagView:_tagsView
+                        backgroundColor:[UIColor colorWithRed:0.30 green:0.72 blue:0.53 alpha:1.00]
+                             attachment:@{@"key": @"2"}];
+    
+    location += length;
+    [self.class addBatchTagsWithStrings:tags
+                                  range:NSMakeRange(location, length)
+                              toTagView:_tagsView
+                        backgroundColor:[UIColor colorWithRed:0.97 green:0.64 blue:0.27 alpha:1.00]
+                             attachment:@{@"key": @"3"}];
+    
+    location += length;
+    [self.class addBatchTagsWithStrings:tags
+                                  range:NSMakeRange(location, length)
+                              toTagView:_tagsView
+                        backgroundColor:[UIColor colorWithRed:0.73 green:0.91 blue:0.41 alpha:1.00]
+                             attachment:@{@"key": @"4"}];
+    
+    location += length;
+    [self.class addBatchTagsWithStrings:tags
+                                  range:NSMakeRange(location, length)
+                              toTagView:_tagsView
+                        backgroundColor:[UIColor colorWithRed:0.35 green:0.35 blue:0.36 alpha:1.00]
+                             attachment:@{@"key": @"5"}];
+    
+    location += length;
+    [self.class addBatchTagsWithStrings:tags
+                                  range:NSMakeRange(location, length)
+                              toTagView:_tagsView
+                        backgroundColor:[UIColor colorWithRed:1.00 green:0.41 blue:0.42 alpha:1.00]
+                             attachment:@{@"key": @"6"}];
+    
+    location += length;
+    [self.class addBatchTagsWithStrings:tags
+                                  range:NSMakeRange(location, length)
+                              toTagView:_tagsView
+                        backgroundColor:[UIColor colorWithRed:0.50 green:0.86 blue:0.90 alpha:1.00]
+                             attachment:@{@"key": @"7"}];
+    
+    location += length;
+    [self.class addBatchTagsWithStrings:tags
+                                  range:NSMakeRange(location, length)
+                              toTagView:_tagsView
+                        backgroundColor:[UIColor colorWithRed:0.33 green:0.23 blue:0.34 alpha:1.00]
+                             attachment:@{@"key": @"8"}];
+    
+    [_tagsView reload];
 }
 
-- (void)generateTagsTapped {
-  NSString *text = @"神的恩赐，神的恩赐，神的恩赐。埃尼亚语comodo ligula eget dolor。Aenean马萨。与社会有关的生育问题和生育问题，都是必须解决的问题。Donec quam felis, ultresies nec, pellentesque eu, pretium quis, sem。无结果者皆为敌人。刚足，小穗状花序，锯齿状花序，卵形花序，圆弧。In enim just to, rhoncus ut, imperdiet a, venenatis vitae, just to。Nullam dictum felis eu pede mollis pretium。整数tincidunt。";
-  [self.tagsView removeAllTags];
-  for (NSString *word in [text componentsSeparatedByString:@" "]) {
-    if (word.length > 0) {
-      [self.tagsView addTag:word];
-    }
-  }
-}
 
 - (UITextView *)textView {
     if (!_textView) {
@@ -94,21 +175,11 @@
     return _buttom;
 }
 
-- (TFY_TagsSlideView *)tagsView {
+- (TFY_TextTagCollectionView *)tagsView {
     if (!_tagsView) {
-        _tagsView = TFY_TagsSlideView.new;
-        _tagsView.editable = NO;
-        _tagsView.selectable = YES;
-        _tagsView.allowsMultipleSelection = YES;
-        _tagsView.scrollsHorizontally = NO;
-//        _tagsView.backgroundselectedColor = UIColor.blackColor;
-//        _tagsView.interitemSpacing = 10;
-//        _tagsView.lineSpacing = 10;
-//        _tagsView.tagButtonHeight = 40;
-//        _tagsView.textColor = UIColor.redColor;
-//        _tagsView.borderColor = UIColor.greenColor;
-//        _tagsView.borderWidth = 1.5;
-//        _tagsView.cornerRadius = 8;
+        _tagsView = TFY_TextTagCollectionView.new;
+        _tagsView.alignment = TagCollectionAlignmentFillByExpandingWidth;
+        _tagsView.delegate = self;
     }
     return _tagsView;
 }
@@ -143,5 +214,80 @@
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (void)textTagCollectionView:(TFY_TextTagCollectionView *)textTagCollectionView
+                    didTapTag:(TFY_TextTag *)tag
+                      atIndex:(NSUInteger)index {
+    NSLog(@"Did tap: %@, config extra: %@", tag.content, tag.attachment);
+}
+
++ (void)addBatchTagsWithStrings:(NSArray<NSString *> *)strings
+                          range:(NSRange)range
+                      toTagView:(TFY_TextTagCollectionView *)tagView
+                backgroundColor:(UIColor *)backgroundColor
+                     attachment:(id)attachment {
+    
+    static TFY_TextTagStyle *defaultStyle = nil;
+    static TFY_TextTagStringContent *defaultContent = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        defaultStyle = [TFY_TextTagStyle new];
+        defaultStyle.backgroundColor = [UIColor whiteColor];
+        defaultStyle.borderColor = [UIColor whiteColor];
+        defaultStyle.borderWidth = 1;
+        defaultStyle.cornerRadius = 4;
+        defaultStyle.extraSpace = CGSizeMake(8, 8);
+        defaultStyle.shadowColor = [UIColor blackColor];
+        defaultStyle.shadowOpacity = 0.3;
+        defaultStyle.shadowRadius = 2;
+        defaultStyle.shadowOffset = CGSizeMake(1, 1);
+        
+        defaultContent = [TFY_TextTagStringContent new];
+        defaultContent.textFont = [UIFont systemFontOfSize:20];
+        defaultContent.textColor = [UIColor whiteColor];
+    });
+    
+    for (NSString *text in [strings subarrayWithRange:range]) {
+        TFY_TextTag *tag = [TFY_TextTag new];
+        
+//        tag.enableAutoDetectAccessibility = YES;
+        
+        tag.isAccessibilityElement = YES;
+        tag.accessibilityLabel = text;
+        tag.accessibilityIdentifier = [NSString stringWithFormat:@"identifier: %@", text];
+        tag.accessibilityHint = [NSString stringWithFormat:@"hint: %@", text];
+        tag.accessibilityValue = [NSString stringWithFormat:@"value: %@", text];
+        
+        TFY_TextTagStyle *style = [defaultStyle copy];
+        style.backgroundColor = backgroundColor;
+        
+        TFY_TextTagStyle *selectedStyle = [style copy];
+        selectedStyle.backgroundColor = [self.class getRevertColor:style.backgroundColor];
+        selectedStyle.borderColor = [UIColor blackColor];
+        selectedStyle.cornerRadius = 8;
+        selectedStyle.shadowColor = [UIColor greenColor];
+        
+        TFY_TextTagStringContent *content = [defaultContent copy];
+        content.text = text;
+        
+        tag.style = style;
+        tag.selectedStyle = selectedStyle;
+        tag.content = content;
+        tag.attachment = attachment;
+        [tagView addTag:tag];
+    }
+    
+    [tagView updateTagAtIndex:range.location + arc4random_uniform((uint32_t)range.length) selected:YES];
+}
+
++ (UIColor *)getRevertColor:(UIColor *)color {
+    CGFloat red = 0;
+    CGFloat green = 0;
+    CGFloat blue = 0;
+    [color getRed:&red green:&green blue:&blue alpha:nil];
+    return [UIColor colorWithRed:1 - red green:1 - green blue:1 - blue alpha:1];
+}
+
 
 @end

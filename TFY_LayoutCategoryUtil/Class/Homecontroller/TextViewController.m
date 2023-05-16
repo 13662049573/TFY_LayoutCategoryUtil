@@ -9,7 +9,7 @@
 #import "TextViewController.h"
 #import "TFY_TextblanksField.h"
 #import "EmptyTableViewController.h"
-@interface TextViewController ()
+@interface TextViewController ()<TextTagCollectionViewDelegate>
 @property (nonatomic, strong) TFY_TextView *textView;
 @property(strong,nonatomic) UIImage *image;
 @property (strong, nonatomic) UIImageView *imageView;
@@ -18,6 +18,10 @@
 @property(strong,nonatomic) UIImageView *view1;
 @property(strong,nonatomic) UIImageView *view2;
 @property(strong,nonatomic) UIImageView *view3;
+
+@property (strong, nonatomic)  TFY_TextTagCollectionView *textTagCollectionView1;
+@property (strong, nonatomic)  TFY_TextTagCollectionView *textTagCollectionView2;
+@property (strong, nonatomic) NSArray *tags;
 @end
 
 @implementation TextViewController
@@ -34,6 +38,155 @@
 //    TFY_GCD_QUEUE_TIME(2, ^{
 //        [self addTextView];
 //    });
+    self.textTagCollectionView1.makeChain
+    .addToSuperView(self.view)
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+        make.top.left.right.equalTo(self.view).offset(0);
+        make.height.mas_equalTo(TFY_Height_H()/3);
+    });
+    
+    self.textTagCollectionView2.makeChain
+    .addToSuperView(self.view)
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+        make.left.right.equalTo(self.view).offset(0);
+        make.top.equalTo(self.textTagCollectionView1.mas_bottom).offset(20);
+        make.bottom.equalTo(self.view).offset(-TFY_kBottomBarHeight());
+    });
+    
+    _tags = @[
+            @"AutoLayoutAutoLayoutAutoLayoutAutoLayoutAutoLayoutAutoLayoutAutoLayoutAutoLayoutAutoLayout",
+            @"dynamically", @"calculates", @"the", @"size", @"and", @"position",
+            @"of", @"all", @"the", @"views", @"in", @"your", @"view", @"hierarchy", @"based",
+            @"on", @"constraints", @"placed", @"on", @"those", @"views",
+            @"For", @"example", @"you", @"can", @"constrain", @"a", @"button",
+            @"so", @"that", @"it", @"is", @"horizontally", @"centered", @"with",
+            @"an", @"Image", @"view", @"and", @"so", @"that", @"the", @"button’s",
+            @"top", @"edge", @"always", @"remains", @"8", @"points", @"below", @"the",
+            @"image’s", @"bottom", @"If", @"the", @"image", @"view’s", @"size", @"or",
+            @"position", @"changes", @"the", @"button’s", @"position", @"automatically", @"adjusts", @"to", @"match"
+    ];
+    
+    TFY_TextTagStringContent *content = [TFY_TextTagStringContent new];
+    TFY_TextTagStringContent *selectedContent = [TFY_TextTagStringContent new];
+    TFY_TextTagStyle *style = [TFY_TextTagStyle new];
+    TFY_TextTagStyle *selectedStyle = [TFY_TextTagStyle new];
+    
+    content.textFont = [UIFont boldSystemFontOfSize:18.0f];
+    selectedContent.textFont = content.textFont;
+    
+    content.textColor = [UIColor colorWithRed:0.23 green:0.23 blue:0.23 alpha:1.00];
+    selectedContent.textColor = [UIColor whiteColor];
+    
+    style.backgroundColor = [UIColor colorWithRed:0.31 green:0.70 blue:0.80 alpha:1.00];
+    selectedStyle.backgroundColor = [UIColor colorWithRed:0.38 green:0.36 blue:0.63 alpha:1.00];
+    
+    style.borderColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.22 alpha:1.00];
+    style.borderWidth = 1;
+
+    selectedStyle.borderColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.22 alpha:1.00];
+    selectedStyle.borderWidth = 1;
+    
+    style.shadowColor = [UIColor grayColor];
+    style.shadowOffset = CGSizeMake(0, 1);
+    style.shadowOpacity = 0.5f;
+    style.shadowRadius = 2;
+
+    selectedStyle.shadowColor = [UIColor greenColor];
+    selectedStyle.shadowOffset = CGSizeMake(0, 2);
+    selectedStyle.shadowOpacity = 0.5f;
+    selectedStyle.shadowRadius = 1;
+
+    style.cornerRadius = 2;
+    selectedStyle.cornerRadius = 4;
+    
+    style.extraSpace = CGSizeMake(4, 4);
+    selectedStyle.extraSpace = style.extraSpace;
+
+    NSMutableArray *tags = [NSMutableArray new];
+    for (NSString *string in _tags) {
+        TFY_TextTagStringContent *stringContent = [content copy];
+        stringContent.text = string;
+        TFY_TextTagStringContent *selectedStringContent = [selectedContent copy];
+        selectedStringContent.text = string;
+        TFY_TextTag *tag = [TFY_TextTag new];
+        tag.content = stringContent;
+        tag.selectedContent = selectedStringContent;
+        tag.style = style;
+        tag.selectedStyle = selectedStyle;
+        [tags addObject:tag.copy];
+    }
+    [_textTagCollectionView1 addTags:tags];
+    
+    // Style2
+    content.textFont = [UIFont systemFontOfSize:18.0f];
+    selectedContent.textFont = [UIFont systemFontOfSize:20.0f];
+
+    content.textColor = [UIColor whiteColor];
+    selectedContent.textColor = [UIColor greenColor];
+
+    style.extraSpace = CGSizeMake(12, 12);
+    selectedStyle.extraSpace = CGSizeMake(12, 12);
+    
+    style.backgroundColor = [UIColor colorWithRed:0.10 green:0.53 blue:0.85 alpha:1.00];
+    selectedStyle.backgroundColor = [UIColor colorWithRed:0.21 green:0.29 blue:0.36 alpha:1.00];
+    
+    style.cornerRadius = 12.0f;
+    style.cornerBottomRight = true;
+    style.cornerBottomLeft = false;
+    style.cornerTopRight = false;
+    style.cornerTopLeft = true;
+
+    selectedStyle.cornerRadius = 8.0f;
+    selectedStyle.cornerBottomRight = true;
+    selectedStyle.cornerBottomLeft = false;
+    selectedStyle.cornerTopRight = true;
+    selectedStyle.cornerTopLeft = false;
+    
+    style.borderWidth = 1;
+    selectedStyle.borderWidth = 4;
+    
+    style.borderColor = [UIColor redColor];
+    selectedStyle.borderColor = [UIColor orangeColor];
+
+    style.shadowColor = [UIColor blackColor];
+    style.shadowOffset = CGSizeMake(0, 4);
+    style.shadowOpacity = 0.3f;
+    style.shadowRadius = 4;
+
+    selectedStyle.shadowColor = [UIColor redColor];
+    selectedStyle.shadowOffset = CGSizeMake(0, 1);
+    selectedStyle.shadowOpacity = 0.3f;
+    selectedStyle.shadowRadius = 2;
+
+    tags = [NSMutableArray new];
+    for (NSString *string in _tags) {
+        TFY_TextTagStringContent *stringContent = [content copy];
+        stringContent.text = string;
+        TFY_TextTagStringContent *selectedStringContent = [selectedContent copy];
+        selectedStringContent.text = [string stringByAppendingString:@"!"];
+        TFY_TextTag *tag = [TFY_TextTag new];
+        tag.content = stringContent;
+        tag.selectedContent = selectedStringContent;
+        tag.style = style;
+        tag.selectedStyle = selectedStyle;
+        [tags addObject:tag.copy];
+    }
+    [_textTagCollectionView2 addTags:tags];
+
+    // Init selection
+    [_textTagCollectionView1 updateTagAtIndex:0 selected:YES];
+    [_textTagCollectionView1 updateTagAtIndex:4 selected:YES];
+    [_textTagCollectionView1 updateTagAtIndex:6 selected:YES];
+    [_textTagCollectionView1 updateTagAtIndex:17 selected:YES];
+
+    [_textTagCollectionView2 updateTagAtIndex:0 selected:YES];
+    [_textTagCollectionView2 updateTagAtIndex:4 selected:YES];
+    [_textTagCollectionView2 updateTagAtIndex:6 selected:YES];
+    [_textTagCollectionView2 updateTagAtIndex:17 selected:YES];
+    
+    // Load data
+    [_textTagCollectionView1 reload];
+    [_textTagCollectionView2 reload];
 }
 
 - (void)yyyyyyy {
@@ -60,6 +213,30 @@
       [TFY_GCDQueue executeInMainQueue:^{
         NSLog(@"GCD实现延迟操作");
       } afterDelaySecs:2.f];
+}
+
+- (TFY_TextTagCollectionView *)textTagCollectionView1 {
+    if (!_textTagCollectionView1) {
+        _textTagCollectionView1 = TFY_TextTagCollectionView.new;
+        _textTagCollectionView1.delegate = self;
+        _textTagCollectionView1.showsVerticalScrollIndicator = NO;
+        _textTagCollectionView1.horizontalSpacing = 6.0;
+        _textTagCollectionView1.verticalSpacing = 8.0;
+        _textTagCollectionView1.alignment = TagCollectionAlignmentFillByExpandingWidth;
+    }
+    return _textTagCollectionView1;
+}
+
+- (TFY_TextTagCollectionView *)textTagCollectionView2 {
+    if (!_textTagCollectionView2) {
+        _textTagCollectionView2 = TFY_TextTagCollectionView.new;
+        _textTagCollectionView2.delegate = self;
+        _textTagCollectionView2.showsVerticalScrollIndicator = NO;
+        _textTagCollectionView2.horizontalSpacing = 8;
+        _textTagCollectionView2.verticalSpacing = 8;
+        _textTagCollectionView2.alignment = TagCollectionAlignmentFillByExpandingWidthExceptLastLine;
+    }
+    return _textTagCollectionView2;
 }
 
 - (void)ggggggggggg {
