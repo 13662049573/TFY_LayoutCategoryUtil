@@ -9,7 +9,7 @@
 #import "TextViewController.h"
 #import "TFY_TextblanksField.h"
 #import "EmptyTableViewController.h"
-@interface TextViewController ()<TextTagCollectionViewDelegate>
+@interface TextViewController ()<TextTagCollectionViewDelegate,TagCollectionViewDataSource,TagCollectionViewDelegate>
 @property (nonatomic, strong) TFY_TextView *textView;
 @property(strong,nonatomic) UIImage *image;
 @property (strong, nonatomic) UIImageView *imageView;
@@ -19,8 +19,11 @@
 @property(strong,nonatomic) UIImageView *view2;
 @property(strong,nonatomic) UIImageView *view3;
 
-@property (strong, nonatomic)  TFY_TextTagCollectionView *textTagCollectionView1;
+@property (strong, nonatomic)  TFY_TagCollectionView *tagCollectionView;
 @property (strong, nonatomic)  TFY_TextTagCollectionView *textTagCollectionView2;
+
+@property (strong, nonatomic) NSMutableArray <UIView *> *tagViews;
+
 @property (strong, nonatomic) NSArray *tags;
 @end
 
@@ -38,7 +41,10 @@
 //    TFY_GCD_QUEUE_TIME(2, ^{
 //        [self addTextView];
 //    });
-    self.textTagCollectionView1.makeChain
+    
+    _tagViews = [NSMutableArray new];
+    
+    self.tagCollectionView.makeChain
     .addToSuperView(self.view)
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
         make.top.left.right.equalTo(self.view).offset(0);
@@ -49,7 +55,7 @@
     .addToSuperView(self.view)
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
         make.left.right.equalTo(self.view).offset(0);
-        make.top.equalTo(self.textTagCollectionView1.mas_bottom).offset(20);
+        make.top.equalTo(self.tagCollectionView.mas_bottom).offset(20);
         make.bottom.equalTo(self.view).offset(-TFY_kBottomBarHeight());
     });
     
@@ -70,53 +76,6 @@
     TFY_TextTagStringContent *selectedContent = [TFY_TextTagStringContent new];
     TFY_TextTagStyle *style = [TFY_TextTagStyle new];
     TFY_TextTagStyle *selectedStyle = [TFY_TextTagStyle new];
-    
-    content.textFont = [UIFont boldSystemFontOfSize:18.0f];
-    selectedContent.textFont = content.textFont;
-    
-    content.textColor = [UIColor colorWithRed:0.23 green:0.23 blue:0.23 alpha:1.00];
-    selectedContent.textColor = [UIColor whiteColor];
-    
-    style.backgroundColor = [UIColor colorWithRed:0.31 green:0.70 blue:0.80 alpha:1.00];
-    selectedStyle.backgroundColor = [UIColor colorWithRed:0.38 green:0.36 blue:0.63 alpha:1.00];
-    
-    style.borderColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.22 alpha:1.00];
-    style.borderWidth = 1;
-
-    selectedStyle.borderColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.22 alpha:1.00];
-    selectedStyle.borderWidth = 1;
-    
-    style.shadowColor = [UIColor grayColor];
-    style.shadowOffset = CGSizeMake(0, 1);
-    style.shadowOpacity = 0.5f;
-    style.shadowRadius = 2;
-
-    selectedStyle.shadowColor = [UIColor greenColor];
-    selectedStyle.shadowOffset = CGSizeMake(0, 2);
-    selectedStyle.shadowOpacity = 0.5f;
-    selectedStyle.shadowRadius = 1;
-
-    style.cornerRadius = 2;
-    selectedStyle.cornerRadius = 4;
-    
-    style.extraSpace = CGSizeMake(4, 4);
-    selectedStyle.extraSpace = style.extraSpace;
-
-    NSMutableArray *tags = [NSMutableArray new];
-    for (NSString *string in _tags) {
-        TFY_TextTagStringContent *stringContent = [content copy];
-        stringContent.text = string;
-        TFY_TextTagStringContent *selectedStringContent = [selectedContent copy];
-        selectedStringContent.text = string;
-        TFY_TextTag *tag = [TFY_TextTag new];
-        tag.content = stringContent;
-        tag.selectedContent = selectedStringContent;
-        tag.style = style;
-        tag.selectedStyle = selectedStyle;
-        [tags addObject:tag.copy];
-    }
-    [_textTagCollectionView1 addTags:tags];
-    
     // Style2
     content.textFont = [UIFont systemFontOfSize:18.0f];
     selectedContent.textFont = [UIFont systemFontOfSize:20.0f];
@@ -158,7 +117,7 @@
     selectedStyle.shadowOpacity = 0.3f;
     selectedStyle.shadowRadius = 2;
 
-    tags = [NSMutableArray new];
+    NSMutableArray *tags = [NSMutableArray new];
     for (NSString *string in _tags) {
         TFY_TextTagStringContent *stringContent = [content copy];
         stringContent.text = string;
@@ -173,20 +132,36 @@
     }
     [_textTagCollectionView2 addTags:tags];
 
-    // Init selection
-    [_textTagCollectionView1 updateTagAtIndex:0 selected:YES];
-    [_textTagCollectionView1 updateTagAtIndex:4 selected:YES];
-    [_textTagCollectionView1 updateTagAtIndex:6 selected:YES];
-    [_textTagCollectionView1 updateTagAtIndex:17 selected:YES];
-
     [_textTagCollectionView2 updateTagAtIndex:0 selected:YES];
     [_textTagCollectionView2 updateTagAtIndex:4 selected:YES];
     [_textTagCollectionView2 updateTagAtIndex:6 selected:YES];
     [_textTagCollectionView2 updateTagAtIndex:17 selected:YES];
     
-    // Load data
-    [_textTagCollectionView1 reload];
     [_textTagCollectionView2 reload];
+    
+    
+    UIColor *backgroundColor1 = [UIColor colorWithRed:0.30 green:0.72 blue:0.53 alpha:1.00];
+    UIColor *backgroundColor2 = [UIColor colorWithRed:0.10 green:0.53 blue:0.85 alpha:1.00];
+    UIColor *backgroundColor3 = [UIColor colorWithRed:0.97 green:0.64 blue:0.27 alpha:1.00];
+    
+    [_tagViews addObject:[self newLabelWithText:@"AutoLayout" fontSize:14.0f textColor:[UIColor whiteColor] backgroundColor:backgroundColor1]];
+    [_tagViews addObject:[self newButtonWithTitle:@"Button1" fontSize:18.0f backgroundColor:backgroundColor2]];
+    [_tagViews addObject:[self newImageViewWithImage:[UIImage imageNamed:@"bluefaces_1"]]];
+    [_tagViews addObject:[self newLabelWithText:@"dynamically" fontSize:20.0f textColor:[UIColor whiteColor] backgroundColor:backgroundColor1]];
+    [_tagViews addObject:[self newButtonWithTitle:@"Button2" fontSize:16.0f backgroundColor:backgroundColor3]];
+    [_tagViews addObject:[self newButtonWithTitle:@"Button3" fontSize:15.0f backgroundColor:backgroundColor2]];
+    [_tagViews addObject:[self newImageViewWithImage:[UIImage imageNamed:@"bluefaces_2"]]];
+    [_tagViews addObject:[self newLabelWithText:@"the" fontSize:16.0f textColor:[UIColor blackColor] backgroundColor:backgroundColor1]];
+    [_tagViews addObject:[self newButtonWithTitle:@"Button4" fontSize:22.0f backgroundColor:backgroundColor2]];
+    [_tagViews addObject:[self newImageViewWithImage:[UIImage imageNamed:@"bluefaces_3"]]];
+    [_tagViews addObject:[self newLabelWithText:@"views" fontSize:12.0f
+                                      textColor:[UIColor colorWithRed:0.21 green:0.29 blue:0.36 alpha:1.00]
+                                backgroundColor:backgroundColor3]];
+    [_tagViews addObject:[self newButtonWithTitle:@"Button5" fontSize:15.0f backgroundColor:backgroundColor1]];
+    [_tagViews addObject:[self newImageViewWithImage:[UIImage imageNamed:@"bluefaces_4"]]];
+    [_tagViews addObject:[self newImageViewWithImage:[UIImage imageNamed:@"bluefaces_4"]]];
+
+    [_tagCollectionView reload];
 }
 
 - (void)yyyyyyy {
@@ -215,16 +190,13 @@
       } afterDelaySecs:2.f];
 }
 
-- (TFY_TextTagCollectionView *)textTagCollectionView1 {
-    if (!_textTagCollectionView1) {
-        _textTagCollectionView1 = TFY_TextTagCollectionView.new;
-        _textTagCollectionView1.delegate = self;
-        _textTagCollectionView1.showsVerticalScrollIndicator = NO;
-        _textTagCollectionView1.horizontalSpacing = 6.0;
-        _textTagCollectionView1.verticalSpacing = 8.0;
-        _textTagCollectionView1.alignment = TagCollectionAlignmentFillByExpandingWidth;
+- (TFY_TagCollectionView *)tagCollectionView {
+    if (!_tagCollectionView) {
+        _tagCollectionView = [[TFY_TagCollectionView alloc] initWithFrame:CGRectMake(0, 0, TFY_Width_W(), TFY_Height_H()/3)];
+        _tagCollectionView.delegate = self;
+        _tagCollectionView.dataSource = self;
     }
-    return _textTagCollectionView1;
+    return _tagCollectionView;
 }
 
 - (TFY_TextTagCollectionView *)textTagCollectionView2 {
@@ -589,6 +561,83 @@
 - (void)leftbarItemEditAction:(UIBarButtonItem *)item {
     [self ggggggggggg];
 }
+
+#pragma mark - TagCollectionViewDelegate
+
+- (CGSize)tagCollectionView:(TFY_TagCollectionView *)tagCollectionView sizeForTagAtIndex:(NSUInteger)index {
+    CGSize size = _tagViews[index].frame.size;
+    return size;
+}
+
+- (void)tagCollectionView:(TFY_TagCollectionView *)tagCollectionView didSelectTag:(UIView *)tagView atIndex:(NSUInteger)index {
+    NSLog(@"=====:%@",[NSString stringWithFormat:@"Tap tag: %@, at: %ld", tagView.class, (long) index]);
+}
+
+#pragma mark - TagCollectionViewDataSource
+
+- (NSUInteger)numberOfTagsInTagCollectionView:(TFY_TagCollectionView *)tagCollectionView {
+    return _tagViews.count;
+}
+
+- (UIView *)tagCollectionView:(TFY_TagCollectionView *)tagCollectionView tagViewForIndex:(NSUInteger)index {
+    return _tagViews[index];
+}
+
+#pragma mark - Private methods
+
+- (UILabel *)newLabelWithText:(NSString *)text fontSize:(CGFloat)fontSize textColor:(UIColor *)textColor backgroundColor:(UIColor *)backgroudColor {
+    UILabel *label = [UILabel new];
+
+    label.font = [UIFont systemFontOfSize:fontSize];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = text;
+    label.textColor = textColor;
+    label.backgroundColor = backgroudColor;
+    [label sizeToFit];
+    label.layer.masksToBounds = YES;
+    label.layer.cornerRadius = 4.0f;
+
+    [self expandSizeForView:label extraWidth:12 extraHeight:8];
+
+    return label;
+}
+
+- (UIButton *)newButtonWithTitle:(NSString *)title fontSize:(CGFloat)fontSize backgroundColor:(UIColor *)backgroudColor {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+
+    button.titleLabel.font = [UIFont systemFontOfSize:fontSize];
+    [button setTitle:title forState:UIControlStateNormal];
+    button.backgroundColor = backgroudColor;
+    [button sizeToFit];
+    button.layer.masksToBounds = YES;
+    button.layer.cornerRadius = 4.0f;
+
+    [self expandSizeForView:button extraWidth:12 extraHeight:8];
+
+    [button addTarget:self action:@selector(onTap:) forControlEvents:UIControlEventTouchUpInside];
+
+    return button;
+}
+
+- (UIImageView *)newImageViewWithImage:(UIImage *)image {
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    [imageView sizeToFit];
+    return imageView;
+}
+
+- (void)expandSizeForView:(UIView *)view extraWidth:(CGFloat)extraWidth extraHeight:(CGFloat)extraHeight {
+    CGRect frame = view.frame;
+    frame.size.width += extraWidth;
+    frame.size.height += extraHeight;
+    view.frame = frame;
+}
+
+#pragma mark - Action
+
+- (void)onTap:(UIButton *)button {
+   
+}
+
 
 @end
 

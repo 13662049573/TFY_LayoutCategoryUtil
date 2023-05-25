@@ -2038,26 +2038,34 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
  * masterfootImage  下边视图的图片，生成的图片的宽度为footerImageView的宽度，拼接在midView的下面
  */
 + (UIImage *)tfy_addSlaveHeaderImage:(UIImage *)slaveheaderImage toMasterMidImage:(UIImage *)mastermidImage toMasterFootImage:(UIImage *)masterfootImage{
-    CGSize size;
-    size.width = slaveheaderImage.size.width;
-    size.height = slaveheaderImage.size.height + mastermidImage.size.height + masterfootImage.size.height;
     
-    UIGraphicsBeginImageContextWithOptions(size, YES, 0.0);
+    CGFloat width = mastermidImage.size.width;
+    CGFloat height = slaveheaderImage.size.height + mastermidImage.size.height + masterfootImage.size.height;
     
-    //Draw slaveheaderImage
-    [slaveheaderImage drawInRect:CGRectMake(0, 0, slaveheaderImage.size.width, slaveheaderImage.size.height)];
+    CGSize offScreenSize = CGSizeMake(width, height);
     
-    //Draw mastermidImage
-    [mastermidImage drawInRect:CGRectMake(0, mastermidImage.size.height, mastermidImage.size.width, mastermidImage.size.height)];
+    UIGraphicsBeginImageContextWithOptions(offScreenSize, YES, [UIScreen mainScreen].scale);
+    //给画布添加颜色
+    [[UIColor whiteColor] setFill];
+    CGRect bounds = CGRectMake(0, 0, width, height);
+    UIRectFill(bounds);
+    //拼接第一份头部图片
+    CGRect rectT = CGRectMake(0, 0, width, slaveheaderImage.size.height);
+    [slaveheaderImage drawInRect:rectT];
     
-    //Draw masterfootImage
-    [masterfootImage drawInRect:CGRectMake(0, slaveheaderImage.size.height+masterfootImage.size.height, masterfootImage.size.width, masterfootImage.size.height)];
-    
-    UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
+    //这里是主图片曲线图
+    CGRect rect = CGRectMake(0, rectT.origin.y+slaveheaderImage.size.height,width, mastermidImage.size.height);
+    [mastermidImage drawInRect:rect];
+   
+    //拼接下部分图片，这里按照自己图片需求更改位置
+    CGRect rectB = CGRectMake(0,rect.origin.y + mastermidImage.size.height, width, masterfootImage.size.height);
+    [masterfootImage drawInRect:rectB];
+    //合成图片
+    UIImage* imagez = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
     
-    return resultImage;
+    return imagez;
 }
 
 /**
@@ -2104,7 +2112,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
 
 
 //leftImage:左侧图片 rightImage:右侧图片 margin:两者间隔
-- (UIImage *)tfy_combineWithLeftImg:(UIImage*)leftImage rightImg:(UIImage*)rightImage withMargin:(NSInteger)margin{
+- (UIImage *)tfy_combineWithLeftImg:(UIImage*)leftImage rightImg:(UIImage*)rightImage withMargin:(NSInteger)margin {
     if (rightImage == nil) {
         return leftImage;
     }
@@ -2113,7 +2121,7 @@ void TFY_ProviderReleaseData(void * info, const void * data, size_t size) {
     CGSize offScreenSize = CGSizeMake(width, height);
     
     // UIGraphicsBeginImageContext(offScreenSize);用这个重绘图片会模糊
-    UIGraphicsBeginImageContextWithOptions(offScreenSize, NO, [UIScreen mainScreen].scale);
+    UIGraphicsBeginImageContextWithOptions(offScreenSize, YES, [UIScreen mainScreen].scale);
     
     CGRect rectL = CGRectMake(0, 0, leftImage.size.width, height);
     [leftImage drawInRect:rectL];

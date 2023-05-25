@@ -26,7 +26,7 @@
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
         make.left.equalTo(self.view).offset(30);
         make.right.equalTo(self.view).offset(-30);
-        make.top.equalTo(self.view).offset(100);
+        make.top.equalTo(self.view).offset(0);
         make.height.mas_equalTo(40);
     });
     
@@ -250,9 +250,6 @@
     
     for (NSString *text in [strings subarrayWithRange:range]) {
         TFY_TextTag *tag = [TFY_TextTag new];
-        
-//        tag.enableAutoDetectAccessibility = YES;
-        
         tag.isAccessibilityElement = YES;
         tag.accessibilityLabel = text;
         tag.accessibilityIdentifier = [NSString stringWithFormat:@"identifier: %@", text];

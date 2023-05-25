@@ -24,7 +24,6 @@
     if (self) {
         [self commonInit];
     }
-
     return self;
 }
 
@@ -33,7 +32,6 @@
     if (self) {
         [self commonInit];
     }
-
     return self;
 }
 
