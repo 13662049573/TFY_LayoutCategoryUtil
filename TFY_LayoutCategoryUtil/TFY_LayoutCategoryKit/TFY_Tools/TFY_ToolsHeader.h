@@ -21,5 +21,6 @@
 
 #import "TFY_GCDTimer.h"
 #import "TFY_GCDSemaphore.h"
+#import "TFY_OpenShareHeader.h"
 
 #endif /* TFY_ToolsHeader_h */

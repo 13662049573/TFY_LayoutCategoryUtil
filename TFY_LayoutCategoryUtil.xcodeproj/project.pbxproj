@@ -62,6 +62,12 @@
 		3695B8072904C4A900D8FD7D /* TFY_Label.m in Sources */ = {isa = PBXBuildFile; fileRef = 3695B8062904C4A900D8FD7D /* TFY_Label.m */; };
 		3695B80A2904D0A500D8FD7D /* TFY_WKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3695B8092904D0A500D8FD7D /* TFY_WKWebView.m */; };
 		36978E7027F6F24C00557EC0 /* TFY_TextblanksField.m in Sources */ = {isa = PBXBuildFile; fileRef = 36978E6F27F6F24C00557EC0 /* TFY_TextblanksField.m */; };
+		369F05FE2A28684B005B1E0F /* TFY_OpenShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F05FD2A28684B005B1E0F /* TFY_OpenShare.m */; };
+		369F06012A286F4C005B1E0F /* TFY_OpenShare+QQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F06002A286F4C005B1E0F /* TFY_OpenShare+QQ.m */; };
+		369F06042A287010005B1E0F /* TFY_OpenShare+Renren.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F06032A287010005B1E0F /* TFY_OpenShare+Renren.m */; };
+		369F06072A287062005B1E0F /* TFY_OpenShare+Alipay.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F06062A287062005B1E0F /* TFY_OpenShare+Alipay.m */; };
+		369F060A2A28708F005B1E0F /* TFY_OpenShare+Weixin.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F06092A28708F005B1E0F /* TFY_OpenShare+Weixin.m */; };
+		369F060E2A287202005B1E0F /* TFY_OpenShare+Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F060D2A287202005B1E0F /* TFY_OpenShare+Weibo.m */; };
 		36BA238724EE488000CE8275 /* UITableViewCell+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA238424EE487F00CE8275 /* UITableViewCell+TFY_Chain.m */; };
 		36BA238824EE488000CE8275 /* UITableView+TFY_LayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA238524EE488000CE8275 /* UITableView+TFY_LayoutCell.m */; };
 		36BE1D5E2A130DC50028C5B8 /* TFY_TextTagStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BE1D5D2A130DC50028C5B8 /* TFY_TextTagStyle.m */; };
@@ -319,6 +325,19 @@
 		3695B8092904D0A500D8FD7D /* TFY_WKWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_WKWebView.m; sourceTree = "<group>"; };
 		36978E6E27F6F24C00557EC0 /* TFY_TextblanksField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_TextblanksField.h; sourceTree = "<group>"; };
 		36978E6F27F6F24C00557EC0 /* TFY_TextblanksField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_TextblanksField.m; sourceTree = "<group>"; };
+		369F05FC2A28684B005B1E0F /* TFY_OpenShare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_OpenShare.h; sourceTree = "<group>"; };
+		369F05FD2A28684B005B1E0F /* TFY_OpenShare.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_OpenShare.m; sourceTree = "<group>"; };
+		369F05FF2A286F4C005B1E0F /* TFY_OpenShare+QQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TFY_OpenShare+QQ.h"; sourceTree = "<group>"; };
+		369F06002A286F4C005B1E0F /* TFY_OpenShare+QQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TFY_OpenShare+QQ.m"; sourceTree = "<group>"; };
+		369F06022A287010005B1E0F /* TFY_OpenShare+Renren.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TFY_OpenShare+Renren.h"; sourceTree = "<group>"; };
+		369F06032A287010005B1E0F /* TFY_OpenShare+Renren.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TFY_OpenShare+Renren.m"; sourceTree = "<group>"; };
+		369F06052A287062005B1E0F /* TFY_OpenShare+Alipay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TFY_OpenShare+Alipay.h"; sourceTree = "<group>"; };
+		369F06062A287062005B1E0F /* TFY_OpenShare+Alipay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TFY_OpenShare+Alipay.m"; sourceTree = "<group>"; };
+		369F06082A28708F005B1E0F /* TFY_OpenShare+Weixin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TFY_OpenShare+Weixin.h"; sourceTree = "<group>"; };
+		369F06092A28708F005B1E0F /* TFY_OpenShare+Weixin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TFY_OpenShare+Weixin.m"; sourceTree = "<group>"; };
+		369F060B2A2870F7005B1E0F /* TFY_OpenShareHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_OpenShareHeader.h; sourceTree = "<group>"; };
+		369F060C2A287202005B1E0F /* TFY_OpenShare+Weibo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TFY_OpenShare+Weibo.h"; sourceTree = "<group>"; };
+		369F060D2A287202005B1E0F /* TFY_OpenShare+Weibo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TFY_OpenShare+Weibo.m"; sourceTree = "<group>"; };
 		36BA238324EE487F00CE8275 /* UITableViewCell+TFY_Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+TFY_Chain.h"; sourceTree = "<group>"; };
 		36BA238424EE487F00CE8275 /* UITableViewCell+TFY_Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+TFY_Chain.m"; sourceTree = "<group>"; };
 		36BA238524EE488000CE8275 /* UITableView+TFY_LayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+TFY_LayoutCell.m"; sourceTree = "<group>"; };
@@ -743,6 +762,26 @@
 				3695B8062904C4A900D8FD7D /* TFY_Label.m */,
 			);
 			path = TFY_LabelKit;
+			sourceTree = "<group>";
+		};
+		369F05FB2A28681D005B1E0F /* OpenShare */ = {
+			isa = PBXGroup;
+			children = (
+				369F060B2A2870F7005B1E0F /* TFY_OpenShareHeader.h */,
+				369F05FC2A28684B005B1E0F /* TFY_OpenShare.h */,
+				369F05FD2A28684B005B1E0F /* TFY_OpenShare.m */,
+				369F05FF2A286F4C005B1E0F /* TFY_OpenShare+QQ.h */,
+				369F06002A286F4C005B1E0F /* TFY_OpenShare+QQ.m */,
+				369F06022A287010005B1E0F /* TFY_OpenShare+Renren.h */,
+				369F06032A287010005B1E0F /* TFY_OpenShare+Renren.m */,
+				369F06052A287062005B1E0F /* TFY_OpenShare+Alipay.h */,
+				369F06062A287062005B1E0F /* TFY_OpenShare+Alipay.m */,
+				369F06082A28708F005B1E0F /* TFY_OpenShare+Weixin.h */,
+				369F06092A28708F005B1E0F /* TFY_OpenShare+Weixin.m */,
+				369F060C2A287202005B1E0F /* TFY_OpenShare+Weibo.h */,
+				369F060D2A287202005B1E0F /* TFY_OpenShare+Weibo.m */,
+			);
+			path = OpenShare;
 			sourceTree = "<group>";
 		};
 		36BE1D5B2A130D880028C5B8 /* TFY_TagCollectionView */ = {
@@ -1204,6 +1243,7 @@
 		565583B42431990A00020D3C /* TFY_Tools */ = {
 			isa = PBXGroup;
 			children = (
+				369F05FB2A28681D005B1E0F /* OpenShare */,
 				36C334AE24ED2D4D00DA6FB2 /* TFY_ToolsHeader.h */,
 				36885734298600D60023A340 /* GCD */,
 				368857332986009F0023A340 /* Utils */,
@@ -1527,6 +1567,7 @@
 				3688573A298601990023A340 /* TFY_GCDQueue.m in Sources */,
 				36D3DC0E27F6C9E900A79848 /* TextViewController.m in Sources */,
 				5655840C2431BB7600020D3C /* NSTimer+TFY_Tools.m in Sources */,
+				369F06012A286F4C005B1E0F /* TFY_OpenShare+QQ.m in Sources */,
 				565584E22431E49600020D3C /* PersonalTableViewController.m in Sources */,
 				5655842C2431C4DC00020D3C /* TFY_TapGestureChainModel.m in Sources */,
 				565584062431BAFA00020D3C /* NSAttributedString+TFY_Tools.m in Sources */,
@@ -1540,10 +1581,12 @@
 				36BA238824EE488000CE8275 /* UITableView+TFY_LayoutCell.m in Sources */,
 				565583DE2431B2DD00020D3C /* UILabel+TFY_Tools.m in Sources */,
 				3695B7F02904B9E100D8FD7D /* TFY_BaseLabel.m in Sources */,
+				369F06072A287062005B1E0F /* TFY_OpenShare+Alipay.m in Sources */,
 				565583E72431B5DE00020D3C /* NSDictionary+TFY_Tools.m in Sources */,
 				3608F8B028F2465C00E7D023 /* TFYExtensionRotation.m in Sources */,
 				565584C62431DD3B00020D3C /* MainViewController.m in Sources */,
 				36D8D89C27F6817400C6B400 /* TFY_TextStorage.m in Sources */,
+				369F06042A287010005B1E0F /* TFY_OpenShare+Renren.m in Sources */,
 				565583D22431AFB700020D3C /* NSNumber+TFY_Tools.m in Sources */,
 				565584642431CA5400020D3C /* TFY_ButtonChainModel.m in Sources */,
 				3654164824FF369C00CC0024 /* PolicyWebViewController.m in Sources */,
@@ -1555,6 +1598,7 @@
 				5655849A2431D17C00020D3C /* TFY_WebViewChainModel.m in Sources */,
 				36D8D89927F680C800C6B400 /* TFY_LayoutManager.m in Sources */,
 				565584B92431D53B00020D3C /* TFY_TiledLayerChainModel.m in Sources */,
+				369F060E2A287202005B1E0F /* TFY_OpenShare+Weibo.m in Sources */,
 				36D8D89327F67ED500C6B400 /* TFY_TextParse.m in Sources */,
 				5655848E2431D01A00020D3C /* TFY_TextFieldChainModel.m in Sources */,
 				362541F528A1FE9F003CD751 /* CLLocationManager+TFY_Tools.m in Sources */,
@@ -1571,6 +1615,7 @@
 				36867DC824EBE1D200A761BC /* UIApplication+TFY_Tools.m in Sources */,
 				5655846D2431CC0B00020D3C /* TFY_DatePickerViewChainModel.m in Sources */,
 				565584972431D12E00020D3C /* TFY_VisualEffectViewChainModel.m in Sources */,
+				369F060A2A28708F005B1E0F /* TFY_OpenShare+Weixin.m in Sources */,
 				565584262431C43800020D3C /* TFY_RotationGestureChainModel.m in Sources */,
 				36D8D8A827F68E3300C6B400 /* TFY_TextView.m in Sources */,
 				36C334A124ED26CE00DA6FB2 /* NSData+TFY_Data.m in Sources */,
@@ -1593,6 +1638,7 @@
 				5655845D2431C86F00020D3C /* TFY_BaseViewChainModel+Masonry.m in Sources */,
 				565584BC2431D57500020D3C /* TFY_TransFormLayerChainModel.m in Sources */,
 				36D8D89027F67C4E00C6B400 /* TFY_TextAttachment.m in Sources */,
+				369F05FE2A28684B005B1E0F /* TFY_OpenShare.m in Sources */,
 				565584232431C3DE00020D3C /* TFY_PinchGestureChainModel.m in Sources */,
 				565584942431D0E400020D3C /* TFY_ViewChainModel.m in Sources */,
 				36EBD92C25773AFA00C70D20 /* UIView+Badge.m in Sources */,
