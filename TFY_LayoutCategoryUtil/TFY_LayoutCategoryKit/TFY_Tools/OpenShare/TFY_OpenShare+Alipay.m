@@ -30,10 +30,8 @@ static NSString* schema=@"Alipay";
         //获取到fromAppUrlScheme，来设置截屏。
         NSString *linkStr=[self urlDecode:[link substringFromIndex:NSMaxRange([link rangeOfString:@"?"])]];
         NSDictionary *linkDic=[NSJSONSerialization JSONObjectWithData:[linkStr dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSString *path = [self jsonStringPrettyPrintedFormatForDictionary:@{@"image_data" :UIImagePNGRepresentation(screenShot),@"scheme" :linkDic[@"fromAppUrlScheme"]}];
         NSError *err;
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self requiringSecureCoding:YES error:&err];
-        [data writeToFile:path atomically:YES];
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:@{@"image_data" :UIImagePNGRepresentation(screenShot),@"scheme" :linkDic[@"fromAppUrlScheme"]} requiringSecureCoding:YES error:&err];
         [[UIPasteboard generalPasteboard] setData:data forPasteboardType:@"com.alipay.alipayClient.screenImage"];
         //END 设置截屏(可以不设置,注释掉这块代码即可。)。
         [self openURL:link];

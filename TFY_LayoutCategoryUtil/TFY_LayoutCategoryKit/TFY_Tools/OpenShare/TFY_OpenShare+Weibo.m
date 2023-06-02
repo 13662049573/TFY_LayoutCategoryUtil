@@ -33,53 +33,47 @@ static NSString *schema=@"Weibo";
     if ([msg isEmpty:@[@"link" ,@"image"] AndNotEmpty:@[@"title"] ]) {
         //text类型分享
         message= @{
-                   @"__class" : @"WBMessageObject",
-                   @"text" :msg.title
-                   };
+            @"__class" : @"WBMessageObject",
+            @"text" :msg.title
+        };
     }else if ([msg isEmpty:@[@"link" ] AndNotEmpty:@[@"title",@"image"] ]) {
         //图片类型分享
         message=@{
-                  @"__class" : @"WBMessageObject",
-                  @"imageObject":@{
-                          @"imageData":[self dataWithImage:msg.image]
-                          },
-                  @"text" : msg.title
-                  };
+            @"__class" : @"WBMessageObject",
+            @"imageObject":@{
+                @"imageData":[self dataWithImage:msg.image]
+            },
+            @"text" : msg.title
+        };
         
     }else if ([msg isEmpty:@[] AndNotEmpty:@[@"title",@"link" ,@"image"] ]) {
         //链接类型分享
         message=@{
-                  @"__class" : @"WBMessageObject",
-                  @"mediaObject":@{
-                          @"__class" : @"WBWebpageObject",
-                          @"description": msg.desc?:msg.title,
-                          @"objectID" : @"identifier1",
-                          @"thumbnailData":msg.thumbnail ? [self dataWithImage:msg.thumbnail] : [self dataWithImage:msg.image  scale:CGSizeMake(100, 100)],
-                          @"title": msg.title,
-                          @"webpageUrl":msg.link
-                          }
-                  
-                  };
+            @"__class" : @"WBMessageObject",
+            @"mediaObject":@{
+                @"__class" : @"WBWebpageObject",
+                @"description": msg.desc?:msg.title,
+                @"objectID" : @"identifier1",
+                @"thumbnailData":msg.thumbnail ? [self dataWithImage:msg.thumbnail] : [self dataWithImage:msg.image  scale:CGSizeMake(100, 100)],
+                @"title": msg.title,
+                @"webpageUrl":msg.link
+            }
+            
+        };
     }
     NSString *uuid=[[NSUUID UUID] UUIDString];
-    NSString *transferObjectpath = [self jsonStringPrettyPrintedFormatForDictionary:@{
+    NSError *transferObjecterr;
+    NSData *transferObjectdata = [NSKeyedArchiver archivedDataWithRootObject:@{
         @"__class" :@"WBSendMessageToWeiboRequest",
         @"message":message,
         @"requestID" :uuid,
-        }];
-    NSError *transferObjecterr;
-    NSData *transferObjectdata = [NSKeyedArchiver archivedDataWithRootObject:self requiringSecureCoding:YES error:&transferObjecterr];
-    [transferObjectdata writeToFile:transferObjectpath atomically:YES];
+    } requiringSecureCoding:YES error:&transferObjecterr];
     
-    NSString *userInfopath = [self jsonStringPrettyPrintedFormatForDictionary:@{}];
     NSError *userInfoerr;
-    NSData *userInfodata = [NSKeyedArchiver archivedDataWithRootObject:self requiringSecureCoding:YES error:&userInfoerr];
-    [userInfodata writeToFile:userInfopath atomically:YES];
+    NSData *userInfodata = [NSKeyedArchiver archivedDataWithRootObject:@{} requiringSecureCoding:YES error:&userInfoerr];
     
-    NSString *apppath = [self jsonStringPrettyPrintedFormatForDictionary:@{ @"appKey" : [self keyFor:schema][@"appKey"],@"bundleID" : [self CFBundleIdentifier]}];
     NSError *apperr;
-    NSData *appdata = [NSKeyedArchiver archivedDataWithRootObject:self requiringSecureCoding:YES error:&apperr];
-    [appdata writeToFile:apppath atomically:YES];
+    NSData *appdata = [NSKeyedArchiver archivedDataWithRootObject:@{@"appKey" : [self keyFor:schema][@"appKey"],@"bundleID" : [self CFBundleIdentifier]} requiringSecureCoding:YES error:&apperr];
     
     NSArray *messageData=@[
                            @{@"transferObject":transferObjectdata},
@@ -105,32 +99,26 @@ static NSString *schema=@"Weibo";
     
     NSString *uuid=[[NSUUID UUID] UUIDString];
     
-    NSString *transferObjectpath = [self jsonStringPrettyPrintedFormatForDictionary:@{
+    NSError *transferObjecterr;
+    NSData *transferObjectdata = [NSKeyedArchiver archivedDataWithRootObject:@{
         @"__class" :@"WBAuthorizeRequest",
         @"redirectURI":redirectURI,
         @"requestID" :uuid,
         @"scope": scope?:@"all"
-        }];
-    NSError *transferObjecterr;
-    NSData *transferObjectdata = [NSKeyedArchiver archivedDataWithRootObject:self requiringSecureCoding:YES error:&transferObjecterr];
-    [transferObjectdata writeToFile:transferObjectpath atomically:YES];
+        } requiringSecureCoding:YES error:&transferObjecterr];
     
-    NSString *userInfopath = [self jsonStringPrettyPrintedFormatForDictionary:@{
+    NSError *userInfoerr;
+    NSData *userInfodata = [NSKeyedArchiver archivedDataWithRootObject:@{
         @"mykey":@"as you like",
        @"SSO_From" : @"SendMessageToWeiboViewController"
-       }];
-    NSError *userInfoerr;
-    NSData *userInfodata = [NSKeyedArchiver archivedDataWithRootObject:self requiringSecureCoding:YES error:&userInfoerr];
-    [userInfodata writeToFile:userInfopath atomically:YES];
+       } requiringSecureCoding:YES error:&userInfoerr];
     
-    NSString *apppath = [self jsonStringPrettyPrintedFormatForDictionary:@{
+    NSError *apperr;
+    NSData *appdata = [NSKeyedArchiver archivedDataWithRootObject:@{
         @"appKey" :[self keyFor:schema][@"appKey"],
         @"bundleID" : [self CFBundleIdentifier],
         @"name" :[self CFBundleDisplayName]
-        }];
-    NSError *apperr;
-    NSData *appdata = [NSKeyedArchiver archivedDataWithRootObject:self requiringSecureCoding:YES error:&apperr];
-    [appdata writeToFile:apppath atomically:YES];
+        } requiringSecureCoding:YES error:&apperr];
     
     NSArray *authData=@[
                         @{@"transferObject":transferObjectdata},

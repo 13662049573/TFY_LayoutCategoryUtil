@@ -144,7 +144,7 @@ typedef enum : NSUInteger {
 +(NSString*)CFBundleDisplayName;
 +(NSString*)CFBundleIdentifier;
 
-+(void)setGeneralPasteboard:(NSString*)key Value:(NSDictionary*)value encoding:(TFYOSPboardEncoding)encoding;
++(void)setGeneralPasteboard:(NSString*)key Value:(id)value encoding:(TFYOSPboardEncoding)encoding;
 +(NSDictionary*)generalPasteboardData:(NSString*)key encoding:(TFYOSPboardEncoding)encoding;
 +(NSString*)base64AndUrlEncode:(NSString *)string;
 +(NSString*)urlDecode:(NSString*)input;
@@ -162,7 +162,6 @@ typedef enum : NSUInteger {
 
 + (NSData *)dataWithImage:(UIImage *)image;
 + (NSData *)dataWithImage:(UIImage *)image scale:(CGSize)size;
-+ (NSString *)jsonStringPrettyPrintedFormatForDictionary:(NSDictionary *)dicJson;
 
 @end
 

@@ -64,7 +64,6 @@
 		36978E7027F6F24C00557EC0 /* TFY_TextblanksField.m in Sources */ = {isa = PBXBuildFile; fileRef = 36978E6F27F6F24C00557EC0 /* TFY_TextblanksField.m */; };
 		369F05FE2A28684B005B1E0F /* TFY_OpenShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F05FD2A28684B005B1E0F /* TFY_OpenShare.m */; };
 		369F06012A286F4C005B1E0F /* TFY_OpenShare+QQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F06002A286F4C005B1E0F /* TFY_OpenShare+QQ.m */; };
-		369F06042A287010005B1E0F /* TFY_OpenShare+Renren.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F06032A287010005B1E0F /* TFY_OpenShare+Renren.m */; };
 		369F06072A287062005B1E0F /* TFY_OpenShare+Alipay.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F06062A287062005B1E0F /* TFY_OpenShare+Alipay.m */; };
 		369F060A2A28708F005B1E0F /* TFY_OpenShare+Weixin.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F06092A28708F005B1E0F /* TFY_OpenShare+Weixin.m */; };
 		369F060E2A287202005B1E0F /* TFY_OpenShare+Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F060D2A287202005B1E0F /* TFY_OpenShare+Weibo.m */; };
@@ -329,8 +328,6 @@
 		369F05FD2A28684B005B1E0F /* TFY_OpenShare.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFY_OpenShare.m; sourceTree = "<group>"; };
 		369F05FF2A286F4C005B1E0F /* TFY_OpenShare+QQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TFY_OpenShare+QQ.h"; sourceTree = "<group>"; };
 		369F06002A286F4C005B1E0F /* TFY_OpenShare+QQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TFY_OpenShare+QQ.m"; sourceTree = "<group>"; };
-		369F06022A287010005B1E0F /* TFY_OpenShare+Renren.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TFY_OpenShare+Renren.h"; sourceTree = "<group>"; };
-		369F06032A287010005B1E0F /* TFY_OpenShare+Renren.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TFY_OpenShare+Renren.m"; sourceTree = "<group>"; };
 		369F06052A287062005B1E0F /* TFY_OpenShare+Alipay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TFY_OpenShare+Alipay.h"; sourceTree = "<group>"; };
 		369F06062A287062005B1E0F /* TFY_OpenShare+Alipay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TFY_OpenShare+Alipay.m"; sourceTree = "<group>"; };
 		369F06082A28708F005B1E0F /* TFY_OpenShare+Weixin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TFY_OpenShare+Weixin.h"; sourceTree = "<group>"; };
@@ -772,8 +769,6 @@
 				369F05FD2A28684B005B1E0F /* TFY_OpenShare.m */,
 				369F05FF2A286F4C005B1E0F /* TFY_OpenShare+QQ.h */,
 				369F06002A286F4C005B1E0F /* TFY_OpenShare+QQ.m */,
-				369F06022A287010005B1E0F /* TFY_OpenShare+Renren.h */,
-				369F06032A287010005B1E0F /* TFY_OpenShare+Renren.m */,
 				369F06052A287062005B1E0F /* TFY_OpenShare+Alipay.h */,
 				369F06062A287062005B1E0F /* TFY_OpenShare+Alipay.m */,
 				369F06082A28708F005B1E0F /* TFY_OpenShare+Weixin.h */,
@@ -1586,7 +1581,6 @@
 				3608F8B028F2465C00E7D023 /* TFYExtensionRotation.m in Sources */,
 				565584C62431DD3B00020D3C /* MainViewController.m in Sources */,
 				36D8D89C27F6817400C6B400 /* TFY_TextStorage.m in Sources */,
-				369F06042A287010005B1E0F /* TFY_OpenShare+Renren.m in Sources */,
 				565583D22431AFB700020D3C /* NSNumber+TFY_Tools.m in Sources */,
 				565584642431CA5400020D3C /* TFY_ButtonChainModel.m in Sources */,
 				3654164824FF369C00CC0024 /* PolicyWebViewController.m in Sources */,

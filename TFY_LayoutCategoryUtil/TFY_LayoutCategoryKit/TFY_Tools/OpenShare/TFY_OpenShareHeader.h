@@ -9,7 +9,6 @@
  [TFY_OpenShare connectQQWithAppId:@"1103194207"];
  [TFY_OpenShare connectWeiboWithAppKey:@"402180334"];
  [TFY_OpenShare connectWeixinWithAppId:@"wxd930ea5d5a258f4f" miniAppId:@"gh_d43f693ca31f"];
- [TFY_OpenShare connectRenrenWithAppId:@"228525" AndAppKey:@"1dd8cba4215d4d4ab96a49d3058c1d7f"];
  [TFY_OpenShare connectAlipay];//支付宝参数都是服务器端生成的，这里不需要key.
  
  - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
@@ -25,7 +24,6 @@
 
 #import "TFY_OpenShare+QQ.h"
 #import "TFY_OpenShare+Weixin.h"
-#import "TFY_OpenShare+Renren.h"
 #import "TFY_OpenShare+Alipay.h"
 #import "TFY_OpenShare+Weibo.h"
 

@@ -173,92 +173,78 @@ static TFY_OSMessage *message;
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
 }
 
-+ (id)keyedUnArchiverForKey:(id)object FromFile:(NSString *)path {
-    NSError *error=nil;
-    NSData * unData = [NSData dataWithContentsOfFile:path];
-    id unarch;
-    if (@available(iOS 14.0, *)) {
-        unarch = [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClass:object fromData:unData error:&error];
-    } else {
-        unarch = [NSKeyedUnarchiver unarchivedObjectOfClass:object fromData:unData error:&error];
-    }
-    return unarch;
-}
-
-+ (void)keyedArchiverObject:(id)object ToFile:(NSString *)path {
-    NSError * error;
-    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:object requiringSecureCoding:YES error:&error];
-    [data writeToFile:path atomically:YES];
-}
-
-//将数组转换成json格式字符串,不含\n这些符号
-+ (NSString *)jsonStringCompactFormatForNSArray:(NSArray *)arrJson {
-    if (![arrJson isKindOfClass:[NSArray class]] || ![NSJSONSerialization isValidJSONObject:arrJson]) {
-        return nil;
-    }
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arrJson options:0 error:nil];
-    NSString *strJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    return strJson;
-}
- 
-//将字典转换成json格式字符串,含\n这些符号,便于阅读
-+ (NSString *)jsonStringPrettyPrintedFormatForDictionary:(NSDictionary *)dicJson {
-    if (![dicJson isKindOfClass:[NSDictionary class]] || ![NSJSONSerialization isValidJSONObject:dicJson]) {
-        return nil;
-    }
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dicJson options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *strJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    return strJson;
-}
-
-
-+(void)setGeneralPasteboard:(NSString*)key Value:(NSDictionary*)value encoding:(TFYOSPboardEncoding)encoding{
-    if (value&&key) {
-        NSData *data=nil;
-        NSString *path = @"";
-        NSError *err;
-        switch (encoding) {
-            case TFYOSPboardEncodingKeyedArchiver:
-                path = [self jsonStringPrettyPrintedFormatForDictionary:value];
-                data = [NSKeyedArchiver archivedDataWithRootObject:self requiringSecureCoding:YES error:&err];
-                [data writeToFile:path atomically:YES];
-                break;
-            case TFYOSPboardEncodingPropertyListSerialization:
-                data=[NSPropertyListSerialization dataWithPropertyList:value format:NSPropertyListBinaryFormat_v1_0 options:0 error:&err];
-            default:
-                NSLog(@"encoding not implemented");
-                break;
-        }
-        if (err) {
-            NSLog(@"error when NSPropertyListSerialization: %@",err);
-        }else if (data){
-            [[UIPasteboard generalPasteboard] setData:data forPasteboardType:key];
-        }
-    }
-}
-+(NSDictionary*)generalPasteboardData:(NSString*)key encoding:(TFYOSPboardEncoding)encoding{
-    NSData *data=[[UIPasteboard generalPasteboard] dataForPasteboardType:key];
-    NSDictionary *dic=nil;
-    if (data) {
-        NSError *err;
-        switch (encoding) {
-            case TFYOSPboardEncodingKeyedArchiver:
-                if (@available(iOS 14.0, *)) {
-                    dic = [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClass:self fromData:data error:&err].firstObject;
-                } else {
-                    dic = [NSKeyedUnarchiver unarchivedObjectOfClass:self fromData:data error:&err];
++(void)setGeneralPasteboard:(NSString*)key Value:(id)value encoding:(TFYOSPboardEncoding)encoding{
+    if (nil != value && nil != key) {
+        NSData *data = nil;
+        @try {
+            NSError *err = nil;
+            switch (encoding) {
+                case TFYOSPboardEncodingKeyedArchiver: {
+                    if (@available(iOS 11, *)) {
+                        data = [NSKeyedArchiver archivedDataWithRootObject:value requiringSecureCoding:NO error:NULL];
+                    }
+                    break;
                 }
+                case TFYOSPboardEncodingPropertyListSerialization: {
+                    data = [NSPropertyListSerialization dataWithPropertyList:value
+                                                                      format:NSPropertyListBinaryFormat_v1_0
+                                                                     options:kNilOptions
+                                                                       error:&err];
+                    break;
+                }
+                default:
+                    NSLog(@"encoding not implemented");
+                    break;
+            }
+            
+            if (nil != err) {
+                NSLog(@"error when NSPropertyListSerialization: %@",err);
+            }
+        } @catch (NSException *exception) {
+            NSLog(@"%@", exception);
+            data = nil;
+        } @finally {
+            if (nil != data) {
+                [UIPasteboard.generalPasteboard setData:data forPasteboardType:key];
+            }
+        }
+    }
+}
+
++(NSDictionary*)generalPasteboardData:(NSString*)key encoding:(TFYOSPboardEncoding)encoding {
+    NSData *data = [UIPasteboard.generalPasteboard dataForPasteboardType:key];
+    if (nil == data) {
+        return nil;
+    }
+    NSDictionary *dic = nil;
+    
+    @try {
+        NSError *err = nil;
+        switch (encoding) {
+            case TFYOSPboardEncodingKeyedArchiver: {
+                dic = [NSKeyedUnarchiver unarchivedObjectOfClass:NSDictionary.class fromData:data error:&err];
                 break;
-            case TFYOSPboardEncodingPropertyListSerialization:
-                dic=[NSPropertyListSerialization propertyListWithData:data options:0 format:0 error:&err];
+            }
+                
+            case TFYOSPboardEncodingPropertyListSerialization: {
+                dic = [NSPropertyListSerialization propertyListWithData:data
+                                                                options:kNilOptions
+                                                                 format:NULL
+                                                                  error:&err];
+                break;
+            }
             default:
                 break;
         }
-        if (err) {
+        if (nil != err) {
             NSLog(@"error when NSPropertyListSerialization: %@",err);
         }
+    } @catch (NSException *exception) {
+        NSLog(@"%@", exception);
+        dic = nil;
+    } @finally {
+        return dic;
     }
-    return dic;
 }
 
 +(NSString*)base64AndUrlEncode:(NSString *)string{
