@@ -95,7 +95,6 @@ static NSMutableDictionary *_imageDict;
 
 + (void)creatGroupUrl:(NSArray<NSString *> *)urlArray widthImage:(CGFloat)imageWidth imageArr:(void(^)(NSArray<TFY_ImageModel *> *images))imageHandle
 {
-    [TFY_Utils makeToastActivity];
     __block NSMutableArray<TFY_ImageModel *> *groupImages = [NSMutableArray array];
     dispatch_queue_t queue = dispatch_queue_create("downloadImages", DISPATCH_QUEUE_SERIAL);
     dispatch_async(queue, ^{
@@ -141,7 +140,6 @@ static NSMutableDictionary *_imageDict;
         // 信号等待
         dispatch_semaphore_wait(disp, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [TFY_Utils hideToastActivity];
             if (imageHandle) {
                 imageHandle(groupImages);
             }
