@@ -8,149 +8,188 @@
 
 #import "TFY_AppVersion.h"
 #import "TFY_Scene.h"
+#import "TFY_Utils.h"
 #import "UIApplication+TFY_Tools.h"
 
-#ifndef dispatch_main_async_safe
-#define appVwesion_dispatch_main_async_safe(block)\
-    if (dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL) == dispatch_queue_get_label(dispatch_get_main_queue())) {\
-        block();\
-    } else {\
-        dispatch_async(dispatch_get_main_queue(), block);\
+#import <StoreKit/StoreKit.h>
+
+#define APP_InfoDict                [[NSBundle mainBundle] infoDictionary]
+//应用版本
+#define APP_Version                 [APP_InfoDict objectForKey:@"CFBundleShortVersionString"]
+//应用BundleId
+#define APP_BundleId                [APP_InfoDict objectForKey:@"CFBundleIdentifier"]
+//区域编码
+#define APP_CountryCode             [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode]
+
+#define APPStore_BundleId_URL       @"https://itunes.apple.com/lookup?bundleId=%@&country=%@"
+#define APPStore_ItunesId_URL       @"https://itunes.apple.com/lookup?id=%@&country=%@"
+
+#define AppStore_ResultCount        @"resultCount"
+#define AppStore_Results            @"results"
+
+
+@implementation TFY_AppVersionModel
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    if ([key isEqualToString:@"description"]) {
+        self.descrip = value;
     }
-#endif
+}
+
+@end
+
+@interface TFY_AppVersion ()<SKStoreProductViewControllerDelegate>
+@property (nonatomic, strong) TFY_AppVersionModel *appModel;
+@end
 
 @implementation TFY_AppVersion
 
-// 本地版本号
-+ (NSString *)locationVersion
-{
-    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    NSString *nowVersion = [infoDictionary valueForKey:@"CFBundleShortVersionString"];
-    return nowVersion;
+/**
+ *  自动检测app版本更新
+ *  自动读取BundleId去App Store获取信息
+ */
++ (void)autoCheckVersion {
+    [self autoCheckVersionHandleView:nil];
 }
-
-// Appstore 版本号
-+ (void)isUpdataApp:(NSString *)appId getNewVersion:(void(^)(BOOL success, NSDictionary *result))block
-{
-    NSString *urlstr = [NSString stringWithFormat:@"http://itunes.apple.com/cn/lookup?id=%@", appId];
-    NSURL *url = [NSURL URLWithString:urlstr];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setTimeoutInterval:10];
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (data) {
-            if (!error) {
-                NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                NSArray *results = [dictionary valueForKey:@"results"];
-                if (results.count > 0) {
-                    NSDictionary *dic = results.firstObject;
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (block) {
-                            block(YES, dic);
-                        }
-                    });
-                    return ;
-                } else {
-                    // 已是最新版本
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (block) {
-                            block(YES, nil);
-                        }
-                    });
-                    return;
++ (void)autoCheckVersionHandleView:(BlockAppStoreInfo)appInfo {
+    __weak typeof(self) weakSelf = self;
+    [self getNewAppStoreInfo:^(TFY_AppVersionModel *appModel) {
+        if ([weakSelf shouldUpdateApp:appModel]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (appInfo){
+                    appInfo(appModel);
+                }else{
+                    [TFY_Utils makeToast:@"请自定义View,block回调"];
                 }
-            }
+            });
         }
-        // 请求失败
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (block) {
-                block(NO, nil);
-            }
-        });
-        
     }];
-    [task resume];
+}
+/**
+ *  根据应用itunesId版本更新
+ */
++ (void)checkVersionItunesId:(NSString *)itunesId {
+    [self checkVersionItunesId:itunesId handleView:nil];
+}
++ (void)checkVersionItunesId:(NSString *)itunesId handleView:(BlockAppStoreInfo)appInfo {
+    __weak typeof(self) weakSelf = self;
+    [self getNewAppStoreInfoItunesId:itunesId appInfo:^(TFY_AppVersionModel *appModel) {
+        if ([weakSelf shouldUpdateApp:appModel]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (appInfo){
+                    appInfo(appModel);
+                }else{
+                    [TFY_Utils makeToast:@"请自定义View,block回调"];
+                }
+            });
+        }
+    }];
 }
 
-// 比较版本号
-+ (BOOL)shouldUpdateNowVersion:(NSString *)nowVersion newVersion:(NSString *)newVersion
-{
-    NSComparisonResult result = [newVersion compare:nowVersion options:NSNumericSearch];
-    switch (result) {
-        case NSOrderedDescending:
+/**
+ *  获取App Store应用信息
+ */
++ (void)getAppInfoByUrl:(NSString *)url appStore:(BlockAppStoreInfo)appInfo {
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLSession *urlSession = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [urlSession dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"error = %@",error);
+            return;
+        }
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
+                                                             options:NSJSONReadingMutableContainers
+                                                               error:nil];
+        if ([dict[AppStore_ResultCount] integerValue] == 0) {
+            NSLog(@"please check you App!");
+            return;
+        }
+        TFY_AppVersionModel *model = [[TFY_AppVersionModel alloc] init];
+        NSDictionary *results = [dict[AppStore_Results] firstObject];
+        [model setValuesForKeysWithDictionary:results];
+        appInfo(model);
+    }];
+    [dataTask resume];
+}
+
+/**
+ *  获取前期应用在App Store的信息详情
+ *  1、自动读取当前APP的App Store信息
+ *  2、itunesId:自定义传入APP应用的iTunesId
+ */
++ (void)getNewAppStoreInfo:(BlockAppStoreInfo)appInfo {
+    NSString *url = [self autoTransformURLByItunesId:nil];
+    [self getAppInfoByUrl:url appStore:^(TFY_AppVersionModel *appModel) {
+        appInfo(appModel);
+    }];
+}
++ (void)getNewAppStoreInfoItunesId:(NSString *)itunesId appInfo:(BlockAppStoreInfo)appInfo {
+    NSString *url = [self autoTransformURLByItunesId:itunesId];
+    [self getAppInfoByUrl:url appStore:^(TFY_AppVersionModel *appModel) {
+        appInfo(appModel);
+    }];
+}
+/**
+ *  自动装换出正确请求App Store的URL
+ */
++ (NSString *)autoTransformURLByItunesId:(NSString *)itunesId {
+    NSString *urlStr = @"";
+    if (itunesId) {
+        urlStr = [NSString stringWithFormat:APPStore_ItunesId_URL,itunesId,APP_CountryCode];
+    }else {
+        urlStr = [NSString stringWithFormat:APPStore_BundleId_URL,APP_BundleId,APP_CountryCode];
+    }
+    return urlStr;
+}
+/**
+ *  判断是否需要更新
+ */
++ (BOOL)shouldUpdateApp:(TFY_AppVersionModel *)model {
+    NSMutableArray *currentVersions = [NSMutableArray array];
+    NSMutableArray *appStoreVersions = [NSMutableArray array];
+    [currentVersions addObjectsFromArray:[APP_Version componentsSeparatedByString:@"."]];
+    [appStoreVersions addObjectsFromArray:[model.version componentsSeparatedByString:@"."]];
+    NSInteger difference = currentVersions.count - appStoreVersions.count;
+    if (difference < 0) {
+        for (NSInteger i = 0; i < labs(difference); i++) {
+            [currentVersions addObject:@"0"];
+        }
+    }else if (difference > 0){
+        for (NSInteger i = 0; i < labs(difference); i++) {
+            [appStoreVersions addObject:@"0"];
+        }
+    }
+    for (NSInteger i = 0; i < appStoreVersions.count; i++) {
+        NSInteger currNum = [currentVersions[i] integerValue];
+        NSInteger appStoreNum = [appStoreVersions[i] integerValue];
+        if (appStoreNum > currNum) {
             return YES;
-        default:
+        }else if (appStoreNum < currNum) {
             return NO;
+        }
     }
+    return NO;
 }
 
-// 检测版本并回调
-+ (void)isUpdataApp:(NSString *)appId checkNewVersionNotificationBlock:(void(^)(BOOL success, NSDictionary *_Nullable result))block
-{
-    [self isUpdataApp:appId getNewVersion:^(BOOL success, NSDictionary *result) {
-        if (success) {
-            if (result) {
-                NSString *newVersion = [result valueForKey:@"version"];
-                NSString *nowVersion = [self locationVersion];
-                BOOL shouldUpdate = [self shouldUpdateNowVersion:nowVersion newVersion:newVersion];
-                if (shouldUpdate) {
-                    // 版本不同则有更新
-                    appVwesion_dispatch_main_async_safe(^{
-                        if (block) {
-                            block(success, result);
-                        }
-                    });
-                    return;
-                }
-            }
+/// 获取对应项目下载界面
+- (void)sKStoreProductAppId:(NSString *)appid {
+    [TFY_Utils makeToastActivity];
+    SKStoreProductViewController *storeProductVC = [[SKStoreProductViewController alloc] init];
+    storeProductVC.delegate = self;
+    NSDictionary *dic = [NSDictionary dictionaryWithObject:appid forKey:SKStoreProductParameterITunesItemIdentifier];
+    [storeProductVC loadProductWithParameters:dic completionBlock:^(BOOL result, NSError * _Nullable error) {
+        if (!error) {
+            [self.currentViewController presentViewController:storeProductVC animated:YES completion:nil];
         }
-        appVwesion_dispatch_main_async_safe(^{
-            if (block) {
-                block(success, nil);
-            }
-        });
+        [TFY_Utils hideToastActivity];
     }];
 }
 
-// 弹出提示信息
-+ (void)showUpdateTips:(NSDictionary *)dictionary
-{
-    [self showUpdateTips:dictionary completion:nil];
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController{
+    [self.currentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-// 弹出提示信息并回调
-+ (void)showUpdateTips:(NSDictionary *)dictionary completion:(void(^__nullable)(BOOL success,NSString *trackId,NSURL *trackViewUrl))block
-{
-    NSString *version = [dictionary objectForKey:@"version"];
-    NSString *releaseNotes = [dictionary valueForKey:@"releaseNotes"];
-    if (releaseNotes.length == 0) {
-        releaseNotes = @" ";
-    }
-    releaseNotes = [releaseNotes stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    
-    NSString *trackViewUrl = [dictionary valueForKey:@"trackViewUrl"];
-    
-    NSString *title = [NSString stringWithFormat:@"版本更新(v%@)", version];
-    NSString *message = [NSString stringWithFormat:@"%@\n现在更新？", releaseNotes];
-    NSString *trackId = [NSString stringWithFormat:@"%@",dictionary[@"trackId"]];
-    //有新版本
-    UIAlertController *alertCtr = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *buttonAct = [UIAlertAction actionWithTitle:@"更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if (block) {
-            block(YES,trackId,[NSURL URLWithString:trackViewUrl]);
-        }
-    }];
-    UIAlertAction *cancelAct = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        if (block) {
-            block(NO,trackId,[NSURL URLWithString:trackViewUrl]);
-        }
-    }];
-    [alertCtr addAction:buttonAct];
-    [alertCtr addAction:cancelAct];
-    [self.currentViewController presentViewController:alertCtr animated:YES completion:nil];
-}
-
-+ (UIWindow *)LastWindow {
+- (UIWindow *)LastWindow {
     NSEnumerator  *frontToBackWindows = [[TFY_Scene defaultPackage].windows reverseObjectEnumerator];
     for (UIWindow *window in frontToBackWindows) {
         BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
@@ -162,7 +201,7 @@
     return [UIApplication tfy_keyWindow];
 }
 
-+ (UIViewController *)currentViewController {
+- (UIViewController *)currentViewController {
     UIViewController* currentViewController = self.LastWindow.rootViewController;
     BOOL runLoopFind = YES;
     while (runLoopFind) {
@@ -180,5 +219,6 @@
     }
     return currentViewController;
 }
+
 
 @end
