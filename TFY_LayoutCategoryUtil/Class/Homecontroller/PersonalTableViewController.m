@@ -7,11 +7,9 @@
 //
 
 #import "PersonalTableViewController.h"
-#import <StoreKit/StoreKit.h>
 
-@interface PersonalTableViewController ()<SKStoreProductViewControllerDelegate,TextTagCollectionViewDelegate>
+@interface PersonalTableViewController ()<TextTagCollectionViewDelegate>
 @property(nonatomic , strong)UITextView *textView;
-@property(nonatomic , strong)UIButton *buttom;
 @property (strong, nonatomic)TFY_TextTagCollectionView *tagsView;
 @end
 
@@ -36,20 +34,12 @@
         });
     }];
     
-    self.buttom.makeChain
-    .addToSuperView(self.view)
-    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
-        make.left.right.mas_equalTo(self.textView);
-        make.top.equalTo(self.textView.mas_bottom).offset(20);
-        make.height.mas_equalTo(44);
-    });
-    
     self.tagsView.makeChain
     .addToSuperView(self.view)
     .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
         make.left.equalTo(self.view).offset(20);
         make.right.equalTo(self.view).offset(-20);
-        make.top.equalTo(self.buttom.mas_bottom).offset(30);
+        make.top.equalTo(self.textView.mas_bottom).offset(20);
         make.bottom.equalTo(self.view).offset(-TFY_kBottomBarHeight());
     });
 
@@ -161,20 +151,6 @@
     return _textView;
 }
 
-- (UIButton *)buttom {
-    if (!_buttom) {
-        _buttom = UIButtonSet();
-        _buttom.makeChain
-        .backgroundColor(UIColor.orangeColor)
-        .text(@"检测更新", UIControlStateNormal)
-        .textColor(UIColor.whiteColor, UIControlStateNormal)
-        .cornerRadius(22)
-        .masksToBounds(YES)
-        .addTarget(self, @selector(buttomClick:), UIControlEventTouchUpInside);
-    }
-    return _buttom;
-}
-
 - (TFY_TextTagCollectionView *)tagsView {
     if (!_tagsView) {
         _tagsView = TFY_TextTagCollectionView.new;
@@ -182,37 +158,6 @@
         _tagsView.delegate = self;
     }
     return _tagsView;
-}
-
-- (void)buttomClick:(UIButton *)btn {
-    [TFY_AppVersion isUpdataApp:@"1596187588" checkNewVersionNotificationBlock:^(BOOL success, NSDictionary * _Nullable result) {
-        if (success && result.count > 0) {
-            [TFY_AppVersion showUpdateTips:result completion:^(BOOL success, NSString * _Nonnull trackId, NSURL * _Nonnull trackViewUrl) {
-                if (success) {
-                    [self sKStoreProductAppId:trackId];
-                }
-            }];
-        } else {
-            [TFY_Utils makeToast:@"已经是最新版本了!"];
-        }
-    }];
-}
-/// 获取对应项目下载界面
-- (void)sKStoreProductAppId:(NSString *)appid {
-    [TFY_Utils makeToastActivity];
-    SKStoreProductViewController *storeProductVC = [[SKStoreProductViewController alloc] init];
-    storeProductVC.delegate = self;
-    NSDictionary *dic = [NSDictionary dictionaryWithObject:appid forKey:SKStoreProductParameterITunesItemIdentifier];
-    [storeProductVC loadProductWithParameters:dic completionBlock:^(BOOL result, NSError * _Nullable error) {
-        if (!error) {
-            [self presentViewController:storeProductVC animated:YES completion:nil];
-        }
-        [TFY_Utils hideToastActivity];
-    }];
-}
-
-- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)textTagCollectionView:(TFY_TextTagCollectionView *)textTagCollectionView
