@@ -19,8 +19,6 @@
 #import "TFY_BadgeViewHeader.h"
 //内联函数
 #import "TFY_Inlinefunction.h"
-// 自定义输入框
-#import "TFY_TextKit.h"
 // 索引
 #import "UITableView+IndexView.h"
 // 屏幕旋转
