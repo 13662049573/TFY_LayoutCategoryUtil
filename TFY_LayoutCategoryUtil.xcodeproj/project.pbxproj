@@ -67,6 +67,8 @@
 		369F06072A287062005B1E0F /* TFY_OpenShare+Alipay.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F06062A287062005B1E0F /* TFY_OpenShare+Alipay.m */; };
 		369F060A2A28708F005B1E0F /* TFY_OpenShare+Weixin.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F06092A28708F005B1E0F /* TFY_OpenShare+Weixin.m */; };
 		369F060E2A287202005B1E0F /* TFY_OpenShare+Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F060D2A287202005B1E0F /* TFY_OpenShare+Weibo.m */; };
+		36B9419F2A64D84200058F0A /* redpacket_24.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36B9419D2A64D84200058F0A /* redpacket_24.gif */; };
+		36B941A02A64D84200058F0A /* redpacket_12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36B9419E2A64D84200058F0A /* redpacket_12.gif */; };
 		36BA238724EE488000CE8275 /* UITableViewCell+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA238424EE487F00CE8275 /* UITableViewCell+TFY_Chain.m */; };
 		36BA238824EE488000CE8275 /* UITableView+TFY_LayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA238524EE488000CE8275 /* UITableView+TFY_LayoutCell.m */; };
 		36BE1D5E2A130DC50028C5B8 /* TFY_TextTagStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BE1D5D2A130DC50028C5B8 /* TFY_TextTagStyle.m */; };
@@ -89,6 +91,7 @@
 		36CE97BE254FBB830065B366 /* UIImage+iOS13DarkMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 36CE97BD254FBB830065B366 /* UIImage+iOS13DarkMode.m */; };
 		36D3DC0E27F6C9E900A79848 /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D3DC0D27F6C9E900A79848 /* TextViewController.m */; };
 		36DDFB9F25FC64A2004F1740 /* EmptyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DDFB9E25FC64A2004F1740 /* EmptyTableViewController.m */; };
+		36E60F4A2A62A330001CB83D /* WechatIMG1.GIF in Resources */ = {isa = PBXBuildFile; fileRef = 36E60F492A62A330001CB83D /* WechatIMG1.GIF */; };
 		36E7646127ABA5D100254089 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E7646027ABA5D100254089 /* UIView+Toast.m */; };
 		36E77AF3250B75FE00D503E8 /* TFY_Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E77AF2250B75FE00D503E8 /* TFY_Video.m */; };
 		36EBD9262577399B00C70D20 /* TFY_BadgeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EBD9252577399B00C70D20 /* TFY_BadgeControl.m */; };
@@ -326,6 +329,8 @@
 		369F060B2A2870F7005B1E0F /* TFY_OpenShareHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_OpenShareHeader.h; sourceTree = "<group>"; };
 		369F060C2A287202005B1E0F /* TFY_OpenShare+Weibo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TFY_OpenShare+Weibo.h"; sourceTree = "<group>"; };
 		369F060D2A287202005B1E0F /* TFY_OpenShare+Weibo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TFY_OpenShare+Weibo.m"; sourceTree = "<group>"; };
+		36B9419D2A64D84200058F0A /* redpacket_24.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = redpacket_24.gif; sourceTree = "<group>"; };
+		36B9419E2A64D84200058F0A /* redpacket_12.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = redpacket_12.gif; sourceTree = "<group>"; };
 		36BA238324EE487F00CE8275 /* UITableViewCell+TFY_Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+TFY_Chain.h"; sourceTree = "<group>"; };
 		36BA238424EE487F00CE8275 /* UITableViewCell+TFY_Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+TFY_Chain.m"; sourceTree = "<group>"; };
 		36BA238524EE488000CE8275 /* UITableView+TFY_LayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+TFY_LayoutCell.m"; sourceTree = "<group>"; };
@@ -372,6 +377,7 @@
 		36D3DC0D27F6C9E900A79848 /* TextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextViewController.m; sourceTree = "<group>"; };
 		36DDFB9D25FC64A2004F1740 /* EmptyTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmptyTableViewController.h; sourceTree = "<group>"; };
 		36DDFB9E25FC64A2004F1740 /* EmptyTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmptyTableViewController.m; sourceTree = "<group>"; };
+		36E60F492A62A330001CB83D /* WechatIMG1.GIF */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = WechatIMG1.GIF; sourceTree = "<group>"; };
 		36E7645F27ABA5D100254089 /* UIView+Toast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		36E7646027ABA5D100254089 /* UIView+Toast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		36E77AF1250B75FE00D503E8 /* TFY_Video.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_Video.h; sourceTree = "<group>"; };
@@ -750,6 +756,15 @@
 			path = OpenShare;
 			sourceTree = "<group>";
 		};
+		36B9419C2A64D84200058F0A /* 红包 */ = {
+			isa = PBXGroup;
+			children = (
+				36B9419D2A64D84200058F0A /* redpacket_24.gif */,
+				36B9419E2A64D84200058F0A /* redpacket_12.gif */,
+			);
+			path = "红包";
+			sourceTree = "<group>";
+		};
 		36BE1D5B2A130D880028C5B8 /* TFY_TagCollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -891,6 +906,7 @@
 		565583A5243197BB00020D3C /* Homecontroller */ = {
 			isa = PBXGroup;
 			children = (
+				36B9419C2A64D84200058F0A /* 红包 */,
 				565584C12431DCE600020D3C /* GuideViewController.h */,
 				565584C22431DCE600020D3C /* GuideViewController.m */,
 				565584C42431DD3B00020D3C /* MainViewController.h */,
@@ -923,6 +939,7 @@
 				36FEC8332850260F00B44896 /* IgnoreSectionsIndexes.plist */,
 				36FEC8342850260F00B44896 /* Indexes.plist */,
 				565583AC243197F600020D3C /* TFY_PrefixHeader.pch */,
+				36E60F492A62A330001CB83D /* WechatIMG1.GIF */,
 			);
 			path = PCH;
 			sourceTree = "<group>";
@@ -1311,7 +1328,10 @@
 			files = (
 				36FEC8352850260F00B44896 /* IgnoreSectionsIndexes.plist in Resources */,
 				56558379243196E000020D3C /* LaunchScreen.storyboard in Resources */,
+				36E60F4A2A62A330001CB83D /* WechatIMG1.GIF in Resources */,
 				56558376243196E000020D3C /* Assets.xcassets in Resources */,
+				36B9419F2A64D84200058F0A /* redpacket_24.gif in Resources */,
+				36B941A02A64D84200058F0A /* redpacket_12.gif in Resources */,
 				36FEC8362850260F00B44896 /* Indexes.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,7 @@
 #import "AntmeuenTwoController.h"
 #import "IndexViewController.h"
 @interface AntmeuenTwoController ()
-
+@property(nonatomic , strong)TFY_ImageView *gifImageView;
 @end
 
 @implementation AntmeuenTwoController
@@ -18,102 +18,27 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"选择索引类型";
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.title = @"gif";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"GIF" style:UIBarButtonItemStylePlain target:self action:@selector(gifImageViewClick:)];
     
-    
+    self.gifImageView.makeChain
+//    .contentMode(UIViewContentModeScaleAspectFit)
+    .backgroundColor(UIColor.blackColor)
+    .addToSuperView(self.view)
+    .makeMasonry(^(MASConstraintMaker * _Nonnull make) {
+        make.edges.equalTo(self.view).offset(0);
+    });
 }
 
-#pragma mark - UITableViewDelegate
+- (void)gifImageViewClick:(UIBarButtonItem *)item {
+    self.gifImageView.image = [UIImage tfy_animatedGifName:@"redpacket_24" scale:24];
+}
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UIViewController *viewController;
-    switch (indexPath.row) {
-        case 0:
-        {
-            IndexViewController *indexViewController = [IndexViewController new];
-            indexViewController.ignoreSections = NO;
-            indexViewController.hasSearch = YES;
-            viewController = indexViewController;
-        }
-            break;
-            
-        case 1:
-        {
-            IndexViewController *indexViewController = [IndexViewController new];
-            indexViewController.ignoreSections = YES;
-            indexViewController.hasSearch = YES;
-            viewController = indexViewController;
-        }
-            break;
-            
-        case 2:
-        {
-            IndexViewController *indexViewController = [IndexViewController new];
-            indexViewController.ignoreSections = NO;
-            viewController = indexViewController;
-        }
-            break;
-            
-        case 3:
-        {
-            IndexViewController *indexViewController = [IndexViewController new];
-            indexViewController.ignoreSections = YES;
-            viewController = indexViewController;
-        }
-            break;
-            
-        default:
-            break;
+- (TFY_ImageView *)gifImageView {
+    if (!_gifImageView) {
+        _gifImageView = TFY_ImageView.new;
     }
-    [self.navigationController pushViewController:viewController animated:YES];
-}
-
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 4;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    switch (indexPath.row) {
-        case 0:
-        {
-            cell.textLabel.text = @"不忽略sections";
-            cell.detailTextLabel.text = @"有搜索";
-        }
-            break;
-            
-        case 1:
-        {
-            cell.textLabel.text = @"忽略三个sections";
-            cell.detailTextLabel.text = @"有搜索";
-        }
-            break;
-            
-        case 2:
-        {
-            cell.textLabel.text = @"不忽略sections";
-            cell.detailTextLabel.text = @"无搜索";
-        }
-            break;
-            
-        case 3:
-        {
-            cell.textLabel.text = @"忽略三个sections";
-            cell.detailTextLabel.text = @"无搜索";
-        }
-            break;
-            
-        default:
-            break;
-    }
-    return cell;
+    return _gifImageView;
 }
 
 @end

@@ -212,11 +212,11 @@ TFY_PROPERTY_CHAIN_BLOCK(myblock,NSString *name,NSString *name2);
     TfySY_TabBarItem *item = tabBarVC.tfySY_TabBar.currentSelectItem; // 因为已经到这个页面，说明就是当前的选项卡item
     // 设置徽标位置
     TfySY_TabBarConfigModel *itemModel = item.itemModel;
-    itemModel.itemBadgeStyle = TfySY_TabBarItemBadgeStyleTopCenter; // 因为是item强引用model，所以两个model的指针相同，可以直接设置
+    itemModel.itemBadgeStyle = TfySY_TabBarItemBadgeStyleTopLeft; // 因为是item强引用model，所以两个model的指针相同，可以直接设置
     
     item.badgeLabel.badgeWidth = 15;  // 宽度
     item.badgeLabel.badgeHeight = 15;  // 高度
-    item.badge = @"7";
+    item.badge = @"99";
     
     NSDate *fineDate = [NSDate.date tfy_dateByAddingHours:3];
     TFY_Weak(self);
