@@ -7,6 +7,7 @@
 //
 
 #import "EmptyTableViewController.h"
+#import "IndexViewController.h"
 
 @interface EmptyTableViewController ()<UITextFieldDelegate>
 
@@ -53,9 +54,15 @@
         .textColor(UIColor.blackColor, UIControlStateNormal)
         .backgroundColor(UIColor.orangeColor)
         .makeTag(idx+1)
+        .addTarget(self, @selector(hengpingClick), UIControlEventTouchUpInside)
         .addToSuperView(self.view);
     }];
     
+}
+
+- (void)hengpingClick {
+    IndexViewController *vc = IndexViewController.new;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)textFieldDidChangeSelection:(UITextField *)textField {
