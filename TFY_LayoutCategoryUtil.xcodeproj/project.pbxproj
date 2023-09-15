@@ -67,6 +67,7 @@
 		369F06072A287062005B1E0F /* TFY_OpenShare+Alipay.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F06062A287062005B1E0F /* TFY_OpenShare+Alipay.m */; };
 		369F060A2A28708F005B1E0F /* TFY_OpenShare+Weixin.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F06092A28708F005B1E0F /* TFY_OpenShare+Weixin.m */; };
 		369F060E2A287202005B1E0F /* TFY_OpenShare+Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F060D2A287202005B1E0F /* TFY_OpenShare+Weibo.m */; };
+		36A907542AB4707A00F7797B /* TFY_ModelSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A907532AB4707A00F7797B /* TFY_ModelSqlite.m */; };
 		36B9419F2A64D84200058F0A /* redpacket_24.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36B9419D2A64D84200058F0A /* redpacket_24.gif */; };
 		36B941A02A64D84200058F0A /* redpacket_12.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36B9419E2A64D84200058F0A /* redpacket_12.gif */; };
 		36BA238724EE488000CE8275 /* UITableViewCell+TFY_Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA238424EE487F00CE8275 /* UITableViewCell+TFY_Chain.m */; };
@@ -329,6 +330,8 @@
 		369F060B2A2870F7005B1E0F /* TFY_OpenShareHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFY_OpenShareHeader.h; sourceTree = "<group>"; };
 		369F060C2A287202005B1E0F /* TFY_OpenShare+Weibo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TFY_OpenShare+Weibo.h"; sourceTree = "<group>"; };
 		369F060D2A287202005B1E0F /* TFY_OpenShare+Weibo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TFY_OpenShare+Weibo.m"; sourceTree = "<group>"; };
+		36A907522AB4707A00F7797B /* TFY_ModelSqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFY_ModelSqlite.h; sourceTree = "<group>"; };
+		36A907532AB4707A00F7797B /* TFY_ModelSqlite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFY_ModelSqlite.m; sourceTree = "<group>"; };
 		36B9419D2A64D84200058F0A /* redpacket_24.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = redpacket_24.gif; sourceTree = "<group>"; };
 		36B9419E2A64D84200058F0A /* redpacket_12.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = redpacket_12.gif; sourceTree = "<group>"; };
 		36BA238324EE487F00CE8275 /* UITableViewCell+TFY_Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+TFY_Chain.h"; sourceTree = "<group>"; };
@@ -754,6 +757,15 @@
 				369F060D2A287202005B1E0F /* TFY_OpenShare+Weibo.m */,
 			);
 			path = OpenShare;
+			sourceTree = "<group>";
+		};
+		36A907512AB4705800F7797B /* ModelSqlite */ = {
+			isa = PBXGroup;
+			children = (
+				36A907522AB4707A00F7797B /* TFY_ModelSqlite.h */,
+				36A907532AB4707A00F7797B /* TFY_ModelSqlite.m */,
+			);
+			path = ModelSqlite;
 			sourceTree = "<group>";
 		};
 		36B9419C2A64D84200058F0A /* 红包 */ = {
@@ -1198,6 +1210,7 @@
 		565583B42431990A00020D3C /* TFY_Tools */ = {
 			isa = PBXGroup;
 			children = (
+				36A907512AB4705800F7797B /* ModelSqlite */,
 				369F05FB2A28681D005B1E0F /* OpenShare */,
 				36C334AE24ED2D4D00DA6FB2 /* TFY_ToolsHeader.h */,
 				36885734298600D60023A340 /* GCD */,
@@ -1596,6 +1609,7 @@
 				5655847C2431CDB800020D3C /* TFY_ScrollViewChainModel.m in Sources */,
 				36EBD93825773E8900C70D20 /* UITabBarItem+Badge.m in Sources */,
 				367EE8C527B6239500977C9B /* UIImage+Addtions.m in Sources */,
+				36A907542AB4707A00F7797B /* TFY_ModelSqlite.m in Sources */,
 				36867DB724EBA1DB00A761BC /* UIFont+TFY_Tools.m in Sources */,
 				565584602431C91300020D3C /* TFY_ActivityIndicatorViewModel.m in Sources */,
 				36BA238724EE488000CE8275 /* UITableViewCell+TFY_Chain.m in Sources */,
