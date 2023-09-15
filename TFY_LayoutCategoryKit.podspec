@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_LayoutCategoryKit"
 
-  spec.version      = "3.0.3"
+  spec.version      = "3.0.5"
 
   spec.summary      = "全新链式的界面初始化和界面跳转，布局基于Masonry"
 
@@ -35,6 +35,10 @@ Pod::Spec.new do |spec|
 
      ss.subspec 'OpenShare' do |s|
       s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/OpenShare/**/*.{h,m}"
+     end
+
+     ss.subspec 'ModelSqlite' do |s|
+      s.source_files  = "TFY_LayoutCategoryUtil/TFY_LayoutCategoryKit/TFY_Tools/ModelSqlite/**/*.{h,m}"
      end
 
    end
