@@ -1244,6 +1244,22 @@ Class tfy_baseClassToSwizzleForTarget(id target)
     if ([hitView isEqual:_contentView] || [hitView isEqual:_customView]) {
         return hitView;
     }
+    if (_customView != nil) {
+        for (UIView *subView in self.subviews) {
+            if ([subView isKindOfClass:[_contentView class]]) {
+                for (UIView *customView in subView.subviews) {
+                    if ([customView isKindOfClass:[_customView class]]) {
+                        for (UIView *view in customView.subviews) {
+                            if ([view isKindOfClass:UIButton.class]) {
+                                return view;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return nil;
+    }
     return nil;
 }
 
