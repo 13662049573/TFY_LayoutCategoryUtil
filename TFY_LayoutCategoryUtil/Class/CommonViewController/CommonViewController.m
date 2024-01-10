@@ -30,7 +30,7 @@ static void *kCommonViewControllerTableViewModelKey = &kCommonViewControllerTabl
 static void *kCommonViewControllerCollectionViewModelKey = &kCommonViewControllerCollectionViewModelKey;
 
 
-static NSMutableSet *_CommonProtocolSwizzleSet(){
+static NSMutableSet *_CommonProtocolSwizzleSet(void){
     static NSMutableSet *set = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

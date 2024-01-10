@@ -498,7 +498,7 @@ typedef enum : NSUInteger {
 }
 @end
 
-__attribute__((constructor)) static void ScenePackageExcImp(){
+__attribute__((constructor)) static void ScenePackageExcImp(void){
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         [[TFY_Scene defaultPackage] methodSwizzledScene];

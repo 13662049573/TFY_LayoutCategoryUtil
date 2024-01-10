@@ -142,4 +142,78 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+/**当存储NSArray/NSDictionary属性并且里面是自定义模型对象时，模型对象必须实现NSCoding协议，可以使用TFY_SqliteModel库一行代码实现NSCoding相关代码**/
+
+///模型对象归档解归档实现
+#define TFY_SqliteCodingImplementation \
+- (id)initWithCoder:(NSCoder *)decoder \
+{ \
+if (self = [super init]) { \
+[self tfy_SqliteDecode:decoder]; \
+} \
+return self; \
+} \
+\
+- (void)encodeWithCoder:(NSCoder *)encoder \
+{ \
+[self tfy_SqliteEncode:encoder]; \
+}\
+- (id)copyWithZone:(NSZone *)zone { return [self tfy_SqliteCopy]; }
+
+@protocol TFY_SqliteModelKeyValue <NSObject>
+@optional
+/// 模型类可自定义属性名称<json key名, 替换实际属性名>
++ (NSDictionary <NSString *, NSString *> *)tfy_SqliteModelReplacePropertyMapper;
+/// 模型数组/字典元素对象可自定义类<替换实际属性名,实际类>
++ (NSDictionary <NSString *, Class> *)tfy_SqliteModelReplaceContainerElementClassMapper;
+/// 模型类可自定义属性类型<替换实际属性名,实际类>
++ (NSDictionary <NSString *, Class> *)tfy_SqliteModelReplacePropertyClassMapper;
+
+@end
+
+@interface NSObject (TFY_SqliteModel)<TFY_SqliteModelKeyValue>
+#pragma mark - json转模型对象 Api -
+
+/** 说明:把json解析为模型对象
+ * json :json数据对象
+ * 模型对象
+ */
++ (id)tfy_SqliteModelWithJson:(id)json;
+
+/** 说明:把json解析为模型对象
+ * json :json数据对象
+ * keyPath :json key的路径
+ * 模型对象
+ */
+
++ (id)tfy_SqliteModelWithJson:(id)json keyPath:(NSString *)keyPath;
+
+
+#pragma mark - 模型对象转json Api -
+
+/** 说明:把模型对象转换为字典
+ *@return 字典对象
+ */
+
+- (NSDictionary *)tfy_SqliteDictionary;
+
+/** 说明:把模型对象转换为json字符串
+ *@return json字符串
+ */
+
+- (NSString *)tfy_SqliteJson;
+
+#pragma mark - 模型对象序列化 Api -
+
+/// 复制模型对象
+- (id)tfy_SqliteCopy;
+
+/// 序列化模型对象
+- (void)tfy_SqliteEncode:(NSCoder *)aCoder;
+
+/// 反序列化模型对象
+- (void)tfy_SqliteDecode:(NSCoder *)aDecoder;
+@end
+
 NS_ASSUME_NONNULL_END

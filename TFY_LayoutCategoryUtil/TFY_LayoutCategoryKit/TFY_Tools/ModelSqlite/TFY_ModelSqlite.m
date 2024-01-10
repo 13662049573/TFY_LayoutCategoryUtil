@@ -1722,3 +1722,905 @@ static sqlite3 * _tfy_database;
 
 @end
 
+
+/**当存储NSArray/NSDictionary属性并且里面是自定义模型对象时，模型对象必须实现NSCoding协议，可以使用TFY_SqliteModel库一行代码实现NSCoding相关代码**/
+
+typedef NS_OPTIONS(NSUInteger, TFY_SqliteTYPE) {
+    _SqliteArray = 1 << 0,
+    _SqliteDictionary = 1 << 1,
+    _SqliteString = 1 << 2,
+    _SqliteInteger = 1 << 3,
+    _SqliteUInteger = 1 << 4,
+    _SqliteFloat = 1 << 5,
+    _SqliteDouble = 1 << 6,
+    _SqliteBoolean = 1 << 7,
+    _SqliteChar = 1 << 8,
+    _SqliteNumber = 1 << 9,
+    _SqliteNull = 1 << 10,
+    _SqliteModel = 1 << 11,
+    _SqliteData = 1 << 12,
+    _SqliteDate = 1 << 13,
+    _SqliteValue = 1 << 14,
+    _SqliteUrl = 1 << 15,
+    _SqliteSet = 1 << 16,
+    _SqliteUnknown = 1 << 17
+};
+
+@interface TFY_SqliteModelPropertyInfo : NSObject {
+@public
+    Class class;
+    TFY_SqliteTYPE type;
+    SEL setter;
+    SEL getter;
+}
+@end
+@implementation TFY_SqliteModelPropertyInfo
+
+- (void)setClass:(Class)_class valueClass:(Class)valueClass {
+    class = _class;
+    if (class == nil) {
+        type = _SqliteNull;
+        return;
+    }
+    if ([class isSubclassOfClass:[NSString class]]) {type = _SqliteString;}
+    else if ([class isSubclassOfClass:[NSDictionary class]]) {type = _SqliteDictionary;}
+    else if ([valueClass isSubclassOfClass:[NSDictionary class]]) {type = _SqliteModel;}
+    else if ([class isSubclassOfClass:[NSArray class]]) {type = _SqliteArray;}
+    else if ([class isSubclassOfClass:[NSNumber class]]) {type = _SqliteNumber;}
+    else if ([class isSubclassOfClass:[NSDate class]]) {type = _SqliteDate;}
+    else if ([class isSubclassOfClass:[NSValue class]]) {type = _SqliteValue;}
+    else if ([class isSubclassOfClass:[NSData class]]) {type = _SqliteData;}
+    else {type = _SqliteUnknown;}
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        type = _SqliteUnknown;
+    }
+    return self;
+}
+
+@end
+
+@implementation NSObject (TFY_SqliteModel)
+
+#pragma mark - 枚举类属性列表 -
+
++ (void)tfy_SqliteEnumeratePropertyNameUsingBlock:(void (NS_NOESCAPE ^)(NSString * propertyName, NSUInteger index, BOOL * stop))block {
+    unsigned int propertyCount = 0;
+    BOOL stop = NO;
+    objc_property_t * properties = class_copyPropertyList(self, &propertyCount);
+    for (unsigned int i = 0; i < propertyCount; i++) {
+        objc_property_t property = properties[i];
+        const char * name = property_getName(property);
+        block([NSString stringWithUTF8String:name],i,&stop);
+        if (stop) break;
+    }
+    free(properties);
+}
+
++ (void)tfy_SqliteEnumeratePropertyAttributesUsingBlock:(void (NS_NOESCAPE ^)(NSString * propertyName,objc_property_t property, NSUInteger index, BOOL * stop))block {
+    unsigned int propertyCount = 0;
+    BOOL stop = NO;
+    objc_property_t * properties = class_copyPropertyList(self, &propertyCount);
+    for (unsigned int i = 0; i < propertyCount; i++) {
+        objc_property_t property = properties[i];
+        const char * name = property_getName(property);
+        block([NSString stringWithUTF8String:name],property,i,&stop);
+        if (stop) break;
+    }
+    free(properties);
+}
+
+#pragma mark - 模型对象序列化 Api -
+
+- (void)copySuperObject:(id)newSelf {
+    Class superClass = class_getSuperclass(self.class);
+    if (superClass != nil &&
+        superClass != [NSObject class]) {
+        NSObject * superObject = superClass.new;
+        [superClass tfy_SqliteEnumeratePropertyNameUsingBlock:^(NSString *propertyName, NSUInteger index, BOOL *stop) {
+            [superObject setValue:[self valueForKey:propertyName] forKey:propertyName];
+            [newSelf setValue:[self valueForKey:propertyName] forKey:propertyName];
+        }];
+        [superObject copySuperObject:newSelf];
+    }
+}
+
+- (id)tfy_SqliteCopy {
+    id newSelf = self.class.new;
+    [self copySuperObject:newSelf];
+    [self.class tfy_SqliteEnumeratePropertyAttributesUsingBlock:^(NSString *propertyName, objc_property_t property, NSUInteger index, BOOL *stop) {
+        NSDictionary <NSString *, TFY_SqliteModelPropertyInfo *> * propertyInfoMap = [self.class getModelPropertyDictionary];
+        TFY_SqliteModelPropertyInfo * propertyInfo = nil;
+        if (propertyInfoMap != nil) {
+            propertyInfo = propertyInfoMap[propertyName];
+        }
+        if (propertyInfo == nil) {
+            propertyInfo = [TFY_SqliteModelPropertyInfo new];
+            const char * attributes = property_getAttributes(property);
+            propertyInfo->type = [self.class parserTypeWithAttr:[NSString stringWithUTF8String:attributes]];
+            propertyInfo->setter = NSSelectorFromString([NSString stringWithFormat:@"set%@%@:",[propertyName substringToIndex:1].uppercaseString, [propertyName substringFromIndex:1]]);
+        }
+        if ([newSelf respondsToSelector:propertyInfo->setter]) {
+            id value = [self valueForKey:propertyName];
+            switch (propertyInfo->type) {
+                case _SqliteChar: {
+                    ((void (*)(id, SEL, char))(void *) objc_msgSend)((id)newSelf, propertyInfo->setter, [value charValue]);
+                }
+                    break;
+                case _SqliteFloat: {
+                    ((void (*)(id, SEL, float))(void *) objc_msgSend)((id)newSelf, propertyInfo->setter, [value floatValue]);
+                }
+                    break;
+                case _SqliteDouble: {
+                    ((void (*)(id, SEL, double))(void *) objc_msgSend)((id)newSelf, propertyInfo->setter, [value doubleValue]);
+                }
+                    break;
+                case _SqliteBoolean:{
+                    ((void (*)(id, SEL, BOOL))(void *) objc_msgSend)((id)newSelf, propertyInfo->setter, [value boolValue]);
+                }
+                    break;
+                case _SqliteInteger:{
+                    ((void (*)(id, SEL, NSInteger))(void *) objc_msgSend)((id)newSelf, propertyInfo->setter, [value integerValue]);
+                }
+                    break;
+                case _SqliteUInteger:{
+                    ((void (*)(id, SEL, NSUInteger))(void *) objc_msgSend)((id)newSelf, propertyInfo->setter, [value unsignedIntegerValue]);
+                }
+                    break;
+                default: {
+                    if (value) {
+                        ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)newSelf, propertyInfo->setter, [value copy]);
+                    }
+                }
+                    break;
+            }
+        }
+    }];
+    return newSelf;
+}
+
+- (void)tfy_SqliteEncode:(NSCoder *)aCoder {
+    Class superClass = class_getSuperclass(self.class);
+    if (superClass != nil &&
+        superClass != [NSObject class]) {
+        NSObject * superObject = superClass.new;
+        [superClass tfy_SqliteEnumeratePropertyNameUsingBlock:^(NSString *propertyName, NSUInteger index, BOOL *stop) {
+            [superObject setValue:[self valueForKey:propertyName] forKey:propertyName];
+        }];
+        [superObject tfy_SqliteEncode:aCoder];
+    }
+    [self.class tfy_SqliteEnumeratePropertyNameUsingBlock:^(NSString *propertyName, NSUInteger index, BOOL *stop) {
+        id value = [self valueForKey:propertyName];
+        if (value != nil) {
+            [aCoder encodeObject:value forKey:propertyName];
+        }
+    }];
+}
+
+- (void)tfy_SqliteDecode:(NSCoder *)aDecoder {
+    Class superClass = class_getSuperclass(self.class);
+    if (superClass != nil &&
+        superClass != [NSObject class]) {
+        NSObject * superObject = superClass.new;
+        [superObject tfy_SqliteDecode:aDecoder];
+        [superClass tfy_SqliteEnumeratePropertyNameUsingBlock:^(NSString *propertyName, NSUInteger index, BOOL *stop) {
+            [self setValue:[superObject valueForKey:propertyName] forKey:propertyName];
+        }];
+    }
+    [self.class tfy_SqliteEnumeratePropertyAttributesUsingBlock:^(NSString *propertyName, objc_property_t property, NSUInteger index, BOOL *stop) {
+        id value = [aDecoder decodeObjectForKey:propertyName];
+        if (value != nil) {
+            NSDictionary <NSString *, TFY_SqliteModelPropertyInfo *> * propertyInfoMap = [self.class getModelPropertyDictionary];
+            TFY_SqliteModelPropertyInfo * propertyInfo = nil;
+            if (propertyInfoMap != nil) {
+                propertyInfo = propertyInfoMap[propertyName];
+            }
+            if ([value isKindOfClass:[NSNumber class]]) {
+                if (propertyInfo == nil) {
+                    propertyInfo = [TFY_SqliteModelPropertyInfo new];
+                    const char * attributes = property_getAttributes(property);
+                    NSArray * attributesArray = [[NSString stringWithUTF8String:attributes] componentsSeparatedByString:@"\""];
+                    if (attributesArray.count != 1) {
+                        propertyInfo->type = _SqliteNumber;
+                    }else {
+                        propertyInfo->type = [self.class parserTypeWithAttr:[NSString stringWithUTF8String:attributes]];
+                    }
+                    propertyInfo->setter = NSSelectorFromString([NSString stringWithFormat:@"set%@%@:",[propertyName substringToIndex:1].uppercaseString, [propertyName substringFromIndex:1]]);
+                }
+                if ([self respondsToSelector:propertyInfo->setter]) {
+                    switch (propertyInfo->type) {
+                        case _SqliteChar:
+                            ((void (*)(id, SEL, char))(void *) objc_msgSend)((id)self, propertyInfo->setter, [value charValue]);
+                            break;
+                        case _SqliteFloat:
+                            ((void (*)(id, SEL, float))(void *) objc_msgSend)((id)self, propertyInfo->setter, [value floatValue]);
+                            break;
+                        case _SqliteDouble:
+                            ((void (*)(id, SEL, double))(void *) objc_msgSend)((id)self, propertyInfo->setter, [value doubleValue]);
+                            break;
+                        case _SqliteBoolean:
+                            ((void (*)(id, SEL, BOOL))(void *) objc_msgSend)((id)self, propertyInfo->setter, [value boolValue]);
+                            break;
+                        case _SqliteInteger:
+                            ((void (*)(id, SEL, NSInteger))(void *) objc_msgSend)((id)self, propertyInfo->setter, [value integerValue]);
+                            break;
+                        case _SqliteUInteger:
+                            ((void (*)(id, SEL, NSUInteger))(void *) objc_msgSend)((id)self, propertyInfo->setter, [value unsignedIntegerValue]);
+                            break;
+                        case _SqliteNumber:
+                            ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)self, propertyInfo->setter, value);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }else {
+                if (propertyInfo != nil) {
+                    ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)self, propertyInfo->setter, value);
+                }else {
+                    SEL setter = NSSelectorFromString([NSString stringWithFormat:@"set%@%@:",[propertyName substringToIndex:1].uppercaseString, [propertyName substringFromIndex:1]]);
+                    if ([self respondsToSelector:setter]) {
+                        ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)self, setter, value);
+                    }
+                }
+            }
+        }
+    }];
+}
+
+#pragma mark - json转模型对象 Api -
+
++ (id)tfy_SqliteModelWithJson:(id)json {
+    if (json) {
+        if ([json isKindOfClass:[NSData class]]) {
+            id jsonObject = [NSJSONSerialization JSONObjectWithData:json options:kNilOptions error:nil];
+            return [self tfy_SqliteModelWithJson:jsonObject];
+        }else if ([json isKindOfClass:[NSDictionary class]]) {
+            return [self handleDataModelEngine:json class:self];
+        }else if ([json isKindOfClass:[NSArray class]]) {
+            return [self handleDataModelEngine:json class:self];
+        }else if ([json isKindOfClass:[NSString class]]) {
+            id  jsonData = [json dataUsingEncoding:NSUTF8StringEncoding];
+            return [self tfy_SqliteModelWithJson:jsonData];
+        }
+    }
+    return nil;
+}
+
++ (id)tfy_SqliteModelWithJson:(id)json keyPath:(NSString *)keyPath {
+    if (json) {
+        if (keyPath != nil && keyPath.length > 0) {
+            __block id jsonObject = nil;
+            if ([json isKindOfClass:[NSData class]]) {
+                jsonObject = [NSJSONSerialization JSONObjectWithData:json options:kNilOptions error:nil];
+            }else if ([json isKindOfClass:[NSDictionary class]]) {
+                jsonObject = json;
+            }else if ([json isKindOfClass:[NSArray class]]) {
+                jsonObject = json;
+            }else if ([json isKindOfClass:[NSString class]]) {
+                id  jsonData = [json dataUsingEncoding:NSUTF8StringEncoding];
+                jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+            }else {
+                return nil;
+            }
+            NSArray<NSString *> * keyPathArray = [keyPath componentsSeparatedByString:@"."];
+            [keyPathArray enumerateObjectsUsingBlock:^(NSString * _Nonnull key, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSRange range = [key rangeOfString:@"["];
+                if (range.location != NSNotFound) {
+                    NSString * realKey = [key substringToIndex:range.location];
+                    NSString * indexString = key;
+                    if (realKey.length > 0) {
+                        jsonObject = jsonObject[realKey];
+                        indexString = [key substringFromIndex:range.location];
+                    }
+                    NSString * handleIndexString = [indexString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"[]"]];
+                    NSInteger indexLength = handleIndexString.length;
+                    for (NSUInteger i = 0; i < indexLength; i++) {
+                        NSInteger index = [[handleIndexString substringWithRange:NSMakeRange(i, 1)] integerValue];
+                        jsonObject = jsonObject[index];
+                    }
+                }else {
+                    jsonObject = jsonObject[key];
+                }
+            }];
+            if (jsonObject) {
+                if ([jsonObject isKindOfClass:[NSDictionary class]] || [jsonObject isKindOfClass:[NSArray class]]) {
+                    return [self tfy_SqliteModelWithJson:jsonObject];
+                }else {
+                    return jsonObject;
+                }
+            }
+            return nil;
+        }else {
+            return [self tfy_SqliteModelWithJson:json];
+        }
+    }
+    return nil;
+}
+
+#pragma mark - 模型对象转json Api -
+
+- (NSString *)tfy_SqliteJson {
+    id jsonSet = nil;
+    if ([self isKindOfClass:[NSDictionary class]]) {
+        jsonSet = [self parserDictionaryEngine:(NSDictionary *)self];
+    }else if ([self isKindOfClass:[NSArray class]]) {
+        jsonSet = [self parserArrayEngine:(NSArray *)self];
+    }else {
+        jsonSet = [self tfy_SqliteDictionary];
+    }
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:jsonSet options:kNilOptions error:nil];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
+- (NSDictionary *)tfy_SqliteDictionary {
+    NSMutableDictionary * jsonDictionary = [NSMutableDictionary new];
+    Class superClass = class_getSuperclass(self.class);
+    if (superClass != nil &&
+        superClass != [NSObject class]) {
+        NSObject * superObject = superClass.new;
+        [superClass tfy_SqliteEnumeratePropertyNameUsingBlock:^(NSString *propertyName, NSUInteger index, BOOL *stop) {
+            [superObject setValue:[self valueForKey:propertyName] forKey:propertyName];
+        }];
+        [jsonDictionary setDictionary:[superObject tfy_SqliteDictionary]];
+    }
+    NSDictionary <NSString *, TFY_SqliteModelPropertyInfo *> * propertyInfoMap = [self.class getModelPropertyDictionary];
+    [self.class tfy_SqliteEnumeratePropertyAttributesUsingBlock:^(NSString *propertyName, objc_property_t property, NSUInteger index, BOOL *stop) {
+        TFY_SqliteModelPropertyInfo * propertyInfo = nil;
+        if (propertyInfoMap != nil) {
+            propertyInfo = propertyInfoMap[propertyName];
+        }
+        if (propertyInfo) {
+            if (propertyInfo->getter == nil) {
+                propertyInfo->getter = NSSelectorFromString(propertyName);
+            }
+            switch (propertyInfo->type) {
+                case _SqliteData: {
+                    id value = ((id (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyInfo->getter);
+                    if (value) {
+                        if ([value isKindOfClass:[NSData class]]) {
+                            [jsonDictionary setObject:[[NSString alloc] initWithData:value encoding:NSUTF8StringEncoding] forKey:propertyName];
+                        }else {
+                            [jsonDictionary setObject:value forKey:propertyName];
+                        }
+                    }else {
+                        [jsonDictionary setObject:[NSNull new] forKey:propertyName];
+                    }
+                }
+                    break;
+                case _SqliteDate: {
+                    id value = ((id (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyInfo->getter);
+                    if (value) {
+                        if ([value isKindOfClass:[NSString class]]) {
+                            [jsonDictionary setObject:value forKey:propertyName];
+                        }else {
+                            NSDateFormatter * formatter = [NSDateFormatter new];
+                            formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+                            [jsonDictionary setObject:[formatter stringFromDate:value] forKey:propertyName];
+                        }
+                    }else {
+                        [jsonDictionary setObject:[NSNull new] forKey:propertyName];
+                    }
+                }
+                    break;
+                case _SqliteValue:
+                    break;
+                case _SqliteString:
+                case _SqliteNumber: {
+                    id value = ((id (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyInfo->getter);
+                    if (value != nil) {
+                        [jsonDictionary setObject:value forKey:propertyName];
+                    }else {
+                        [jsonDictionary setObject:[NSNull new] forKey:propertyName];
+                    }
+                }
+                    break;
+                case _SqliteModel: {
+                    id value = ((id (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyInfo->getter);
+                    [jsonDictionary setObject:[value tfy_SqliteDictionary] forKey:propertyName];
+                }
+                    break;
+                case _SqliteArray: {
+                    id value = ((id (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyInfo->getter);
+                    [jsonDictionary setObject:[self parserArrayEngine:value] forKey:propertyName];
+                }
+                    break;
+                case _SqliteDictionary: {
+                    id value = ((id (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyInfo->getter);
+                    [jsonDictionary setObject:[self parserDictionaryEngine:value] forKey:propertyName];
+                }
+                    break;
+                case _SqliteChar: {
+                    char value = ((char (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyInfo->getter);
+                    [jsonDictionary setObject:[NSNumber numberWithChar:value] forKey:propertyName];
+                }
+                    break;
+                case _SqliteFloat: {
+                    Float64 value = ((Float64 (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyInfo->getter);
+                    [jsonDictionary setObject:[NSNumber numberWithFloat:value] forKey:propertyName];
+                }
+                    break;
+                case _SqliteDouble: {
+                    double value = ((double (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyInfo->getter);
+                    [jsonDictionary setObject:[NSNumber numberWithDouble:value] forKey:propertyName];
+                }
+                    break;
+                case _SqliteBoolean: {
+                    BOOL value = ((BOOL (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyInfo->getter);
+                    [jsonDictionary setObject:[NSNumber numberWithBool:value] forKey:propertyName];
+                }
+                    break;
+                case _SqliteInteger: {
+                    NSInteger value = ((NSInteger (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyInfo->getter);
+                    [jsonDictionary setObject:[NSNumber numberWithInteger:value] forKey:propertyName];
+                }
+                    break;
+                case _SqliteUInteger: {
+                    NSUInteger value = ((NSUInteger (*)(id, SEL))(void *) objc_msgSend)((id)self, propertyInfo->getter);
+                    [jsonDictionary setObject:[NSNumber numberWithUnsignedInteger:value] forKey:propertyName];
+                }
+                    break;
+                case _SqliteNull: {
+                    [jsonDictionary setObject:[NSNull new] forKey:propertyName];
+                }
+                    break;
+                default:
+                    break;
+            }
+        }else {
+            const char * attributes = property_getAttributes(property);
+            NSArray * attributesArray = [[NSString stringWithUTF8String:attributes] componentsSeparatedByString:@"\""];
+            if (attributesArray.count == 1) {
+                id value = [self valueForKey:propertyName];
+                [jsonDictionary setObject:value forKey:propertyName];
+            }else {
+                id value = ((id (*)(id, SEL))(void *) objc_msgSend)((id)self, NSSelectorFromString(propertyName));
+                if (value != nil) {
+                    Class classType = NSClassFromString(attributesArray[1]);
+                    if ([classType isSubclassOfClass:[NSString class]]) {
+                        [jsonDictionary setObject:value forKey:propertyName];
+                    }else if ([classType isSubclassOfClass:[NSNumber class]]) {
+                        [jsonDictionary setObject:value forKey:propertyName];
+                    }else if ([classType isSubclassOfClass:[NSDictionary class]]) {
+                        [jsonDictionary setObject:[self parserDictionaryEngine:value] forKey:propertyName];
+                    }else if ([classType isSubclassOfClass:[NSArray class]]) {
+                        [jsonDictionary setObject:[self parserArrayEngine:value] forKey:propertyName];
+                    }else if ([classType isSubclassOfClass:[NSDate class]]) {
+                        if ([value isKindOfClass:[NSString class]]) {
+                            [jsonDictionary setObject:value forKey:propertyName];
+                        }else {
+                            NSDateFormatter * formatter = [NSDateFormatter new];
+                            formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+                            [jsonDictionary setObject:[formatter stringFromDate:value] forKey:propertyName];
+                        }
+                    }else if ([classType isSubclassOfClass:[NSData class]]) {
+                        if ([value isKindOfClass:[NSData class]]) {
+                            [jsonDictionary setObject:[[NSString alloc] initWithData:value encoding:NSUTF8StringEncoding] forKey:propertyName];
+                        }else {
+                            [jsonDictionary setObject:value forKey:propertyName];
+                        }
+                    }else if ([classType isSubclassOfClass:[NSValue class]] || [classType isSubclassOfClass:[NSSet class]] || [classType isSubclassOfClass:[NSURL class]] || [classType isSubclassOfClass:[NSError class]]) {
+                    }else {
+                        [jsonDictionary setObject:[value tfy_SqliteDictionary] forKey:propertyName];
+                    }
+                }else {
+                    [jsonDictionary setObject:[NSNull new] forKey:propertyName];
+                }
+            }
+        }
+    }];
+    return jsonDictionary;
+}
+
+#pragma mark - 模型对象转json解析引擎(private) -
+
+- (id)parserDictionaryEngine:(NSDictionary *)value {
+    if (value == nil) return [NSNull new];
+    NSMutableDictionary * subJsonDictionary = [NSMutableDictionary new];
+    NSArray * allKey = value.allKeys;
+    for (NSString * key in allKey) {
+        id subValue = value[key];
+        if ([subValue isKindOfClass:[NSString class]] ||
+            [subValue isKindOfClass:[NSNumber class]]) {
+            [subJsonDictionary setObject:subValue forKey:key];
+        }else if ([subValue isKindOfClass:[NSDictionary class]]){
+            [subJsonDictionary setObject:[self parserDictionaryEngine:subValue] forKey:key];
+        }else if ([subValue isKindOfClass:[NSArray class]]) {
+            [subJsonDictionary setObject:[self parserArrayEngine:subValue] forKey:key];
+        }else {
+            [subJsonDictionary setObject:[subValue tfy_SqliteDictionary] forKey:key];
+        }
+    }
+    return subJsonDictionary;
+}
+
+- (id)parserArrayEngine:(NSArray *)value {
+    if (value == nil) return [NSNull new];
+    NSMutableArray * subJsonArray = [NSMutableArray new];
+    for (id subValue in value) {
+        if ([subValue isKindOfClass:[NSString class]] ||
+            [subValue isKindOfClass:[NSNumber class]]) {
+            [subJsonArray addObject:subValue];
+        }else if ([subValue isKindOfClass:[NSDictionary class]]){
+            [subJsonArray addObject:[self parserDictionaryEngine:subValue]];
+        }else if ([subValue isKindOfClass:[NSArray class]]) {
+            [subJsonArray addObject:[self parserArrayEngine:subValue]];
+        }else {
+            [subJsonArray addObject:[subValue tfy_SqliteDictionary]];
+        }
+    }
+    return subJsonArray;
+}
+
+#pragma mark - json转模型对象解析引擎(private) -
+
+static const char  TFY_SqliteModelPropertyInfokey = '\0';
+static const char  TFY_SqliteReplaceKeyValue = '\0';
+static const char  TFY_SqliteReplacePropertyClass = '\0';
+static const char  TFY_SqliteReplaceContainerElementClass = '\0';
+
++ (NSDictionary <NSString *, Class> *)getContainerElementClassMapper {
+    return objc_getAssociatedObject(self, &TFY_SqliteReplaceContainerElementClass);
+}
+
++ (void)setContainerElementClassMapper:(NSDictionary <NSString *, Class> *)mapper {
+    objc_setAssociatedObject(self, &TFY_SqliteReplaceContainerElementClass, mapper, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
++ (NSDictionary <NSString *, Class> *)getModelPropertyClassMapper {
+    return objc_getAssociatedObject(self, &TFY_SqliteReplacePropertyClass);
+}
+
++ (void)setModelPropertyClassMapper:(NSDictionary <NSString *, Class> *)mapper {
+    objc_setAssociatedObject(self, &TFY_SqliteReplacePropertyClass, mapper, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
++ (NSDictionary <NSString *, NSString *> *)getModelReplacePropertyMapper {
+    return objc_getAssociatedObject(self, &TFY_SqliteReplaceKeyValue);
+}
+
++ (void)setModelReplacePropertyMapper:(NSDictionary *)mapper {
+    objc_setAssociatedObject(self, &TFY_SqliteReplaceKeyValue, mapper, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
++ (NSDictionary <NSString *, TFY_SqliteModelPropertyInfo *>*)getModelPropertyDictionary {
+    return objc_getAssociatedObject(self, &TFY_SqliteModelPropertyInfokey);
+}
+
++ (TFY_SqliteModelPropertyInfo *)getPropertyInfo:(NSString *)property {
+    NSDictionary * propertyInfo = objc_getAssociatedObject(self, &TFY_SqliteModelPropertyInfokey);
+    return propertyInfo != nil ? propertyInfo[property] : nil;
+}
+
++ (void)setModelInfo:(TFY_SqliteModelPropertyInfo *)modelInfo property:(NSString *)property {
+    NSMutableDictionary * propertyInfo = objc_getAssociatedObject(self, &TFY_SqliteModelPropertyInfokey);
+    if (propertyInfo == nil) {
+        propertyInfo = [NSMutableDictionary dictionary];
+        objc_setAssociatedObject(self, &TFY_SqliteModelPropertyInfokey, propertyInfo, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    [propertyInfo setObject:modelInfo forKey:property];
+}
+
++ (NSString *)existproperty:(NSString *)property withObject:(NSObject *)object {
+    objc_property_t property_t = class_getProperty(object.class, [property UTF8String]);
+    if (property_t != NULL) {
+        const char * name = property_getName(property_t);
+        NSString * nameString = [NSString stringWithUTF8String:name];
+        return nameString;
+    }else {
+        unsigned int  propertyCount = 0;
+        objc_property_t *properties = class_copyPropertyList([object class], &propertyCount);
+        for (unsigned int i = 0; i < propertyCount; ++i) {
+            objc_property_t property_t = properties[i];
+            const char * name = property_getName(property_t);
+            NSString * nameString = [NSString stringWithUTF8String:name];
+            if ([nameString.lowercaseString isEqualToString:property.lowercaseString]) {
+                free(properties);
+                return nameString;
+            }
+        }
+        free(properties);
+        Class superClass = class_getSuperclass(object.class);
+        if (superClass && superClass != [NSObject class]) {
+            NSString * name =  [self existproperty:property withObject:superClass.new];
+            if (name != nil && name.length > 0) {
+                return name;
+            }
+        }
+        return nil;
+    }
+}
+
++ (TFY_SqliteTYPE)parserTypeWithAttr:(NSString *)attr {
+    NSArray * sub_attrs = [attr componentsSeparatedByString:@","];
+    NSString * first_sub_attr = sub_attrs.firstObject;
+    first_sub_attr = [first_sub_attr substringFromIndex:1];
+    TFY_SqliteTYPE attr_type = _SqliteNull;
+    const char type = *[first_sub_attr UTF8String];
+    switch (type) {
+        case 'B':
+            attr_type = _SqliteBoolean;
+            break;
+        case 'c':
+        case 'C':
+            attr_type = _SqliteChar;
+            break;
+        case 'S':
+        case 'I':
+        case 'L':
+        case 'Q':
+            attr_type = _SqliteUInteger;
+        case 'l':
+        case 'q':
+        case 'i':
+        case 's':
+            attr_type = _SqliteInteger;
+            break;
+        case 'f':
+            attr_type = _SqliteFloat;
+            break;
+        case 'd':
+        case 'D':
+            attr_type = _SqliteDouble;
+            break;
+        default:
+            break;
+    }
+    return attr_type;
+}
+
++ (TFY_SqliteModelPropertyInfo *)classExistProperty:(NSString *)property withObject:(NSObject *)object valueClass:(Class)valueClass {
+    TFY_SqliteModelPropertyInfo * propertyInfo = nil;
+    objc_property_t property_t = class_getProperty(object.class, [property UTF8String]);
+    if (property_t != NULL) {
+        const char * attributes = property_getAttributes(property_t);
+        NSString * attr = [NSString stringWithUTF8String:attributes];
+        NSArray * arrayString = [attr componentsSeparatedByString:@"\""];
+        propertyInfo = [TFY_SqliteModelPropertyInfo new];
+        if (arrayString.count == 1) {
+            propertyInfo->type = [self parserTypeWithAttr:arrayString[0]];
+        }else {
+            [propertyInfo setClass: NSClassFromString(arrayString[1]) valueClass:valueClass];
+        }
+        return propertyInfo;
+    }else {
+        unsigned int  propertyCount = 0;
+        objc_property_t *properties = class_copyPropertyList([object class], &propertyCount);
+        for (unsigned int i = 0; i < propertyCount; ++i) {
+            objc_property_t property_t = properties[i];
+            const char * name = property_getName(property_t);
+            NSString * nameStr = [NSString stringWithUTF8String:name];
+            if ([nameStr.lowercaseString isEqualToString:property.lowercaseString]) {
+                const char * attributes = property_getAttributes(property_t);
+                NSString * attr = [NSString stringWithUTF8String:attributes];
+                NSArray * arrayString = [attr componentsSeparatedByString:@"\""];
+                free(properties);
+                propertyInfo = [TFY_SqliteModelPropertyInfo new];
+                if (arrayString.count == 1) {
+                    propertyInfo->type = [self parserTypeWithAttr:arrayString[0]];
+                }else {
+                    [propertyInfo setClass: NSClassFromString(arrayString[1]) valueClass:valueClass];
+                }
+                return propertyInfo;
+            }
+        }
+        free(properties);
+        Class superClass = class_getSuperclass(object.class);
+        if (superClass && superClass != [NSObject class]) {
+            propertyInfo = [self classExistProperty:property withObject:superClass.new valueClass:valueClass];
+            if (propertyInfo != nil) {
+                return propertyInfo;
+            }
+        }
+    }
+    return propertyInfo;
+}
+
++ (id)handleDataModelEngine:(id)object class:(Class)class {
+    if(object) {
+        if([object isKindOfClass:[NSDictionary class]]) {
+            __block NSObject *  modelObject = nil;
+            NSDictionary  * dictionary = object;
+            __block NSDictionary <NSString *, NSString *> * replacePropertyNameMap = [class getModelReplacePropertyMapper];
+            __block NSDictionary <NSString *, Class> * replacePropertyClassMap = [class getModelPropertyClassMapper];
+            __block NSDictionary <NSString *, Class> * replaceContainerElementClassMap = [class getContainerElementClassMapper];
+            if (replacePropertyNameMap == nil &&
+                [class respondsToSelector:@selector(tfy_SqliteModelReplacePropertyMapper)]) {
+                replacePropertyNameMap = [class tfy_SqliteModelReplacePropertyMapper];
+                [class setModelReplacePropertyMapper:replacePropertyNameMap];
+            }
+            if ([class isSubclassOfClass:[NSDictionary class]]) {
+                modelObject = [NSMutableDictionary dictionary];
+                [dictionary enumerateKeysAndObjectsUsingBlock:^(NSString * key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                    if ([obj isKindOfClass:[NSDictionary class]] || [obj isKindOfClass:[NSArray class]]) {
+                        Class subModelClass = NSClassFromString(key);
+                        if (subModelClass == nil) {
+                            subModelClass = NSClassFromString([NSString stringWithFormat:@"%@%@:",[key substringToIndex:1].uppercaseString, [key substringFromIndex:1]]);
+                            if (subModelClass == nil) {
+                                subModelClass = [obj class];
+                            }
+                        }
+                        [(NSMutableDictionary *)modelObject setObject:[self handleDataModelEngine:obj class:subModelClass] forKey:key];
+                    }else {
+                        [(NSMutableDictionary *)modelObject setObject:obj forKey:key];
+                    }
+                }];
+            }else {
+                modelObject = [class new];
+                [dictionary enumerateKeysAndObjectsUsingBlock:^(NSString * key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                    NSString * actualProperty = key;
+                    id subObject = obj;
+                    if (replacePropertyNameMap != nil) {
+                        NSString * replaceName =  replacePropertyNameMap[actualProperty];
+                        if (replaceName) {
+                            actualProperty = replaceName;
+                        }
+                    }
+                    TFY_SqliteModelPropertyInfo * propertyInfo = [class getPropertyInfo:actualProperty];
+                    if (propertyInfo == nil || (propertyInfo != nil && propertyInfo->type == _SqliteUnknown)) {
+                        if (replacePropertyClassMap) {
+                            propertyInfo = [TFY_SqliteModelPropertyInfo new];
+                            [propertyInfo setClass:replacePropertyClassMap[actualProperty] valueClass:[obj class]];
+                        }else {
+                            if ([class respondsToSelector:@selector(tfy_SqliteModelReplacePropertyClassMapper)]) {
+                                [class setModelPropertyClassMapper:[class tfy_SqliteModelReplacePropertyClassMapper]];
+                            }
+                            propertyInfo = [self classExistProperty:actualProperty withObject:modelObject valueClass:[obj class]];
+                        }
+                        if (propertyInfo) {
+                            [class setModelInfo:propertyInfo property:actualProperty];
+                        }else {
+                            return;
+                        }
+                        SEL setter = NSSelectorFromString([NSString stringWithFormat:@"set%@%@:",[actualProperty substringToIndex:1].uppercaseString, [actualProperty substringFromIndex:1]]);
+                        if (![modelObject respondsToSelector:setter]) {
+                            actualProperty = [self existproperty:actualProperty withObject:modelObject];
+                            if (actualProperty == nil) {
+                                return;
+                            }
+                            setter = NSSelectorFromString([NSString stringWithFormat:@"set%@%@:",[actualProperty substringToIndex:1].uppercaseString, [actualProperty substringFromIndex:1]]);
+                        }
+                        propertyInfo->setter = setter;
+                    }
+                    switch (propertyInfo->type) {
+                        case _SqliteArray:
+                            if(![subObject isKindOfClass:[NSNull class]]){
+                                Class subModelClass = NULL;
+                                if (replaceContainerElementClassMap) {
+                                    subModelClass = replaceContainerElementClassMap[actualProperty];
+                                }else if ([class respondsToSelector:@selector(tfy_SqliteModelReplaceContainerElementClassMapper)]) {
+                                    replaceContainerElementClassMap = [class tfy_SqliteModelReplaceContainerElementClassMapper];
+                                    subModelClass = replaceContainerElementClassMap[actualProperty];
+                                    [class setContainerElementClassMapper:replaceContainerElementClassMap];
+                                }
+                                if (subModelClass == NULL) {
+                                    subModelClass = NSClassFromString(actualProperty);
+                                    if (subModelClass == nil) {
+                                        NSString * first = [actualProperty substringToIndex:1];
+                                        NSString * other = [actualProperty substringFromIndex:1];
+                                        subModelClass = NSClassFromString([NSString stringWithFormat:@"%@%@",[first uppercaseString],other]);
+                                    }
+                                }
+                                if (subModelClass) {
+                                    ((void (*)(id, SEL, NSArray *))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, [self handleDataModelEngine:subObject class:subModelClass]);
+                                }else {
+                                    ((void (*)(id, SEL, NSArray *))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, subObject);
+                                }
+                                
+                            }else{
+                                ((void (*)(id, SEL, NSArray *))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, @[]);
+                            }
+                            break;
+                        case _SqliteDictionary:
+                            if(![subObject isKindOfClass:[NSNull class]]){
+                                Class subModelClass = NULL;
+                                if (replaceContainerElementClassMap) {
+                                    subModelClass = replaceContainerElementClassMap[actualProperty];
+                                }else if ([class respondsToSelector:@selector(tfy_SqliteModelReplaceContainerElementClassMapper)]) {
+                                    replaceContainerElementClassMap = [class tfy_SqliteModelReplaceContainerElementClassMapper];
+                                    if (replaceContainerElementClassMap) {
+                                        subModelClass = replaceContainerElementClassMap[actualProperty];
+                                        [class setContainerElementClassMapper:replaceContainerElementClassMap];
+                                    }
+                                }
+                                if (subModelClass == NULL) {
+                                    subModelClass = NSClassFromString(actualProperty);
+                                    if (subModelClass == nil) {
+                                        NSString * first = [actualProperty substringToIndex:1];
+                                        NSString * other = [actualProperty substringFromIndex:1];
+                                        subModelClass = NSClassFromString([NSString stringWithFormat:@"%@%@",[first uppercaseString],other]);
+                                    }
+                                }
+                                if (subModelClass) {
+                                    NSMutableDictionary * subObjectDictionary = [NSMutableDictionary dictionary];
+                                    [subObject enumerateKeysAndObjectsUsingBlock:^(NSString * key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                                        [subObjectDictionary setObject:[self handleDataModelEngine:obj class:subModelClass] forKey:key];
+                                    }];
+                                    ((void (*)(id, SEL, NSDictionary *))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, subObjectDictionary);
+                                }else {
+                                    ((void (*)(id, SEL, NSArray *))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, subObject);
+                                }
+                                
+                            }else{
+                                ((void (*)(id, SEL, NSDictionary *))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, @{});
+                            }
+                            break;
+                        case _SqliteString:
+                            if(![subObject isKindOfClass:[NSNull class]]){
+                                ((void (*)(id, SEL, NSString *))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, subObject);
+                            }else{
+                                ((void (*)(id, SEL, NSString *))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, @"");
+                            }
+                            break;
+                        case _SqliteNumber:
+                            if(![subObject isKindOfClass:[NSNull class]]){
+                                ((void (*)(id, SEL, NSNumber *))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, subObject);
+                            }else{
+                                ((void (*)(id, SEL, NSNumber *))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, @(0));
+                            }
+                            break;
+                        case _SqliteInteger:
+                            ((void (*)(id, SEL, NSInteger))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, [subObject integerValue]);
+                            break;
+                        case _SqliteUInteger:
+                            ((void (*)(id, SEL, NSUInteger))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, [subObject unsignedIntegerValue]);
+                            break;
+                        case _SqliteBoolean:
+                            ((void (*)(id, SEL, BOOL))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, [subObject boolValue]);
+                            break;
+                        case _SqliteFloat:
+                            ((void (*)(id, SEL, float))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, [subObject floatValue]);
+                            break;
+                        case _SqliteDouble:
+                            ((void (*)(id, SEL, double))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, [subObject doubleValue]);
+                            break;
+                        case _SqliteChar:
+                            ((void (*)(id, SEL, char))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, [subObject charValue]);
+                            break;
+                        case _SqliteModel:
+                            ((void (*)(id, SEL, id))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, [self handleDataModelEngine:subObject class:propertyInfo->class]);
+                            break;
+                        case _SqliteDate:
+                            if(![subObject isKindOfClass:[NSNull class]]){
+                                ((void (*)(id, SEL, NSDate *))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, subObject);
+                            }
+                            break;
+                        case _SqliteValue:
+                            if(![subObject isKindOfClass:[NSNull class]]){
+                                ((void (*)(id, SEL, NSValue *))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, subObject);
+                            }
+                            break;
+                        case _SqliteData: {
+                            if(![subObject isKindOfClass:[NSNull class]]){
+                                ((void (*)(id, SEL, NSData *))(void *) objc_msgSend)((id)modelObject, propertyInfo->setter, subObject);
+                            }
+                            break;
+                        }
+                        default:
+                            
+                            break;
+                    }
+                }];
+            }
+            return modelObject;
+        }else if ([object isKindOfClass:[NSArray class]]){
+            NSMutableArray  * modelObjectArr = [NSMutableArray new];
+            [object enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                id subModelObject = [self handleDataModelEngine:obj class:class];
+                if(subModelObject){
+                    [modelObjectArr addObject:subModelObject];
+                }
+            }];
+            return modelObjectArr;
+        }else {
+            return object;
+        }
+    }
+    return nil;
+}
+
+
+@end

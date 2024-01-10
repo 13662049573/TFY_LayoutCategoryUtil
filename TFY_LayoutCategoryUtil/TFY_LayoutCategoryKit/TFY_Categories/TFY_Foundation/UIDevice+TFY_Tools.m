@@ -179,7 +179,7 @@ static uint64_t _net_counter_get_by_type(net_interface_counter *counter, Network
     return bytes;
 }
 
-static net_interface_counter get_net_interface_counter() {
+static net_interface_counter get_net_interface_counter(void) {
     static dispatch_semaphore_t lock;
     static NSMutableDictionary *sharedInCounters;
     static NSMutableDictionary *sharedOutCounters;
