@@ -17,31 +17,56 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol TFY_ModelSqlite <NSObject>
 @optional
 /**
- *  自定义数据存储路径
+ 自定义数据存储路径
+ 自定义数据库路径(目录即可)
  */
 + (NSString *)tfy_SqlitePath;
-/**
- *  自定义模型类数据库版本号
+
+/// 自定义模型类数据库版本号
+/** 注意：
+ ***该返回值在改变数据模型属性类型/增加/删除属性时需要更改否则无法自动更新原来模型数据表字段以及类型***
  */
 + (NSString *)tfy_SqliteVersion;
-/**
- *  自定义数据库加密密码 手动引入pod 'TFY_ModelKit/SQLCipher'
+
+/// 自定义数据库加密密码
+/** 注意：
+ ***该加密功能需要引用SQLCipher三方库才支持***
+ /// 引入方式有:
+ *** 手动引入 ***
+ *** pod 'TFY_ModelSqliteKit/SQLCipher' ***
  */
-+ (NSString *)tfy_SqlitePasswordKey;
++ (NSString *)whc_SqlitePasswordKey;
+
+/// 自定义数据表主键名称
 /**
- *  自定义数据表主键名称
+ *** 返回自定义主键名称默认主键:_id ***
  */
 + (NSString *)tfy_SqliteMainkey;
+
+
 /**
- *  忽略属性集合
+ 忽略属性集合
+
+  返回忽略属性集合
  */
 + (NSArray *)tfy_IgnorePropertys;
+
+
 /**
- *  引入使用其他方式创建的数据库存储路径来使用Sqlite进行操作其他方式创建的数据库
+ 引入使用其他方式创建的数据库存储路径比如:FMDB
+ 来使用TFY_Sqlite进行操作其他方式创建的数据库
+
+ 存储路径
  */
 + (NSString *)tfy_OtherSqlitePath;
+
+
 /**
- *  指定自定义表名 在指定引入其他方式创建的数据库时，这个时候如果表名不是模型类名需要实现该方法指定表名称
+ 指定自定义表名
+
+ 在指定引入其他方式创建的数据库时，这个时候如果表名不是模型类名需要实现该方法指定表名称
+ 
+  表名
  */
 + (NSString *)tfy_TableName;
 
@@ -50,93 +75,226 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TFY_ModelSqlite : NSObject
 /**
- *  存储模型数组到本地(事务方式) 模型数组对象(model_array 里对象类型要一致)
+ * 说明: 存储模型数组到本地(事务方式)
+ *  model_array 模型数组对象(model_array 里对象类型要一致)
  */
+
 + (BOOL)inserts:(NSArray *)model_array;
+
 /**
- *  存储模型到本地model_object 模型对象
+ * 说明: 存储模型到本地
+ *  model_object 模型对象
  */
+
 + (BOOL)insert:(id)model_object;
+
+
 /**
- *  获取模型类表总条数model_class 模型类 总条数
+ * 说明: 获取模型类表总条数
+ *  model_class 模型类
+ *  总条数
  */
 + (NSUInteger)count:(Class)model_class;
+
 /**
- * 查询本地模型对象model_class 模型类 查询模型对象数组
+ * 说明: 查询本地模型对象
+ *  model_class 模型类
+ *  查询模型对象数组
  */
+
 + (NSArray *)query:(Class)model_class;
+
 /**
- * 查询本地模型对象model_class 模型类 where 查询条件(查询语法和SQL where 查询语法一样，where为空则查询所有) 查询模型对象数组
+ * 说明: 查询本地模型对象
+ *  model_class 模型类
+ *  where 查询条件(查询语法和SQL where 查询语法一样，where为空则查询所有)
+ *  查询模型对象数组
  */
-+ (NSArray *)query:(Class)model_class where:(NSString *_Nullable)where;
+
++ (NSArray *)query:(Class)model_class where:(NSString *)where;
+
 /**
- * 查询本地模型对象 order 排序条件(排序语法和SQL order 查询语法一样，order为空则不排序)
+ * 说明: 查询本地模型对象
+ *  model_class 模型类
+ *  order 排序条件(排序语法和SQL order 查询语法一样，order为空则不排序)
+ *  查询模型对象数组
  */
+
+/// example: [TFY_ModelSqlite query:[Person class] order:@"by age desc/asc"];
+/// 对person数据表查询并且根据age自动降序或者升序排序
+
 + (NSArray *)query:(Class)model_class order:(NSString *)order;
+
 /**
- *  查询本地模型对象 limit 限制条件(限制语法和SQL limit 查询语法一样，limit为空则不限制查询) [TFY_ModelSqlite query:[Person class] limit:@"8"];
+ * 说明: 查询本地模型对象
+ *  model_class 模型类
+ *  limit 限制条件(限制语法和SQL limit 查询语法一样，limit为空则不限制查询)
+ *  查询模型对象数组
  */
+
+/// example: [TFY_ModelSqlite query:[Person class] limit:@"8"];
+/// 对person数据表查询并且并且限制查询数量为8
+/// example: [TFY_ModelSqlite query:[Person class] limit:@"8 offset 8"];
+/// 对person数据表查询并且对查询列表偏移8并且限制查询数量为8
+
 + (NSArray *)query:(Class)model_class limit:(NSString *)limit;
+
 /**
- *  [TFY_ModelSqlite query:[Person class] where:@"age < 30" order:@"by age desc/asc"]; 
+ * 说明: 查询本地模型对象
+ *  model_class 模型类
+ *  where 查询条件(查询语法和SQL where 查询语法一样，where为空则查询所有)
+ *  order 排序条件(排序语法和SQL order 查询语法一样，order为空则不排序)
+ *  查询模型对象数组
  */
+
+/// example: [TFY_ModelSqlite query:[Person class] where:@"age < 30" order:@"by age desc/asc"];
+/// 对person数据表查询age小于30岁并且根据age自动降序或者升序排序
+
 + (NSArray *)query:(Class)model_class where:(NSString *)where order:(NSString *)order;
+
 /**
- * [TFY_ModelSqlite query:[Person class] where:@"age <= 30" limit:@"8 offset 8"];
+ * 说明: 查询本地模型对象
+ *  model_class 模型类
+ *  where 查询条件(查询语法和SQL where 查询语法一样，where为空则查询所有)
+ *  limit 限制条件(限制语法和SQL limit 查询语法一样，limit为空则不限制查询)
+ *  查询模型对象数组
  */
+
+/// example: [TFY_ModelSqlite query:[Person class] where:@"age <= 30" limit:@"8"];
+/// 对person数据表查询age小于30岁并且限制查询数量为8
+/// example: [TFY_ModelSqlite query:[Person class] where:@"age <= 30" limit:@"8 offset 8"];
+/// 对person数据表查询age小于30岁并且对查询列表偏移8并且限制查询数量为8
+
 + (NSArray *)query:(Class)model_class where:(NSString *)where limit:(NSString *)limit;
+
 /**
- *  [TFY_ModelSqlite query:[Person class] order:@"by age desc/asc" limit:@"8 offset 8"];
+ * 说明: 查询本地模型对象
+ *  model_class 模型类
+ *  order 排序条件(排序语法和SQL order 查询语法一样，order为空则不排序)
+ *  limit 限制条件(限制语法和SQL limit 查询语法一样，limit为空则不限制查询)
+ *  查询模型对象数组
  */
+
+/// example: [TFY_ModelSqlite query:[Person class] order:@"by age desc/asc" limit:@"8"];
+/// 对person数据表查询并且根据age自动降序或者升序排序并且限制查询的数量为8
+/// example: [TFY_ModelSqlite query:[Person class] order:@"by age desc/asc" limit:@"8 offset 8"];
+/// 对person数据表查询并且根据age自动降序或者升序排序并且限制查询的数量为8偏移为8
+
 + (NSArray *)query:(Class)model_class order:(NSString *)order limit:(NSString *)limit;
+
 /**
- * [TFY_ModelSqlite query:[Person class] where:@"age <= 30" order:@"by age desc/asc" limit:@"8"];
+ * 说明: 查询本地模型对象
+ *  model_class 模型类
+ *  where 查询条件(查询语法和SQL where 查询语法一样，where为空则查询所有)
+ *  order 排序条件(排序语法和SQL order 查询语法一样，order为空则不排序)
+ *  limit 限制条件(限制语法和SQL limit 查询语法一样，limit为空则不限制查询)
+ *  查询模型对象数组
  */
+
+/// example: [TFY_ModelSqlite query:[Person class] where:@"age <= 30" order:@"by age desc/asc" limit:@"8"];
+/// 对person数据表查询age小于30岁并且根据age自动降序或者升序排序并且限制查询的数量为8
+/// example: [TFY_ModelSqlite query:[Person class] where:@"age <= 30" order:@"by age desc/asc" limit:@"8 offset 8"];
+/// 对person数据表查询age小于30岁并且根据age自动降序或者升序排序并且限制查询的数量为8偏移为8
+
 + (NSArray *)query:(Class)model_class where:(NSString *)where order:(NSString *)order limit:(NSString *)limit;
+
+
 /**
- * 自定义sql查询 [TFY_ModelSqlite query:Model.self sql:@"select cc.* from ( select tt.*,(select count(*)+1 from Chapter where chapter_id = tt.chapter_id and updateTime< updateTime ) as group_id from Chapter tt) cc where cc.group_id<=7 order by updateTime desc"];
+ 说明: 自定义sql查询
+
+  model_class 接收model类
+  sql sql语句
+  查询模型对象数组
+ 
+ example: [TFY_ModelSqlite query:Model.self sql:@"select cc.* from ( select tt.*,(select count(*)+1 from Chapter where chapter_id = tt.chapter_id and updateTime< tt.updateTime ) as group_id from Chapter tt) cc where cc.group_id<=7 order by updateTime desc"];
  */
 + (NSArray *)query:(Class)model_class sql:(NSString *)sql;
+
 /**
- *  利用sqlite 函数进行查询 [TFY_ModelSqlite query:[Person class] sqliteFunc:@"max(age)"];
-                         [TFY_ModelSqlite query:[Person class] sqliteFunc:@"count(*)"];
+ * 说明: 利用sqlite 函数进行查询
+ 
+ *  model_class 要查询模型类
+ *  func sqlite函数例如：（MAX(age),MIN(age),COUNT(*)....）
+ *  返回查询结果(如果结果条数 > 1返回Array , = 1返回单个值 , = 0返回nil)
+ * /// example: [TFY_ModelSqlite query:[Person class] sqliteFunc:@"max(age)"];  /// 获取Person表的最大age值
+ * /// example: [TFY_ModelSqlite query:[Person class] sqliteFunc:@"count(*)"];  /// 获取Person表的总记录条数
  */
 + (id)query:(Class)model_class func:(NSString *)func;
+
 /**
- *  利用sqlite 函数进行查询 [TFY_ModelSqlite query:[Person class] sqliteFunc:@"max(age)" condition:@"where name = '北京'"];
-                         [TFY_ModelSqlite query:[Person class] sqliteFunc:@"count(*)" condition:@"where name = '北京'"];
+ * 说明: 利用sqlite 函数进行查询
+ 
+ *  model_class 要查询模型类
+ *  func sqlite函数例如：（MAX(age),MIN(age),COUNT(*)....）
+ *  condition 其他查询条件例如：(where age > 20 order by age desc ....)
+ *  返回查询结果(如果结果条数 > 1返回Array , = 1返回单个值 , = 0返回nil)
+ * /// example: [TFY_ModelSqlite query:[Person class] sqliteFunc:@"max(age)" condition:@"where name = '北京'"];  /// 获取Person表name=北京集合中的的最大age值
+ * /// example: [TFY_ModelSqlite query:[Person class] sqliteFunc:@"count(*)" condition:@"where name = '北京'"];  /// 获取Person表name=北京集合中的总记录条数
  */
-+ (id)query:(Class)model_class func:(NSString *)func condition:(NSString *_Nullable)condition;
++ (id)query:(Class)model_class func:(NSString *)func condition:(NSString *)condition;
+
 /**
- * 更新本地模型对象
+ * 说明: 更新本地模型对象
+ *  model_object 模型对象
+ *  where 查询条件(查询语法和SQL where 查询语法一样，where为空则更新所有)
  */
+
 + (BOOL)update:(id)model_object where:(NSString *)where;
+
+
 /**
- *  更新数据表字段 [TFY_ModelSqlite update:Person.self value:@"name = 'tfy', age = 100" where:@"age > 25"];
+ 说明: 更新数据表字段
+
+  model_class 模型类
+  value 更新的值
+  where 更新条件
+  是否成功
+ /// 更新Person表在age字段大于25岁是的name值为whc，age为100岁
+ /// example: [TFY_ModelSqlite update:Person.self value:@"name = 'whc', age = 100" where:@"age > 25"];
  */
 + (BOOL)update:(Class)model_class value:(NSString *)value where:(NSString *)where;
+
 /**
- * 清空本地模型对象
+ * 说明: 清空本地模型对象
+ *  model_class 模型类
  */
+
 + (BOOL)clear:(Class)model_class;
+
+
 /**
- * 删除本地模型对象
+ * 说明: 删除本地模型对象
+ *  model_class 模型类
+ *  where 查询条件(查询语法和SQL where 查询语法一样，where为空则删除所有)
  */
-+ (BOOL)deletes:(Class)model_class where:(NSString *_Nullable)where;
+
++ (BOOL)deletes:(Class)model_class where:(NSString *)where;
+
 /**
- *  清空所有本地模型数据库
+ * 说明: 清空所有本地模型数据库
  */
+
 + (void)removeAllModel;
+
 /**
- *  清空指定本地模型数据库
+ * 说明: 清空指定本地模型数据库
+ *  model_class 模型类
  */
+
 + (void)removeModel:(Class)model_class;
+
 /**
- *  返回本地模型数据库路径
+ * 说明: 返回本地模型数据库路径
+ *  model_class 模型类
+ *  路径
  */
+
 + (NSString *)localPathWithModel:(Class)model_class;
+
 /**
- *  返回本地模型数据库版本号
+ * 说明: 返回本地模型数据库版本号
+ *  model_class 模型类
+ *  版本号
  */
 + (NSString *)versionWithModel:(Class)model_class;
 
