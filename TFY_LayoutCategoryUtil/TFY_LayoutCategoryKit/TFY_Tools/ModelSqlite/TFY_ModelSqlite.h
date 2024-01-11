@@ -111,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  查询模型对象数组
  */
 
-+ (NSArray *)query:(Class)model_class where:(NSString *)where;
++ (NSArray *)query:(Class)model_class where:(NSString *_Nullable)where;
 
 /**
  * 说明: 查询本地模型对象
@@ -231,7 +231,7 @@ NS_ASSUME_NONNULL_BEGIN
  * /// example: [TFY_ModelSqlite query:[Person class] sqliteFunc:@"max(age)" condition:@"where name = '北京'"];  /// 获取Person表name=北京集合中的的最大age值
  * /// example: [TFY_ModelSqlite query:[Person class] sqliteFunc:@"count(*)" condition:@"where name = '北京'"];  /// 获取Person表name=北京集合中的总记录条数
  */
-+ (id)query:(Class)model_class func:(NSString *)func condition:(NSString *)condition;
++ (id)query:(Class)model_class func:(NSString *)func condition:(NSString *_Nullable)condition;
 
 /**
  * 说明: 更新本地模型对象
@@ -268,7 +268,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  where 查询条件(查询语法和SQL where 查询语法一样，where为空则删除所有)
  */
 
-+ (BOOL)deletes:(Class)model_class where:(NSString *)where;
++ (BOOL)deletes:(Class)model_class where:(NSString *_Nullable)where;
 
 /**
  * 说明: 清空所有本地模型数据库
@@ -301,21 +301,24 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-/**当存储NSArray/NSDictionary属性并且里面是自定义模型对象时，模型对象必须实现NSCoding协议，可以使用TFY_SqliteModel库一行代码实现NSCoding相关代码**/
+/**当存储NSArray/NSDictionary属性并且里面是自定义模型对象时，模型对象必须实现NSSecureCoding协议，可以使用TFY_SqliteModel库一行代码实现NSSecureCoding相关代码**/
 
 ///模型对象归档解归档实现
 #define TFY_SqliteCodingImplementation \
-- (id)initWithCoder:(NSCoder *)decoder \
-{ \
-if (self = [super init]) { \
-[self tfy_SqliteDecode:decoder]; \
-} \
-return self; \
-} \
-\
-- (void)encodeWithCoder:(NSCoder *)encoder \
-{ \
-[self tfy_SqliteEncode:encoder]; \
+- (instancetype)initWithCoder:(NSCoder *)coder\
+{\
+    self = [super init];\
+    if (self) {\
+        [self tfy_SqliteDecode:coder];\
+    }\
+    return self;\
+}\
+- (void)encodeWithCoder:(NSCoder *)coder\
+{\
+    [self tfy_SqliteEncode:coder];\
+}\
++ (BOOL)supportsSecureCoding {\
+    return YES;\
 }\
 - (id)copyWithZone:(NSZone *)zone { return [self tfy_SqliteCopy]; }
 

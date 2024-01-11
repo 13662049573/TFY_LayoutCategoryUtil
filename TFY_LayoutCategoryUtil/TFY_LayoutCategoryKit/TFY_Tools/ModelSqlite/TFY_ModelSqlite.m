@@ -828,13 +828,17 @@ static sqlite3 * _tfy_database;
                     @try {
                         if ([value isKindOfClass:[NSArray class]] ||
                             [value isKindOfClass:[NSDictionary class]]) {
+                            NSError *error = nil;
                             NSData * data = [NSKeyedArchiver archivedDataWithRootObject:value requiringSecureCoding:YES error:nil];
+                            if (error) {
+                                NSLog(@"Error unarchiving data: %@", error.description);
+                            }
                             sqlite3_bind_blob(pp_stmt, index, [data bytes], (int)[data length], SQLITE_TRANSIENT);
                         }else {
                             sqlite3_bind_blob(pp_stmt, index, [value bytes], (int)[value length], SQLITE_TRANSIENT);
                         }
                     } @catch (NSException *exception) {
-                        [self log:[NSString stringWithFormat:@"insert 异常 Array/Dictionary类型元素未实现NSCoding协议归档失败"]];
+                        [self log:[NSString stringWithFormat:@"insert 异常 Array/Dictionary类型元素未实现NSSecureCoding协议归档失败"]];
                     }
                 }
                     break;
@@ -1138,7 +1142,12 @@ static sqlite3 * _tfy_database;
                         if (blob != NULL) {
                             NSData * value = [NSData dataWithBytes:blob length:length];
                             @try {
-                                id set_value = [NSKeyedUnarchiver unarchivedObjectOfClass:NSArray.class fromData:value error:nil];
+                                NSSet<Class> *classes = [NSSet setWithArray:@[NSObject.class]];
+                                NSError *error = nil;
+                                id set_value = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:value error:&error];
+                                if (error) {
+                                    NSLog(@"Error unarchiving data: %@", error.description);
+                                }
                                 if (set_value) {
                                     switch (property_info.type) {
                                         case _MutableArray:
@@ -1157,7 +1166,7 @@ static sqlite3 * _tfy_database;
                                     [current_model_object setValue:set_value forKey:field_name];
                                 }
                             } @catch (NSException *exception) {
-                                [self log:@"query 查询异常 Array/Dictionary 元素没实现NSCoding协议解归档失败"];
+                                [self log:@"query 查询异常 Array/Dictionary 元素没实现NSSecureCoding协议解归档失败"];
                             }
                         }
                     }
@@ -1457,7 +1466,7 @@ static sqlite3 * _tfy_database;
                         NSData * set_value = [NSKeyedArchiver archivedDataWithRootObject:value requiringSecureCoding:YES error:nil];
                         sqlite3_bind_blob(pp_stmt, index, [set_value bytes], (int)[set_value length], SQLITE_TRANSIENT);
                     } @catch (NSException *exception) {
-                        [self log:@"update 操作异常 Array/Dictionary 元素没实现NSCoding协议归档失败"];
+                        [self log:@"update 操作异常 Array/Dictionary 元素没实现NSSecureCoding协议归档失败"];
                     }
                 }
                     break;
@@ -1468,10 +1477,14 @@ static sqlite3 * _tfy_database;
                         value = property_info.type == _Dictionary ? [NSDictionary dictionary] : [NSArray array];
                     }
                     @try {
+                        NSError *error = nil;
                         NSData * set_value = [NSKeyedArchiver archivedDataWithRootObject:value requiringSecureCoding:YES error:nil];
+                        if (error) {
+                            NSLog(@"Error unarchiving data: %@", error.description);
+                        }
                         sqlite3_bind_blob(pp_stmt, index, [set_value bytes], (int)[set_value length], SQLITE_TRANSIENT);
                     } @catch (NSException *exception) {
-                        [self log:@"update 操作异常 Array/Dictionary 元素没实现NSCoding协议归档失败"];
+                        [self log:@"update 操作异常 Array/Dictionary 元素没实现NSSecureCoding协议归档失败"];
                     }
                 }
                     break;
@@ -1723,7 +1736,7 @@ static sqlite3 * _tfy_database;
 @end
 
 
-/**当存储NSArray/NSDictionary属性并且里面是自定义模型对象时，模型对象必须实现NSCoding协议，可以使用TFY_SqliteModel库一行代码实现NSCoding相关代码**/
+/**当存储NSArray/NSDictionary属性并且里面是自定义模型对象时，模型对象必须实现NSSecureCoding协议，可以使用TFY_SqliteModel库一行代码实现NSSecureCoding相关代码**/
 
 typedef NS_OPTIONS(NSUInteger, TFY_SqliteTYPE) {
     _SqliteArray = 1 << 0,
