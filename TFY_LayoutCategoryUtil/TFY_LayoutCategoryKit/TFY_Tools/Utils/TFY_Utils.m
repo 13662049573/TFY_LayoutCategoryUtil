@@ -2232,13 +2232,49 @@ static CGRect oldframe;
 +(id)keyedUnArchiverForKey:(id)object FromFile:(NSString *)path{
     NSError *error=nil;
     NSData * unData = [NSData dataWithContentsOfFile:path];
-    id unarch;
-    if (@available(iOS 14.0, *)) {
-        unarch = [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClass:object fromData:unData error:&error];
-    } else {
-        unarch = [NSKeyedUnarchiver unarchivedObjectOfClass:object fromData:unData error:&error];
+    NSSet<Class> *classes = [NSSet setWithArray:@[NSArray.class,
+                                                  NSDictionary.class,
+                                                  NSString.class,
+                                                  NSMutableArray.class,
+                                                  NSMutableDictionary.class,
+                                                  NSMutableString.class,
+                                                  NSMutableData.class,
+                                                  NSData.class,
+                                                  NSNull.class,
+                                                  NSValue.class,
+                                                  NSDate.class,
+                                                  UIColor.class,
+                                                  UIFont.class,
+                                                  NSClassFromString(@"__NSArray0").class,
+                                                  NSClassFromString(@"__NSArrayI").class,
+                                                  NSClassFromString(@"__NSArrayI_Transfer").class,
+                                                  NSClassFromString(@"__NSSingleObjectArrayI").class,
+                                                  NSClassFromString(@"__NSFrozenArrayM").class,
+                                                  NSClassFromString(@"__NSArrayReversed").class,
+                                                  NSClassFromString(@"__NSArrayM").class,
+                                                  NSClassFromString(@"__NSCFArray").class,
+                                                  NSClassFromString(@"__NSDictionaryM").class,
+                                                  NSClassFromString(@"__NSCFString").class,
+                                                  NSClassFromString(@"NSPlaceholderString").class,
+                                                  NSClassFromString(@"__NSCFConstantString").class,
+                                                  NSClassFromString(@"NSTaggedPointerString").class]];
+    id unarch = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:unData error:&error];
+    if (error) {
+        NSLog(@"Error unarchiving data: %@", error.description);
     }
     return unarch;
+}
+
+// 生成一个指定范围的随机整数
++ (u_int32_t)randomInRangeLo:(u_int32_t)loBound toHi:(u_int32_t)hiBound
+{
+    u_int32_t random;
+    int32_t   range = hiBound - loBound + 1;
+    u_int32_t limit = UINT32_MAX - (UINT32_MAX % range);
+    do {
+        random = arc4random();
+    } while (random > limit);
+    return loBound + (random % range);
 }
 
 /**
