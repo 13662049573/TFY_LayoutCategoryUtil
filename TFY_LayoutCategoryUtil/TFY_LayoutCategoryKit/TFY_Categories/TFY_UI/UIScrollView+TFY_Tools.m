@@ -126,7 +126,11 @@ static CGFloat const oriImageH = 200;
 
 - (void)tfy_adJustedContentIOS11{
     if (@available(iOS 11.0, *)) {
-        [self setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+        self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    
+    if (@available(iOS 13.0, *)) {
+        self.automaticallyAdjustsScrollIndicatorInsets = NO;
     }
 }
 
