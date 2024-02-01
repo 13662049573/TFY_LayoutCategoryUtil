@@ -1149,7 +1149,7 @@ CGRect TFY_CGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode 
     UIImage               *lauchImage      = nil;
     NSString              *viewOrientation = nil;
     CGSize                 viewSize        = [UIScreen mainScreen].bounds.size;
-    UIInterfaceOrientation orientation     = [[UIApplication sharedApplication] statusBarOrientation];
+    UIInterfaceOrientation orientation     = [[UIApplication sharedApplication].windows.firstObject.windowScene interfaceOrientation];
     
     if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight) {
         

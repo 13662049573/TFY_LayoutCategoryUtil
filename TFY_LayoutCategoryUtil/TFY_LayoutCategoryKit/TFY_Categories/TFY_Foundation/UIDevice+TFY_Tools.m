@@ -79,7 +79,7 @@
     static dispatch_once_t one;
     static BOOL pad;
     dispatch_once(&one, ^{
-        pad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+        pad = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
     });
     return pad;
 }

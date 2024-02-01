@@ -416,11 +416,33 @@ const char* jailbreak_tool_pathes[] = {
 //获取当前VC
 + (UIViewController *)getCurrentVC
 {
-    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *rootViewController = [TFY_Utils appKeyWindow].rootViewController;
     
     UIViewController *currentVC = [self getCurrentVCFrom:rootViewController];
     
     return currentVC;
+}
+
++ (UIWindow *)appKeyWindow {
+    UIWindow *keywindow = nil;
+    if (@available(iOS 13.0, *)) {
+        for (UIWindowScene *scene in UIApplication.sharedApplication.connectedScenes) {
+            if (scene.activationState == UISceneActivationStateForegroundActive) {
+                if (@available(iOS 15.0, *)) {
+                    keywindow = scene.keyWindow;
+                }
+                if (keywindow == nil) {
+                    for (UIWindow *window in scene.windows) {
+                        if (window.windowLevel == UIWindowLevelNormal && window.hidden == NO && CGRectEqualToRect(window.bounds, UIScreen.mainScreen.bounds)) {
+                            keywindow = window;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return keywindow;
 }
 
 + (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC
