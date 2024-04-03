@@ -506,7 +506,8 @@ static sqlite3 * _tfy_database;
     }
     return main_key;
 }
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (NSString *)md5:(NSString *)psw {
     if (psw && psw.length > 0) {
         NSMutableString * encrypt = [NSMutableString string];
@@ -521,6 +522,7 @@ static sqlite3 * _tfy_database;
     }
     return psw;
 }
+#pragma clang diagnostic pop
 
 + (NSString *)pswWithModel:(Class)model {
     NSString * psw = nil;

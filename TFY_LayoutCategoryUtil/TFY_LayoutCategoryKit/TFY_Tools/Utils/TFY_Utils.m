@@ -659,22 +659,6 @@ const char* jailbreak_tool_pathes[] = {
     }
     return dict;
 }
-
-/*MD5加密*/
-+(NSString *)md5HexDigest:(NSString *)str
-{
-    const char *original_str = [str UTF8String];
-    unsigned char result[CC_MD5_DIGEST_LENGTH];
-    CC_MD5(original_str, (int)strlen(original_str), result);
-    NSMutableString *hash = [NSMutableString string];
-    for (int i = 0; i < 16; i++)
-    {
-        [hash appendFormat:@"%02X", result[i]];
-    }
-    NSString * mdfiveString = [hash lowercaseString];
-    
-    return mdfiveString;
-}
 /**
  *  把多个json字符串转为一个json字符串
  */
@@ -1426,7 +1410,7 @@ const char* jailbreak_tool_pathes[] = {
             exit(0);
         }];
         [alert addAction:okAction];
-        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
+        [TFY_ScenePackage.appKeyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
         return isYUEYU;
     }
     return isYUEYU;
@@ -2216,7 +2200,7 @@ static CGRect oldframe;
  */
 +(void)showImage:(UIImageView*)avatarImageView{
     UIImage *image = avatarImageView.image;
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIWindow *window = TFY_ScenePackage.appKeyWindow;
     UIView *backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
     oldframe = [avatarImageView convertRect:avatarImageView.bounds toView:window];
     backgroundView.backgroundColor = [UIColor blackColor];
@@ -2559,10 +2543,12 @@ static CGRect oldframe;
 /**
  *  改变导航栏工具条字体颜色 0 为白色 1 为黑色
  */
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 +(void)BackstatusBarStyle:(NSInteger)index{
   [UIApplication sharedApplication].statusBarStyle = index==0?(UIStatusBarStyleLightContent):(UIStatusBarStyleDefault);
 }
-
+#pragma clang diagnostic pop
 /**
  *  按钮旋转动画
  */

@@ -109,4 +109,7 @@
     NSLog(@"%@", self);
 }
 
+- (void)eat {
+}
+
 @end
