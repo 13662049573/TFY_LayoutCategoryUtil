@@ -93,7 +93,7 @@ typedef NS_ENUM(NSInteger, GradientChangeDirection) {
 /**
  *  创建渐变颜色 size  渐变的size direction 渐变方式 startcolor 开始颜色  endColor 结束颜色
  */
-+(UIColor *)tfy_colorGradientChangeWithSize:(CGSize)size direction:(GradientChangeDirection)direction startColor:(UIColor *)startcolor endColor:(UIColor *)endColor;
++(UIColor *)tfy_colorGradientChangeWithSize:(CGSize)size direction:(GradientChangeDirection)direction colorsArr:(NSArray<UIColor *> *)colorsArr;
 
 /**
  * 需要的 NSNumbers 数组中并配置从它的颜色。
@@ -220,10 +220,6 @@ CG_INLINE UIColor *TFY_ColorRGBAlphaPercent(CGFloat r, CGFloat g, CGFloat b, CGF
 /** RGB颜色传分数 */
 CG_INLINE UIColor *TFY_ColorRGBPercent(CGFloat r, CGFloat g, CGFloat b){
     return TFY_ColorRGBAlphaPercent(r,g,b,1);
-}
-/**渐变色*/
-CG_INLINE UIColor *TFY_ColorGradient(CGSize size,GradientChangeDirection direction,UIColor *starcolor,UIColor *endcolor){
-    return [UIColor tfy_colorGradientChangeWithSize:size direction:direction startColor:starcolor endColor:endcolor];
 }
 
 #define RGBAlphaPercent(r,g,b,a) UIColorRGBAlphaPercent(r,g,b,a)

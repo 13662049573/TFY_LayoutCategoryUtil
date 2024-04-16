@@ -502,8 +502,8 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
 /**
  *  创建渐变颜色 size  渐变的size direction 渐变方式 startcolor 开始颜色  endColor 结束颜色
  */
-+(UIColor *)tfy_colorGradientChangeWithSize:(CGSize)size direction:(GradientChangeDirection)direction startColor:(UIColor *)startcolor endColor:(UIColor *)endColor{
-    if (CGSizeEqualToSize(size, CGSizeZero) || !startcolor || !endColor) {
++(UIColor *)tfy_colorGradientChangeWithSize:(CGSize)size direction:(GradientChangeDirection)direction colorsArr:(NSArray<UIColor *> *)colorsArr {
+    if (CGSizeEqualToSize(size, CGSizeZero) || colorsArr.count == 0) {
         return nil;
     }
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
@@ -534,7 +534,11 @@ static void RGBtoHSV( float r, float g, float b, float *h, float *s, float *v )
     }
     gradientLayer.endPoint = endPoint;
     
-    gradientLayer.colors = @[(__bridge id)startcolor.CGColor, (__bridge id)endColor.CGColor];
+    NSMutableArray *dataArray = NSMutableArray.array;
+    [colorsArr enumerateObjectsUsingBlock:^(UIColor * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [dataArray addObject:(__bridge id)obj.CGColor];
+    }];
+    gradientLayer.colors = dataArray;
     UIGraphicsBeginImageContext(size);
     [gradientLayer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
