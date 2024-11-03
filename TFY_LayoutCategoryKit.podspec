@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "TFY_LayoutCategoryKit"
 
-  spec.version      = "3.1.5"
+  spec.version      = "3.1.6"
 
   spec.summary      = "全新链式的界面初始化和界面跳转，布局基于Masonry"
 
@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   
   spec.author       = { "tfyzxc13662049573" => "420144542@qq.com" }
   
-  spec.platform     = :ios, "13.0"
+  spec.platform     = :ios, "14.0"
 
   spec.source       = { :git => "https://github.com/13662049573/TFY_LayoutCategoryUtil.git", :tag => spec.version }
 

@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
  *** 手动引入 ***
  *** pod 'TFY_ModelSqliteKit/SQLCipher' ***
  */
-+ (NSString *)whc_SqlitePasswordKey;
++ (NSString *)tfy_SqlitePasswordKey;
 
 /// 自定义数据表主键名称
 /**
